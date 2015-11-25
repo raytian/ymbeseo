@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This code handles the Google+ specific output that's not covered by OpenGraph.
  */
-class WPSEO_GooglePlus {
+class YMBESEO_GooglePlus {
 
 	/**
 	 * @var    object    Instance of this class
@@ -17,11 +17,11 @@ class WPSEO_GooglePlus {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'wpseo_googleplus', array( $this, 'google_plus_title' ), 10 );
-		add_action( 'wpseo_googleplus', array( $this, 'description' ), 11 );
-		add_action( 'wpseo_googleplus', array( $this, 'google_plus_image' ), 12 );
+		add_action( 'YMBESEO_googleplus', array( $this, 'google_plus_title' ), 10 );
+		add_action( 'YMBESEO_googleplus', array( $this, 'description' ), 11 );
+		add_action( 'YMBESEO_googleplus', array( $this, 'google_plus_image' ), 12 );
 
-		add_action( 'wpseo_head', array( $this, 'output' ), 40 );
+		add_action( 'YMBESEO_head', array( $this, 'output' ), 40 );
 	}
 
 	/**
@@ -42,9 +42,9 @@ class WPSEO_GooglePlus {
 	 */
 	public function output() {
 		/**
-		 * Action: 'wpseo_googleplus' - Hook to add all Google+ specific output to.
+		 * Action: 'YMBESEO_googleplus' - Hook to add all Google+ specific output to.
 		 */
-		do_action( 'wpseo_googleplus' );
+		do_action( 'YMBESEO_googleplus' );
 	}
 
 	/**
@@ -52,14 +52,14 @@ class WPSEO_GooglePlus {
 	 */
 	public function description() {
 		if ( is_singular() ) {
-			$desc = WPSEO_Meta::get_value( 'google-plus-description' );
+			$desc = YMBESEO_Meta::get_value( 'google-plus-description' );
 
 			/**
-			 * Filter: 'wpseo_googleplus_desc' - Allow developers to change the Google+ specific description output
+			 * Filter: 'YMBESEO_googleplus_desc' - Allow developers to change the Google+ specific description output
 			 *
 			 * @api string $desc The description string
 			 */
-			$desc = trim( apply_filters( 'wpseo_googleplus_desc', $desc ) );
+			$desc = trim( apply_filters( 'YMBESEO_googleplus_desc', $desc ) );
 
 			if ( is_string( $desc ) && '' !== $desc ) {
 				echo '<meta itemprop="description" content="', esc_attr( $desc ), '">', "\n";
@@ -72,17 +72,17 @@ class WPSEO_GooglePlus {
 	 */
 	public function google_plus_title() {
 		if ( is_singular() ) {
-			$title = WPSEO_Meta::get_value( 'google-plus-title' );
+			$title = YMBESEO_Meta::get_value( 'google-plus-title' );
 
 			/**
-			 * Filter: 'wpseo_googleplus_title' - Allow developers to change the Google+ specific title
+			 * Filter: 'YMBESEO_googleplus_title' - Allow developers to change the Google+ specific title
 			 *
 			 * @api string $title The title string
 			 */
-			$title = trim( apply_filters( 'wpseo_googleplus_title', $title ) );
+			$title = trim( apply_filters( 'YMBESEO_googleplus_title', $title ) );
 
 			if ( is_string( $title ) && $title !== '' ) {
-				$title = wpseo_replace_vars( $title, get_post() );
+				$title = YMBESEO_replace_vars( $title, get_post() );
 
 				echo '<meta itemprop="name" content="', esc_attr( $title ), '">', "\n";
 			}
@@ -94,14 +94,14 @@ class WPSEO_GooglePlus {
 	 */
 	public function google_plus_image() {
 		if ( is_singular() ) {
-			$image = WPSEO_Meta::get_value( 'google-plus-image' );
+			$image = YMBESEO_Meta::get_value( 'google-plus-image' );
 
 			/**
-			 * Filter: 'wpseo_googleplus_image' - Allow changing the Google+ image
+			 * Filter: 'YMBESEO_googleplus_image' - Allow changing the Google+ image
 			 *
 			 * @api string $img Image URL string
 			 */
-			$image = trim( apply_filters( 'wpseo_googleplus_image', $image ) );
+			$image = trim( apply_filters( 'YMBESEO_googleplus_image', $image ) );
 
 			if ( is_string( $image ) && $image !== '' ) {
 				echo '<meta itemprop="image" content="', esc_url( $image ), '">', "\n";

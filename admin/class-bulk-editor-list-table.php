@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin\Bulk Editor
+ * @package YMBESEO\Admin\Bulk Editor
  * @since      1.5.0
  */
 
 /**
  * Implements table for bulk editing.
  */
-class WPSEO_Bulk_List_Table extends WP_List_Table {
+class YMBESEO_Bulk_List_Table extends WP_List_Table {
 
 	/**
 	 * The nonce that was passed with the request
@@ -130,7 +130,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 */
 	private function verify_nonce() {
 		if ( $this->should_verify_nonce() && ! wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'bulk-editor-table' ) ) {
-			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( __( 'You are not allowed to access this page.', 'wordpress-seo' ), array( 'type' => 'error' ) ) );
+			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( __( 'You are not allowed to access this page.', 'ymbeseo' ), array( 'type' => 'error' ) ) );
 			Yoast_Notification_Center::get()->display_notifications();
 			die;
 		}
@@ -208,7 +208,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			<?php if ( 'top' === $which ) { ?>
 			<form id="posts-filter" action="" method="get">
 				<input type="hidden" name="nonce" value="<?php echo $this->nonce; ?>"/>
-				<input type="hidden" name="page" value="wpseo_tools"/>
+				<input type="hidden" name="page" value="YMBESEO_tools"/>
 				<input type="hidden" name="tool" value="bulk-editor"/>
 				<input type="hidden" name="type" value="<?php echo esc_attr( $this->page_type ); ?>"/>
 				<input type="hidden" name="orderby"
@@ -291,7 +291,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 		$post_status         = filter_input( INPUT_GET, 'post_status' );
 		$class               = empty( $post_status ) ? ' class="current"' : '';
-		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts', 'wordpress-seo' ), number_format_i18n( $total_posts ) ) . '</a>';
+		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts', 'ymbeseo' ), number_format_i18n( $total_posts ) ) . '</a>';
 
 		$post_stati = get_post_stati( array( 'show_in_admin_all_list' => true ), 'objects' );
 		if ( is_array( $post_stati ) && $post_stati !== array() ) {
@@ -318,7 +318,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 					$class = ' class="current"';
 				}
 
-				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
+				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
 			}
 		}
 		unset( $post_stati, $status, $status_name, $total, $class );
@@ -334,7 +334,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		if ( 'trash' === $post_status ) {
 			$class = 'class="current"';
 		}
-		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'Trash <span class="count">(%s)</span>', 'Trash <span class="count">(%s)</span>', $trashed_posts, 'posts', 'wordpress-seo' ), number_format_i18n( $trashed_posts ) ) . '</a>';
+		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'Trash <span class="count">(%s)</span>', 'Trash <span class="count">(%s)</span>', $trashed_posts, 'posts', 'ymbeseo' ), number_format_i18n( $trashed_posts ) ) . '</a>';
 
 		return $status_links;
 	}
@@ -384,7 +384,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 				}
 
 				echo sprintf( '<select name="post_type_filter">%1$s</select>', $options );
-				submit_button( __( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
+				submit_button( __( 'Filter', 'ymbeseo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
 				echo '</div>';
 			}
 		}
@@ -537,7 +537,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	protected function set_pagination( $total_items ) {
 
 		// Calculate items per page.
-		$per_page = $this->get_items_per_page( 'wpseo_posts_per_page', 10 );
+		$per_page = $this->get_items_per_page( 'YMBESEO_posts_per_page', 10 );
 		$paged    = esc_sql( sanitize_text_field( filter_input( INPUT_GET, 'paged' ) ) );
 
 		if ( empty( $paged ) || ! is_numeric( $paged ) || $paged <= 0 ) {
@@ -745,17 +745,17 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$actions = array();
 
 		if ( $can_edit_post && 'trash' !== $rec->post_status ) {
-			$actions['edit'] = '<a href="' . esc_url( get_edit_post_link( $rec->ID, true ) ) . '" title="' . esc_attr( __( 'Edit this item', 'wordpress-seo' ) ) . '">' . __( 'Edit', 'wordpress-seo' ) . '</a>';
+			$actions['edit'] = '<a href="' . esc_url( get_edit_post_link( $rec->ID, true ) ) . '" title="' . esc_attr( __( 'Edit this item', 'ymbeseo' ) ) . '">' . __( 'Edit', 'ymbeseo' ) . '</a>';
 		}
 
 		if ( $post_type_object->public ) {
 			if ( in_array( $rec->post_status, array( 'pending', 'draft', 'future' ) ) ) {
 				if ( $can_edit_post ) {
-					$actions['view'] = '<a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $rec->ID ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '">' . __( 'Preview', 'wordpress-seo' ) . '</a>';
+					$actions['view'] = '<a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $rec->ID ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;', 'ymbeseo' ), $rec->post_title ) ) . '">' . __( 'Preview', 'ymbeseo' ) . '</a>';
 				}
 			}
 			elseif ( 'trash' !== $rec->post_status ) {
-				$actions['view'] = '<a href="' . esc_url( get_permalink( $rec->ID ) ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '" rel="bookmark">' . __( 'View', 'wordpress-seo' ) . '</a>';
+				$actions['view'] = '<a href="' . esc_url( get_permalink( $rec->ID ) ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;', 'ymbeseo' ), $rec->post_title ) ) . '" rel="bookmark">' . __( 'View', 'ymbeseo' ) . '</a>';
 			}
 		}
 
@@ -829,7 +829,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 		// Fill meta data if exists in $this->meta_data.
 		$meta_data  = ( ! empty( $this->meta_data[ $record_id ] ) ) ? $this->meta_data[ $record_id ] : array();
-		$meta_key   = WPSEO_Meta::$meta_prefix . $this->target_db_field;
+		$meta_key   = YMBESEO_Meta::$meta_prefix . $this->target_db_field;
 		$meta_value = ( ! empty( $meta_data[ $meta_key ] ) ) ? $meta_data[ $meta_key ] : '';
 
 		if ( ! empty( $values ) ) {
@@ -887,7 +887,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			"
 				 	SELECT *
 				 	FROM {$wpdb->postmeta}
-				 	WHERE post_id IN({$post_ids}) && meta_key = '" . WPSEO_Meta::$meta_prefix . $this->target_db_field . "'
+				 	WHERE post_id IN({$post_ids}) && meta_key = '" . YMBESEO_Meta::$meta_prefix . $this->target_db_field . "'
 				"
 		);
 
@@ -917,16 +917,16 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	protected function merge_columns( $columns = array() ) {
 		$columns = array_merge(
 			array(
-				'col_page_title'  => __( 'WP Page Title', 'wordpress-seo' ),
-				'col_post_type'   => __( 'Post Type', 'wordpress-seo' ),
-				'col_post_status' => __( 'Post Status', 'wordpress-seo' ),
-				'col_post_date'   => __( 'Publication date', 'wordpress-seo' ),
-				'col_page_slug'   => __( 'Page URL/Slug', 'wordpress-seo' ),
+				'col_page_title'  => __( 'WP Page Title', 'ymbeseo' ),
+				'col_post_type'   => __( 'Post Type', 'ymbeseo' ),
+				'col_post_status' => __( 'Post Status', 'ymbeseo' ),
+				'col_post_date'   => __( 'Publication date', 'ymbeseo' ),
+				'col_page_slug'   => __( 'Page URL/Slug', 'ymbeseo' ),
 			),
 			$columns
 		);
 
-		$columns['col_row_action'] = __( 'Action', 'wordpress-seo' );
+		$columns['col_row_action'] = __( 'Action', 'ymbeseo' );
 
 		return $columns;
 	}

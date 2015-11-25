@@ -1,17 +1,17 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
- * Option: wpseo_social
+ * Option: YMBESEO_social
  */
-class WPSEO_Option_Social extends WPSEO_Option {
+class YMBESEO_Option_Social extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_social';
+	public $option_name = 'YMBESEO_social';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -100,8 +100,8 @@ class WPSEO_Option_Social extends WPSEO_Option {
 		/* Auto-magically set the fb connect key */
 		$this->defaults['fbconnectkey'] = self::get_fbconnectkey();
 
-		self::$twitter_card_types['summary']             = __( 'Summary', 'wordpress-seo' );
-		self::$twitter_card_types['summary_large_image'] = __( 'Summary with large image', 'wordpress-seo' );
+		self::$twitter_card_types['summary']             = __( 'Summary', 'ymbeseo' );
+		self::$twitter_card_types['summary_large_image'] = __( 'Summary with large image', 'ymbeseo' );
 	}
 
 
@@ -166,7 +166,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 												break;
 
 											case 'link':
-												$clean[ $key ][ $user_id ][ $fb_key ] = WPSEO_Utils::sanitize_url( $fb_value );
+												$clean[ $key ][ $user_id ][ $fb_key ] = YMBESEO_Utils::sanitize_url( $fb_value );
 												break;
 										}
 									}
@@ -184,7 +184,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 				case 'og_frontpage_desc':
 				case 'og_frontpage_title':
 					if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -237,7 +237,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									sprintf( __( '%s does not seem to be a valid Twitter user-id. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
+									sprintf( __( '%s does not seem to be a valid Twitter user-id. Please correct.', 'ymbeseo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}
@@ -256,7 +256,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 				case 'googleplus':
 				case 'opengraph':
 				case 'twitter':
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -291,12 +291,12 @@ class WPSEO_Option_Social extends WPSEO_Option {
 		$old_option = null;
 		if ( isset( $all_old_option_values ) ) {
 			// Ok, we have an import.
-			if ( isset( $all_old_option_values['wpseo_indexation'] ) && is_array( $all_old_option_values['wpseo_indexation'] ) && $all_old_option_values['wpseo_indexation'] !== array() ) {
-				$old_option = $all_old_option_values['wpseo_indexation'];
+			if ( isset( $all_old_option_values['YMBESEO_indexation'] ) && is_array( $all_old_option_values['YMBESEO_indexation'] ) && $all_old_option_values['YMBESEO_indexation'] !== array() ) {
+				$old_option = $all_old_option_values['YMBESEO_indexation'];
 			}
 		}
 		else {
-			$old_option = get_option( 'wpseo_indexation' );
+			$old_option = get_option( 'YMBESEO_indexation' );
 		}
 
 		if ( is_array( $old_option ) && $old_option !== array() ) {

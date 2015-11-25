@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -8,9 +8,9 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 }
 
 /**
- * Class WPSEO_GSC_Table
+ * Class YMBESEO_GSC_Table
  */
-class WPSEO_GSC_Table extends WP_List_Table {
+class YMBESEO_GSC_Table extends WP_List_Table {
 
 	/**
 	 * @var string
@@ -104,10 +104,10 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'             => '<input type="checkbox" />',
-			'url'            => __( 'URL', 'wordpress-seo' ),
-			'last_crawled'   => __( 'Last crawled', 'wordpress-seo' ),
-			'first_detected' => __( 'First detected', 'wordpress-seo' ),
-			'response_code'  => __( 'Response code', 'wordpress-seo' ),
+			'url'            => __( 'URL', 'ymbeseo' ),
+			'last_crawled'   => __( 'Last crawled', 'ymbeseo' ),
+			'first_detected' => __( 'First detected', 'ymbeseo' ),
+			'response_code'  => __( 'Response code', 'ymbeseo' ),
 		);
 
 		return $columns;
@@ -136,7 +136,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function get_bulk_actions() {
 		return array(
-			'mark_as_fixed' => __( 'Mark as fixed', 'wordpress-seo' ),
+			'mark_as_fixed' => __( 'Mark as fixed', 'ymbeseo' ),
 		);
 	}
 
@@ -161,7 +161,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="wpseo_crawl_issues[]" value="%s" />', $item['url']
+			'<input type="checkbox" name="YMBESEO_crawl_issues[]" value="%s" />', $item['url']
 		);
 	}
 
@@ -203,11 +203,11 @@ class WPSEO_GSC_Table extends WP_List_Table {
 			 */
 			$modal_height = $this->modal_box( $item['url'] );
 
-			$actions['create_redirect'] = '<a title="' . __( 'Create a redirect', 'wordpress-seo' ) . '" href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . __( 'Create redirect', 'wordpress-seo' ) . '</a>';
+			$actions['create_redirect'] = '<a title="' . __( 'Create a redirect', 'ymbeseo' ) . '" href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . __( 'Create redirect', 'ymbeseo' ) . '</a>';
 		}
 
-		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
-		$actions['markasfixed'] = '<a href="javascript:wpseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
+		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'ymbeseo' ) . '</a>';
+		$actions['markasfixed'] = '<a href="javascript:YMBESEO_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'ymbeseo' ) . '</a>';
 
 		return sprintf(
 			'<span class="value">%1$s</span> %2$s',
@@ -339,7 +339,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 		$current_redirect = false;
 		$view_type        = $this->modal_box_type( $url, $current_redirect );
 
-		require WPSEO_PATH . '/admin/google_search_console/views/gsc-create-redirect.php';
+		require YMBESEO_PATH . '/admin/google_search_console/views/gsc-create-redirect.php';
 
 		return $view_type;
 	}
@@ -353,11 +353,11 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 * @return string
 	 */
 	private function modal_box_type( $url, &$current_redirect ) {
-		if ( defined( 'WPSEO_PREMIUM_FILE' ) && class_exists( 'WPSEO_URL_Redirect_Manager' ) ) {
+		if ( defined( 'YMBESEO_PREMIUM_FILE' ) && class_exists( 'YMBESEO_URL_Redirect_Manager' ) ) {
 			static $redirect_manager;
 
 			if ( ! $redirect_manager ) {
-				$redirect_manager = new WPSEO_URL_Redirect_Manager();
+				$redirect_manager = new YMBESEO_URL_Redirect_Manager();
 			}
 
 			if ( $current_redirect = $redirect_manager->search_url( $url ) ) {
@@ -377,7 +377,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 * @param string $platform
 	 */
 	private function show_fields( $platform ) {
-		echo "<input type='hidden' name='wpseo_gsc_nonce' value='" . wp_create_nonce( 'wpseo_gsc_nonce' ) . "' />";
+		echo "<input type='hidden' name='YMBESEO_gsc_nonce' value='" . wp_create_nonce( 'YMBESEO_gsc_nonce' ) . "' />";
 		echo "<input id='field_platform' type='hidden' name='platform' value='{$platform}' />";
 		echo "<input id='field_category' type='hidden' name='category' value='{$this->current_view}' />";
 	}

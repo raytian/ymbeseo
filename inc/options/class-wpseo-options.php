@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
@@ -8,7 +8,7 @@
  *
  * Instantiates all the options and offers a number of utility methods to work with the options
  */
-class WPSEO_Options {
+class YMBESEO_Options {
 
 	/**
 	 * @var  array  Options this class uses
@@ -16,15 +16,15 @@ class WPSEO_Options {
 	 * @static
 	 */
 	public static $options = array(
-		'wpseo'               => 'WPSEO_Option_Wpseo',
-		'wpseo_permalinks'    => 'WPSEO_Option_Permalinks',
-		'wpseo_titles'        => 'WPSEO_Option_Titles',
-		'wpseo_social'        => 'WPSEO_Option_Social',
-		'wpseo_rss'           => 'WPSEO_Option_RSS',
-		'wpseo_internallinks' => 'WPSEO_Option_InternalLinks',
-		'wpseo_xml'           => 'WPSEO_Option_XML',
-		'wpseo_ms'            => 'WPSEO_Option_MS',
-		'wpseo_taxonomy_meta' => 'WPSEO_Taxonomy_Meta',
+		'wpseo'               => 'YMBESEO_Option_Wpseo',
+		'YMBESEO_permalinks'    => 'YMBESEO_Option_Permalinks',
+		'YMBESEO_titles'        => 'YMBESEO_Option_Titles',
+		'YMBESEO_social'        => 'YMBESEO_Option_Social',
+		'YMBESEO_rss'           => 'YMBESEO_Option_RSS',
+		'YMBESEO_internallinks' => 'YMBESEO_Option_InternalLinks',
+		'YMBESEO_xml'           => 'YMBESEO_Option_XML',
+		'YMBESEO_ms'            => 'YMBESEO_Option_MS',
+		'YMBESEO_taxonomy_meta' => 'YMBESEO_Taxonomy_Meta',
 	);
 
 	/**
@@ -154,7 +154,7 @@ class WPSEO_Options {
 					$option_names[] = $option_name;
 				}
 			}
-			$option_names = apply_filters( 'wpseo_options', $option_names );
+			$option_names = apply_filters( 'YMBESEO_options', $option_names );
 		}
 
 		return $option_names;
@@ -225,7 +225,7 @@ class WPSEO_Options {
 			unset( $instance );
 
 			// If we've done a full clean-up, we can safely remove this really old option.
-			delete_option( 'wpseo_indexation' );
+			delete_option( 'YMBESEO_indexation' );
 		}
 	}
 
@@ -248,8 +248,8 @@ class WPSEO_Options {
 	 * @since 1.5.2.3
 	 */
 	public static function bring_back_breadcrumb_defaults() {
-		if ( isset( self::$option_instances['wpseo_internallinks'] ) ) {
-			self::$option_instances['wpseo_internallinks']->bring_back_defaults();
+		if ( isset( self::$option_instances['YMBESEO_internallinks'] ) ) {
+			self::$option_instances['YMBESEO_internallinks']->bring_back_defaults();
 		}
 	}
 
@@ -265,10 +265,10 @@ class WPSEO_Options {
 		Make sure title_test and description_test function are available even when called
 			   from the isolated activation
 		*/
-		require_once( WPSEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
+		require_once( YMBESEO_PATH . 'inc/ymbeseo-non-ajax-functions.php' );
 
-		// Commented out? wpseo_title_test(); R.
-		wpseo_description_test();
+		// Commented out? YMBESEO_title_test(); R.
+		YMBESEO_description_test();
 
 		/* Force WooThemes to use Yoast SEO data. */
 		if ( function_exists( 'woo_version_init' ) ) {
@@ -339,7 +339,7 @@ class WPSEO_Options {
 	 */
 	public static function reset_ms_blog( $blog_id ) {
 		if ( is_multisite() ) {
-			$options      = get_site_option( 'wpseo_ms' );
+			$options      = get_site_option( 'YMBESEO_ms' );
 			$option_names = self::get_option_names();
 
 			if ( is_array( $option_names ) && $option_names !== array() ) {
@@ -377,27 +377,27 @@ class WPSEO_Options {
 	 * Check whether the current user is allowed to access the configuration.
 	 *
 	 * @deprecated 1.5.6.1
-	 * @deprecated use WPSEO_Utils::grant_access()
-	 * @see        WPSEO_Utils::grant_access()
+	 * @deprecated use YMBESEO_Utils::grant_access()
+	 * @see        YMBESEO_Utils::grant_access()
 	 *
 	 * @return boolean
 	 */
 	public static function grant_access() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::grant_access()' );
+		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'YMBESEO_Utils::grant_access()' );
 
-		return WPSEO_Utils::grant_access();
+		return YMBESEO_Utils::grant_access();
 	}
 
 	/**
 	 * Clears the WP or W3TC cache depending on which is used
 	 *
 	 * @deprecated 1.5.6.1
-	 * @deprecated use WPSEO_Utils::clear_cache()
-	 * @see        WPSEO_Utils::clear_cache()
+	 * @deprecated use YMBESEO_Utils::clear_cache()
+	 * @see        YMBESEO_Utils::clear_cache()
 	 */
 	public static function clear_cache() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::clear_cache()' );
-		WPSEO_Utils::clear_cache();
+		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'YMBESEO_Utils::clear_cache()' );
+		YMBESEO_Utils::clear_cache();
 	}
 
 
@@ -405,12 +405,12 @@ class WPSEO_Options {
 	 * Flush W3TC cache after succesfull update/add of taxonomy meta option
 	 *
 	 * @deprecated 1.5.6.1
-	 * @deprecated use WPSEO_Utils::flush_w3tc_cache()
-	 * @see        WPSEO_Utils::flush_w3tc_cache()
+	 * @deprecated use YMBESEO_Utils::flush_w3tc_cache()
+	 * @see        YMBESEO_Utils::flush_w3tc_cache()
 	 */
 	public static function flush_w3tc_cache() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::flush_w3tc_cache()' );
-		WPSEO_Utils::flush_w3tc_cache();
+		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'YMBESEO_Utils::flush_w3tc_cache()' );
+		YMBESEO_Utils::flush_w3tc_cache();
 	}
 
 
@@ -418,11 +418,11 @@ class WPSEO_Options {
 	 * Clear rewrite rules
 	 *
 	 * @deprecated 1.5.6.1
-	 * @deprecated use WPSEO_Utils::clear_rewrites()
-	 * @see        WPSEO_Utils::clear_rewrites()
+	 * @deprecated use YMBESEO_Utils::clear_rewrites()
+	 * @see        YMBESEO_Utils::clear_rewrites()
 	 */
 	public static function clear_rewrites() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::clear_rewrites()' );
-		WPSEO_Utils::clear_rewrites();
+		_deprecated_function( __METHOD__, 'WPSEO 1.5.6.1', 'YMBESEO_Utils::clear_rewrites()' );
+		YMBESEO_Utils::clear_rewrites();
 	}
 }

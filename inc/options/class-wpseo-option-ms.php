@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
@@ -9,20 +9,20 @@
  * Overloads a number of methods of the abstract class to ensure the use of the correct site_option
  * WP functions.
  */
-class WPSEO_Option_MS extends WPSEO_Option {
+class YMBESEO_Option_MS extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_ms';
+	public $option_name = 'YMBESEO_ms';
 
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_wpseo_multisite_options';
+	public $group_name = 'so_YMBESEO_multisite_options';
 
 	/**
-	 * @var  bool  whether to include the option in the return for WPSEO_Options::get_all()
+	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()
 	 */
 	public $include_in_all = false;
 
@@ -150,7 +150,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 							$this->group_name, // Slug title of the setting.
 							'_' . $key, // Suffix-id for the error message box.
 							/* translators: %1$s expands to the option name and %2$sexpands to Yoast SEO */
-							sprintf( __( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'wordpress-seo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'Yoast SEO' ), // The error message.
+							sprintf( __( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'ymbeseo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'Yoast SEO' ), // The error message.
 							'error' // Error type, either 'error' or 'updated'.
 						);
 					}
@@ -159,7 +159,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 
 				case 'defaultblog':
 					if ( isset( $dirty[ $key ] ) && ( $dirty[ $key ] !== '' && $dirty[ $key ] !== '-' ) ) {
-						$int = WPSEO_Utils::validate_int( $dirty[ $key ] );
+						$int = YMBESEO_Utils::validate_int( $dirty[ $key ] );
 						if ( $int !== false && $int > 0 ) {
 							// Check if a valid blog number has been received.
 							$exists = get_blog_details( $int, false );
@@ -170,7 +170,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									esc_html__( 'The default blog setting must be the numeric blog id of the blog you want to use as default.', 'wordpress-seo' ) . '<br>' . sprintf( esc_html__( 'This must be an existing blog. Blog %s does not exist or has been marked as deleted.', 'wordpress-seo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
+									esc_html__( 'The default blog setting must be the numeric blog id of the blog you want to use as default.', 'ymbeseo' ) . '<br>' . sprintf( esc_html__( 'This must be an existing blog. Blog %s does not exist or has been marked as deleted.', 'ymbeseo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}
@@ -180,7 +180,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 							add_settings_error(
 								$this->group_name, // Slug title of the setting.
 								'_' . $key, // Suffix-id for the error message box.
-								esc_html__( 'The default blog setting must be the numeric blog id of the blog you want to use as default.', 'wordpress-seo' ) . '<br>' . esc_html__( 'No numeric value was received.', 'wordpress-seo' ), // The error message.
+								esc_html__( 'The default blog setting must be the numeric blog id of the blog you want to use as default.', 'ymbeseo' ) . '<br>' . esc_html__( 'No numeric value was received.', 'ymbeseo' ), // The error message.
 								'error' // Error type, either 'error' or 'updated'.
 							);
 						}
@@ -189,7 +189,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 					break;
 
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}

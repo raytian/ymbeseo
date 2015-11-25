@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  * @since      1.5.0
  */
 
@@ -9,11 +9,11 @@
  *
  * Some guidelines:
  * - To update a meta value, you can just use update_post_meta() with the full (prefixed) meta key
- *        or the convenience method WPSEO_Meta::set_value() with the internal key.
+ *        or the convenience method YMBESEO_Meta::set_value() with the internal key.
  *        All updates will be automatically validated.
  *        Meta values will only be saved to the database if they are *not* the same as the default to
  *        keep database load low.
- * - To retrieve a WPSEO meta value, you **must** use WPSEO_Meta::get_value() which will always return a
+ * - To retrieve a WPSEO meta value, you **must** use YMBESEO_Meta::get_value() which will always return a
  *        string value, either the saved value or the default.
  *        This method can also retrieve a complete set of WPSEO meta values for one specific post, see
  *        the method documentation for the parameters.
@@ -25,7 +25,7 @@
  * @internal   use $key when the key is the WPSEO internal name (without prefix), $meta_key when it
  *             includes the prefix
  */
-class WPSEO_Meta {
+class YMBESEO_Meta {
 
 	/**
 	 * @var    string    Prefix for all WPSEO meta values in the database
@@ -34,14 +34,14 @@ class WPSEO_Meta {
 	 * @internal if at any point this would change, quite apart from an upgrade routine, this also will need to
 	 * be changed in the wpml-config.xml file.
 	 */
-	public static $meta_prefix = '_yoast_wpseo_';
+	public static $meta_prefix = '_so_YMBESEO_';
 
 
 	/**
 	 * @var    string   Prefix for all WPSEO meta value form field names and ids
 	 * @static
 	 */
-	public static $form_prefix = 'yoast_wpseo_';
+	public static $form_prefix = 'so_YMBESEO_';
 
 
 	/**
@@ -94,7 +94,7 @@ class WPSEO_Meta {
 	 *
 	 * @internal
 	 * - Titles, help texts, description text and option labels are added via a translate_meta_boxes() method
-	 *     in the relevant child classes (WPSEO_Metabox and WPSEO_Social_admin) as they are only needed there.
+	 *     in the relevant child classes (YMBESEO_Metabox and YMBESEO_Social_admin) as they are only needed there.
 	 * - Beware: even though the meta keys are divided into subsets, they still have to be uniquely named!
 	 */
 	public static $meta_fields = array(
@@ -247,7 +247,7 @@ class WPSEO_Meta {
 	 */
 	public static function init() {
 
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 		foreach ( self::$social_networks as $option => $network ) {
 			if ( true === $options[ $option ] ) {
 				foreach ( self::$social_fields as $box => $type ) {
@@ -266,7 +266,7 @@ class WPSEO_Meta {
 		 * Allow add-on plugins to register their meta fields for management by this class
 		 * add_filter() calls must be made before plugins_loaded prio 14
 		 */
-		$extra_fields = apply_filters( 'add_extra_wpseo_meta_fields', array() );
+		$extra_fields = apply_filters( 'add_extra_YMBESEO_meta_fields', array() );
 		if ( is_array( $extra_fields ) ) {
 			self::$meta_fields = self::array_merge_recursive_distinct( $extra_fields, self::$meta_fields );
 		}
@@ -337,10 +337,10 @@ class WPSEO_Meta {
 
 
 			case 'general':
-				$options = get_option( 'wpseo_titles' );
+				$options = get_option( 'YMBESEO_titles' );
 				if ( $options['usemetakeywords'] === true ) {
 					/* Adjust the link in the keywords description text string based on the post type */
-					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=wpseo_titles#top#post_types' ) ) . '">', '</a>' );
+					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_titles#top#post_types' ) ) . '">', '</a>' );
 				}
 				else {
 					/* Don't show the keywords field if keywords aren't enabled */
@@ -350,21 +350,21 @@ class WPSEO_Meta {
 				 * Filter the WPSEO metabox form field definitions for the general tab, backward compatibility
 				 *
 				 * @deprecated 1.5.0
-				 * @deprecated use the 'wpseo_metabox_entries_general' filter instead
-				 * @see        WPSEO_Meta::get_meta_field_defs()
+				 * @deprecated use the 'YMBESEO_metabox_entries_general' filter instead
+				 * @see        YMBESEO_Meta::get_meta_field_defs()
 				 *
 				 * @param      array $field_defs Metabox orm definitions.
 				 *
 				 * @return     array
 				 */
-				$field_defs = apply_filters( 'wpseo_metabox_entries', $field_defs );
+				$field_defs = apply_filters( 'YMBESEO_metabox_entries', $field_defs );
 				break;
 
 
 			case 'advanced':
 				global $post;
 
-				$options = WPSEO_Options::get_all();
+				$options = YMBESEO_Options::get_all();
 
 				if ( ! current_user_can( 'manage_options' ) && $options['disableadvanced_meta'] ) {
 					return array();
@@ -394,7 +394,7 @@ class WPSEO_Meta {
 					$robots_adv = implode( ', ', $robots_adv );
 				}
 				else {
-					$robots_adv = __( 'None', 'wordpress-seo' );
+					$robots_adv = __( 'None', 'ymbeseo' );
 				}
 				$field_defs['meta-robots-adv']['options']['-'] = sprintf( $field_defs['meta-robots-adv']['options']['-'], $robots_adv );
 				unset( $robots_adv );
@@ -423,7 +423,7 @@ class WPSEO_Meta {
 		 * @return array
 		 */
 
-		return apply_filters( 'wpseo_metabox_entries_' . $tab, $field_defs, $post_type );
+		return apply_filters( 'YMBESEO_metabox_entries_' . $tab, $field_defs, $post_type );
 	}
 
 
@@ -443,7 +443,7 @@ class WPSEO_Meta {
 
 		switch ( true ) {
 			case ( $meta_key === self::$meta_prefix . 'linkdex' ):
-				$int = WPSEO_Utils::validate_int( $meta_value );
+				$int = YMBESEO_Utils::validate_int( $meta_value );
 				if ( $int !== false && $int >= 0 ) {
 					$clean = strval( $int ); // Convert to string to make sure default check works.
 				}
@@ -474,7 +474,7 @@ class WPSEO_Meta {
 			case ( $field_def['type'] === 'text' && $meta_key === self::$meta_prefix . 'canonical' ):
 			case ( $field_def['type'] === 'text' && $meta_key === self::$meta_prefix . 'redirect' ):
 				// Validate as url(-part).
-				$url = WPSEO_Utils::sanitize_url( $meta_value );
+				$url = YMBESEO_Utils::sanitize_url( $meta_value );
 				if ( $url !== '' ) {
 					$clean = $url;
 				}
@@ -483,7 +483,7 @@ class WPSEO_Meta {
 
 			case ( $field_def['type'] === 'upload' && $meta_key === self::$meta_prefix . 'opengraph-image' ):
 				// Validate as url.
-				$url = WPSEO_Utils::sanitize_url( $meta_value, array( 'http', 'https', 'ftp', 'ftps' ) );
+				$url = YMBESEO_Utils::sanitize_url( $meta_value, array( 'http', 'https', 'ftp', 'ftps' ) );
 				if ( $url !== '' ) {
 					$clean = $url;
 				}
@@ -495,7 +495,7 @@ class WPSEO_Meta {
 					// Remove line breaks and tabs.
 					// @todo [JRF => Yoast] verify that line breaks and the likes aren't allowed/recommended in meta header fields.
 					$meta_value = str_replace( array( "\n", "\r", "\t", '  ' ), ' ', $meta_value );
-					$clean      = WPSEO_Utils::sanitize_text_field( trim( $meta_value ) );
+					$clean      = YMBESEO_Utils::sanitize_text_field( trim( $meta_value ) );
 				}
 				break;
 
@@ -507,12 +507,12 @@ class WPSEO_Meta {
 			case ( $field_def['type'] === 'text' ):
 			default:
 				if ( is_string( $meta_value ) ) {
-					$clean = WPSEO_Utils::sanitize_text_field( trim( $meta_value ) );
+					$clean = YMBESEO_Utils::sanitize_text_field( trim( $meta_value ) );
 				}
 				break;
 		}
 
-		$clean = apply_filters( 'wpseo_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
+		$clean = apply_filters( 'YMBESEO_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
 
 		return $clean;
 	}
@@ -780,13 +780,13 @@ class WPSEO_Meta {
 		global $wpdb;
 
 		/**
-		 * Clean up '_yoast_wpseo_meta-robots'
+		 * Clean up '_so_YMBESEO_meta-robots'
 		 *
-		 * Retrieve all '_yoast_wpseo_meta-robots' meta values and convert if no new values found
+		 * Retrieve all '_so_YMBESEO_meta-robots' meta values and convert if no new values found
 		 *
 		 * @internal Query is pretty well optimized this way
 		 *
-		 * @todo [JRF => Yoast] find out all possible values which the old '_yoast_wpseo_meta-robots' could contain
+		 * @todo [JRF => Yoast] find out all possible values which the old '_so_YMBESEO_meta-robots' could contain
 		 * to convert the data correctly
 		 */
 		$query  = $wpdb->prepare(
@@ -936,7 +936,7 @@ class WPSEO_Meta {
 		}
 		unset( $query, $oldies, $old, $clean );
 
-		do_action( 'wpseo_meta_clean_up' );
+		do_action( 'YMBESEO_meta_clean_up' );
 	}
 
 

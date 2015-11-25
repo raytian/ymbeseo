@@ -39,8 +39,8 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-if ( ! defined( 'WPSEO_FILE' ) ) {
-	define( 'WPSEO_FILE', __FILE__ );
+if ( ! defined( 'YMBESEO_FILE' ) ) {
+	define( 'YMBESEO_FILE', __FILE__ );
 }
 
 // Load the Yoast SEO plugin.

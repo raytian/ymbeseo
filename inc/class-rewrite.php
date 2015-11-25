@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This code handles the category rewrites.
  */
-class WPSEO_Rewrite {
+class YMBESEO_Rewrite {
 
 	/**
 	 * Class constructor
@@ -30,7 +30,7 @@ class WPSEO_Rewrite {
 	 * @since 1.2.8
 	 */
 	function schedule_flush() {
-		update_option( 'wpseo_flush_rewrite', 1 );
+		update_option( 'YMBESEO_flush_rewrite', 1 );
 	}
 
 	/**
@@ -40,10 +40,10 @@ class WPSEO_Rewrite {
 	 * @return bool
 	 */
 	function flush() {
-		if ( get_option( 'wpseo_flush_rewrite' ) ) {
+		if ( get_option( 'YMBESEO_flush_rewrite' ) ) {
 
 			add_action( 'shutdown', 'flush_rewrite_rules' );
-			delete_option( 'wpseo_flush_rewrite' );
+			delete_option( 'YMBESEO_flush_rewrite' );
 
 			return true;
 		}
@@ -83,10 +83,10 @@ class WPSEO_Rewrite {
 	 * @return array
 	 */
 	function query_vars( $query_vars ) {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		if ( $options['stripcategorybase'] === true ) {
-			$query_vars[] = 'wpseo_category_redirect';
+			$query_vars[] = 'YMBESEO_category_redirect';
 		}
 
 		return $query_vars;
@@ -100,8 +100,8 @@ class WPSEO_Rewrite {
 	 * @return array
 	 */
 	function request( $query_vars ) {
-		if ( isset( $query_vars['wpseo_category_redirect'] ) ) {
-			$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['wpseo_category_redirect'], 'category' );
+		if ( isset( $query_vars['YMBESEO_category_redirect'] ) ) {
+			$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['YMBESEO_category_redirect'], 'category' );
 
 			wp_redirect( $catlink, 301 );
 			exit;
@@ -154,7 +154,7 @@ class WPSEO_Rewrite {
 		$old_base                            = $wp_rewrite->get_category_permastruct();
 		$old_base                            = str_replace( '%category%', '(.+)', $old_base );
 		$old_base                            = trim( $old_base, '/' );
-		$category_rewrite[ $old_base . '$' ] = 'index.php?wpseo_category_redirect=$matches[1]';
+		$category_rewrite[ $old_base . '$' ] = 'index.php?YMBESEO_category_redirect=$matches[1]';
 
 		return $category_rewrite;
 	}

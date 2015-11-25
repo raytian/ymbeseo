@@ -1,16 +1,16 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
- * Class WPSEO_JSON_LD
+ * Class YMBESEO_JSON_LD
  *
  * Outputs schema code specific for Google's JSON LD stuff
  *
  * @since 1.8
  */
-class WPSEO_JSON_LD {
+class YMBESEO_JSON_LD {
 
 	/**
 	 * @var array Holds the plugins options.
@@ -31,11 +31,11 @@ class WPSEO_JSON_LD {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
-		add_action( 'wpseo_head', array( $this, 'json_ld' ), 90 );
-		add_action( 'wpseo_json_ld', array( $this, 'website' ), 10 );
-		add_action( 'wpseo_json_ld', array( $this, 'organization_or_person' ), 20 );
+		add_action( 'YMBESEO_head', array( $this, 'json_ld' ), 90 );
+		add_action( 'YMBESEO_json_ld', array( $this, 'website' ), 10 );
+		add_action( 'YMBESEO_json_ld', array( $this, 'organization_or_person' ), 20 );
 	}
 
 	/**
@@ -44,7 +44,7 @@ class WPSEO_JSON_LD {
 	 * @since 1.8
 	 */
 	public function json_ld() {
-		do_action( 'wpseo_json_ld' );
+		do_action( 'YMBESEO_json_ld' );
 	}
 
 	/**
@@ -101,13 +101,13 @@ class WPSEO_JSON_LD {
 	 */
 	private function output( $context ) {
 		/**
-		 * Filter: 'wpseo_json_ld_output' - Allows filtering of the JSON+LD output
+		 * Filter: 'YMBESEO_json_ld_output' - Allows filtering of the JSON+LD output
 		 *
 		 * @api array $output The output array, before its JSON encoded
 		 *
 		 * @param string $context The context of the output, useful to determine whether to filter or not.
 		 */
-		$this->data = apply_filters( 'wpseo_json_ld_output', $this->data, $context );
+		$this->data = apply_filters( 'YMBESEO_json_ld_output', $this->data, $context );
 
 		if ( function_exists( 'wp_json_encode' ) ) {
 			$json_data = wp_json_encode( $this->data );  // Function wp_json_encode() was introduced in WP 4.1.
@@ -158,7 +158,7 @@ class WPSEO_JSON_LD {
 		$this->data = array(
 			'@context' => 'http://schema.org',
 			'@type'    => '',
-			'url'      => WPSEO_Frontend::get_instance()->canonical( false, true ),
+			'url'      => YMBESEO_Frontend::get_instance()->canonical( false, true ),
 			'sameAs'   => $this->profiles,
 		);
 	}
@@ -198,11 +198,11 @@ class WPSEO_JSON_LD {
 	 */
 	private function get_home_url() {
 		/**
-		 * Filter: 'wpseo_json_home_url' - Allows filtering of the home URL for Yoast SEO's JSON+LD output
+		 * Filter: 'YMBESEO_json_home_url' - Allows filtering of the home URL for Yoast SEO's JSON+LD output
 		 *
 		 * @api unsigned string
 		 */
-		return apply_filters( 'wpseo_json_home_url', trailingslashit( home_url() ) );
+		return apply_filters( 'YMBESEO_json_home_url', trailingslashit( home_url() ) );
 	}
 
 	/**
@@ -221,17 +221,17 @@ class WPSEO_JSON_LD {
 	 */
 	private function internal_search_section() {
 		/**
-		 * Filter: 'disable_wpseo_json_ld_search' - Allow disabling of the json+ld output
+		 * Filter: 'disable_YMBESEO_json_ld_search' - Allow disabling of the json+ld output
 		 *
 		 * @api bool $display_search Whether or not to display json+ld search on the frontend
 		 */
-		if ( ! apply_filters( 'disable_wpseo_json_ld_search', false ) ) {
+		if ( ! apply_filters( 'disable_YMBESEO_json_ld_search', false ) ) {
 			/**
-			 * Filter: 'wpseo_json_ld_search_url' - Allows filtering of the search URL for Yoast SEO
+			 * Filter: 'YMBESEO_json_ld_search_url' - Allows filtering of the search URL for Yoast SEO
 			 *
 			 * @api string $search_url The search URL for this site with a `{search_term_string}` variable.
 			 */
-			$search_url = apply_filters( 'wpseo_json_ld_search_url', $this->get_home_url() . '?s={search_term_string}' );
+			$search_url = apply_filters( 'YMBESEO_json_ld_search_url', $this->get_home_url() . '?s={search_term_string}' );
 
 			$this->data['potentialAction'] = array(
 				'@type'       => 'SearchAction',
@@ -260,10 +260,10 @@ class WPSEO_JSON_LD {
 	 * Renders internal search schema markup
 	 *
 	 * @deprecated 2.1
-	 * @deprecated use WPSEO_JSON_LD::website()
+	 * @deprecated use YMBESEO_JSON_LD::website()
 	 */
 	public function internal_search() {
-		_deprecated_function( __METHOD__, 'WPSEO 2.1', 'WPSEO_JSON_LD::website()' );
+		_deprecated_function( __METHOD__, 'WPSEO 2.1', 'YMBESEO_JSON_LD::website()' );
 
 		$this->website();
 	}

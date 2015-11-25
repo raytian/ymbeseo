@@ -1,17 +1,17 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.6.2
  */
 
 /**
- * Class WPSEO_Snippet_Preview
+ * Class YMBESEO_Snippet_Preview
  *
  * Generates a Google Search snippet preview.
  *
  * Takes a $post, $title and $description
  */
-class WPSEO_Snippet_Preview {
+class YMBESEO_Snippet_Preview {
 	/**
 	 * @var string The dynamically generated html for the snippet preview.
 	 */
@@ -61,7 +61,7 @@ class WPSEO_Snippet_Preview {
 	 * @param string $description
 	 */
 	public function __construct( $post, $title, $description ) {
-		$this->options     = WPSEO_Options::get_all();
+		$this->options     = YMBESEO_Options::get_all();
 		$this->post        = $post;
 		$this->title       = esc_html( $title );
 		$this->description = esc_html( $description );
@@ -149,14 +149,14 @@ HTML;
 	protected function set_content_through_filter( $content ) {
 		$properties = get_object_vars( $this );
 
-		// Backward compatibility for functions hooking into the wpseo_snippet filter.
+		// Backward compatibility for functions hooking into the YMBESEO_snippet filter.
 		$properties['desc'] = $properties['description'];
 
 		/**
-		 * Filter: 'wpseo_snippet' - Allow changing the html for the snippet preview.
+		 * Filter: 'YMBESEO_snippet' - Allow changing the html for the snippet preview.
 		 *
 		 * Passing in the post twice because of backwards compatibility.
 		 */
-		$this->content = apply_filters( 'wpseo_snippet', $content, $this->post, $properties );
+		$this->content = apply_filters( 'YMBESEO_snippet', $content, $this->post, $properties );
 	}
 }

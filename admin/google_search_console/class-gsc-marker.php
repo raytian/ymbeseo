@@ -1,15 +1,15 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Marker
+ * Class YMBESEO_GSC_Marker
  */
-class WPSEO_GSC_Marker {
+class YMBESEO_GSC_Marker {
 
 	/**
-	 * @var WPSEO_GSC_Issues
+	 * @var YMBESEO_GSC_Issues
 	 */
 	private $crawl_issues;
 
@@ -60,7 +60,7 @@ class WPSEO_GSC_Marker {
 	 */
 	private function get_result() {
 		if ( $this->can_be_marked_as_fixed() ) {
-			$service = new WPSEO_GSC_Service( WPSEO_GSC_Settings::get_profile() );
+			$service = new YMBESEO_GSC_Service( YMBESEO_GSC_Settings::get_profile() );
 
 			if ( $this->set_crawl_issues() && $this->send_mark_as_fixed( $service ) && $this->delete_crawl_issue() ) {
 				$this->update_issue_count( $service );
@@ -94,7 +94,7 @@ class WPSEO_GSC_Marker {
 		$this->platform = filter_input( INPUT_POST, 'platform' );
 		$this->category = filter_input( INPUT_POST, 'category' );
 		if ( $this->platform && $this->category ) {
-			$this->crawl_issues = new WPSEO_GSC_Issues( $this->platform, $this->category );
+			$this->crawl_issues = new YMBESEO_GSC_Issues( $this->platform, $this->category );
 
 			return true;
 		}
@@ -105,11 +105,11 @@ class WPSEO_GSC_Marker {
 	/**
 	 * Sending a request to the Google Search Console API to let them know we marked an issue as fixed.
 	 *
-	 * @param WPSEO_GSC_Service $service
+	 * @param YMBESEO_GSC_Service $service
 	 *
 	 * @return bool
 	 */
-	private function send_mark_as_fixed( WPSEO_GSC_Service $service ) {
+	private function send_mark_as_fixed( YMBESEO_GSC_Service $service ) {
 		return $service->mark_as_fixed( $this->url, $this->platform, $this->category );
 	}
 
@@ -125,10 +125,10 @@ class WPSEO_GSC_Marker {
 	/**
 	 * Getting the counts for current platform - category combination and update the score of it.
 	 *
-	 * @param WPSEO_GSC_Service $service
+	 * @param YMBESEO_GSC_Service $service
 	 */
-	private function update_issue_count( WPSEO_GSC_Service $service ) {
-		$counts  = new WPSEO_GSC_Count( $service );
+	private function update_issue_count( YMBESEO_GSC_Service $service ) {
+		$counts  = new YMBESEO_GSC_Count( $service );
 
 		// Get the issues.
 		$total_issues = $counts->get_issue_count( $this->platform, $this->category );

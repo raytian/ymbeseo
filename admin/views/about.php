@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -14,7 +14,7 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
  *
  * @param array $contributors
  */
-function wpseo_display_contributors( $contributors ) {
+function YMBESEO_display_contributors( $contributors ) {
 	foreach ( $contributors as $username => $dev ) {
 		echo '<li class="wp-person" id="wp-person-', $username, '">';
 		echo '<a href="https://github.com/', $username, '"><img	src="https://secure.gravatar.com/avatar/', $dev->gravatar, '?s=60" class="gravatar" alt="', $dev->name, '"></a>';
@@ -29,7 +29,7 @@ function wpseo_display_contributors( $contributors ) {
 
 	<h1><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Thank you for updating %1$s!', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( __( 'Thank you for updating %1$s!', 'ymbeseo' ), 'Yoast SEO' );
 		?></h1>
 
 	<p class="about-text">
@@ -40,10 +40,10 @@ function wpseo_display_contributors( $contributors ) {
 		<a class="nav-tab" href="#top#new" id="new-tab">
 			<?php
 			/* translators: %s: '2.3' version number */
-			echo sprintf( __( 'What’s new in %s', 'wordpress-seo' ), '2.3' );
+			echo sprintf( __( 'What’s new in %s', 'ymbeseo' ), '2.3' );
 			?>
 		</a>
-		<a class="nav-tab" href="#top#credits" id="credits-tab"><?php _e( 'Credits', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" href="#top#credits" id="credits-tab"><?php _e( 'Credits', 'ymbeseo' ); ?></a>
 	</h2>
 
 	<div id="new" class="wpseotab">
@@ -156,12 +156,12 @@ function wpseo_display_contributors( $contributors ) {
 
 				<div class="last-feature">
 					<span class="dashicons dashicons-translation"></span>
-					<h4><?php _e( 'More Translations', 'wordpress-seo' ); ?></h4>
+					<h4><?php _e( 'More Translations', 'ymbeseo' ); ?></h4>
 
 					<p>
 						<?php
 						/* translators: %1$s expands to Yoast SEO, %2$s and %3$s to the anchor tags to the translate.yoast.com link, %4$d to the number of translations, %5$d to the number of translations, */
-						printf( __( '%1$s ships, at time of release, with %4$d translations, of which %5$d are complete. That\'s a huge improvement from last time, and we\'re improving every week. Join us at %2$stranslate.yoast.com%3$s!', 'wordpress-seo' ), 'Yoast SEO', '<a target="_blank" href="https://translate.yoast.com/projects/wordpress-seo">', '</a>', 32, 10 );
+						printf( __( '%1$s ships, at time of release, with %4$d translations, of which %5$d are complete. That\'s a huge improvement from last time, and we\'re improving every week. Join us at %2$stranslate.yoast.com%3$s!', 'ymbeseo' ), 'Yoast SEO', '<a target="_blank" href="https://translate.yoast.com/projects/wordpress-seo">', '</a>', 32, 10 );
 						?>
 					</p>
 				</div>
@@ -169,7 +169,7 @@ function wpseo_display_contributors( $contributors ) {
 		</div>
 
 		<div class="return-to-dashboard">
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ); ?>"><?php _e( 'Go to The General settings page →', 'wordpress-seo' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=YMBESEO_dashboard' ) ); ?>"><?php _e( 'Go to The General settings page →', 'ymbeseo' ); ?></a>
 		</div>
 
 	</div>
@@ -178,42 +178,42 @@ function wpseo_display_contributors( $contributors ) {
 		<p class="about-description">
 			<?php
 			/* translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast SEO */
-			printf( __( 'While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team.', 'wordpress-seo' ), '<a target="_blank" href="https://yoast.com/">', '</a>', 'Yoast SEO' );
+			printf( __( 'While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team.', 'ymbeseo' ), '<a target="_blank" href="https://yoast.com/">', '</a>', 'Yoast SEO' );
 			echo ' ';
-			printf( __( 'Want to help us develop? Read our %1$scontribution guidelines%2$s!', 'wordpress-seo' ), '<a target="_blank" href="http://yoa.st/wpseocontributionguidelines">', '</a>' );
+			printf( __( 'Want to help us develop? Read our %1$scontribution guidelines%2$s!', 'ymbeseo' ), '<a target="_blank" href="http://yoa.st/wpseocontributionguidelines">', '</a>' );
 			?>
 		</p>
 
-		<h4 class="wp-people-group"><?php _e( 'Project Leaders', 'wordpress-seo' ); ?></h4>
+		<h4 class="wp-people-group"><?php _e( 'Project Leaders', 'ymbeseo' ); ?></h4>
 		<ul class="wp-people-group " id="wp-people-group-project-leaders">
 			<?php
 			$leaders = array(
 				'jdevalk'   => (object) array(
 					'name'     => 'Joost de Valk',
-					'role'     => __( 'Project Lead', 'wordpress-seo' ),
+					'role'     => __( 'Project Lead', 'ymbeseo' ),
 					'gravatar' => 'f08c3c3253bf14b5616b4db53cea6b78',
 				),
 				'jrfnl'     => (object) array(
 					'name'     => 'Juliette Reinders Folmer',
-					'role'     => __( 'Lead Developer', 'wordpress-seo' ),
+					'role'     => __( 'Lead Developer', 'ymbeseo' ),
 					'gravatar' => 'cbbac3e529102364dc3b026af3cc2988',
 				),
 				'omarreiss' => (object) array(
 					'name'     => 'Omar Reiss',
-					'role'     => __( 'Lead Developer', 'wordpress-seo' ),
+					'role'     => __( 'Lead Developer', 'ymbeseo' ),
 					'gravatar' => '86aaa606a1904e7e0cf9857a663c376e',
 				),
 				'tacoverdo' => (object) array(
 					'name'     => 'Taco Verdonschot',
-					'role'     => __( 'QA & Translations Manager', 'wordpress-seo' ),
+					'role'     => __( 'QA & Translations Manager', 'ymbeseo' ),
 					'gravatar' => 'd2d3ecb38cacd521926979b5c678297b',
 				),
 			);
 
-			wpseo_display_contributors( $leaders );
+			YMBESEO_display_contributors( $leaders );
 			?>
 		</ul>
-		<h4 class="wp-people-group"><?php _e( 'Recent Rockstars', 'wordpress-seo' ); ?></h4>
+		<h4 class="wp-people-group"><?php _e( 'Recent Rockstars', 'ymbeseo' ); ?></h4>
 		<ul class="wp-people-group " id="wp-people-group-rockstars">
 			<?php
 			$contributors = array(
@@ -239,34 +239,34 @@ function wpseo_display_contributors( $contributors ) {
 				),
 			);
 
-			wpseo_display_contributors( $contributors );
+			YMBESEO_display_contributors( $contributors );
 			?>
 		</ul>
-		<h4 class="wp-people-group"><?php _e( 'Contributing Developers', 'wordpress-seo' ); ?></h4>
+		<h4 class="wp-people-group"><?php _e( 'Contributing Developers', 'ymbeseo' ); ?></h4>
 		<ul class="wp-people-group " id="wp-people-group-core-developers">
 			<?php
 			$contributors = array(
 				'atimmer'       => (object) array(
 					'name'     => 'Anton Timmermans',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => __( 'Developer', 'ymbeseo' ),
 					'gravatar' => 'b3acbabfdd208ecbf950d864b86fe968',
 				),
 				'petervw'       => (object) array(
 					'name'     => 'Peter van Wilderen',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => __( 'Developer', 'ymbeseo' ),
 					'gravatar' => 'e4662ebd4b59d3c196e2ba721d8a1efc',
 				),
 				'CarolineGeven' => (object) array(
 					'name'     => 'Caroline Geven',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => __( 'Developer', 'ymbeseo' ),
 					'gravatar' => 'f2596a568c3974e35f051266a63d791f',
 				),
 			);
 
-			wpseo_display_contributors( $contributors );
+			YMBESEO_display_contributors( $contributors );
 			?>
 		</ul>
-		<h4 class="wp-people-group"><?php _e( 'Contributors to this release', 'wordpress-seo' ); ?></h4>
+		<h4 class="wp-people-group"><?php _e( 'Contributors to this release', 'ymbeseo' ); ?></h4>
 		<?php
 		$patches_from = array(
 			'Pete Nelson'             => 'https://github.com/petenelson',

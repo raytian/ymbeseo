@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Admin\Import\External
+ * @package YMBESEO\Admin\Import\External
  */
 
 /**
- * Class WPSEO_Import_WooThemes_SEO
+ * Class YMBESEO_Import_WooThemes_SEO
  *
  * Class with functionality to import Yoast SEO settings from WooThemes SEO
  */
-class WPSEO_Import_WooThemes_SEO extends WPSEO_Import_External {
+class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 
 	/**
 	 * Class constructor
@@ -24,9 +24,9 @@ class WPSEO_Import_WooThemes_SEO extends WPSEO_Import_External {
 		$this->import_custom_values( 'seo_woo_meta_home_key', 'metakey-home-wpseo' );
 		$this->import_metas();
 
-		update_option( 'wpseo_titles', $this->options );
+		update_option( 'YMBESEO_titles', $this->options );
 
-		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'wordpress-seo' ) );
+		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'ymbeseo' ) );
 	}
 
 	/**
@@ -121,22 +121,22 @@ class WPSEO_Import_WooThemes_SEO extends WPSEO_Import_External {
 	 * Import meta values if they're applicable
 	 */
 	private function import_metas() {
-		WPSEO_Meta::replace_meta( 'seo_follow', WPSEO_Meta::$meta_prefix . 'meta-robots-nofollow', $this->replace );
-		WPSEO_Meta::replace_meta( 'seo_noindex', WPSEO_Meta::$meta_prefix . 'meta-robots-noindex', $this->replace );
+		YMBESEO_Meta::replace_meta( 'seo_follow', YMBESEO_Meta::$meta_prefix . 'meta-robots-nofollow', $this->replace );
+		YMBESEO_Meta::replace_meta( 'seo_noindex', YMBESEO_Meta::$meta_prefix . 'meta-robots-noindex', $this->replace );
 
 		// If WooSEO is set to use the Woo titles, import those.
 		if ( 'true' == get_option( 'seo_woo_wp_title' ) ) {
-			WPSEO_Meta::replace_meta( 'seo_title', WPSEO_Meta::$meta_prefix . 'title', $this->replace );
+			YMBESEO_Meta::replace_meta( 'seo_title', YMBESEO_Meta::$meta_prefix . 'title', $this->replace );
 		}
 
 		// If WooSEO is set to use the Woo meta descriptions, import those.
 		if ( 'b' == get_option( 'seo_woo_meta_single_desc' ) ) {
-			WPSEO_Meta::replace_meta( 'seo_description', WPSEO_Meta::$meta_prefix . 'metadesc', $this->replace );
+			YMBESEO_Meta::replace_meta( 'seo_description', YMBESEO_Meta::$meta_prefix . 'metadesc', $this->replace );
 		}
 
 		// If WooSEO is set to use the Woo meta keywords, import those.
 		if ( 'b' == get_option( 'seo_woo_meta_single_key' ) ) {
-			WPSEO_Meta::replace_meta( 'seo_keywords', WPSEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
+			YMBESEO_Meta::replace_meta( 'seo_keywords', YMBESEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
 		}
 
 		foreach ( array( 'seo_woo_wp_title', 'seo_woo_meta_single_desc', 'seo_woo_meta_single_key' ) as $option ) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  * @since      1.8.0
  */
 
@@ -8,7 +8,7 @@
  * Group of utility methods for use by WPSEO
  * All methods are static, this is just a sort of namespacing class wrapper.
  */
-class WPSEO_Utils {
+class YMBESEO_Utils {
 
 	/**
 	 * @var bool $has_filters Whether the PHP filter extension is enabled
@@ -35,7 +35,7 @@ class WPSEO_Utils {
 			return true;
 		}
 
-		$options = get_site_option( 'wpseo_ms' );
+		$options = get_site_option( 'YMBESEO_ms' );
 		if ( $options['access'] === 'admin' && current_user_can( 'manage_options' ) ) {
 			return true;
 		}
@@ -64,13 +64,13 @@ class WPSEO_Utils {
 		}
 
 		/**
-		 * Filter: 'wpseo_allow_system_file_edit' - Allow developers to change whether the editing of
+		 * Filter: 'YMBESEO_allow_system_file_edit' - Allow developers to change whether the editing of
 		 * .htaccess and robots.txt is allowed
 		 *
 		 * @api bool $allowed Whether file editing is allowed
 		 */
 
-		return apply_filters( 'wpseo_allow_system_file_edit', $allowed );
+		return apply_filters( 'YMBESEO_allow_system_file_edit', $allowed );
 	}
 
 	/**
@@ -200,27 +200,27 @@ class WPSEO_Utils {
 		}
 		switch ( $val ) {
 			case 0:
-				$score = __( 'N/A', 'wordpress-seo' );
+				$score = __( 'N/A', 'ymbeseo' );
 				$css   = 'na';
 				break;
 			case 4:
 			case 5:
-				$score = __( 'Poor', 'wordpress-seo' );
+				$score = __( 'Poor', 'ymbeseo' );
 				$css   = 'poor';
 				break;
 			case 6:
 			case 7:
-				$score = __( 'OK', 'wordpress-seo' );
+				$score = __( 'OK', 'ymbeseo' );
 				$css   = 'ok';
 				break;
 			case 8:
 			case 9:
 			case 10:
-				$score = __( 'Good', 'wordpress-seo' );
+				$score = __( 'Good', 'ymbeseo' );
 				$css   = 'good';
 				break;
 			default:
-				$score = __( 'Bad', 'wordpress-seo' );
+				$score = __( 'Bad', 'ymbeseo' );
 				$css   = 'bad';
 				break;
 		}
@@ -499,7 +499,7 @@ class WPSEO_Utils {
 	 */
 	public static function register_cache_clear_option( $option, $type = '' ) {
 		self::$cache_clear[ $option ] = $type;
-		add_action( 'update_option', array( 'WPSEO_Utils', 'clear_transient_cache' ) );
+		add_action( 'update_option', array( 'YMBESEO_Utils', 'clear_transient_cache' ) );
 	}
 
 	/**
@@ -510,7 +510,7 @@ class WPSEO_Utils {
 	public static function clear_transient_cache( $option ) {
 		if ( isset( self::$cache_clear[ $option ] ) ) {
 			if ( '' !== self::$cache_clear[ $option ] ) {
-				wpseo_invalidate_sitemap_cache( self::$cache_clear[ $option ] );
+				YMBESEO_invalidate_sitemap_cache( self::$cache_clear[ $option ] );
 			}
 			else {
 				self::clear_sitemap_cache();
@@ -530,12 +530,12 @@ class WPSEO_Utils {
 			return;
 		}
 
-		if ( ! apply_filters( 'wpseo_enable_xml_sitemap_transient_caching', true ) ) {
+		if ( ! apply_filters( 'YMBESEO_enable_xml_sitemap_transient_caching', true ) ) {
 			return;
 		}
 
 		// Not sure about efficiency, but that's what code elsewhere does R.
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		if ( true !== $options['enablexmlsitemap'] ) {
 			return;
@@ -551,13 +551,13 @@ class WPSEO_Utils {
 					$query .= ' OR ';
 				}
 
-				$query .= " option_name LIKE '_transient_wpseo_sitemap_cache_" . $sitemap_type . "_%' OR option_name LIKE '_transient_timeout_wpseo_sitemap_cache_" . $sitemap_type . "_%'";
+				$query .= " option_name LIKE '_transient_YMBESEO_sitemap_cache_" . $sitemap_type . "_%' OR option_name LIKE '_transient_timeout_YMBESEO_sitemap_cache_" . $sitemap_type . "_%'";
 
 				$first = false;
 			}
 		}
 		else {
-			$query .= " option_name LIKE '_transient_wpseo_sitemap_%' OR option_name LIKE '_transient_timeout_wpseo_sitemap_%'";
+			$query .= " option_name LIKE '_transient_YMBESEO_sitemap_%' OR option_name LIKE '_transient_timeout_YMBESEO_sitemap_%'";
 		}
 
 		$wpdb->query( $query );
@@ -775,7 +775,7 @@ class WPSEO_Utils {
 			$formatted_url .= '?' . $parsed_url['query'];
 		}
 
-		return apply_filters( 'wpseo_format_admin_url', $formatted_url );
+		return apply_filters( 'YMBESEO_format_admin_url', $formatted_url );
 	}
 
 
@@ -796,4 +796,4 @@ class WPSEO_Utils {
 		return false;
 	}
 
-} /* End of class WPSEO_Utils */
+} /* End of class YMBESEO_Utils */

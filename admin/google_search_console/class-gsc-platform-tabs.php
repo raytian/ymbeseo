@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Platform_Tabs
+ * Class YMBESEO_GSC_Platform_Tabs
  */
-class WPSEO_GSC_Platform_Tabs {
+class YMBESEO_GSC_Platform_Tabs {
 
 	/**
 	 * @var string
@@ -37,19 +37,19 @@ class WPSEO_GSC_Platform_Tabs {
 	 * @return string
 	 */
 	private function platform_tabs() {
-		$tabs = array( 'settings' => __( 'Settings', 'wordpress-seo' ) );
+		$tabs = array( 'settings' => __( 'Settings', 'ymbeseo' ) );
 
 		$platforms = array(
-			'web'             => __( 'Desktop', 'wordpress-seo' ),
-			'smartphone_only' => __( 'Smartphone', 'wordpress-seo' ),
-			'mobile'          => __( 'Feature phone', 'wordpress-seo' ),
+			'web'             => __( 'Desktop', 'ymbeseo' ),
+			'smartphone_only' => __( 'Smartphone', 'ymbeseo' ),
+			'mobile'          => __( 'Feature phone', 'ymbeseo' ),
 		);
 
-		if ( WPSEO_GSC_Settings::get_profile() !== '' ) {
+		if ( YMBESEO_GSC_Settings::get_profile() !== '' ) {
 			$tabs = array_merge( $platforms, $tabs );
 		}
 
-		$admin_link = admin_url( 'admin.php?page=wpseo_search_console&tab=' );
+		$admin_link = admin_url( 'admin.php?page=YMBESEO_search_console&tab=' );
 
 		$this->set_current_tab( $tabs );
 

@@ -120,13 +120,13 @@ function wpseoDetectWrongVariables( e ) {
 	jQuery.each( wrongVariables, function( index, variable ) {
 			error_id = e.attr( 'id' ) + '-' + variable + '-warning';
 			if ( e.val().search( '%%' + variable + '%%' ) !== -1 ) {
-				e.addClass( 'wpseo_variable_warning' );
+				e.addClass( 'YMBESEO_variable_warning' );
 				var msg = wpseoAdminL10n.variable_warning.replace( '%s', '%%' + variable + '%%' );
 				if ( jQuery( '#' + error_id ).length ) {
 					jQuery( '#' + error_id ).html( msg );
 				}
 				else {
-					e.after( ' <div id="' + error_id + '" class="wpseo_variable_warning"><div class="clear"></div>' + msg + '</div>' );
+					e.after( ' <div id="' + error_id + '" class="YMBESEO_variable_warning"><div class="clear"></div>' + msg + '</div>' );
 				}
 				warn = true;
 			}
@@ -138,7 +138,7 @@ function wpseoDetectWrongVariables( e ) {
 		}
 	);
 	if ( warn === false ) {
-		e.removeClass( 'wpseo_variable_warning' );
+		e.removeClass( 'YMBESEO_variable_warning' );
 	}
 }
 
@@ -152,7 +152,7 @@ function wpseoDetectWrongVariables( e ) {
  */
 function setWPOption( option, newval, hide, nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_set_option',
+			action: 'YMBESEO_set_option',
 			option: option,
 			newval: newval,
 			_wpnonce: nonce
@@ -171,7 +171,7 @@ function setWPOption( option, newval, hide, nonce ) {
  */
 function wpseoKillBlockingFiles( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_kill_blocking_files',
+			action: 'YMBESEO_kill_blocking_files',
 			_ajax_nonce: nonce
 		}, function( data ) {
 			if ( data === 'success' ) {
@@ -212,7 +212,7 @@ jQuery( window ).on( 'hashchange', wpseoSetTabHash );
  */
 jQuery( document ).on( 'ready', wpseoSetTabHash );
 
-function wpseo_add_fb_admin() {
+function YMBESEO_add_fb_admin() {
 	var target_form = jQuery('#TB_ajaxContent');
 
 	jQuery.post(
@@ -221,7 +221,7 @@ function wpseo_add_fb_admin() {
 			_wpnonce: target_form.find('input[name=fb_admin_nonce]').val(),
 			admin_name: target_form.find('input[name=fb_admin_name]').val(),
 			admin_id: target_form.find('input[name=fb_admin_id]').val(),
-			action: 'wpseo_add_fb_admin'
+			action: 'YMBESEO_add_fb_admin'
 		},
 		function( response ) {
 			var resp = jQuery.parseJSON( response );

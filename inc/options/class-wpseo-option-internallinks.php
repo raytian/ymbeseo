@@ -1,17 +1,17 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
- * Option: wpseo_internallinks
+ * Option: YMBESEO_internallinks
  */
-class WPSEO_Option_InternalLinks extends WPSEO_Option {
+class YMBESEO_Option_InternalLinks extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_internallinks';
+	public $option_name = 'YMBESEO_internallinks';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -65,10 +65,10 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['breadcrumbs-404crumb']      = __( 'Error 404: Page not found', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-archiveprefix'] = __( 'Archives for', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-home']          = __( 'Home', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-searchprefix']  = __( 'You searched for', 'wordpress-seo' );
+		$this->defaults['breadcrumbs-404crumb']      = __( 'Error 404: Page not found', 'ymbeseo' );
+		$this->defaults['breadcrumbs-archiveprefix'] = __( 'Archives for', 'ymbeseo' );
+		$this->defaults['breadcrumbs-home']          = __( 'Home', 'ymbeseo' );
+		$this->defaults['breadcrumbs-searchprefix']  = __( 'You searched for', 'ymbeseo' );
 	}
 
 
@@ -162,7 +162,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									sprintf( __( 'Please select a valid taxonomy for post type "%s"', 'wordpress-seo' ), $post_type ), // The error message.
+									sprintf( __( 'Please select a valid taxonomy for post type "%s"', 'ymbeseo' ), $post_type ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}
@@ -201,7 +201,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $tax, // Suffix-id for the error message box.
-									sprintf( __( 'Please select a valid post type for taxonomy "%s"', 'wordpress-seo' ), $tax ), // The error message.
+									sprintf( __( 'Please select a valid post type for taxonomy "%s"', 'ymbeseo' ), $tax ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 								unset( $tax );
@@ -225,7 +225,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 				 * 		'breadcrumbs-enable'
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -279,8 +279,8 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 
 		/* Make sure the old fall-back defaults for empty option keys are now added to the option */
 		if ( isset( $current_version ) && version_compare( $current_version, '1.5.2.3', '<' ) ) {
-			if ( has_action( 'init', array( 'WPSEO_Options', 'bring_back_breadcrumb_defaults' ) ) === false ) {
-				add_action( 'init', array( 'WPSEO_Options', 'bring_back_breadcrumb_defaults' ), 3 );
+			if ( has_action( 'init', array( 'YMBESEO_Options', 'bring_back_breadcrumb_defaults' ) ) === false ) {
+				add_action( 'init', array( 'YMBESEO_Options', 'bring_back_breadcrumb_defaults' ), 3 );
 			}
 		}
 

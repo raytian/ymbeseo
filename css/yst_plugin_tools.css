@@ -91,12 +91,12 @@ label.radio {
 	margin-right: 20px;
 }
 
-.wpseo_content_wrapper {
+.YMBESEO_content_wrapper {
 	display: table;
 	width: 100%;
 }
 
-.wpseo_content_cell {
+.YMBESEO_content_cell {
 	display: table-cell;
 	height: 500px;
 	margin: 0;
@@ -104,26 +104,26 @@ label.radio {
 	vertical-align: top;
 }
 
-#wpseo_content_top {
+#YMBESEO_content_top {
 	min-width: 800px;
 }
 
-div.wpseo_variable_warning {
+div.YMBESEO_variable_warning {
 	margin: 5px 0 0 0;
 	padding: 5px;
 	color: red;
 }
 
-input.wpseo_variable_warning,
-textarea.wpseo_variable_warning {
+input.YMBESEO_variable_warning,
+textarea.YMBESEO_variable_warning {
 	border: 1px solid red;
 }
 
-.wpseo_variable_warning a {
+.YMBESEO_variable_warning a {
 	color: red;
 }
 
-.wpseo_content_wrapper div.wpseo-warning {
+.YMBESEO_content_wrapper div.wpseo-warning {
 	margin: 2em 0 0 0;
 	padding-right: 10px;
 	padding-left: 10px;
@@ -131,11 +131,11 @@ textarea.wpseo_variable_warning {
 	background-color: #dedede;
 }
 
-.wpseo_content_wrapper div.wpseo-warning h4 {
+.YMBESEO_content_wrapper div.wpseo-warning h4 {
 	margin: 1em 0 0 0;
 }
 
-.wpseo_content_wrapper div.wpseo-warning p.error-message {
+.YMBESEO_content_wrapper div.wpseo-warning p.error-message {
 	font-weight: normal;
 }
 
@@ -145,7 +145,7 @@ textarea.wpseo_variable_warning {
 }
 
 @media (max-width: 1020px) {
-	#wpseo_content_top {
+	#YMBESEO_content_top {
 		margin-left: 0;
 		padding-left: 0;
 	}
@@ -431,12 +431,12 @@ div#separator input.radio:checked + label {
 	line-height: 24px;
 }
 
-#TB_window .wpseo_content_wrapper p {
+#TB_window .YMBESEO_content_wrapper p {
 	font-size: 14px;
 	font-style: normal;
 }
 
-#TB_window .wpseo_content_wrapper label {
+#TB_window .YMBESEO_content_wrapper label {
 	margin: 0 10px 0 0;
 	font-size: 14px;
 	font-weight: bold;

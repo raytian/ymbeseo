@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.8.0
  */
 
 /**
  * Customizes user profile.
  */
-class WPSEO_Admin_User_Profile {
+class YMBESEO_Admin_User_Profile {
 	/**
 	 * Class constructor
 	 */
@@ -28,7 +28,7 @@ class WPSEO_Admin_User_Profile {
 	private function filter_input_post( $var_name ) {
 		$val = filter_input( INPUT_POST, $var_name );
 		if ( $val ) {
-			return WPSEO_Utils::sanitize_text_field( $val );
+			return YMBESEO_Utils::sanitize_text_field( $val );
 		}
 		return '';
 	}
@@ -39,14 +39,14 @@ class WPSEO_Admin_User_Profile {
 	 * @param    int $user_id of the updated user.
 	 */
 	public function process_user_option_update( $user_id ) {
-		update_user_meta( $user_id, '_yoast_wpseo_profile_updated', time() );
+		update_user_meta( $user_id, '_so_YMBESEO_profile_updated', time() );
 
-		check_admin_referer( 'wpseo_user_profile_update', 'wpseo_nonce' );
+		check_admin_referer( 'YMBESEO_user_profile_update', 'YMBESEO_nonce' );
 
-		update_user_meta( $user_id, 'wpseo_title', $this->filter_input_post( 'wpseo_author_title' ) );
-		update_user_meta( $user_id, 'wpseo_metadesc', $this->filter_input_post( 'wpseo_author_metadesc' ) );
-		update_user_meta( $user_id, 'wpseo_metakey', $this->filter_input_post( 'wpseo_author_metakey' ) );
-		update_user_meta( $user_id, 'wpseo_excludeauthorsitemap', $this->filter_input_post( 'wpseo_author_exclude' ) );
+		update_user_meta( $user_id, 'YMBESEO_title', $this->filter_input_post( 'YMBESEO_author_title' ) );
+		update_user_meta( $user_id, 'YMBESEO_metadesc', $this->filter_input_post( 'YMBESEO_author_metadesc' ) );
+		update_user_meta( $user_id, 'YMBESEO_metakey', $this->filter_input_post( 'YMBESEO_author_metakey' ) );
+		update_user_meta( $user_id, 'YMBESEO_excludeauthorsitemap', $this->filter_input_post( 'YMBESEO_author_exclude' ) );
 	}
 
 	/**
@@ -55,9 +55,9 @@ class WPSEO_Admin_User_Profile {
 	 * @param    object $user
 	 */
 	public function user_profile( $user ) {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
-		wp_nonce_field( 'wpseo_user_profile_update', 'wpseo_nonce' );
+		wp_nonce_field( 'YMBESEO_user_profile_update', 'YMBESEO_nonce' );
 
 		require_once( 'views/user-profile.php' );
 	}

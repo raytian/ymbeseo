@@ -1,22 +1,22 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
- * Option: wpseo_xml
+ * Option: YMBESEO_xml
  */
-class WPSEO_Option_XML extends WPSEO_Option {
+class YMBESEO_Option_XML extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_xml';
+	public $option_name = 'YMBESEO_xml';
 
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_wpseo_xml_sitemap_options';
+	public $group_name = 'so_YMBESEO_xml_sitemap_options';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -54,12 +54,12 @@ class WPSEO_Option_XML extends WPSEO_Option {
 	 *       is updated early on and if so, change the call to schedule these for a later action on add/update
 	 *       instead of running them straight away
 	 *
-	 * @return \WPSEO_Option_XML
+	 * @return \YMBESEO_Option_XML
 	 */
 	protected function __construct() {
 		parent::__construct();
-		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_rewrites' ) );
-		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_sitemap_cache' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_rewrites' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_sitemap_cache' ) );
 	}
 
 
@@ -83,8 +83,8 @@ class WPSEO_Option_XML extends WPSEO_Option {
 	 */
 	public function enrich_defaults() {
 
-		$user_roles          = WPSEO_Utils::get_roles();
-		$filtered_user_roles = apply_filters( 'wpseo_sitemaps_supported_user_roles', $user_roles );
+		$user_roles          = YMBESEO_Utils::get_roles();
+		$filtered_user_roles = apply_filters( 'YMBESEO_sitemaps_supported_user_roles', $user_roles );
 		if ( is_array( $filtered_user_roles ) && $filtered_user_roles !== array() ) {
 			foreach ( $filtered_user_roles as $role_name => $role_value ) {
 				$this->defaults[ 'user_role-' . $role_name . '-not_in_sitemap' ] = false;
@@ -96,7 +96,7 @@ class WPSEO_Option_XML extends WPSEO_Option {
 		unset( $user_roles, $filtered_user_roles );
 
 		$post_type_names     = get_post_types( array( 'public' => true ), 'names' );
-		$filtered_post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', $post_type_names );
+		$filtered_post_types = apply_filters( 'YMBESEO_sitemaps_supported_post_types', $post_type_names );
 
 		if ( is_array( $filtered_post_types ) && $filtered_post_types !== array() ) {
 			foreach ( $filtered_post_types as $pt ) {
@@ -112,7 +112,7 @@ class WPSEO_Option_XML extends WPSEO_Option {
 		unset( $post_type_names, $filtered_post_types );
 
 		$taxonomy_objects    = get_taxonomies( array( 'public' => true ), 'objects' );
-		$filtered_taxonomies = apply_filters( 'wpseo_sitemaps_supported_taxonomies', $taxonomy_objects );
+		$filtered_taxonomies = apply_filters( 'YMBESEO_sitemaps_supported_taxonomies', $taxonomy_objects );
 		if ( is_array( $filtered_taxonomies ) && $filtered_taxonomies !== array() ) {
 			foreach ( $filtered_taxonomies as $tax ) {
 				if ( isset( $tax->labels->name ) && trim( $tax->labels->name ) != '' ) {
@@ -148,13 +148,13 @@ class WPSEO_Option_XML extends WPSEO_Option {
 					 * - what should be the guideline?) and adjust error message
 					 */
 					if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-						$int = WPSEO_Utils::validate_int( $dirty[ $key ] );
+						$int = YMBESEO_Utils::validate_int( $dirty[ $key ] );
 						if ( $int !== false && $int > 0 ) {
 							$clean[ $key ] = $int;
 						}
 						else {
 							if ( isset( $old[ $key ] ) && $old[ $key ] !== '' ) {
-								$int = WPSEO_Utils::validate_int( $old[ $key ] );
+								$int = YMBESEO_Utils::validate_int( $old[ $key ] );
 								if ( $int !== false && $int > 0 ) {
 									$clean[ $key ] = $int;
 								}
@@ -163,7 +163,7 @@ class WPSEO_Option_XML extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									sprintf( __( '"Max entries per sitemap page" should be a positive number, which %s is not. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
+									sprintf( __( '"Max entries per sitemap page" should be a positive number, which %s is not. Please correct.', 'ymbeseo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}
@@ -200,7 +200,7 @@ class WPSEO_Option_XML extends WPSEO_Option {
 				 *		'taxonomies-' . $tax->name . '-not_in_sitemap' fields
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -236,7 +236,7 @@ class WPSEO_Option_XML extends WPSEO_Option {
 					case 'user_role-': /* 'user_role-' . $role_name. '-not_in_sitemap' fields */
 					case 'post_types-': /* 'post_types-' . $pt->name . '-not_in_sitemap' fields */
 					case 'taxonomies-': /* 'taxonomies-' . $tax->name . '-not_in_sitemap' fields */
-						$option_value[ $key ] = WPSEO_Utils::validate_bool( $value );
+						$option_value[ $key ] = YMBESEO_Utils::validate_bool( $value );
 						break;
 				}
 			}

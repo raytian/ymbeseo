@@ -1,5 +1,5 @@
 /* global ajaxurl */
-/* global wpseo_bulk_editor_nonce */
+/* global YMBESEO_bulk_editor_nonce */
 /* jshint -W097 */
 'use strict';
 var bulk_editor = function( current_table ) {
@@ -9,9 +9,9 @@ var bulk_editor = function( current_table ) {
 	var column_value = current_table.find( 'th[id^=col_existing_yoast]' ).first().text().replace( 'Existing ', '' );
 
 	var save_method = new_class.replace( '-new-', '_save_' );
-	var save_all_method = 'wpseo_save_all_' + current_table.attr( 'class' ).split( 'wpseo_bulk_' )[ 1 ];
+	var save_all_method = 'YMBESEO_save_all_' + current_table.attr( 'class' ).split( 'YMBESEO_bulk_' )[ 1 ];
 
-	var bulk_type = save_method.replace( 'wpseo_save_', '' );
+	var bulk_type = save_method.replace( 'YMBESEO_save_', '' );
 
 	var options = {
 		new_class: '.' + new_class,
@@ -47,8 +47,8 @@ var bulk_editor = function( current_table ) {
 
 				var data = {
 					action: save_method,
-					_ajax_nonce: wpseo_bulk_editor_nonce,
-					wpseo_post_id: id,
+					_ajax_nonce: YMBESEO_bulk_editor_nonce,
+					YMBESEO_post_id: id,
 					new_value: new_value,
 					existing_value: current_value
 				};
@@ -62,7 +62,7 @@ var bulk_editor = function( current_table ) {
 
 			var data = {
 				action: save_all_method,
-				_ajax_nonce: wpseo_bulk_editor_nonce
+				_ajax_nonce: YMBESEO_bulk_editor_nonce
 			};
 
 			data.send = false;
@@ -151,7 +151,7 @@ var bulk_editor = function( current_table ) {
 };
 
 jQuery( document ).ready( function() {
-		var parent_tables = jQuery( 'table[class*="wpseo_bulk"]' );
+		var parent_tables = jQuery( 'table[class*="YMBESEO_bulk"]' );
 		parent_tables.each(
 			function( number, parent_table ) {
 				var current_table = jQuery( parent_table );

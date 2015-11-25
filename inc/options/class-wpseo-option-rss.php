@@ -1,17 +1,17 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
- * Option: wpseo_rss
+ * Option: YMBESEO_rss
  */
-class WPSEO_Option_RSS extends WPSEO_Option {
+class YMBESEO_Option_RSS extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_rss';
+	public $option_name = 'YMBESEO_rss';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -44,7 +44,7 @@ class WPSEO_Option_RSS extends WPSEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['rssafter'] = sprintf( __( 'The post %s appeared first on %s.', 'wordpress-seo' ), '%%POSTLINK%%', '%%BLOGLINK%%' );
+		$this->defaults['rssafter'] = sprintf( __( 'The post %s appeared first on %s.', 'ymbeseo' ), '%%POSTLINK%%', '%%BLOGLINK%%' );
 	}
 
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Service
+ * Class YMBESEO_GSC_Service
  */
-class WPSEO_GSC_Service {
+class YMBESEO_GSC_Service {
 
 	/**
 	 * @var Yoast_Api_Google_Client
@@ -101,7 +101,7 @@ class WPSEO_GSC_Service {
 	 * @return bool
 	 */
 	public function mark_as_fixed( $url, $platform, $category ) {
-		$response = $this->client->do_request( 'sites/' .  urlencode( $this->profile ) .  '/urlCrawlErrorsSamples/' . urlencode( ltrim( $url, '/' ) ) . '?category=' . WPSEO_GSC_Mapper::category_to_api( $category ) . '&platform=' . WPSEO_GSC_Mapper::platform_to_api( $platform ) . '', false, 'DELETE' );
+		$response = $this->client->do_request( 'sites/' .  urlencode( $this->profile ) .  '/urlCrawlErrorsSamples/' . urlencode( ltrim( $url, '/' ) ) . '?category=' . YMBESEO_GSC_Mapper::category_to_api( $category ) . '&platform=' . YMBESEO_GSC_Mapper::platform_to_api( $platform ) . '', false, 'DELETE' );
 		return ( $response->getResponseHttpCode() === 204 );
 	}
 
@@ -134,7 +134,7 @@ class WPSEO_GSC_Service {
 		catch ( Exception $exception ) {
 			if ( $exception->getMessage() === 'required_version' ) {
 				$this->incompatible_api_libs(
-					__( 'Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We\'ve detected this isn\'t the case, so please update the Yoast plugins that aren\'t up to date yet.', 'wordpress-seo' )
+					__( 'Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We\'ve detected this isn\'t the case, so please update the Yoast plugins that aren\'t up to date yet.', 'ymbeseo' )
 				);
 			}
 		}
@@ -145,18 +145,18 @@ class WPSEO_GSC_Service {
 				sprintf(
 					__(
 						'%1$s detected you’re using a version of %2$s which is not compatible with %1$s. Please update %2$s to the latest version to use this feature.',
-						'wordpress-seo'
+						'ymbeseo'
 					),
 					'Yoast SEO',
 					'Google Analytics by Yoast'
 				)
 			);
 
-			wp_redirect( admin_url( 'admin.php?page=wpseo_dashboard' ) );
+			wp_redirect( admin_url( 'admin.php?page=YMBESEO_dashboard' ) );
 			exit;
 		}
 
-		$this->client = new Yoast_Api_Google_Client( WPSEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
+		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
 	}
 
 	/**

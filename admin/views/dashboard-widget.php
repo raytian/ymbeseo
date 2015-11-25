@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  *
  * @var array $statistics {
  *      An array of statistics to display
@@ -13,7 +13,7 @@
  */
 
 ?>
-<p><?php _e( 'Below are your published posts&#8217; SEO scores. Now is as good a time as any to start improving some of your posts!', 'wordpress-seo' ); ?></p>
+<p><?php _e( 'Below are your published posts&#8217; SEO scores. Now is as good a time as any to start improving some of your posts!', 'ymbeseo' ); ?></p>
 <table>
 	<?php foreach ( $statistics as $statistic ) :
 		if ( current_user_can( 'edit_others_posts' ) === false ) {

@@ -9,7 +9,7 @@
  */
 function wpseoDismissAbout( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_dismiss_about',
+			action: 'YMBESEO_dismiss_about',
 			_wpnonce: nonce
 		}
 	);
@@ -22,7 +22,7 @@ function wpseoDismissAbout( nonce ) {
  */
 function wpseoDismissTaglineNotice( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_dismiss_tagline_notice',
+			action: 'YMBESEO_dismiss_tagline_notice',
 			_wpnonce: nonce
 		}
 	);
@@ -37,7 +37,7 @@ function wpseoDismissTaglineNotice( nonce ) {
  */
 function wpseoSetIgnore( option, hide, nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_set_ignore',
+			action: 'YMBESEO_set_ignore',
 			option: option,
 			_wpnonce: nonce
 		}, function( data ) {
