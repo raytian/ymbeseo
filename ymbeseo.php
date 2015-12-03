@@ -1,13 +1,9 @@
 <?php
 /**
- * @package YMBESEO\Main
- */
-
-/**
  * Plugin Name: Yoast Minus Bloat Equals SEO
  * Version: 0.1 (fork from Yoast SEO 2.3.5)
  * Plugin URI: https://so-wp.com/plugins/ymbeseo
- * Description: Yoast Minus Bloat Equals SEO
+ * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5
  * Author: SO WP
  * Author URI: https://so-wp.com/
  * Text Domain: ymbeseo
