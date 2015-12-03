@@ -44,4 +44,4 @@ if ( ! defined( 'YMBESEO_FILE' ) ) {
 }
 
 // Load the Yoast SEO plugin.
-require_once( dirname( __FILE__ ) . '/wp-seo-main.php' );
+require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );
