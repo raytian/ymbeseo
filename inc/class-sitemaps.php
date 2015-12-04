@@ -130,21 +130,6 @@ class YMBESEO_Sitemaps {
 	}
 
 	/**
-	 * This query invalidates the main query on purpose so it returns nice and quickly
-	 *
-	 * @param string $where
-	 *
-	 * @deprecated The relevant sitemap code now hijacks main query before this filter can act on it.
-	 *
-	 * @return string
-	 */
-	function invalidate_main_query( $where ) {
-
-		return $where;
-	}
-
-
-	/**
 	 * Returns the server HTTP protocol to use for output, if it's set.
 	 *
 	 * @return string
