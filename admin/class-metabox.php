@@ -2255,49 +2255,4 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 
 		return false;
 	}
-
-	/********************** DEPRECATED METHODS **********************/
-
-	/**
-	 * Adds the Yoast SEO box
-	 *
-	 * @deprecated 1.4.24
-	 * @deprecated use YMBESEO_Metabox::add_meta_box()
-	 * @see        YMBESEO_Meta::add_meta_box()
-	 */
-	public function add_custom_box() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.4.24', 'YMBESEO_Metabox::add_meta_box()' );
-		$this->add_meta_box();
-	}
-
-	/**
-	 * Retrieve the meta boxes for the given post type.
-	 *
-	 * @deprecated 1.5.0
-	 * @deprecated use YMBESEO_Meta::get_meta_field_defs()
-	 * @see        YMBESEO_Meta::get_meta_field_defs()
-	 *
-	 * @param  string $post_type
-	 *
-	 * @return  array
-	 */
-	public function get_meta_boxes( $post_type = 'post' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.0', 'YMBESEO_Meta::get_meta_field_defs()' );
-
-		return $this->get_meta_field_defs( 'general', $post_type );
-	}
-
-	/**
-	 * Pass some variables to js
-	 *
-	 * @deprecated 1.5.0
-	 * @deprecated use YMBESEO_Meta::localize_script()
-	 * @see        YMBESEO_Meta::localize_script()
-	 */
-	public function script() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.0', 'YMBESEO_Meta::localize_script()' );
-
-		return $this->localize_script();
-	}
-
 } /* End of class */
