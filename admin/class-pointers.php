@@ -118,7 +118,7 @@ class YMBESEO_Pointers {
 
 				ymbeseo_pointer_options = $.extend(ymbeseo_pointer_options, {
 					buttons: function (event, t) {
-						var button = jQuery('<a href="<?php echo $this->get_ignore_url(); ?>" id="pointer-close" style="margin:0 5px;" class="button-secondary">' + '<?php _e( 'Close', 'wordpress-seo' ) ?>' + '</a>');
+						var button = jQuery('<a href="<?php echo $this->get_ignore_url(); ?>" id="pointer-close" style="margin:0 5px;" class="button-secondary">' + '<?php _e( 'Close', 'ymbeseo' ) ?>' + '</a>');
 						button.bind('click.pointer', function () {
 							t.element.pointer('close');
 						});
@@ -180,15 +180,15 @@ class YMBESEO_Pointers {
 	 */
 	private function start_tour_pointer() {
 		$selector = 'li.toplevel_page_ymbeseo_dashboard';
-		$content  = '<h3>' . __( 'Congratulations!', 'wordpress-seo' ) . '</h3>'
+		$content  = '<h3>' . __( 'Congratulations!', 'ymbeseo' ) . '</h3>'
 					/* translators: %1$s expands to Yoast SEO */
-		            .'<p>' . sprintf( __( 'You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a quick introduction of this plugin&#8217;s core functionality.', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>';
+		            .'<p>' . sprintf( __( 'You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a quick introduction of this plugin&#8217;s core functionality.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>';
 		$opt_arr  = array(
 			'content'  => $content,
 			'position' => array( 'edge' => 'bottom', 'align' => 'center' ),
 		);
 
-		$this->button_array['button2']['text']     = __( 'Start Tour', 'wordpress-seo' );
+		$this->button_array['button2']['text']     = __( 'Start Tour', 'ymbeseo' );
 		$this->button_array['button2']['function'] = sprintf( 'document.location="%s";', admin_url( 'admin.php?page=ymbeseo_dashboard' ) );
 
 		$this->print_scripts( $selector, $opt_arr );
@@ -214,13 +214,13 @@ class YMBESEO_Pointers {
 		);
 		if ( isset( $pointer['next_page'] ) ) {
 			$this->button_array['button2'] = array(
-				'text'     => __( 'Next', 'wordpress-seo' ),
+				'text'     => __( 'Next', 'ymbeseo' ),
 				'function' => 'window.location="' . admin_url( 'admin.php?page=ymbeseo_' . $pointer['next_page'] ) . '";',
 			);
 		}
 		if ( isset( $pointer['prev_page'] ) ) {
 			$this->button_array['button3'] = array(
-				'text'     => __( 'Previous', 'wordpress-seo' ),
+				'text'     => __( 'Previous', 'ymbeseo' ),
 				'function' => 'window.location="' . admin_url( 'admin.php?page=ymbeseo_' . $pointer['prev_page'] ) . '";',
 			);
 		}
@@ -236,27 +236,27 @@ class YMBESEO_Pointers {
 		global $current_user;
 
 		return array(
-			'content'   => '<h3>' . __( 'General settings', 'wordpress-seo' ) . '</h3>'
+			'content'   => '<h3>' . __( 'General settings', 'ymbeseo' ) . '</h3>'
 				/* translators: %1$s expands to Yoast SEO */
-			               . '<p>' . sprintf( __( 'These are the General settings for %1$s, here you can restart this tour or revert the %1$s settings to default.', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>'
-			               . '<p><strong>' . __( 'Tab: Your Info / Company Info', 'wordpress-seo' ) . '</strong><br/>' . __( 'Add some info here needed for Google\'s Knowledge Graph.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Tab: Webmaster Tools', 'wordpress-seo' ) . '</strong><br/>' . __( 'You can add the verification codes for the different Webmaster Tools programs here. We highly encourage you to check out both Google and Bing&#8217;s Webmaster Tools.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Tab: Security', 'wordpress-seo' ) . '</strong><br/>' . __( 'Determine who has access to the plugins advanced settings on the post edit screen.', 'wordpress-seo' ) . '</p>'
+			               . '<p>' . sprintf( __( 'These are the General settings for %1$s, here you can restart this tour or revert the %1$s settings to default.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>'
+			               . '<p><strong>' . __( 'Tab: Your Info / Company Info', 'ymbeseo' ) . '</strong><br/>' . __( 'Add some info here needed for Google\'s Knowledge Graph.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Tab: Webmaster Tools', 'ymbeseo' ) . '</strong><br/>' . __( 'You can add the verification codes for the different Webmaster Tools programs here. We highly encourage you to check out both Google and Bing&#8217;s Webmaster Tools.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Tab: Security', 'ymbeseo' ) . '</strong><br/>' . __( 'Determine who has access to the plugins advanced settings on the post edit screen.', 'ymbeseo' ) . '</p>'
 
 				/* translators: %1$s expands to Yoast SEO */
-			               . '<p><strong>' . sprintf( __( 'More %1$s', 'wordpress-seo' ), 'Yoast SEO' ) . '</strong><br/>'
+			               . '<p><strong>' . sprintf( __( 'More %1$s', 'ymbeseo' ), 'Yoast SEO' ) . '</strong><br/>'
 
 				/* @todo What about this translation */
-	   					   . sprintf( __( 'There&#8217;s more to learn about WordPress &amp; SEO than just using this plugin. A great start is our article %1$sthe definitive guide to WordPress SEO%2$s.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/articles/wordpress-seo/#utm_source=ymbeseo_dashboard&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
+	   					   . sprintf( __( 'There&#8217;s more to learn about WordPress &amp; SEO than just using this plugin. A great start is our article %1$sthe definitive guide to WordPress SEO%2$s.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/articles/ymbeseo/#utm_source=ymbeseo_dashboard&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
 						   . '</p>'
-			               . '<p><strong style="font-size:150%;">' . __( 'Subscribe to our Newsletter', 'wordpress-seo' ) . '</strong><br/>'
+			               . '<p><strong style="font-size:150%;">' . __( 'Subscribe to our Newsletter', 'ymbeseo' ) . '</strong><br/>'
 				/* translators: %1$s expands to Yoast SEO */
-			               . sprintf( __( 'If you would like us to keep you up-to-date regarding %1$s and other plugins by Yoast, subscribe to our newsletter:', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>'
+			               . sprintf( __( 'If you would like us to keep you up-to-date regarding %1$s and other plugins by Yoast, subscribe to our newsletter:', 'ymbeseo' ), 'Yoast SEO' ) . '</p>'
 			               . '<form target="_blank" action="http://yoast.us1.list-manage1.com/subscribe/post?u=ffa93edfe21752c921f860358&amp;id=972f1c9122" method="post" selector="newsletter-form" accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">'
 			               . '<p>'
-			               . '<input style="margin: 5px; color:#666" name="EMAIL" value="' . esc_attr( $current_user->user_email ) . '" selector="newsletter-email" placeholder="' . __( 'Email', 'wordpress-seo' ) . '"/>'
+			               . '<input style="margin: 5px; color:#666" name="EMAIL" value="' . esc_attr( $current_user->user_email ) . '" selector="newsletter-email" placeholder="' . __( 'Email', 'ymbeseo' ) . '"/>'
 			               . '<input type="hidden" name="group" value="2"/>'
-			               . '<button type="submit" class="button-primary">' . __( 'Subscribe', 'wordpress-seo' ) . '</button>'
+			               . '<button type="submit" class="button-primary">' . __( 'Subscribe', 'ymbeseo' ) . '</button>'
 			               . '</p>'
 			               . '</form>',
 			'next_page' => 'titles',
@@ -270,12 +270,12 @@ class YMBESEO_Pointers {
 	 */
 	private function titles_pointer() {
 		return array(
-			'content'   => '<h3>' . __( 'Title &amp; Metas settings', 'wordpress-seo' ) . '</h3>'
-			               . '<p>' . __( 'This is where you	set the titles and meta-information for all your post types, taxonomies, archives, special pages and for your homepage. The page is divided into different tabs. Make sure you check &#8217;em all out!', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Sitewide settings', 'wordpress-seo' ) . '</strong><br/>' . __( 'The first tab will show you site-wide settings for titles, normally you\'ll only need to change the Title Separator.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Templates and settings', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'Now click on the &#8216;%1$sPost Types%2$s&#8217;-tab, as this will be our example.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', 				       '</a>' ) . '<br/>' . __( 'The templates are built using variables. You can find all these variables in the help tab (in the top-right corner of the page). The settings allow you to set specific behavior for the post types.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Archives', 'wordpress-seo' ) . '</strong><br/>' . __( 'On the archives tab you can set templates for specific pages like author archives, search results and more.', 'wordpress-seo' )
-			               . '<p><strong>' . __( 'Other', 'wordpress-seo' ) . '</strong><br/>' . __( 'On the Other tab you can change sitewide meta settings, like enable meta keywords.', 'wordpress-seo' ),
+			'content'   => '<h3>' . __( 'Title &amp; Metas settings', 'ymbeseo' ) . '</h3>'
+			               . '<p>' . __( 'This is where you	set the titles and meta-information for all your post types, taxonomies, archives, special pages and for your homepage. The page is divided into different tabs. Make sure you check &#8217;em all out!', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Sitewide settings', 'ymbeseo' ) . '</strong><br/>' . __( 'The first tab will show you site-wide settings for titles, normally you\'ll only need to change the Title Separator.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Templates and settings', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'Now click on the &#8216;%1$sPost Types%2$s&#8217;-tab, as this will be our example.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', 				       '</a>' ) . '<br/>' . __( 'The templates are built using variables. You can find all these variables in the help tab (in the top-right corner of the page). The settings allow you to set specific behavior for the post types.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Archives', 'ymbeseo' ) . '</strong><br/>' . __( 'On the archives tab you can set templates for specific pages like author archives, search results and more.', 'ymbeseo' )
+			               . '<p><strong>' . __( 'Other', 'ymbeseo' ) . '</strong><br/>' . __( 'On the Other tab you can change sitewide meta settings, like enable meta keywords.', 'ymbeseo' ),
 			'next_page' => 'social',
 			'prev_page' => 'dashboard',
 		);
@@ -288,13 +288,13 @@ class YMBESEO_Pointers {
 	 */
 	private function social_pointer() {
 		return array(
-			'content'   => '<h3>' . __( 'Social settings', 'wordpress-seo' ) . '</h3>'
-			               . '<p><strong>' . __( 'Facebook', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'On this tab you can enable the %1$sFacebook Open Graph%2$s functionality from this plugin, as well as assign a Facebook user or Application to be the admin of your site, so you can view the Facebook insights.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/facebook-open-graph-protocol/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
-			               . '<p>' . __( 'The frontpage settings allow you to set meta-data for your homepage, whereas the default settings allow you to set a fallback for all posts/pages without images. ', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Twitter', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'With %1$sTwitter Cards%2$s, you can attach rich photos, videos and media experience to tweets that drive traffic to your website. Simply check the box, sign up for the service, and users who Tweet links to your content will have a &#8220;Card&#8221; added to the tweet that&#8217;s visible to all of their followers.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/twitter-cards/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
-			               . '<p><strong>' . __( 'Pinterest', 'wordpress-seo' ) . '</strong><br/>' . __( 'On this tab you can verify your site with Pinterest and enter your Pinterest account.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'Google+', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'This tab allows you to add specific post meta data for Google+. And if you have a Google+ page for your business, add that URL here and link it on your %1$sGoogle+%2$s page&#8217;s about page.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://plus.google.com/' ) . '">', '</a>' ) . '</p>'
-			               . '<p><strong>' . __( 'Other', 'wordpress-seo' ) . '</strong><br/>' . __( 'On this tab you can enter some more of your social accounts, mostly used for Google\'s Knowledge Graph.', 'wordpress-seo' ) . '</p>',
+			'content'   => '<h3>' . __( 'Social settings', 'ymbeseo' ) . '</h3>'
+			               . '<p><strong>' . __( 'Facebook', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'On this tab you can enable the %1$sFacebook Open Graph%2$s functionality from this plugin, as well as assign a Facebook user or Application to be the admin of your site, so you can view the Facebook insights.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/facebook-open-graph-protocol/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
+			               . '<p>' . __( 'The frontpage settings allow you to set meta-data for your homepage, whereas the default settings allow you to set a fallback for all posts/pages without images. ', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Twitter', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'With %1$sTwitter Cards%2$s, you can attach rich photos, videos and media experience to tweets that drive traffic to your website. Simply check the box, sign up for the service, and users who Tweet links to your content will have a &#8220;Card&#8221; added to the tweet that&#8217;s visible to all of their followers.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/twitter-cards/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
+			               . '<p><strong>' . __( 'Pinterest', 'ymbeseo' ) . '</strong><br/>' . __( 'On this tab you can verify your site with Pinterest and enter your Pinterest account.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Google+', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'This tab allows you to add specific post meta data for Google+. And if you have a Google+ page for your business, add that URL here and link it on your %1$sGoogle+%2$s page&#8217;s about page.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://plus.google.com/' ) . '">', '</a>' ) . '</p>'
+			               . '<p><strong>' . __( 'Other', 'ymbeseo' ) . '</strong><br/>' . __( 'On this tab you can enter some more of your social accounts, mostly used for Google\'s Knowledge Graph.', 'ymbeseo' ) . '</p>',
 			'next_page' => 'xml',
 			'prev_page' => 'titles',
 		);
@@ -307,11 +307,11 @@ class YMBESEO_Pointers {
 	 */
 	private function xml_sitemaps_pointer() {
 		return array(
-			'content'   => '<h3>' . __( 'XML Sitemaps', 'wordpress-seo' ) . '</h3>'
-			               . '<p><strong>' . __( 'What are XML sitemaps?', 'wordpress-seo' ) . '</strong><br/>' . __( 'A Sitemap is an XML file that lists the URLs for a site. It allows webmasters to include additional information about each URL: when it was last updated, how often it changes, and how important it is in relation to other URLs in the site. This allows search engines to crawl the site more intelligently.', 'wordpress-seo' ) . '</p>'
-			               . '<p><strong>' . __( 'What does the plugin do with XML Sitemaps?', 'wordpress-seo' ) . '</strong><br/>' . __( 'This plugin adds XML sitemaps to your site. The sitemaps are automatically updated when you publish a new post, page or custom post and Google and Bing will be automatically notified.', 'wordpress-seo' ) . '</p>'
-			               . '<p>' . __( 'If you want to exclude certain post types and/or taxonomies, you can also set that on this page.', 'wordpress-seo' ) . '</p>'
-			               . '<p>' . __( 'Is your webserver low on memory? Decrease the entries per sitemap (default: 1000) to reduce load.', 'wordpress-seo' ) . '</p>',
+			'content'   => '<h3>' . __( 'XML Sitemaps', 'ymbeseo' ) . '</h3>'
+			               . '<p><strong>' . __( 'What are XML sitemaps?', 'ymbeseo' ) . '</strong><br/>' . __( 'A Sitemap is an XML file that lists the URLs for a site. It allows webmasters to include additional information about each URL: when it was last updated, how often it changes, and how important it is in relation to other URLs in the site. This allows search engines to crawl the site more intelligently.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'What does the plugin do with XML Sitemaps?', 'ymbeseo' ) . '</strong><br/>' . __( 'This plugin adds XML sitemaps to your site. The sitemaps are automatically updated when you publish a new post, page or custom post and Google and Bing will be automatically notified.', 'ymbeseo' ) . '</p>'
+			               . '<p>' . __( 'If you want to exclude certain post types and/or taxonomies, you can also set that on this page.', 'ymbeseo' ) . '</p>'
+			               . '<p>' . __( 'Is your webserver low on memory? Decrease the entries per sitemap (default: 1000) to reduce load.', 'ymbeseo' ) . '</p>',
 			'next_page' => 'advanced',
 			'prev_page' => 'social',
 		);
@@ -324,7 +324,7 @@ class YMBESEO_Pointers {
 	 */
 	private function advanced_pointer() {
 		return array(
-			'content'   => '<h3>' . __( 'Advanced Settings', 'wordpress-seo' ) . '</h3><p>' . __( 'All of the options on these tabs are for advanced users only, if you don&#8217;t know whether you should check any, don&#8217;t touch them.', 'wordpress-seo' ) . '</p>',
+			'content'   => '<h3>' . __( 'Advanced Settings', 'ymbeseo' ) . '</h3><p>' . __( 'All of the options on these tabs are for advanced users only, if you don&#8217;t know whether you should check any, don&#8217;t touch them.', 'ymbeseo' ) . '</p>',
 			'next_page' => 'licenses',
 			'prev_page' => 'xml',
 		);
@@ -337,17 +337,17 @@ class YMBESEO_Pointers {
 	 */
 	private function licenses_pointer() {
 		return array(
-			'content'   => '<h3>' . __( 'Extensions and Licenses', 'wordpress-seo' ) . '</h3>'
-			               . '<p><strong>' . __( 'Extensions', 'wordpress-seo' ) . '</strong><br/>'
+			'content'   => '<h3>' . __( 'Extensions and Licenses', 'ymbeseo' ) . '</h3>'
+			               . '<p><strong>' . __( 'Extensions', 'ymbeseo' ) . '</strong><br/>'
 				/* translators: %1$s expands to Yoast SEO, %2$s to Yoast SEO Premium, %3$s and %4$s to an anchor with link about our premium plugins */
-						   . sprintf( __( 'The powerful functions of %1$s can be extended with %3$sYoast premium plugins%4$s. These premium plugins require the installation of %1$s or %2$s and add specific functionality. You can read all about the Yoast Premium Plugins %3$shere%4$s.', 'wordpress-seo' ), 'Yoast SEO', 'Yoast SEO Premium', '<a target="_blank" href="' . esc_url( 'https://yoast.com/wordpress/plugins/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
+						   . sprintf( __( 'The powerful functions of %1$s can be extended with %3$sYoast premium plugins%4$s. These premium plugins require the installation of %1$s or %2$s and add specific functionality. You can read all about the Yoast Premium Plugins %3$shere%4$s.', 'ymbeseo' ), 'Yoast SEO', 'Yoast SEO Premium', '<a target="_blank" href="' . esc_url( 'https://yoast.com/wordpress/plugins/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
 						   . '</p>'
-			               . '<p><strong>' . __( 'Licenses', 'wordpress-seo' ) . '</strong><br/>'
+			               . '<p><strong>' . __( 'Licenses', 'ymbeseo' ) . '</strong><br/>'
 				/* translators: %1$s expands to Yoast SEO Premium */
-				           . sprintf( __( 'Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, you&#8217;ll have to enter a license key. You can do so on the Licenses-tab. Once you&#8217;ve activated your premium plugin, you can use all its powerful features.', 'wordpress-seo' ), 'Yoast SEO Premium' )
+				           . sprintf( __( 'Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, you&#8217;ll have to enter a license key. You can do so on the Licenses-tab. Once you&#8217;ve activated your premium plugin, you can use all its powerful features.', 'ymbeseo' ), 'Yoast SEO Premium' )
 				           . '</p>'
-			               . '<p><strong>' . __( 'Like this plugin?', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'So, we&#8217;ve come to the end of the tour. If you like the plugin, please %srate it 5 stars on WordPress.org%s!', 'wordpress-seo' ), '<a target="_blank" href="https://wordpress.org/plugins/wordpress-seo/">', '</a>' ) . '</p>'
-			               . '<p>' . sprintf( __( 'Thank you for using our plugin and good luck with your SEO!<br/><br/>Best,<br/>Team Yoast - %1$sYoast.com%2$s', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>',
+			               . '<p><strong>' . __( 'Like this plugin?', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'So, we&#8217;ve come to the end of the tour. If you like the plugin, please %srate it 5 stars on WordPress.org%s!', 'ymbeseo' ), '<a target="_blank" href="https://wordpress.org/plugins/ymbeseo/">', '</a>' ) . '</p>'
+			               . '<p>' . sprintf( __( 'Thank you for using our plugin and good luck with your SEO!<br/><br/>Best,<br/>Team Yoast - %1$sYoast.com%2$s', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>',
 			'prev_page' => 'advanced',
 		);
 	}

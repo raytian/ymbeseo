@@ -452,7 +452,7 @@ class YMBESEO_Frontend {
 			$title = $this->get_title_from_options( 'title-search-ymbeseo' );
 
 			if ( ! is_string( $title ) || '' === $title ) {
-				$title_part = sprintf( __( 'Search for "%s"', 'wordpress-seo' ), esc_html( get_search_query() ) );
+				$title_part = sprintf( __( 'Search for "%s"', 'ymbeseo' ), esc_html( get_search_query() ) );
 			}
 		}
 		elseif ( is_category() || is_tag() || is_tax() ) {
@@ -511,16 +511,16 @@ class YMBESEO_Frontend {
 			// Replacement would be needed!
 			if ( empty( $title ) ) {
 				if ( is_month() ) {
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), single_month_title( ' ', false ) );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), single_month_title( ' ', false ) );
 				}
 				elseif ( is_year() ) {
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_query_var( 'year' ) );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_query_var( 'year' ) );
 				}
 				elseif ( is_day() ) {
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_the_date() );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_the_date() );
 				}
 				else {
-					$title_part = __( 'Archives', 'wordpress-seo' );
+					$title_part = __( 'Archives', 'ymbeseo' );
 				}
 			}
 		}
@@ -532,16 +532,16 @@ class YMBESEO_Frontend {
 					$date       = sprintf( '%04d-%02d-%02d 00:00:00', get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
 					$date       = mysql2date( get_option( 'date_format' ), $date, true );
 					$date       = apply_filters( 'get_the_date', $date, '' );
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), $date );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), $date );
 				}
 				elseif ( 0 !== get_query_var( 'monthnum' ) ) {
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), single_month_title( ' ', false ) );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), single_month_title( ' ', false ) );
 				}
 				elseif ( 0 !== get_query_var( 'year' ) ) {
-					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_query_var( 'year' ) );
+					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_query_var( 'year' ) );
 				}
 				else {
-					$title_part = __( 'Archives', 'wordpress-seo' );
+					$title_part = __( 'Archives', 'ymbeseo' );
 				}
 			}
 			else {
@@ -551,7 +551,7 @@ class YMBESEO_Frontend {
 				// YMBESEO_Options::get_default( 'ymbeseo_titles', 'title-404-ymbeseo' )
 				// Replacement would be needed!
 				if ( empty( $title ) ) {
-					$title_part = __( 'Page not found', 'wordpress-seo' );
+					$title_part = __( 'Page not found', 'ymbeseo' );
 				}
 			}
 		}
@@ -1242,7 +1242,7 @@ class YMBESEO_Frontend {
 				echo '<meta name="description" content="', esc_attr( strip_tags( stripslashes( $this->metadesc ) ) ), '"/>', "\n";
 			}
 			elseif ( current_user_can( 'manage_options' ) && is_singular() ) {
-				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'wordpress-seo' ), ' -->', "\n";
+				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'ymbeseo' ), ' -->', "\n";
 			}
 		}
 		else {

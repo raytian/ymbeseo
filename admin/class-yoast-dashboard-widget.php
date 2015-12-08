@@ -38,7 +38,7 @@ class Yoast_Dashboard_Widget {
 		wp_add_dashboard_widget(
 			'ymbeseo-dashboard-overview',
 			/* translators: %s is the plugin name */
-			sprintf( __( '%s Posts Overview', 'wordpress-seo' ), 'Yoast SEO' ),
+			sprintf( __( '%s Posts Overview', 'ymbeseo' ), 'Yoast SEO' ),
 			array( $this, 'display_dashboard_widget' )
 		);
 	}
@@ -113,38 +113,38 @@ class Yoast_Dashboard_Widget {
 		return array(
 			array(
 				'seo_rank' => 'good',
-				'title'    => __( 'Posts with good SEO score', 'wordpress-seo' ),
+				'title'    => __( 'Posts with good SEO score', 'ymbeseo' ),
 				'class'    => 'ymbeseo-glance-good',
 				'count'    => $this->statistics->get_good_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'ok',
-				'title'    => __( 'Posts with OK SEO score', 'wordpress-seo' ),
+				'title'    => __( 'Posts with OK SEO score', 'ymbeseo' ),
 				'class'    => 'ymbeseo-glance-ok',
 				'count'    => $this->statistics->get_ok_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'poor',
-				'title'    => __( 'Posts with poor SEO score', 'wordpress-seo' ),
+				'title'    => __( 'Posts with poor SEO score', 'ymbeseo' ),
 				'class'    => 'ymbeseo-glance-poor',
 				'count'    => $this->statistics->get_poor_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'bad',
-				'title'    => __( 'Posts with bad SEO score', 'wordpress-seo' ),
+				'title'    => __( 'Posts with bad SEO score', 'ymbeseo' ),
 				'class'    => 'ymbeseo-glance-bad',
 				'count'    => $this->statistics->get_bad_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'na',
-				'title'    => __( 'Posts without focus keyword', 'wordpress-seo' ),
+				'title'    => __( 'Posts without focus keyword', 'ymbeseo' ),
 				'class'    => 'ymbeseo-glance-na',
 				'count'    => $this->statistics->get_no_focus_post_count(),
 			),
 			array(
 				'seo_rank' => 'noindex',
 				/* translators: %s expands to <code>noindex</code> */
-				'title'    => sprintf( __( 'Posts that are set to %s', 'wordpress-seo' ), '<code>noindex</code>' ),
+				'title'    => sprintf( __( 'Posts that are set to %s', 'ymbeseo' ), '<code>noindex</code>' ),
 				'class'    => 'ymbeseo-glance-noindex',
 				'count'    => $this->statistics->get_no_index_post_count(),
 			),

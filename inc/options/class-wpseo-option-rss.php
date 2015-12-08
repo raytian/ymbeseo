@@ -44,7 +44,7 @@ class YMBESEO_Option_RSS extends YMBESEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['rssafter'] = sprintf( __( 'The post %s appeared first on %s.', 'wordpress-seo' ), '%%POSTLINK%%', '%%BLOGLINK%%' );
+		$this->defaults['rssafter'] = sprintf( __( 'The post %s appeared first on %s.', 'ymbeseo' ), '%%POSTLINK%%', '%%BLOGLINK%%' );
 	}
 
 

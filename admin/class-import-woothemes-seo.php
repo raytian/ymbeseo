@@ -26,7 +26,7 @@ class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 
 		update_option( 'ymbeseo_titles', $this->options );
 
-		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'wordpress-seo' ) );
+		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'ymbeseo' ) );
 	}
 
 	/**

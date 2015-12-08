@@ -37,12 +37,12 @@ class YMBESEO_GSC_Platform_Tabs {
 	 * @return string
 	 */
 	private function platform_tabs() {
-		$tabs = array( 'settings' => __( 'Settings', 'wordpress-seo' ) );
+		$tabs = array( 'settings' => __( 'Settings', 'ymbeseo' ) );
 
 		$platforms = array(
-			'web'             => __( 'Desktop', 'wordpress-seo' ),
-			'smartphone_only' => __( 'Smartphone', 'wordpress-seo' ),
-			'mobile'          => __( 'Feature phone', 'wordpress-seo' ),
+			'web'             => __( 'Desktop', 'ymbeseo' ),
+			'smartphone_only' => __( 'Smartphone', 'ymbeseo' ),
+			'mobile'          => __( 'Feature phone', 'ymbeseo' ),
 		);
 
 		if ( YMBESEO_GSC_Settings::get_profile() !== '' ) {

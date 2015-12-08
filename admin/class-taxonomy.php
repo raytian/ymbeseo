@@ -73,13 +73,13 @@ class YMBESEO_Taxonomy {
 		$this->no_index_options        = YMBESEO_Taxonomy_Meta::$no_index_options;
 		$this->sitemap_include_options = YMBESEO_Taxonomy_Meta::$sitemap_include_options;
 
-		$this->no_index_options['default'] = __( 'Use %s default (Currently: %s)', 'wordpress-seo' );
-		$this->no_index_options['index']   = __( 'Always index', 'wordpress-seo' );
-		$this->no_index_options['noindex'] = __( 'Always noindex', 'wordpress-seo' );
+		$this->no_index_options['default'] = __( 'Use %s default (Currently: %s)', 'ymbeseo' );
+		$this->no_index_options['index']   = __( 'Always index', 'ymbeseo' );
+		$this->no_index_options['noindex'] = __( 'Always noindex', 'ymbeseo' );
 
-		$this->sitemap_include_options['-']      = __( 'Auto detect', 'wordpress-seo' );
-		$this->sitemap_include_options['always'] = __( 'Always include', 'wordpress-seo' );
-		$this->sitemap_include_options['never']  = __( 'Never include', 'wordpress-seo' );
+		$this->sitemap_include_options['-']      = __( 'Auto detect', 'ymbeseo' );
+		$this->sitemap_include_options['always'] = __( 'Always include', 'ymbeseo' );
+		$this->sitemap_include_options['never']  = __( 'Never include', 'ymbeseo' );
 	}
 
 
@@ -182,20 +182,20 @@ class YMBESEO_Taxonomy {
 		$options  = YMBESEO_Options::get_all();
 
 		/* translators: %1$s expands to Yoast SEO */
-		echo '<h3>', sprintf( __( '%1$s Settings', 'wordpress-seo' ), 'Yoast SEO' ) . '</h3>';
+		echo '<h3>', sprintf( __( '%1$s Settings', 'ymbeseo' ), 'Yoast SEO' ) . '</h3>';
 		echo '<table class="form-table ymbeseo-taxonomy-form">';
 
-		$this->form_row( 'ymbeseo_title', __( 'SEO Title', 'wordpress-seo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
-		$this->form_row( 'ymbeseo_desc', __( 'SEO Description', 'wordpress-seo' ), esc_html__( 'The SEO description is used for the meta description on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_title', __( 'SEO Title', 'ymbeseo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'ymbeseo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_desc', __( 'SEO Description', 'ymbeseo' ), esc_html__( 'The SEO description is used for the meta description on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 
 		if ( $options['usemetakeywords'] === true ) {
-			$this->form_row( 'ymbeseo_metakey', __( 'Meta keywords', 'wordpress-seo' ), esc_html__( 'Meta keywords used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+			$this->form_row( 'ymbeseo_metakey', __( 'Meta keywords', 'ymbeseo' ), esc_html__( 'Meta keywords used on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 		}
 
-		$this->form_row( 'ymbeseo_canonical', __( 'Canonical', 'wordpress-seo' ), esc_html__( 'The canonical link is shown on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_canonical', __( 'Canonical', 'ymbeseo' ), esc_html__( 'The canonical link is shown on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 
 		if ( $options['breadcrumbs-enable'] === true ) {
-			$this->form_row( 'ymbeseo_bctitle', __( 'Breadcrumbs title', 'wordpress-seo' ), sprintf( esc_html__( 'The Breadcrumbs title is used in the breadcrumbs where this %s appears.', 'wordpress-seo' ), $term->taxonomy ), $tax_meta );
+			$this->form_row( 'ymbeseo_bctitle', __( 'Breadcrumbs title', 'ymbeseo' ), sprintf( esc_html__( 'The Breadcrumbs title is used in the breadcrumbs where this %s appears.', 'ymbeseo' ), $term->taxonomy ), $tax_meta );
 		}
 
 		$current = 'index';
@@ -206,16 +206,16 @@ class YMBESEO_Taxonomy {
 		$noindex_options            = $this->no_index_options;
 		$noindex_options['default'] = sprintf( $noindex_options['default'], $term->taxonomy, $current );
 
-		$desc = sprintf( esc_html__( 'This %s follows the indexation rules set under Metas and Titles, you can override it here.', 'wordpress-seo' ), $term->taxonomy );
+		$desc = sprintf( esc_html__( 'This %s follows the indexation rules set under Metas and Titles, you can override it here.', 'ymbeseo' ), $term->taxonomy );
 		if ( '0' == get_option( 'blog_public' ) ) {
-			$desc .= '<br /><span class="error-message">' . esc_html__( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'wordpress-seo' ) . '</span>';
+			$desc .= '<br /><span class="error-message">' . esc_html__( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'ymbeseo' ) . '</span>';
 		}
 
-		$this->form_row( 'ymbeseo_noindex', sprintf( __( 'Noindex this %s', 'wordpress-seo' ), $term->taxonomy ), $desc, $tax_meta, 'select', $noindex_options );
+		$this->form_row( 'ymbeseo_noindex', sprintf( __( 'Noindex this %s', 'ymbeseo' ), $term->taxonomy ), $desc, $tax_meta, 'select', $noindex_options );
 		unset( $current, $no_index_options, $desc );
 
 
-		$this->form_row( 'ymbeseo_sitemap_include', __( 'Include in sitemap?', 'wordpress-seo' ), '', $tax_meta, 'select', $this->sitemap_include_options );
+		$this->form_row( 'ymbeseo_sitemap_include', __( 'Include in sitemap?', 'ymbeseo' ), '', $tax_meta, 'select', $this->sitemap_include_options );
 
 		echo '</table>';
 	}

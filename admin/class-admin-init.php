@@ -68,7 +68,7 @@ class YMBESEO_Admin_Init {
 			}
 			/* translators: %1$s expands to Yoast SEO, $2%s to the version number, %3$s and %4$s to anchor tags with link to intro page  */
 			$info_message = sprintf(
-				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'wordpress-seo' ),
+				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'ymbeseo' ),
 				'Yoast SEO',
 				YMBESEO_VERSION,
 				'<a href="' . admin_url( 'admin.php?page=ymbeseo_dashboard&intro=1' ) . '">',
@@ -112,7 +112,7 @@ class YMBESEO_Admin_Init {
 			), wp_customize_url() );
 
 			$info_message = sprintf(
-				__( 'You still have the default WordPress tagline, even an empty one is probably better. %1$sYou can fix this in the customizer%2$s.', 'wordpress-seo' ),
+				__( 'You still have the default WordPress tagline, even an empty one is probably better. %1$sYou can fix this in the customizer%2$s.', 'ymbeseo' ),
 				'<a href="' . esc_attr( $customize_url ) . '">',
 				'</a>'
 			);
@@ -154,7 +154,7 @@ class YMBESEO_Admin_Init {
 
 			$info_message = sprintf(
 				/* translators: %1$s expands to Yoast SEO, %2$s expands to 5.4.3, %3$s expands to Google Analytics by Yoast */
-				__( '%1$s detected you are using version %2$s of %3$s, please update to the latest version to prevent compatibility issues.', 'wordpress-seo' ),
+				__( '%1$s detected you are using version %2$s of %3$s, please update to the latest version to prevent compatibility issues.', 'ymbeseo' ),
 				'Yoast SEO',
 				'5.4.3',
 				'Google Analytics by Yoast'
@@ -243,8 +243,8 @@ class YMBESEO_Admin_Init {
 	private function register_i18n_promo_class() {
 		new yoast_i18n(
 			array(
-				'textdomain'     => 'wordpress-seo',
-				'project_slug'   => 'wordpress-seo',
+				'textdomain'     => 'ymbeseo',
+				'project_slug'   => 'ymbeseo',
 				'plugin_name'    => 'Yoast SEO',
 				'hook'           => 'ymbeseo_admin_footer',
 				'glotpress_url'  => 'https://translate.yoast.com/',

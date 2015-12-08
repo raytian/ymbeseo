@@ -27,20 +27,20 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 */
 	public static function translate_meta_boxes() {
 		/* translators: %s expands to the social network's name */
-		$title_text       = __( 'If you don\'t want to use the post title for sharing the post on %s but instead want another title there, write it here.', 'wordpress-seo' );
+		$title_text       = __( 'If you don\'t want to use the post title for sharing the post on %s but instead want another title there, write it here.', 'ymbeseo' );
 		/* translators: %s expands to the social network's name */
-		$description_text = __( 'If you don\'t want to use the meta description for sharing the post on %s but want another description there, write it here.', 'wordpress-seo' );
+		$description_text = __( 'If you don\'t want to use the meta description for sharing the post on %s but want another description there, write it here.', 'ymbeseo' );
 		/* translators: %s expands to the social network's name */
-		$image_text       = __( 'If you want to override the image used on %s for this post, upload / choose an image or add the URL here.', 'wordpress-seo' );
+		$image_text       = __( 'If you want to override the image used on %s for this post, upload / choose an image or add the URL here.', 'ymbeseo' );
 		/* translators: %1$s expands to the social network, %2$s to the recommended image size */
-		$image_size_text  = __( 'The recommended image size for %1$s is %2$spx.', 'wordpress-seo' );
+		$image_size_text  = __( 'The recommended image size for %1$s is %2$spx.', 'ymbeseo' );
 
 		$options = YMBESEO_Options::get_all();
 
 		$social_networks = array(
-			'opengraph'  => __( 'Facebook', 'wordpress-seo' ),
-			'twitter'    => __( 'Twitter', 'wordpress-seo' ),
-			'googleplus' => __( 'Google+', 'wordpress-seo' ),
+			'opengraph'  => __( 'Facebook', 'ymbeseo' ),
+			'twitter'    => __( 'Twitter', 'ymbeseo' ),
+			'googleplus' => __( 'Google+', 'ymbeseo' ),
 		);
 
 		// Source: https://blog.bufferapp.com/ideal-image-sizes-social-media-posts.
@@ -56,13 +56,13 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 					$network = 'google-plus'; // Yuck, I know.
 				}
 
-				self::$meta_fields['social'][ $network . '-title' ]['title']       = sprintf( __( '%s Title', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-title' ]['title']       = sprintf( __( '%s Title', 'ymbeseo' ), $label );
 				self::$meta_fields['social'][ $network . '-title' ]['description'] = sprintf( $title_text, $label );
 
-				self::$meta_fields['social'][ $network . '-description' ]['title']       = sprintf( __( '%s Description', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-description' ]['title']       = sprintf( __( '%s Description', 'ymbeseo' ), $label );
 				self::$meta_fields['social'][ $network . '-description' ]['description'] = sprintf( $description_text, $label );
 
-				self::$meta_fields['social'][ $network . '-image' ]['title']       = sprintf( __( '%s Image', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-image' ]['title']       = sprintf( __( '%s Image', 'ymbeseo' ), $label );
 				self::$meta_fields['social'][ $network . '-image' ]['description'] = sprintf( $image_text, $label ) . ' ' . sprintf( $image_size_text, $label, $recommended_image_sizes[ $network ] );
 			}
 		}
@@ -72,7 +72,7 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 * Output the tab header for the Social tab
 	 */
 	public function tab_header() {
-		echo '<li class="social"><a class="ymbeseo_tablink" href="#ymbeseo_social">', __( 'Social', 'wordpress-seo' ), '</a></li>';
+		echo '<li class="social"><a class="ymbeseo_tablink" href="#ymbeseo_social">', __( 'Social', 'ymbeseo' ), '</a></li>';
 	}
 
 	/**
@@ -83,7 +83,7 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 		foreach ( $this->get_meta_field_defs( 'social' ) as $meta_key => $meta_field ) {
 			$content .= $this->do_meta_box( $meta_field, $meta_key );
 		}
-		$this->do_tab( 'social', __( 'Social', 'wordpress-seo' ), $content );
+		$this->do_tab( 'social', __( 'Social', 'ymbeseo' ), $content );
 	}
 
 

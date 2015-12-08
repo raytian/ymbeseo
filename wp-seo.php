@@ -10,7 +10,7 @@
  * Description: The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more.
  * Author: Team Yoast
  * Author URI: https://yoast.com/
- * Text Domain: wordpress-seo
+ * Text Domain: ymbeseo
  * Domain Path: /languages/
  * License: GPL v3
  */

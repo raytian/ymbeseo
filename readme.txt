@@ -12,7 +12,7 @@ Improve your WordPress SEO: Write better content and have a fully optimized Word
 
 == Description ==
 
-WordPress out of the box is already technically quite a good platform for SEO, this was true when Joost wrote his original [WordPress SEO](https://yoast.com/articles/wordpress-seo/) article in 2008 (and updated every few months) and it's still true today, but that doesn't mean you can't improve it further! This plugin is written from the ground up by Joost de Valk and his team at [Yoast](https://yoast.com/) to improve your site's SEO on *all* needed aspects. While this [Yoast SEO plugin](https://yoast.com/wordpress/plugins/seo/) goes the extra mile to take care of all the technical optimization, more on that below, it first and foremost helps you write better content.  Yoast SEO forces you to choose a focus keyword when you're writing your articles, and then makes sure you use that focus keyword everywhere.
+WordPress out of the box is already technically quite a good platform for SEO, this was true when Joost wrote his original [WordPress SEO](https://yoast.com/articles/ymbeseo/) article in 2008 (and updated every few months) and it's still true today, but that doesn't mean you can't improve it further! This plugin is written from the ground up by Joost de Valk and his team at [Yoast](https://yoast.com/) to improve your site's SEO on *all* needed aspects. While this [Yoast SEO plugin](https://yoast.com/wordpress/plugins/seo/) goes the extra mile to take care of all the technical optimization, more on that below, it first and foremost helps you write better content.  Yoast SEO forces you to choose a focus keyword when you're writing your articles, and then makes sure you use that focus keyword everywhere.
 
 > <strong>Premium Support</strong><br>
 > The Yoast team does not provide support for the Yoast SEO plugin on the WordPress.org forums. One on one email support is available to people who bought the [Premium Yoast SEO plugin](https://yoast.com/wordpress/plugins/seo-premium/) only.
@@ -25,7 +25,7 @@ Take a look at the explanation of the General tab in Yoast SEO, this is one of t
 https://www.youtube.com/watch?v=co5TjUwqWIQ&w=532&rel=0
 
 > <strong>Bug Reports</strong><br>
-> Bug reports for Yoast SEO are [welcomed on GitHub](https://github.com/Yoast/wordpress-seo). Please note GitHub is _not_ a support forum and issues that aren't properly qualified as bugs will be closed.
+> Bug reports for Yoast SEO are [welcomed on GitHub](https://github.com/Yoast/ymbeseo). Please note GitHub is _not_ a support forum and issues that aren't properly qualified as bugs will be closed.
 
 = Write better content with Yoast SEO =
 Using the snippet preview you can see a rendering of what your post or page will look like in the search results, whether your title is too long or too short and your meta description makes sense in the context of a search result. This way the plugin will help you not only increase rankings but also increase the click through for organic search results.
@@ -88,8 +88,8 @@ Be sure to also check out the premium [News SEO module](https://yoast.com/wordpr
 = Further Reading =
 For more info, check out the following articles:
 
-* The [Yoast SEO Knowledgebase](http://kb.yoast.com/category/42-wordpress-seo).
-* [WordPress SEO - The definitive Guide by Yoast](https://yoast.com/articles/wordpress-seo/).
+* The [Yoast SEO Knowledgebase](http://kb.yoast.com/category/42-ymbeseo).
+* [WordPress SEO - The definitive Guide by Yoast](https://yoast.com/articles/ymbeseo/).
 * Once you have great SEO, you'll need the [best WordPress Hosting](https://yoast.com/articles/wordpress-hosting/).
 * The [Yoast SEO Plugin](https://yoast.com/wordpress/plugins/seo/) official homepage.
 * Other [WordPress Plugins](https://yoast.com/wordpress/plugins/) by the same author.
@@ -100,7 +100,7 @@ seo, SEO, Yoast SEO, google, meta, meta description, search engine optimization,
 
 == Installation ==
 
-1. Upload the `wordpress-seo` folder to the `/wp-content/plugins/` directory
+1. Upload the `ymbeseo` folder to the `/wp-content/plugins/` directory
 1. Activate the Yoast SEO plugin through the 'Plugins' menu in WordPress
 1. Configure the plugin by going to the `SEO` menu that appears in your admin menu
 
@@ -178,7 +178,7 @@ Release Date: July 22nd, 2015
 Release Date: July 21st, 2015
 
 * Features:
-	* Adds full integration with Google Search Console (formerly: Google Webmaster Tools). It is now possible to see all errors from Google straight in your WordPress install. If you have [Yoast SEO Premium](https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=textlink&utm_campaign=changelog), you'll even be able to fix those errors by redirecting the broken urls.
+	* Adds full integration with Google Search Console (formerly: Google Webmaster Tools). It is now possible to see all errors from Google straight in your WordPress install. If you have [Yoast SEO Premium](https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=textlink&utm_campaign=changelog), you'll even be able to fix those errors by redirecting the broken urls.
 	* Adds a dashboard widget showing published posts' SEO scores. Thanks [Brandon Hubbard](https://github.com/bhubbard) for the idea!
 	* Adds a customizer panel for Yoast SEO Breadcrumbs if breadcrumbs are enabled or the active theme has declared theme support for it. Props again to [Brandon Hubbard](https://github.com/bhubbard) for his awesome contribution.
 
@@ -323,8 +323,8 @@ Release Date: March 26th, 2015
 	* Contains an incredible amount of code style improvements, making the code cleaner and more readable.
 	* Makes sure every function in the plugin is documented using PHPDoc by having it checked automatically by the Codesniffer.
 	* Refactored a lot of legacy code in the admin, mainly with regard to the way output is rendered. Provides for a better separation of concerns, making the code more comprehensible and re-usable.
-	* Deprecated a large amount of form methods and moved them to the `Yoast_Form` class. Click [here](https://github.com/Yoast/wordpress-seo/blob/add975664d1f160eed262b02327a93bda5488f8b/admin/class-config.php#L172) for the list of deprecated methods.
-	* Deprecated a large amount of utility functions and moved them to the `YMBESEO_Utils` class. Click [here](https://github.com/Yoast/wordpress-seo/blob/add975664d1f160eed262b02327a93bda5488f8b/inc/ymbeseo-functions.php#L496) for the list of deprecated functions.
+	* Deprecated a large amount of form methods and moved them to the `Yoast_Form` class. Click [here](https://github.com/Yoast/ymbeseo/blob/add975664d1f160eed262b02327a93bda5488f8b/admin/class-config.php#L172) for the list of deprecated methods.
+	* Deprecated a large amount of utility functions and moved them to the `YMBESEO_Utils` class. Click [here](https://github.com/Yoast/ymbeseo/blob/add975664d1f160eed262b02327a93bda5488f8b/inc/ymbeseo-functions.php#L496) for the list of deprecated functions.
 
 = 1.7.4 =
 

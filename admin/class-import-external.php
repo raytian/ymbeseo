@@ -105,7 +105,7 @@ class YMBESEO_Import_External {
 			}
 			unset( $hs_meta, $meta );
 		}
-		$this->set_msg( __( 'HeadSpace2 data successfully imported', 'wordpress-seo' ) );
+		$this->set_msg( __( 'HeadSpace2 data successfully imported', 'ymbeseo' ) );
 	}
 
 	/**
@@ -117,7 +117,7 @@ class YMBESEO_Import_External {
 		$posts = $wpdb->get_results( "SELECT ID, robotsmeta FROM $wpdb->posts" );
 
 		if ( ! $posts ) {
-			$this->set_msg( __( 'Error: no Robots Meta data found to import.', 'wordpress-seo' ) );
+			$this->set_msg( __( 'Error: no Robots Meta data found to import.', 'ymbeseo' ) );
 
 			return;
 		}
@@ -144,7 +144,7 @@ class YMBESEO_Import_External {
 				}
 			}
 		}
-		$this->set_msg( __( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'wordpress-seo' ) );
+		$this->set_msg( __( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'ymbeseo' ) );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class YMBESEO_Import_External {
 			}
 		}
 		update_option( 'ymbeseo_rss', $optnew );
-		$this->set_msg( __( 'RSS Footer options imported successfully.', 'wordpress-seo' ) );
+		$this->set_msg( __( 'RSS Footer options imported successfully.', 'ymbeseo' ) );
 	}
 
 	/**
@@ -186,10 +186,10 @@ class YMBESEO_Import_External {
 			}
 			unset( $opt, $val );
 			update_option( 'ymbeseo_internallinks', $optnew );
-			$this->set_msg( __( 'Yoast Breadcrumbs options imported successfully.', 'wordpress-seo' ) );
+			$this->set_msg( __( 'Yoast Breadcrumbs options imported successfully.', 'ymbeseo' ) );
 		}
 		else {
-			$this->set_msg( __( 'Yoast Breadcrumbs options could not be found', 'wordpress-seo' ) );
+			$this->set_msg( __( 'Yoast Breadcrumbs options could not be found', 'ymbeseo' ) );
 		}
 	}
 }

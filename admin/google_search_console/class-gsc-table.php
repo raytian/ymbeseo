@@ -104,10 +104,10 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'             => '<input type="checkbox" />',
-			'url'            => __( 'URL', 'wordpress-seo' ),
-			'last_crawled'   => __( 'Last crawled', 'wordpress-seo' ),
-			'first_detected' => __( 'First detected', 'wordpress-seo' ),
-			'response_code'  => __( 'Response code', 'wordpress-seo' ),
+			'url'            => __( 'URL', 'ymbeseo' ),
+			'last_crawled'   => __( 'Last crawled', 'ymbeseo' ),
+			'first_detected' => __( 'First detected', 'ymbeseo' ),
+			'response_code'  => __( 'Response code', 'ymbeseo' ),
 		);
 
 		return $columns;
@@ -136,7 +136,7 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function get_bulk_actions() {
 		return array(
-			'mark_as_fixed' => __( 'Mark as fixed', 'wordpress-seo' ),
+			'mark_as_fixed' => __( 'Mark as fixed', 'ymbeseo' ),
 		);
 	}
 
@@ -203,11 +203,11 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 			 */
 			$modal_height = $this->modal_box( $item['url'] );
 
-			$actions['create_redirect'] = '<a title="' . __( 'Create a redirect', 'wordpress-seo' ) . '" href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . __( 'Create redirect', 'wordpress-seo' ) . '</a>';
+			$actions['create_redirect'] = '<a title="' . __( 'Create a redirect', 'ymbeseo' ) . '" href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . __( 'Create redirect', 'ymbeseo' ) . '</a>';
 		}
 
-		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
-		$actions['markasfixed'] = '<a href="javascript:ymbeseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
+		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'ymbeseo' ) . '</a>';
+		$actions['markasfixed'] = '<a href="javascript:ymbeseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'ymbeseo' ) . '</a>';
 
 		return sprintf(
 			'<span class="value">%1$s</span> %2$s',

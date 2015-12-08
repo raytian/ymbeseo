@@ -134,7 +134,7 @@ class YMBESEO_GSC_Service {
 		catch ( Exception $exception ) {
 			if ( $exception->getMessage() === 'required_version' ) {
 				$this->incompatible_api_libs(
-					__( 'Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We\'ve detected this isn\'t the case, so please update the Yoast plugins that aren\'t up to date yet.', 'wordpress-seo' )
+					__( 'Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We\'ve detected this isn\'t the case, so please update the Yoast plugins that aren\'t up to date yet.', 'ymbeseo' )
 				);
 			}
 		}
@@ -145,7 +145,7 @@ class YMBESEO_GSC_Service {
 				sprintf(
 					__(
 						'%1$s detected you’re using a version of %2$s which is not compatible with %1$s. Please update %2$s to the latest version to use this feature.',
-						'wordpress-seo'
+						'ymbeseo'
 					),
 					'Yoast SEO',
 					'Google Analytics by Yoast'

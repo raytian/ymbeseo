@@ -175,9 +175,9 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['title-author-ymbeseo'] = sprintf( __( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
-		$this->defaults['title-search-ymbeseo'] = sprintf( __( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
-		$this->defaults['title-404-ymbeseo']    = __( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
+		$this->defaults['title-author-ymbeseo'] = sprintf( __( '%s, Author at %s', 'ymbeseo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
+		$this->defaults['title-search-ymbeseo'] = sprintf( __( 'You searched for %s', 'ymbeseo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
+		$this->defaults['title-404-ymbeseo']    = __( 'Page not found', 'ymbeseo' ) . ' %%sep%% %%sitename%%';
 	}
 
 
@@ -209,7 +209,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		}
 
 		if ( $post_type_objects_custom !== array() ) {
-			$archive = sprintf( __( '%s Archive', 'wordpress-seo' ), '%%pt_plural%%' );
+			$archive = sprintf( __( '%s Archive', 'ymbeseo' ), '%%pt_plural%%' );
 			foreach ( $post_type_objects_custom as $pt ) {
 				if ( ! $pt->has_archive ) {
 					continue;
@@ -225,7 +225,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		}
 
 		if ( $taxonomy_names !== array() ) {
-			$archives = sprintf( __( '%s Archives', 'wordpress-seo' ), '%%term_title%%' );
+			$archives = sprintf( __( '%s Archives', 'ymbeseo' ), '%%term_title%%' );
 			foreach ( $taxonomy_names as $tax ) {
 				$this->defaults[ 'title-tax-' . $tax ]       = $archives . ' %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-tax-' . $tax ]    = ''; // Text area.

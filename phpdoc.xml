@@ -2,7 +2,7 @@
 <phpdoc>
 	<title>Yoast SEO API Documentation</title>
 	<parser>
-		<target>/Users/jdevalk/Code/docs/wordpress-seo</target>
+		<target>/Users/jdevalk/Code/docs/ymbeseo</target>
 		<encoding>utf8</encoding>
 		<markers>
 			<item>TODO</item>
@@ -10,7 +10,7 @@
 		</markers>
 	</parser>
 	<transformer>
-		<target>/Users/jdevalk/Code/docs/wordpress-seo</target>
+		<target>/Users/jdevalk/Code/docs/ymbeseo</target>
 	</transformer>
 	<transformations>
 		<template name="responsive"/>

@@ -77,7 +77,7 @@ if ( isset( $import ) ) {
 
 	// Check if we've deleted old data and adjust message to match it.
 	if ( $replace ) {
-		$msg .= ' ' . __( 'The old data of the imported plugin was deleted successfully.', 'wordpress-seo' );
+		$msg .= ' ' . __( 'The old data of the imported plugin was deleted successfully.', 'ymbeseo' );
 	}
 
 	if ( $msg != '' ) {
@@ -89,12 +89,12 @@ if ( isset( $import ) ) {
 <br/><br/>
 <h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 	<a class="nav-tab nav-tab-active" id="ymbeseo-import-tab"
-	   href="#top#ymbeseo-import"><?php _e( 'Import', 'wordpress-seo' ); ?></a>
-	<a class="nav-tab" id="ymbeseo-export-tab" href="#top#ymbeseo-export"><?php _e( 'Export', 'wordpress-seo' ); ?></a>
+	   href="#top#ymbeseo-import"><?php _e( 'Import', 'ymbeseo' ); ?></a>
+	<a class="nav-tab" id="ymbeseo-export-tab" href="#top#ymbeseo-export"><?php _e( 'Export', 'ymbeseo' ); ?></a>
 	<a class="nav-tab" id="import-seo-tab"
-	   href="#top#import-seo"><?php _e( 'Import from other SEO plugins', 'wordpress-seo' ); ?></a>
+	   href="#top#import-seo"><?php _e( 'Import from other SEO plugins', 'ymbeseo' ); ?></a>
 	<a class="nav-tab" id="import-other-tab"
-	   href="#top#import-other"><?php _e( 'Import from other plugins', 'wordpress-seo' ); ?></a>
+	   href="#top#import-other"><?php _e( 'Import from other plugins', 'ymbeseo' ); ?></a>
 	<?php
 	/**
 	 * Allow adding a custom import tab header
@@ -104,7 +104,7 @@ if ( isset( $import ) ) {
 </h2>
 
 <div id="ymbeseo-import" class="ymbeseotab">
-	<p><?php _e( 'Import settings by locating <em>settings.zip</em> and clicking "Import settings"', 'wordpress-seo' ); ?></p>
+	<p><?php _e( 'Import settings by locating <em>settings.zip</em> and clicking "Import settings"', 'ymbeseo' ); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export#top#ymbeseo-import' ) ); ?>"
@@ -114,19 +114,19 @@ if ( isset( $import ) ) {
 		<input type="file" name="settings_import_file" accept="application/x-zip,application/x-zip-compressed,application/zip" />
 		<input type="hidden" name="action" value="wp_handle_upload"/><br/>
 		<br/>
-		<input type="submit" class="button-primary" value="<?php _e( 'Import settings', 'wordpress-seo' ); ?>"/>
+		<input type="submit" class="button-primary" value="<?php _e( 'Import settings', 'ymbeseo' ); ?>"/>
 	</form>
 </div>
 
 <div id="ymbeseo-export" class="ymbeseotab">
 	<p><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( __( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'ymbeseo' ), 'Yoast SEO' );
 		?></p>
-	<?php $yform->checkbox( 'include_taxonomy_meta', __( 'Include Taxonomy Metadata', 'wordpress-seo' ) ); ?><br/>
+	<?php $yform->checkbox( 'include_taxonomy_meta', __( 'Include Taxonomy Metadata', 'ymbeseo' ) ); ?><br/>
 	<button class="button-primary" id="export-button"><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( __( 'Export your %1$s settings', 'ymbeseo' ), 'Yoast SEO' );
 		?></button>
 	<script>
 		var ymbeseo_export_nonce = '<?php echo wp_create_nonce( 'ymbeseo-export' ); ?>';
@@ -134,42 +134,42 @@ if ( isset( $import ) ) {
 </div>
 
 <div id="import-seo" class="ymbeseotab">
-	<p><?php _e( 'No doubt you\'ve used an SEO plugin before if this site isn\'t new. Let\'s make it easy on you, you can import the data below. If you want, you can import first, check if it was imported correctly, and then import &amp; delete. No duplicate data will be imported.', 'wordpress-seo' ); ?></p>
+	<p><?php _e( 'No doubt you\'ve used an SEO plugin before if this site isn\'t new. Let\'s make it easy on you, you can import the data below. If you want, you can import first, check if it was imported correctly, and then import &amp; delete. No duplicate data will be imported.', 'ymbeseo' ); ?></p>
 
-	<p><?php printf( __( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'wordpress-seo' ), '<a href="https://wordpress.org/plugins/seo-data-transporter/">', '</a>' ); ?></p>
+	<p><?php printf( __( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'ymbeseo' ), '<a href="https://wordpress.org/plugins/seo-data-transporter/">', '</a>' ); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export#top#import-seo' ) ); ?>"
 		method="post" accept-charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 		<?php
 		wp_nonce_field( 'ymbeseo-import', '_wpnonce', true, true );
-		$yform->checkbox( 'importheadspace', __( 'Import from HeadSpace2?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importaioseo', __( 'Import from All-in-One SEO?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importwoo', __( 'Import from WooThemes SEO framework?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importheadspace', __( 'Import from HeadSpace2?', 'ymbeseo' ) );
+		$yform->checkbox( 'importaioseo', __( 'Import from All-in-One SEO?', 'ymbeseo' ) );
+		$yform->checkbox( 'importwoo', __( 'Import from WooThemes SEO framework?', 'ymbeseo' ) );
 		?>
 		<br/>
 		<?php
-		$yform->checkbox( 'deleteolddata', __( 'Delete the old data after import? (recommended)', 'wordpress-seo' ) );
+		$yform->checkbox( 'deleteolddata', __( 'Delete the old data after import? (recommended)', 'ymbeseo' ) );
 		?>
 		<br/>
 		<input type="submit" class="button-primary" name="import"
-		       value="<?php _e( 'Import', 'wordpress-seo' ); ?>"/>
+		       value="<?php _e( 'Import', 'ymbeseo' ); ?>"/>
 	</form>
 	<br/>
 	<br/>
 </div>
 
 <div id="import-other" class="ymbeseotab">
-	<p><?php _e( 'If you want to import data from (by now ancient) Yoast plugins, you can do so here:', 'wordpress-seo' ); ?></p>
+	<p><?php _e( 'If you want to import data from (by now ancient) Yoast plugins, you can do so here:', 'ymbeseo' ); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export#top#import-other' ) ); ?>"
 		method="post" accept-charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 		<?php
 		wp_nonce_field( 'ymbeseo-import', '_wpnonce', true, true );
-		$yform->checkbox( 'importrobotsmeta', __( 'Import from Robots Meta (by Yoast)?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importrssfooter', __( 'Import from RSS Footer (by Yoast)?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importbreadcrumbs', __( 'Import from Yoast Breadcrumbs?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importrobotsmeta', __( 'Import from Robots Meta (by Yoast)?', 'ymbeseo' ) );
+		$yform->checkbox( 'importrssfooter', __( 'Import from RSS Footer (by Yoast)?', 'ymbeseo' ) );
+		$yform->checkbox( 'importbreadcrumbs', __( 'Import from Yoast Breadcrumbs?', 'ymbeseo' ) );
 
 		/**
 		 * Allow option of importing from other 'other' plugins
@@ -179,7 +179,7 @@ if ( isset( $import ) ) {
 
 		?>
 		<br/>
-		<input type="submit" class="button-primary" name="import" value="<?php _e( 'Import', 'wordpress-seo' ); ?>"/>
+		<input type="submit" class="button-primary" name="import" value="<?php _e( 'Import', 'ymbeseo' ); ?>"/>
 	</form>
 	<br/>
 </div>

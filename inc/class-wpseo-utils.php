@@ -200,27 +200,27 @@ class YMBESEO_Utils {
 		}
 		switch ( $val ) {
 			case 0:
-				$score = __( 'N/A', 'wordpress-seo' );
+				$score = __( 'N/A', 'ymbeseo' );
 				$css   = 'na';
 				break;
 			case 4:
 			case 5:
-				$score = __( 'Poor', 'wordpress-seo' );
+				$score = __( 'Poor', 'ymbeseo' );
 				$css   = 'poor';
 				break;
 			case 6:
 			case 7:
-				$score = __( 'OK', 'wordpress-seo' );
+				$score = __( 'OK', 'ymbeseo' );
 				$css   = 'ok';
 				break;
 			case 8:
 			case 9:
 			case 10:
-				$score = __( 'Good', 'wordpress-seo' );
+				$score = __( 'Good', 'ymbeseo' );
 				$css   = 'good';
 				break;
 			default:
-				$score = __( 'Bad', 'wordpress-seo' );
+				$score = __( 'Bad', 'ymbeseo' );
 				$css   = 'bad';
 				break;
 		}

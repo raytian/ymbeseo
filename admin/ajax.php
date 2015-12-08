@@ -116,7 +116,7 @@ function ymbeseo_kill_blocking_files() {
 		$files_removed = 0;
 		foreach ( $options['blocking_files'] as $k => $file ) {
 			if ( ! @unlink( $file ) ) {
-				$message = __( 'Some files could not be removed. Please remove them via FTP.', 'wordpress-seo' );
+				$message = __( 'Some files could not be removed. Please remove them via FTP.', 'ymbeseo' );
 			}
 			else {
 				unset( $options['blocking_files'][ $k ] );
@@ -212,7 +212,7 @@ function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 	if ( empty( $the_post ) ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = __( 'Post doesn\'t exist.', 'wordpress-seo' );
+		$upsert_results['results'] = __( 'Post doesn\'t exist.', 'ymbeseo' );
 
 		return $upsert_results;
 	}
@@ -221,7 +221,7 @@ function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 	if ( ! $post_type_object ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'Post has an invalid Post Type: %s.', 'wordpress-seo' ), $the_post->post_type );
+		$upsert_results['results'] = sprintf( __( 'Post has an invalid Post Type: %s.', 'ymbeseo' ), $the_post->post_type );
 
 		return $upsert_results;
 	}
@@ -229,7 +229,7 @@ function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 	if ( ! current_user_can( $post_type_object->cap->edit_posts ) ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s.', 'wordpress-seo' ), $post_type_object->label );
+		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s.', 'ymbeseo' ), $post_type_object->label );
 
 		return $upsert_results;
 	}
@@ -237,7 +237,7 @@ function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 	if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) && $the_post->post_author != get_current_user_id() ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s that aren\'t yours.', 'wordpress-seo' ), $post_type_object->label );
+		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s that aren\'t yours.', 'ymbeseo' ), $post_type_object->label );
 
 		return $upsert_results;
 
@@ -245,7 +245,7 @@ function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 
 	if ( $sanitized_new_meta_value === $orig_meta_value && $sanitized_new_meta_value !== $new_meta_value ) {
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = __( 'You have used HTML in your value which is not allowed.', 'wordpress-seo' );
+		$upsert_results['results'] = __( 'You have used HTML in your value which is not allowed.', 'ymbeseo' );
 
 		return $upsert_results;
 	}

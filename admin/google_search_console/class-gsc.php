@@ -69,7 +69,7 @@ class YMBESEO_GSC {
 		Yoast_Notification_Center::get()->add_notification(
 			new Yoast_Notification(
 				sprintf(
-					__( 'Don\'t miss your crawl errors: %1$sconnect with Google Search Console here%2$s.', 'wordpress-seo' ),
+					__( 'Don\'t miss your crawl errors: %1$sconnect with Google Search Console here%2$s.', 'ymbeseo' ),
 					'<a href="' . admin_url( 'admin.php?page=ymbeseo_search_console&tab=settings' ) . '">',
 					'</a>'
 				),
@@ -108,7 +108,7 @@ class YMBESEO_GSC {
 
 		// Preparing and displaying the table.
 		$list_table->prepare_items();
-		$list_table->search_box( __( 'Search', 'wordpress-seo' ), 'ymbeseo-crawl-issues-search' );
+		$list_table->search_box( __( 'Search', 'ymbeseo' ), 'ymbeseo-crawl-issues-search' );
 		$list_table->display();
 	}
 
@@ -118,7 +118,7 @@ class YMBESEO_GSC {
 	public function page_scripts() {
 		wp_enqueue_script( 'wp-seo-admin-gsc', plugin_dir_url( YMBESEO_FILE ) . 'js/wp-seo-admin-gsc' . YMBESEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), YMBESEO_VERSION );
 		add_screen_option( 'per_page', array(
-			'label'   => __( 'Crawl errors per page', 'wordpress-seo' ),
+			'label'   => __( 'Crawl errors per page', 'ymbeseo' ),
 			'default' => 50,
 			'option'  => 'errors_per_page',
 		) );
@@ -169,7 +169,7 @@ class YMBESEO_GSC {
 
 			// Adding notification to the notification center.
 			/* Translators: %1$s: expands to Google Search Console. */
-			$this->add_notification( sprintf( __( 'The %1$s data has been removed. You will have to reauthenticate if you want to retrieve the data again.', 'wordpress-seo' ), 'Google Search Console' ), 'updated' );
+			$this->add_notification( sprintf( __( 'The %1$s data has been removed. You will have to reauthenticate if you want to retrieve the data again.', 'ymbeseo' ), 'Google Search Console' ), 'updated' );
 
 			// Directly output the notifications.
 			wp_redirect( remove_query_arg( 'gsc_reset' ) );
@@ -182,7 +182,7 @@ class YMBESEO_GSC {
 			YMBESEO_GSC_Settings::reload_issues();
 
 			// Adding the notification.
-			$this->add_notification( __( 'The issues have been successfully reloaded!', 'wordpress-seo' ), 'updated' );
+			$this->add_notification( __( 'The issues have been successfully reloaded!', 'ymbeseo' ), 'updated' );
 
 			// Directly output the notifications.
 			Yoast_Notification_Center::get()->display_notifications();
@@ -213,7 +213,7 @@ class YMBESEO_GSC {
 		// Catch the authorization code POST.
 		if ( ! empty( $gsc_values['authorization_code'] ) && wp_verify_nonce( $gsc_values['gsc_nonce'], 'ymbeseo-gsc_nonce' ) ) {
 			if ( ! YMBESEO_GSC_Settings::validate_authorization( trim( $gsc_values['authorization_code'] ), $this->service->get_client() ) ) {
-				$this->add_notification( __( 'Incorrect Google Authorization Code.', 'wordpress-seo' ), 'error' );
+				$this->add_notification( __( 'Incorrect Google Authorization Code.', 'ymbeseo' ), 'error' );
 			}
 
 			// Redirect user to prevent a post resubmission which causes an oauth error.
@@ -270,10 +270,10 @@ class YMBESEO_GSC {
 		$screen->add_help_tab(
 			array(
 				'id'      => 'basic-help',
-				'title'   => __( 'Issue categories', 'wordpress-seo' ),
-				'content' => '<p><strong>' .__( 'Desktop', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that occurred when your site was crawled by Googlebot.', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' .__( 'Smartphone', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that occurred only when your site was crawled by Googlebot-Mobile (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' .__( 'Feature phone', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that only occurred when your site was crawled by Googlebot for feature phones (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>',
+				'title'   => __( 'Issue categories', 'ymbeseo' ),
+				'content' => '<p><strong>' .__( 'Desktop', 'ymbeseo' ) . '</strong><br />' . __( 'Errors that occurred when your site was crawled by Googlebot.', 'ymbeseo' ) . '</p>'
+							. '<p><strong>' .__( 'Smartphone', 'ymbeseo' ) . '</strong><br />' . __( 'Errors that occurred only when your site was crawled by Googlebot-Mobile (errors didn\'t appear for desktop).', 'ymbeseo' ) . '</p>'
+							. '<p><strong>' .__( 'Feature phone', 'ymbeseo' ) . '</strong><br />' . __( 'Errors that only occurred when your site was crawled by Googlebot for feature phones (errors didn\'t appear for desktop).', 'ymbeseo' ) . '</p>',
 			)
 		);
 	}

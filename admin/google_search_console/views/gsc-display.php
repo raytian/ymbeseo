@@ -13,7 +13,7 @@ if ( defined( 'WP_DEBUG' ) && WP_DEBUG && YMBESEO_GSC_Settings::get_profile() !=
 		<form action="" method="post">
 			<input type='hidden' name='reload-crawl-issues-nonce' value='<?php echo wp_create_nonce( 'reload-crawl-issues' ); ?>' />
 			<input type="submit" name="reload-crawl-issues" id="reload-crawl-issue" class="button-primary"
-				   style="float: right;" value="<?php _e( 'Reload crawl issues', 'wordpress-seo' ); ?>">
+				   style="float: right;" value="<?php _e( 'Reload crawl issues', 'ymbeseo' ); ?>">
 		</form>
 <?php } ?>
 		<?php echo $platform_tabs = new YMBESEO_GSC_Platform_Tabs; ?>
@@ -28,24 +28,24 @@ switch ( $platform_tabs->current_tab() ) {
 			// Print auth screen.
 			echo '<p>';
 			/* Translators: %1$s: expands to 'Yoast SEO', %2$s expands to Google Search Console. */
-			echo sprintf( __( 'To allow %1$s to fetch your %2$s information, please enter your Google Authorization Code.', 'wordpress-seo' ), 'Yoast SEO', 'Google Search Console' );
+			echo sprintf( __( 'To allow %1$s to fetch your %2$s information, please enter your Google Authorization Code.', 'ymbeseo' ), 'Yoast SEO', 'Google Search Console' );
 			echo "</p>\n";
 			echo '<input type="hidden" id="gsc_auth_url" value="', $this->service->get_client()->createAuthUrl() , '" />';
-			echo "<button id='gsc_auth_code' class='button-secondary'>" , __( 'Get Google Authorization Code', 'wordpress-seo' ) ,"</button>\n";
+			echo "<button id='gsc_auth_code' class='button-secondary'>" , __( 'Get Google Authorization Code', 'ymbeseo' ) ,"</button>\n";
 
-			echo '<p>' . __( 'Please enter the Google Authorization Code in the field below and press the Authenticate button.', 'wordpress-seo' ) . "</p>\n";
+			echo '<p>' . __( 'Please enter the Google Authorization Code in the field below and press the Authenticate button.', 'ymbeseo' ) . "</p>\n";
 			echo "<form action='" . admin_url( 'admin.php?page=ymbeseo_search_console&tab=settings' ) . "' method='post'>\n";
 			echo "<input type='text' name='gsc[authorization_code]' value='' />";
 			echo "<input type='hidden' name='gsc[gsc_nonce]' value='" . wp_create_nonce( 'ymbeseo-gsc_nonce' ) . "' />";
-			echo "<input type='submit' name='gsc[Submit]' value='" . __( 'Authenticate', 'wordpress-seo' ) . "' class='button-primary' />";
+			echo "<input type='submit' name='gsc[Submit]' value='" . __( 'Authenticate', 'ymbeseo' ) . "' class='button-primary' />";
 			echo "</form>\n";
 		}
 		else {
-			$reset_button = '<a class="button-secondary" href="' . add_query_arg( 'gsc_reset', 1 ). '">' . __( 'Reauthenticate with Google ', 'wordpress-seo' ) .'</a>';
-			echo '<h3>',  __( 'Current profile', 'wordpress-seo' ), '</h3>';
+			$reset_button = '<a class="button-secondary" href="' . add_query_arg( 'gsc_reset', 1 ). '">' . __( 'Reauthenticate with Google ', 'ymbeseo' ) .'</a>';
+			echo '<h3>',  __( 'Current profile', 'ymbeseo' ), '</h3>';
 			if ( ($profile = YMBESEO_GSC_Settings::get_profile() ) !== '' ) {
 				echo '<p>';
-				echo Yoast_Form::get_instance()->label( __( 'Current profile', 'wordpress-seo' ), array() );
+				echo Yoast_Form::get_instance()->label( __( 'Current profile', 'ymbeseo' ), array() );
 				echo $profile;
 				echo '</p>';
 
@@ -64,12 +64,12 @@ switch ( $platform_tabs->current_tab() ) {
 				echo '<p>';
 				if ( $profiles = $this->service->get_sites() ) {
 					$show_save = true;
-					echo Yoast_Form::get_instance()->select( 'profile', __( 'Profile', 'wordpress-seo' ), $profiles );
+					echo Yoast_Form::get_instance()->select( 'profile', __( 'Profile', 'ymbeseo' ), $profiles );
 				}
 				else {
 					$show_save = false;
-					echo '<label class="select" for="profile">', __( 'Profile', 'wordpress-seo' ), '</label>';
-					echo __( 'There were no profiles found', 'wordpress-seo' );
+					echo '<label class="select" for="profile">', __( 'Profile', 'ymbeseo' ), '</label>';
+					echo __( 'There were no profiles found', 'ymbeseo' );
 				}
 				echo '</p>';
 
@@ -77,7 +77,7 @@ switch ( $platform_tabs->current_tab() ) {
 				echo '<label class="select"></label>';
 
 				if ( $show_save ) {
-					echo '<input type="submit" name="submit" id="submit" class="button button-primary" value="' . __( 'Save Profile', 'wordpress-seo' ) . '" /> ' . __( 'or', 'wordpress-seo' ) , ' ';
+					echo '<input type="submit" name="submit" id="submit" class="button button-primary" value="' . __( 'Save Profile', 'ymbeseo' ) . '" /> ' . __( 'or', 'ymbeseo' ) , ' ';
 				}
 				echo $reset_button;
 				echo '</p>';

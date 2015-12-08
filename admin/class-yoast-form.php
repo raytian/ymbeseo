@@ -127,9 +127,9 @@ class Yoast_Form {
 			<div id="poststuff">
 			<div id="ymbeseo-debug-info" class="postbox">
 
-				<h3 class="hndle"><span>' . __( 'Debug Information', 'wordpress-seo' ) . '</span></h3>
+				<h3 class="hndle"><span>' . __( 'Debug Information', 'ymbeseo' ) . '</span></h3>
 				<div class="inside">
-					<h4>' . esc_html( __( 'Current option:', 'wordpress-seo' ) ) . ' <span class="ymbeseo-debug">' . esc_html( $this->option_name ) . '</span></h4>
+					<h4>' . esc_html( __( 'Current option:', 'ymbeseo' ) ) . ' <span class="ymbeseo-debug">' . esc_html( $this->option_name ) . '</span></h4>
 					' . ( ( $xdebug ) ? '' : '<pre>' );
 			var_dump( $this->get_option() );
 			echo '
@@ -158,7 +158,7 @@ class Yoast_Form {
 
 		$service_banners = array(
 			array(
-				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=website-review-banner',
+				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=website-review-banner',
 				'img' => 'banner-website-review.png',
 				'alt' => 'Website Review banner',
 			),
@@ -166,7 +166,7 @@ class Yoast_Form {
 
 		$plugin_banners = array(
 			array(
-				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
 				'img' => 'banner-premium-seo.png',
 				'alt' => 'Banner Yoast SEO Premium',
 			),
@@ -174,7 +174,7 @@ class Yoast_Form {
 
 		if ( ! class_exists( 'ymbeseo_Video_Sitemap' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=video-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=video-seo-banner',
 				'img' => 'banner-video-seo.png',
 				'alt' => 'Banner Yoast Video SEO plugin',
 			);
@@ -182,7 +182,7 @@ class Yoast_Form {
 
 		if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
 				'img' => 'banner-woocommerce-seo.png',
 				'alt' => 'Banner Yoast WooCommerce SEO plugin',
 			);
@@ -190,7 +190,7 @@ class Yoast_Form {
 
 		if ( ! defined( 'YMBESEO_LOCAL_VERSION' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=local-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=local-seo-banner',
 				'img' => 'banner-local-seo.png',
 				'alt' => 'Banner Yoast Local SEO plugin',
 			);
@@ -198,7 +198,7 @@ class Yoast_Form {
 
 		if ( ! class_exists( 'YMBESEO_News' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=news-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=news-seo-banner',
 				'img' => 'banner-news-seo.png',
 				'alt' => 'Banner Yoast News SEO plugin',
 			);
@@ -224,10 +224,10 @@ class Yoast_Form {
 			$i ++;
 		}
 		?>
-				<strong><?php _e( 'Remove these ads?', 'wordpress-seo' ); ?></strong><br/>
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
+				<strong><?php _e( 'Remove these ads?', 'ymbeseo' ); ?></strong><br/>
+				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
 				 /* translators: %1$s expands to Yoast SEO Premium */
-				printf( __( 'Upgrade to %1$s &raquo;', 'wordpress-seo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
+				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
 			</div>
 		</div>
 	<?php
@@ -421,7 +421,7 @@ class Yoast_Form {
 
 		$this->label( $label . ':', array( 'for' => 'ymbeseo_' . $var, 'class' => 'select' ) );
 		echo '<input class="textinput" id="ymbeseo_', $var_esc, '" type="text" size="36" name="', esc_attr( $this->option_name ), '[', $var_esc, ']" value="', esc_attr( $val ), '" />';
-		echo '<input id="ymbeseo_', $var_esc, '_button" class="ymbeseo_image_upload_button button" type="button" value="', __( 'Upload Image', 'wordpress-seo' ), '" />';
+		echo '<input id="ymbeseo_', $var_esc, '_button" class="ymbeseo_image_upload_button button" type="button" value="', __( 'Upload Image', 'ymbeseo' ), '" />';
 		echo '<br class="clear"/>';
 	}
 

@@ -13,15 +13,15 @@ $active_tab = filter_input( INPUT_GET, 'tab' );
 
 $tabs = array(
 	'breadcrumbs' => array(
-		'label'     => __( 'Breadcrumbs', 'wordpress-seo' ),
+		'label'     => __( 'Breadcrumbs', 'ymbeseo' ),
 		'opt_group' => 'ymbeseo_internallinks',
 	),
 	'permalinks'  => array(
-		'label'     => __( 'Permalinks', 'wordpress-seo' ),
+		'label'     => __( 'Permalinks', 'ymbeseo' ),
 		'opt_group' => 'ymbeseo_permalinks',
 	),
 	'rss'         => array(
-		'label'     => __( 'RSS', 'wordpress-seo' ),
+		'label'     => __( 'RSS', 'ymbeseo' ),
 		'opt_group' => 'ymbeseo_rss',
 	),
 );

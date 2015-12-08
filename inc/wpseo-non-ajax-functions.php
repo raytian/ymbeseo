@@ -258,33 +258,33 @@ function ymbeseo_admin_bar_menu() {
 
 	$wp_admin_bar->add_menu( array(
 		'id'    => 'ymbeseo-menu',
-		'title' => __( 'SEO', 'wordpress-seo' ) . $score,
+		'title' => __( 'SEO', 'ymbeseo' ) . $score,
 		'href'  => $seo_url,
 	) );
 	$wp_admin_bar->add_menu( array(
 		'parent' => 'ymbeseo-menu',
 		'id'     => 'ymbeseo-kwresearch',
-		'title'  => __( 'Keyword Research', 'wordpress-seo' ),
+		'title'  => __( 'Keyword Research', 'ymbeseo' ),
 		'#',
 	) );
 	$wp_admin_bar->add_menu( array(
 		'parent' => 'ymbeseo-kwresearch',
 		'id'     => 'ymbeseo-adwordsexternal',
-		'title'  => __( 'AdWords External', 'wordpress-seo' ),
+		'title'  => __( 'AdWords External', 'ymbeseo' ),
 		'href'   => 'http://adwords.google.com/keywordplanner',
 		'meta'   => array( 'target' => '_blank' ),
 	) );
 	$wp_admin_bar->add_menu( array(
 		'parent' => 'ymbeseo-kwresearch',
 		'id'     => 'ymbeseo-googleinsights',
-		'title'  => __( 'Google Insights', 'wordpress-seo' ),
+		'title'  => __( 'Google Insights', 'ymbeseo' ),
 		'href'   => 'http://www.google.com/insights/search/#q=' . urlencode( $focuskw ) . '&cmpt=q',
 		'meta'   => array( 'target' => '_blank' ),
 	) );
 	$wp_admin_bar->add_menu( array(
 		'parent' => 'ymbeseo-kwresearch',
 		'id'     => 'ymbeseo-wordtracker',
-		'title'  => __( 'SEO Book', 'wordpress-seo' ),
+		'title'  => __( 'SEO Book', 'ymbeseo' ),
 		'href'   => 'http://tools.seobook.com/keyword-tools/seobook/?keyword=' . urlencode( $focuskw ),
 		'meta'   => array( 'target' => '_blank' ),
 	) );
@@ -296,90 +296,90 @@ function ymbeseo_admin_bar_menu() {
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-menu',
 				'id'     => 'ymbeseo-analysis',
-				'title'  => __( 'Analyze this page', 'wordpress-seo' ),
+				'title'  => __( 'Analyze this page', 'ymbeseo' ),
 				'#',
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-inlinks-ose',
-				'title'  => __( 'Check Inlinks (OSE)', 'wordpress-seo' ),
+				'title'  => __( 'Check Inlinks (OSE)', 'ymbeseo' ),
 				'href'   => '//moz.com/researchtools/ose/links?site=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-kwdensity',
-				'title'  => __( 'Check Keyword Density', 'wordpress-seo' ),
+				'title'  => __( 'Check Keyword Density', 'ymbeseo' ),
 				'href'   => '//www.zippy.co.uk/keyworddensity/index.php?url=' . urlencode( $url ) . '&keyword=' . urlencode( $focuskw ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-cache',
-				'title'  => __( 'Check Google Cache', 'wordpress-seo' ),
+				'title'  => __( 'Check Google Cache', 'ymbeseo' ),
 				'href'   => '//webcache.googleusercontent.com/search?strip=1&q=cache:' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-header',
-				'title'  => __( 'Check Headers', 'wordpress-seo' ),
+				'title'  => __( 'Check Headers', 'ymbeseo' ),
 				'href'   => '//quixapp.com/headers/?r=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-richsnippets',
-				'title'  => __( 'Check Rich Snippets', 'wordpress-seo' ),
+				'title'  => __( 'Check Rich Snippets', 'ymbeseo' ),
 				'href'   => '//www.google.com/webmasters/tools/richsnippets?q=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-facebookdebug',
-				'title'  => __( 'Facebook Debugger', 'wordpress-seo' ),
+				'title'  => __( 'Facebook Debugger', 'ymbeseo' ),
 				'href'   => '//developers.facebook.com/tools/debug/og/object?q=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-pinterestvalidator',
-				'title'  => __( 'Pinterest Rich Pins Validator', 'wordpress-seo' ),
+				'title'  => __( 'Pinterest Rich Pins Validator', 'ymbeseo' ),
 				'href'   => '//developers.pinterest.com/rich_pins/validator/?link=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-htmlvalidation',
-				'title'  => __( 'HTML Validator', 'wordpress-seo' ),
+				'title'  => __( 'HTML Validator', 'ymbeseo' ),
 				'href'   => '//validator.w3.org/check?uri=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-cssvalidation',
-				'title'  => __( 'CSS Validator', 'wordpress-seo' ),
+				'title'  => __( 'CSS Validator', 'ymbeseo' ),
 				'href'   => '//jigsaw.w3.org/css-validator/validator?uri=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-pagespeed',
-				'title'  => __( 'Google Page Speed Test', 'wordpress-seo' ),
+				'title'  => __( 'Google Page Speed Test', 'ymbeseo' ),
 				'href'   => '//developers.google.com/speed/pagespeed/insights/?url=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-modernie',
-				'title'  => __( 'Modern IE Site Scan', 'wordpress-seo' ),
+				'title'  => __( 'Modern IE Site Scan', 'ymbeseo' ),
 				'href'   => '//www.modern.ie/en-us/report#' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'ymbeseo-analysis',
 				'id'     => 'ymbeseo-google-mobile-friendly',
-				'title'  => __( 'Mobile-Friendly Test', 'wordpress-seo' ),
+				'title'  => __( 'Mobile-Friendly Test', 'ymbeseo' ),
 				'href'   => 'https://www.google.com/webmasters/tools/mobile-friendly/?url=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
@@ -398,42 +398,42 @@ function ymbeseo_admin_bar_menu() {
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-menu',
 			'id'     => 'ymbeseo-settings',
-			'title'  => __( 'SEO Settings', 'wordpress-seo' ),
+			'title'  => __( 'SEO Settings', 'ymbeseo' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-general',
-			'title'  => __( 'General', 'wordpress-seo' ),
+			'title'  => __( 'General', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_dashboard' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-titles',
-			'title'  => __( 'Titles &amp; Metas', 'wordpress-seo' ),
+			'title'  => __( 'Titles &amp; Metas', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_titles' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-social',
-			'title'  => __( 'Social', 'wordpress-seo' ),
+			'title'  => __( 'Social', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_social' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-xml',
-			'title'  => __( 'XML Sitemaps', 'wordpress-seo' ),
+			'title'  => __( 'XML Sitemaps', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_xml' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-ymbeseo_advanced',
-			'title'  => __( 'Advanced', 'wordpress-seo' ),
+			'title'  => __( 'Advanced', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_advanced' ),
 		) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'ymbeseo-settings',
 			'id'     => 'ymbeseo-licenses',
-			'title'  => __( 'Extensions', 'wordpress-seo' ),
+			'title'  => __( 'Extensions', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_licenses' ),
 		) );
 	}
@@ -559,7 +559,7 @@ add_action( 'admin_init', 'ymbeseo_disable_aioseo' );
  */
 function ymbeseo_import_aioseo_setting_notice() {
 	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'ymbeseo-import' ) ), admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&import=1&importaioseo=1#top#import-seo' ) );
-	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s?', 'wordpress-seo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
+	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s?', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
 }
 
 /**
@@ -568,7 +568,7 @@ function ymbeseo_import_aioseo_setting_notice() {
  * @since 1.4.8
  */
 function ymbeseo_deactivate_aioseo_notice() {
-	echo '<div class="updated"><p>', esc_html__( 'All-In-One-SEO has been deactivated', 'wordpress-seo' ), '</p></div>';
+	echo '<div class="updated"><p>', esc_html__( 'All-In-One-SEO has been deactivated', 'ymbeseo' ), '</p></div>';
 }
 
 /**
@@ -578,7 +578,7 @@ function ymbeseo_deactivate_aioseo_notice() {
  */
 function ymbeseo_import_robots_meta_notice() {
 	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'ymbeseo-import' ) ), admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&import=1&importrobotsmeta=1#top#import-other' ) );
-	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin Robots-Meta has been detected. Do you want to %simport its settings%s.', 'wordpress-seo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
+	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin Robots-Meta has been detected. Do you want to %simport its settings%s.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
 }
 
 /**
@@ -587,7 +587,7 @@ function ymbeseo_import_robots_meta_notice() {
  * @since 1.4.8
  */
 function ymbeseo_deactivate_robots_meta_notice() {
-	echo '<div class="updated"><p>', esc_html__( 'Robots-Meta has been deactivated', 'wordpress-seo' ), '</p></div>';
+	echo '<div class="updated"><p>', esc_html__( 'Robots-Meta has been deactivated', 'ymbeseo' ), '</p></div>';
 }
 
 /********************** DEPRECATED FUNCTIONS **********************/

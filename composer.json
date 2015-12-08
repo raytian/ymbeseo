@@ -1,5 +1,5 @@
 {
-	"name": "yoast/wordpress-seo",
+	"name": "yoast/ymbeseo",
 	"description": "Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.",
 	"keywords": [
 		"wordpress",
@@ -16,10 +16,10 @@
 	],
 	"type": "wordpress-plugin",
 	"support": {
-		"issues": "https://github.com/Yoast/wordpress-seo/issues",
-		"forum": "https://wordpress.org/support/plugin/wordpress-seo",
-		"wiki": "https://github.com/Yoast/wordpress-seo/wiki",
-		"source": "https://github.com/Yoast/wordpress-seo"
+		"issues": "https://github.com/Yoast/ymbeseo/issues",
+		"forum": "https://wordpress.org/support/plugin/ymbeseo",
+		"wiki": "https://github.com/Yoast/ymbeseo/wiki",
+		"source": "https://github.com/Yoast/ymbeseo"
 	},
 	"require": {
 		"composer/installers": "~1.0",

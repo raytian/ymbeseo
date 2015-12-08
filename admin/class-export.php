@@ -63,12 +63,12 @@ class YMBESEO_Export {
 		$results = array();
 		if ( $this->success ) {
 			$results['status'] = 'success';
-			$results['msg']    = sprintf( __( 'Export created: %1$sdownload your export file here%2$s.', 'wordpress-seo' ), '<a href="' . $this->export_zip_url . '">', '</a>' );
+			$results['msg']    = sprintf( __( 'Export created: %1$sdownload your export file here%2$s.', 'ymbeseo' ), '<a href="' . $this->export_zip_url . '">', '</a>' );
 		}
 		else {
 			$results['status'] = 'failure';
 			/* translators: %1$s expands to Yoast SEO */
-			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'wordpress-seo' ), 'Yoast SEO' ) . $this->error;
+			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'ymbeseo' ), 'Yoast SEO' ) . $this->error;
 		}
 
 		return $results;
@@ -94,12 +94,12 @@ class YMBESEO_Export {
 				return true;
 			}
 			else {
-				$this->error = __( 'Could not zip settings-file.', 'wordpress-seo' );
+				$this->error = __( 'Could not zip settings-file.', 'ymbeseo' );
 
 				return false;
 			}
 		}
-		$this->error = __( 'Could not write settings to file.', 'wordpress-seo' );
+		$this->error = __( 'Could not write settings to file.', 'ymbeseo' );
 
 		return false;
 	}
@@ -109,9 +109,9 @@ class YMBESEO_Export {
 	 */
 	private function export_header() {
 		/* translators: %1$s expands to Yoast SEO */
-		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'wordpress-seo' ), 'Yoast SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
+		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'ymbeseo' ), 'Yoast SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
 		if ( $this->include_taxonomy ) {
-			$this->write_line( '; ' . __( 'This export includes taxonomy metadata', 'wordpress-seo' ) );
+			$this->write_line( '; ' . __( 'This export includes taxonomy metadata', 'ymbeseo' ) );
 		}
 	}
 
@@ -178,7 +178,7 @@ class YMBESEO_Export {
 				$this->write_setting( 'ymbeseo_taxonomy_meta', urlencode( json_encode( $taxonomy_meta ) ) );
 			}
 			else {
-				$this->write_line( '; ' . __( 'No taxonomy metadata found', 'wordpress-seo' ), true );
+				$this->write_line( '; ' . __( 'No taxonomy metadata found', 'ymbeseo' ), true );
 			}
 		}
 	}

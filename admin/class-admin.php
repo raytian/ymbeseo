@@ -97,7 +97,7 @@ class YMBESEO_Admin {
 		$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCIgWw0KCTwhRU5USVRZIG5zX2Zsb3dzICJodHRwOi8vbnMuYWRvYmUuY29tL0Zsb3dzLzEuMC8iPg0KCTwhRU5USVRZIG5zX2V4dGVuZCAiaHR0cDovL25zLmFkb2JlLmNvbS9FeHRlbnNpYmlsaXR5LzEuMC8iPg0KCTwhRU5USVRZIG5zX2FpICJodHRwOi8vbnMuYWRvYmUuY29tL0Fkb2JlSWxsdXN0cmF0b3IvMTAuMC8iPg0KCTwhRU5USVRZIG5zX2dyYXBocyAiaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyI+DQpdPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzEiIHhtbG5zOng9IiZuc19leHRlbmQ7IiB4bWxuczppPSImbnNfYWk7IiB4bWxuczpncmFwaD0iJm5zX2dyYXBoczsiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOmE9Imh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVTVkdWaWV3ZXJFeHRlbnNpb25zLzMuMC8iDQoJIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDAgMzEuODkiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDMxLjg5IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQwLDEyLjUyNEM0MCw1LjYwOCwzMS40NjksMCwyMCwwQzguNTMsMCwwLDUuNjA4LDAsMTIuNTI0YzAsNS41Niw1LjI0MywxMC4yNzIsMTMuNTU3LDExLjkwN3YtNC4wNjUNCgljMCwwLDAuMDQtMS0wLjI4LTEuOTJjLTAuMzItMC45MjEtMS43Ni0zLjAwMS0xLjc2LTUuMTIxYzAtMi4xMjEsMi41NjEtOS41NjMsNS4xMjItMTAuNDQ0Yy0wLjQsMS4yMDEtMC4zMiw3LjY4My0wLjMyLDcuNjgzDQoJczEuNCwyLjcyLDQuNjQxLDIuNzJjMy4yNDIsMCw0LjUxMS0xLjc2LDQuNzE1LTIuMmMwLjIwNi0wLjQ0LDAuODQ2LTguNzIzLDAuODQ2LTguNzIzczQuMDgyLDQuNDAyLDMuNjgyLDkuMzYzDQoJYy0wLjQwMSw0Ljk2Mi00LjQ4Miw3LjIwMy02LjEyMiw5LjEyM2MtMS4yODYsMS41MDUtMi4yMjQsMy4xMy0yLjYyOSw0LjE2OGMwLjgwMS0wLjAzNCwxLjU4Ny0wLjA5OCwyLjM2MS0wLjE4NGw5LjE1MSw3LjA1OQ0KCWwtNC44ODQtNy44M0MzNS41MzUsMjIuMTYxLDQwLDE3LjcxMyw0MCwxMi41MjR6Ii8+DQo8L2c+DQo8L3N2Zz4=';
 
 		// Add main page.
-		$admin_page = add_menu_page( 'Yoast SEO: ' . __( 'General Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'manage_options', 'ymbeseo_dashboard', array(
+		$admin_page = add_menu_page( 'Yoast SEO: ' . __( 'General Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'manage_options', 'ymbeseo_dashboard', array(
 			$this,
 			'load_page',
 		), $icon_svg, '99.31337' );
@@ -114,7 +114,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'Titles &amp; Metas', 'wordpress-seo' ),
+				__( 'Titles &amp; Metas', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_titles',
 				array( $this, 'load_page' ),
@@ -123,7 +123,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'Social', 'wordpress-seo' ),
+				__( 'Social', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_social',
 				array( $this, 'load_page' ),
@@ -132,7 +132,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'XML Sitemaps', 'wordpress-seo' ),
+				__( 'XML Sitemaps', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_xml',
 				array( $this, 'load_page' ),
@@ -141,7 +141,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'Advanced', 'wordpress-seo' ),
+				__( 'Advanced', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_advanced',
 				array( $this, 'load_page' ),
@@ -150,7 +150,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'Tools', 'wordpress-seo' ),
+				__( 'Tools', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_tools',
 				array( $this, 'load_page' ),
@@ -159,7 +159,7 @@ class YMBESEO_Admin {
 			array(
 				'ymbeseo_dashboard',
 				'',
-				__( 'Search Console', 'wordpress-seo' ),
+				__( 'Search Console', 'ymbeseo' ),
 				$manage_options_cap,
 				'ymbeseo_search_console',
 				array( $this->page_gsc, 'display' ),
@@ -171,7 +171,7 @@ class YMBESEO_Admin {
 		$submenu_pages[] = array(
 			'ymbeseo_dashboard',
 			'',
-			'<span style="color:#f18500">' . __( 'Extensions', 'wordpress-seo' ) . '</span>',
+			'<span style="color:#f18500">' . __( 'Extensions', 'ymbeseo' ) . '</span>',
 			$manage_options_cap,
 			'ymbeseo_licenses',
 			array( $this, 'load_page' ),
@@ -199,7 +199,7 @@ class YMBESEO_Admin {
 
 		global $submenu;
 		if ( isset( $submenu['ymbeseo_dashboard'] ) && current_user_can( $manage_options_cap ) ) {
-			$submenu['ymbeseo_dashboard'][0][0] = __( 'General', 'wordpress-seo' );
+			$submenu['ymbeseo_dashboard'][0][0] = __( 'General', 'ymbeseo' );
 		}
 	}
 
@@ -210,33 +210,33 @@ class YMBESEO_Admin {
 		$screen = get_current_screen();
 
 		$screen->set_help_sidebar( '
-			<p><strong>' . __( 'For more information:', 'wordpress-seo' ) . '</strong></p>
-			<p><a target="_blank" href="https://yoast.com/articles/wordpress-seo/#titles">' . __( 'Title optimization', 'wordpress-seo' ) . '</a></p>
-			<p><a target="_blank" href="https://yoast.com/google-page-title/">' . __( 'Why Google won\'t display the right page title', 'wordpress-seo' ) . '</a></p>'
+			<p><strong>' . __( 'For more information:', 'ymbeseo' ) . '</strong></p>
+			<p><a target="_blank" href="https://yoast.com/articles/ymbeseo/#titles">' . __( 'Title optimization', 'ymbeseo' ) . '</a></p>
+			<p><a target="_blank" href="https://yoast.com/google-page-title/">' . __( 'Why Google won\'t display the right page title', 'ymbeseo' ) . '</a></p>'
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'basic-help',
-				'title'   => __( 'Template explanation', 'wordpress-seo' ),
+				'title'   => __( 'Template explanation', 'ymbeseo' ),
 				/* translators: %1$s expands to Yoast SEO */
-				'content' => '<p>' . sprintf( __( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>' . '<p>' . __( 'Note that not all variables can be used in every template.', 'wordpress-seo' ) . '</p>',
+				'content' => '<p>' . sprintf( __( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>' . '<p>' . __( 'Note that not all variables can be used in every template.', 'ymbeseo' ) . '</p>',
 			)
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'title-vars',
-				'title'   => __( 'Basic Variables', 'wordpress-seo' ),
-				'content' => "\n\t\t<h2>" . __( 'Basic Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . YMBESEO_Replace_Vars::get_basic_help_texts(),
+				'title'   => __( 'Basic Variables', 'ymbeseo' ),
+				'content' => "\n\t\t<h2>" . __( 'Basic Variables', 'ymbeseo' ) . "</h2>\n\t\t" . YMBESEO_Replace_Vars::get_basic_help_texts(),
 			)
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'title-vars-advanced',
-				'title'   => __( 'Advanced Variables', 'wordpress-seo' ),
-				'content' => "\n\t\t<h2>" . __( 'Advanced Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . YMBESEO_Replace_Vars::get_advanced_help_texts(),
+				'title'   => __( 'Advanced Variables', 'ymbeseo' ),
+				'content' => "\n\t\t<h2>" . __( 'Advanced Variables', 'ymbeseo' ) . "</h2>\n\t\t" . YMBESEO_Replace_Vars::get_advanced_help_texts(),
 			)
 		);
 	}
@@ -248,20 +248,20 @@ class YMBESEO_Admin {
 		if ( YMBESEO_Utils::grant_access() ) {
 			// Base 64 encoded SVG image.
 			$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCIgWw0KCTwhRU5USVRZIG5zX2Zsb3dzICJodHRwOi8vbnMuYWRvYmUuY29tL0Zsb3dzLzEuMC8iPg0KCTwhRU5USVRZIG5zX2V4dGVuZCAiaHR0cDovL25zLmFkb2JlLmNvbS9FeHRlbnNpYmlsaXR5LzEuMC8iPg0KCTwhRU5USVRZIG5zX2FpICJodHRwOi8vbnMuYWRvYmUuY29tL0Fkb2JlSWxsdXN0cmF0b3IvMTAuMC8iPg0KCTwhRU5USVRZIG5zX2dyYXBocyAiaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyI+DQpdPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzEiIHhtbG5zOng9IiZuc19leHRlbmQ7IiB4bWxuczppPSImbnNfYWk7IiB4bWxuczpncmFwaD0iJm5zX2dyYXBoczsiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOmE9Imh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVTVkdWaWV3ZXJFeHRlbnNpb25zLzMuMC8iDQoJIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDAgMzEuODkiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDMxLjg5IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQwLDEyLjUyNEM0MCw1LjYwOCwzMS40NjksMCwyMCwwQzguNTMsMCwwLDUuNjA4LDAsMTIuNTI0YzAsNS41Niw1LjI0MywxMC4yNzIsMTMuNTU3LDExLjkwN3YtNC4wNjUNCgljMCwwLDAuMDQtMS0wLjI4LTEuOTJjLTAuMzItMC45MjEtMS43Ni0zLjAwMS0xLjc2LTUuMTIxYzAtMi4xMjEsMi41NjEtOS41NjMsNS4xMjItMTAuNDQ0Yy0wLjQsMS4yMDEtMC4zMiw3LjY4My0wLjMyLDcuNjgzDQoJczEuNCwyLjcyLDQuNjQxLDIuNzJjMy4yNDIsMCw0LjUxMS0xLjc2LDQuNzE1LTIuMmMwLjIwNi0wLjQ0LDAuODQ2LTguNzIzLDAuODQ2LTguNzIzczQuMDgyLDQuNDAyLDMuNjgyLDkuMzYzDQoJYy0wLjQwMSw0Ljk2Mi00LjQ4Miw3LjIwMy02LjEyMiw5LjEyM2MtMS4yODYsMS41MDUtMi4yMjQsMy4xMy0yLjYyOSw0LjE2OGMwLjgwMS0wLjAzNCwxLjU4Ny0wLjA5OCwyLjM2MS0wLjE4NGw5LjE1MSw3LjA1OQ0KCWwtNC44ODQtNy44M0MzNS41MzUsMjIuMTYxLDQwLDE3LjcxMyw0MCwxMi41MjR6Ii8+DQo8L2c+DQo8L3N2Zz4=';
-			add_menu_page( 'Yoast SEO: ' . __( 'MultiSite Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'delete_users', 'ymbeseo_dashboard', array(
+			add_menu_page( 'Yoast SEO: ' . __( 'MultiSite Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'delete_users', 'ymbeseo_dashboard', array(
 				$this,
 				'network_config_page',
 			), $icon_svg );
 
 			if ( YMBESEO_Utils::allow_system_file_edit() === true ) {
-				add_submenu_page( 'ymbeseo_dashboard', 'Yoast SEO: ' . __( 'Edit Files', 'wordpress-seo' ), __( 'Edit Files', 'wordpress-seo' ), 'delete_users', 'ymbeseo_files', array(
+				add_submenu_page( 'ymbeseo_dashboard', 'Yoast SEO: ' . __( 'Edit Files', 'ymbeseo' ), __( 'Edit Files', 'ymbeseo' ), 'delete_users', 'ymbeseo_files', array(
 					$this,
 					'load_page',
 				) );
 			}
 
 			// Add Extension submenu page.
-			add_submenu_page( 'ymbeseo_dashboard', 'Yoast SEO: ' . __( 'Extensions', 'wordpress-seo' ), __( 'Extensions', 'wordpress-seo' ), 'delete_users', 'ymbeseo_licenses', array(
+			add_submenu_page( 'ymbeseo_dashboard', 'Yoast SEO: ' . __( 'Extensions', 'ymbeseo' ), __( 'Extensions', 'ymbeseo' ), 'delete_users', 'ymbeseo_licenses', array(
 				$this,
 				'load_page',
 			) );
@@ -327,7 +327,7 @@ class YMBESEO_Admin {
 	function bulk_edit_options() {
 		$option = 'per_page';
 		$args   = array(
-			'label'   => __( 'Posts', 'wordpress-seo' ),
+			'label'   => __( 'Posts', 'ymbeseo' ),
 			'default' => 10,
 			'option'  => 'ymbeseo_posts_per_page',
 		);
@@ -370,10 +370,10 @@ class YMBESEO_Admin {
 					<a href="javascript:ymbeseoSetIgnore(\'blog_public_warning\',\'robotsmessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
-			__( 'Huge SEO Issue: You\'re blocking access to robots.', 'wordpress-seo' ),
-			sprintf( __( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'wordpress-seo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
+			__( 'Huge SEO Issue: You\'re blocking access to robots.', 'ymbeseo' ),
+			sprintf( __( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
 			esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ),
-			__( 'I know, don\'t bug me.', 'wordpress-seo' )
+			__( 'I know, don\'t bug me.', 'ymbeseo' )
 		);
 	}
 
@@ -404,11 +404,11 @@ class YMBESEO_Admin {
 					<a href="javascript:ymbeseoSetIgnore(\'meta_description_warning\',\'metamessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
-			__( 'SEO Issue:', 'wordpress-seo' ),
+			__( 'SEO Issue:', 'ymbeseo' ),
 			/* translators: %1$s expands to Yoast SEO, %2$s to opening anchor and %3$s the anchor closing tag */
-			sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'wordpress-seo' ), 'Yoast SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) ), '</a>' ),
+			sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'ymbeseo' ), 'Yoast SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) ), '</a>' ),
 			esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ),
-			__( 'I know, don\'t bug me.', 'wordpress-seo' )
+			__( 'I know, don\'t bug me.', 'ymbeseo' )
 		);
 	}
 
@@ -424,7 +424,7 @@ class YMBESEO_Admin {
 	 */
 	function add_action_link( $links, $file ) {
 		if ( YMBESEO_BASENAME === $file && YMBESEO_Utils::grant_access() ) {
-			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) . '">' . __( 'Settings', 'wordpress-seo' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) . '">' . __( 'Settings', 'ymbeseo' ) . '</a>';
 			array_unshift( $links, $settings_link );
 		}
 
@@ -436,11 +436,11 @@ class YMBESEO_Admin {
 		}
 
 		// Add link to premium support landing page.
-		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=wordpress-seo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . __( 'Premium Support', 'wordpress-seo' ) . '</a>';
+		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=ymbeseo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . __( 'Premium Support', 'ymbeseo' ) . '</a>';
 		array_unshift( $links, $premium_link );
 
 		// Add link to docs.
-		$faq_link = '<a href="https://yoast.com/wordpress/plugins/seo/faq/">' . __( 'FAQ', 'wordpress-seo' ) . '</a>';
+		$faq_link = '<a href="https://yoast.com/wordpress/plugins/seo/faq/">' . __( 'FAQ', 'ymbeseo' ) . '</a>';
 		array_unshift( $links, $faq_link );
 
 		return $links;
@@ -466,11 +466,11 @@ class YMBESEO_Admin {
 	 */
 	public function update_contactmethods( $contactmethods ) {
 		// Add Google+.
-		$contactmethods['googleplus'] = __( 'Google+', 'wordpress-seo' );
+		$contactmethods['googleplus'] = __( 'Google+', 'ymbeseo' );
 		// Add Twitter.
-		$contactmethods['twitter'] = __( 'Twitter username (without @)', 'wordpress-seo' );
+		$contactmethods['twitter'] = __( 'Twitter username (without @)', 'ymbeseo' );
 		// Add Facebook.
-		$contactmethods['facebook'] = __( 'Facebook profile URL', 'wordpress-seo' );
+		$contactmethods['facebook'] = __( 'Facebook profile URL', 'ymbeseo' );
 
 		return $contactmethods;
 	}
@@ -525,7 +525,7 @@ class YMBESEO_Admin {
 	 */
 	function stopwords() {
 		/* translators: this should be an array of stopwords for your language, separated by comma's. */
-		$stopwords = explode( ',', __( "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves", 'wordpress-seo' ) );
+		$stopwords = explode( ',', __( "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves", 'ymbeseo' ) );
 
 		/**
 		 * Allows filtering of the stop words list

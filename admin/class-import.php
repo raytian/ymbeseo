@@ -73,19 +73,19 @@ class YMBESEO_Import {
 		$this->file = wp_handle_upload( $_FILES['settings_import_file'], $overrides );
 
 		if ( is_wp_error( $this->file ) ) {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . $this->file->get_error_message();
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . $this->file->get_error_message();
 
 			return false;
 		}
 
 		if ( is_array( $this->file ) && isset( $this->file['error'] ) ) {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . $this->file['error'];
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . $this->file['error'];
 
 			return false;
 		}
 
 		if ( ! isset( $this->file['file'] ) ) {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . __( 'Upload failed.', 'wordpress-seo' );
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . __( 'Upload failed.', 'ymbeseo' );
 
 			return false;
 		}
@@ -117,14 +117,14 @@ class YMBESEO_Import {
 	private function unzip_file() {
 		$unzipped = unzip_file( $this->file['file'], $this->path );
 		if ( is_wp_error( $unzipped ) ) {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . sprintf( __( 'Unzipping failed with error "%s".', 'wordpress-seo' ), $unzipped->get_error_message() );
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . sprintf( __( 'Unzipping failed with error "%s".', 'ymbeseo' ), $unzipped->get_error_message() );
 
 			return false;
 		}
 
 		$this->filename = $this->path . 'settings.ini';
 		if ( ! is_file( $this->filename ) || ! is_readable( $this->filename ) ) {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . __( 'Unzipping failed - file settings.ini not found.', 'wordpress-seo' );
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . __( 'Unzipping failed - file settings.ini not found.', 'ymbeseo' );
 
 			return false;
 		}
@@ -145,10 +145,10 @@ class YMBESEO_Import {
 			foreach ( $options as $name => $opt_group ) {
 				$this->parse_option_group( $name, $opt_group, $options );
 			}
-			$this->msg = __( 'Settings successfully imported.', 'wordpress-seo' );
+			$this->msg = __( 'Settings successfully imported.', 'ymbeseo' );
 		}
 		else {
-			$this->msg = __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . __( 'No settings found in file.', 'wordpress-seo' );
+			$this->msg = __( 'Settings could not be imported:', 'ymbeseo' ) . ' ' . __( 'No settings found in file.', 'ymbeseo' );
 		}
 	}
 
@@ -170,7 +170,7 @@ class YMBESEO_Import {
 			$option_instance->import( $opt_group, $this->old_ymbeseo_version, $options );
 		}
 		elseif ( WP_DEBUG === true || ( defined( 'YMBESEO_DEBUG' ) && YMBESEO_DEBUG === true ) ) {
-			$this->msg = sprintf( __( 'Setting "%s" is no longer used and has been discarded.', 'wordpress-seo' ), $name );
+			$this->msg = sprintf( __( 'Setting "%s" is no longer used and has been discarded.', 'ymbeseo' ), $name );
 		}
 	}
 

@@ -92,7 +92,7 @@ class YMBESEO_Admin_Pages {
 	 */
 	public function localize_media_script() {
 		return array(
-			'choose_image' => __( 'Use Image', 'wordpress-seo' ),
+			'choose_image' => __( 'Use Image', 'ymbeseo' ),
 		);
 	}
 
@@ -106,7 +106,7 @@ class YMBESEO_Admin_Pages {
 	public function localize_admin_script() {
 		return array(
 			/* translators: %s: '%%term_title%%' variable used in titles and meta's template that's not compatible with the given template */
-			'variable_warning' => sprintf( __( 'Warning: the variable %s cannot be used in this template.', 'wordpress-seo' ), '<code>%s</code>' ) . ' ' . __( 'See the help tab for more info.', 'wordpress-seo' ),
+			'variable_warning' => sprintf( __( 'Warning: the variable %s cannot be used in this template.', 'ymbeseo' ), '<code>%s</code>' ) . ' ' . __( 'See the help tab for more info.', 'ymbeseo' ),
 		);
 	}
 

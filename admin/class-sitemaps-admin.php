@@ -19,7 +19,7 @@ class YMBESEO_Sitemaps_Admin {
 	/**
 	 * Find sitemaps residing on disk as they will block our rewrite.
 	 *
-	 * @todo issue #561 https://github.com/Yoast/wordpress-seo/issues/561
+	 * @todo issue #561 https://github.com/Yoast/ymbeseo/issues/561
 	 */
 	function delete_sitemaps() {
 		$options = YMBESEO_Options::get_all();

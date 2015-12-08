@@ -18,23 +18,23 @@ $yform->admin_header( false );
 if ( '' === $tool_page ) {
 	$tools = array(
 		'bulk-editor' => array(
-			'title' => __( 'Bulk editor', 'wordpress-seo' ),
-			'desc' => __( 'This tool allows you to quickly change titles and descriptions of your posts and pages without having to go into the editor for each page.', 'wordpress-seo' ),
+			'title' => __( 'Bulk editor', 'ymbeseo' ),
+			'desc' => __( 'This tool allows you to quickly change titles and descriptions of your posts and pages without having to go into the editor for each page.', 'ymbeseo' ),
 		),
 		'import-export' => array(
-			'title' => __( 'Import and Export', 'wordpress-seo' ),
-			'desc' => __( 'Import settings from other SEO plugins and export your settings for re-use on (another) blog.', 'wordpress-seo' ),
+			'title' => __( 'Import and Export', 'ymbeseo' ),
+			'desc' => __( 'Import settings from other SEO plugins and export your settings for re-use on (another) blog.', 'ymbeseo' ),
 		),
 	);
 	if ( YMBESEO_Utils::allow_system_file_edit() === true && ! is_multisite() ) {
 		$tools['file-editor'] = array(
-			'title' => __( 'File editor', 'wordpress-seo' ),
-			'desc' => __( 'This tool allows you to quickly change important files for your SEO, like your robots.txt and, if you have one, your .htaccess file.', 'wordpress-seo' ),
+			'title' => __( 'File editor', 'ymbeseo' ),
+			'desc' => __( 'This tool allows you to quickly change important files for your SEO, like your robots.txt and, if you have one, your .htaccess file.', 'ymbeseo' ),
 		);
 	}
 
 	/* translators: %1$s expands to Yoast SEO */
-	echo '<p>', sprintf( __( '%1$s comes with some very powerful built-in tools:', 'wordpress-seo' ), 'Yoast SEO' ), '</p>';
+	echo '<p>', sprintf( __( '%1$s comes with some very powerful built-in tools:', 'ymbeseo' ), 'Yoast SEO' ), '</p>';
 
 	asort( $tools );
 
@@ -49,7 +49,7 @@ if ( '' === $tool_page ) {
 
 }
 else {
-	echo '<a href="', admin_url( 'admin.php?page=ymbeseo_tools' ), '">', __( '&laquo; Back to Tools page', 'wordpress-seo' ), '</a>';
+	echo '<a href="', admin_url( 'admin.php?page=ymbeseo_tools' ), '">', __( '&laquo; Back to Tools page', 'ymbeseo' ), '</a>';
 	require_once YMBESEO_PATH . 'admin/views/tool-' . $tool_page . '.php';
 }
 
