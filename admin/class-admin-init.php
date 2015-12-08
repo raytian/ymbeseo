@@ -41,8 +41,6 @@ class YMBESEO_Admin_Init {
 		$this->load_taxonomy_class();
 		$this->load_admin_page_class();
 		$this->load_admin_user_class();
-		$this->ignore_tour();
-		$this->load_tour();
 		$this->load_xml_sitemaps_admin();
 	}
 
@@ -256,35 +254,11 @@ class YMBESEO_Admin_Init {
 	}
 
 	/**
-	 * See if we should start our tour.
-	 */
-	private function load_tour() {
-		$restart_tour = filter_input( INPUT_GET, 'ymbeseo_restart_tour' );
-		if ( $restart_tour ) {
-			delete_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' );
-		}
-
-		if ( ! get_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' ) ) {
-			add_action( 'admin_enqueue_scripts', array( 'YMBESEO_Pointers', 'get_instance' ) );
-		}
-	}
-
-	/**
 	 * See if we should start our XML Sitemaps Admin class
 	 */
 	private function load_xml_sitemaps_admin() {
 		if ( $this->options['enablexmlsitemap'] === true ) {
 			new YMBESEO_Sitemaps_Admin;
 		}
-	}
-
-	/**
-	 * Listener for the ignore tour GET value. If this one is set, just set the user meta to true.
-	 */
-	private function ignore_tour() {
-		if ( filter_input( INPUT_GET, 'ymbeseo_ignore_tour' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'ymbeseo-ignore-tour' ) ) {
-			update_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour', true );
-		}
-
 	}
 }
