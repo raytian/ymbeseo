@@ -1,4 +1,4 @@
-# Yoast Minus Bloat Equals SEO
+# YMBE SEO
 
 ###### Last updated on 2015.11.25
 ###### requires at least WordPress 4.0

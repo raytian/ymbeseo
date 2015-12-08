@@ -10,7 +10,7 @@
 class YMBESEO_Upgrade {
 
 	/**
-	 * Holds the Yoast Minus Bloat Equals SEO options
+	 * Holds the YMBE SEO options
 	 *
 	 * @var array
 	 */
@@ -47,9 +47,9 @@ class YMBESEO_Upgrade {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_run_upgrade' - Runs the upgrade hook which are dependent on Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_run_upgrade' - Runs the upgrade hook which are dependent on YMBE SEO
 		 *
-		 * @api string - The current version of Yoast Minus Bloat Equals SEO
+		 * @api string - The current version of YMBE SEO
 		 */
 		do_action( 'ymbeseo_run_upgrade', $this->options['version'] );
 
@@ -57,7 +57,7 @@ class YMBESEO_Upgrade {
 	}
 
 	/**
-	 * Run some functions that run when we first run or when we upgrade Yoast Minus Bloat Equals SEO from < 1.4.13
+	 * Run some functions that run when we first run or when we upgrade YMBE SEO from < 1.4.13
 	 */
 	private function init() {
 		if ( $this->options['version'] === '' || version_compare( $this->options['version'], '1.4.13', '<' ) ) {
@@ -70,7 +70,7 @@ class YMBESEO_Upgrade {
 	}
 
 	/**
-	 * Run the Yoast Minus Bloat Equals SEO 1.5 upgrade routine
+	 * Run the YMBE SEO 1.5 upgrade routine
 	 *
 	 * @param string $version
 	 */
@@ -89,7 +89,7 @@ class YMBESEO_Upgrade {
 	private function upgrade_20() {
 		/**
 		 * Clean up stray ymbeseo_ms options from the options table, option should only exist in the sitemeta table.
-		 * This could have been caused in many version of Yoast Minus Bloat Equals SEO, so deleting it for everything below 2.0
+		 * This could have been caused in many version of YMBE SEO, so deleting it for everything below 2.0
 		 */
 		delete_option( 'ymbeseo_ms' );
 
@@ -118,7 +118,7 @@ class YMBESEO_Upgrade {
 	}
 
 	/**
-	 * Performs upgrade functions to Yoast Minus Bloat Equals SEO 2.2
+	 * Performs upgrade functions to YMBE SEO 2.2
 	 */
 	private function upgrade_22() {
 		// Unschedule our tracking.
@@ -131,7 +131,7 @@ class YMBESEO_Upgrade {
 	}
 
 	/**
-	 * Schedules upgrade function to Yoast Minus Bloat Equals SEO 2.3
+	 * Schedules upgrade function to YMBE SEO 2.3
 	 */
 	private function upgrade_23() {
 		add_action( 'wp', array( $this, 'upgrade_23_query' ), 90 );
@@ -139,7 +139,7 @@ class YMBESEO_Upgrade {
 	}
 
 	/**
-	 * Performs upgrade query to Yoast Minus Bloat Equals SEO 2.3
+	 * Performs upgrade query to YMBE SEO 2.3
 	 */
 	public function upgrade_23_query() {
 		$wp_query = new WP_Query( 'post_type=any&meta_key=_so_ymbeseo_sitemap-include&meta_value=never&order=ASC' );

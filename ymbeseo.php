@@ -4,10 +4,10 @@
  */
 
 /**
- * Plugin Name: Yoast Minus Bloat Equals SEO
+ * Plugin Name: YMBE SEO
  * Version:     0.1.0
  * Plugin URI:  https://so-wp.com/plugins/ymbeseo
- * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5.
+ * Description: YMBE SEO is a fork from Yoast SEO 2.3.5.
  * Author:      SO WP
  * Author URI:  https://so-wp.com/
  * Text Domain: ymbeseo
@@ -16,7 +16,7 @@
  */
 
 /**
- * Yoast Minus Bloat Equals SEO plugin
+ * YMBE SEO plugin
  * Copyright (C) 2015-2016, SO WP - support@so-wp.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -43,5 +43,5 @@ if ( ! defined( 'YMBESEO_FILE' ) ) {
 	define( 'YMBESEO_FILE', __FILE__ );
 }
 
-// Load the Yoast Minus Bloat Equals SEO plugin.
+// Load the YMBE SEO plugin.
 require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );

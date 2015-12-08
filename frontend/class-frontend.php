@@ -4,7 +4,7 @@
  */
 
 /**
- * Main frontend class for Yoast Minus Bloat Equals SEO, responsible for the SEO output as well as removing
+ * Main frontend class for YMBE SEO, responsible for the SEO output as well as removing
  * default WordPress output.
  */
 class YMBESEO_Frontend {
@@ -574,7 +574,7 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_title' - Allow changing the Yoast Minus Bloat Equals SEO <title> output
+		 * Filter: 'ymbeseo_title' - Allow changing the YMBE SEO <title> output
 		 *
 		 * @api string $title The page title being put out.
 		 */
@@ -617,7 +617,7 @@ class YMBESEO_Frontend {
 		$marker = sprintf(
 			'<!-- This site is optimized with the ' . $this->head_product_name() . '%1$s - https://yoast.com/wordpress/plugins/seo/ -->',
 			/**
-			 * Filter: 'ymbeseo_hide_version' - can be used to hide the Yoast Minus Bloat Equals SEO version in the debug marker (only available in Yoast Minus Bloat Equals SEO Premium)
+			 * Filter: 'ymbeseo_hide_version' - can be used to hide the YMBE SEO version in the debug marker (only available in YMBE SEO Premium)
 			 *
 			 * @api bool
 			 */
@@ -663,7 +663,7 @@ class YMBESEO_Frontend {
 	}
 
 	/**
-	 * Main wrapper function attached to wp_head. This combines all the output on the frontend of the Yoast Minus Bloat Equals SEO plugin.
+	 * Main wrapper function attached to wp_head. This combines all the output on the frontend of the YMBE SEO plugin.
 	 */
 	public function head() {
 		global $wp_query;
@@ -676,7 +676,7 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Action: 'ymbeseo_head' - Allow other plugins to output inside the Yoast Minus Bloat Equals SEO section of the head section.
+		 * Action: 'ymbeseo_head' - Allow other plugins to output inside the YMBE SEO section of the head section.
 		 */
 		do_action( 'ymbeseo_head' );
 
@@ -793,7 +793,7 @@ class YMBESEO_Frontend {
 		$robotsstr = preg_replace( '`^index,follow,?`', '', $robotsstr );
 
 		/**
-		 * Filter: 'ymbeseo_robots' - Allows filtering of the meta robots output of Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_robots' - Allows filtering of the meta robots output of YMBE SEO
 		 *
 		 * @api string $robotsstr The meta robots directives to be echoed.
 		 */
@@ -984,7 +984,7 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_canonical' - Allow filtering of the canonical URL put out by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_canonical' - Allow filtering of the canonical URL put out by YMBE SEO
 		 *
 		 * @api string $canonical The canonical URL
 		 */
@@ -1028,7 +1028,7 @@ class YMBESEO_Frontend {
 	public function adjacent_rel_links() {
 		// Don't do this for Genesis, as the way Genesis handles homepage functionality is different and causes issues sometimes.
 		/**
-		 * Filter 'ymbeseo_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by Yoast Minus Bloat Equals SEO on Genesis installs
+		 * Filter 'ymbeseo_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by YMBE SEO on Genesis installs
 		 *
 		 * @api bool $unsigned Whether or not to rel=next / rel=prev
 		 */
@@ -1126,7 +1126,7 @@ class YMBESEO_Frontend {
 			}
 		}
 		/**
-		 * Filter: 'ymbeseo_' . $rel . '_rel_link' - Allow changing link rel output by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_' . $rel . '_rel_link' - Allow changing link rel output by YMBE SEO
 		 *
 		 * @api string $unsigned The full `<link` element.
 		 */
@@ -1214,7 +1214,7 @@ class YMBESEO_Frontend {
 		$keywords = apply_filters( 'ymbeseo_metakey', trim( $keywords ) ); // TODO Make deprecated.
 
 		/**
-		 * Filter: 'ymbeseo_metakeywords' - Allow changing the Yoast Minus Bloat Equals SEO meta keywords
+		 * Filter: 'ymbeseo_metakeywords' - Allow changing the YMBE SEO meta keywords
 		 *
 		 * @api string $keywords The meta keywords to be echoed.
 		 */
@@ -1353,7 +1353,7 @@ class YMBESEO_Frontend {
 		$metadesc = ymbeseo_replace_vars( $metadesc, $post_data );
 
 		/**
-		 * Filter: 'ymbeseo_metadesc' - Allow changing the Yoast Minus Bloat Equals SEO meta description sentence.
+		 * Filter: 'ymbeseo_metadesc' - Allow changing the YMBE SEO meta description sentence.
 		 *
 		 * @api string $metadesc The description sentence.
 		 */
@@ -1677,7 +1677,7 @@ class YMBESEO_Frontend {
 		global $post;
 
 		/**
-		 * Allow the developer to determine whether or not to follow the links in the bits Yoast Minus Bloat Equals SEO adds to the RSS feed, defaults to true.
+		 * Allow the developer to determine whether or not to follow the links in the bits YMBE SEO adds to the RSS feed, defaults to true.
 		 *
 		 * @api   bool $unsigned Whether or not to follow the links in RSS feed, defaults to true.
 		 *
@@ -1860,10 +1860,10 @@ class YMBESEO_Frontend {
 	 */
 	private function head_product_name() {
 		if ( $this->is_premium() ) {
-			return 'Yoast Minus Bloat Equals SEO Premium plugin';
+			return 'YMBE SEO Premium plugin';
 		}
 		else {
-			return 'Yoast Minus Bloat Equals SEO plugin';
+			return 'YMBE SEO plugin';
 		}
 	}
 

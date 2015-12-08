@@ -62,7 +62,7 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Action: 'ymbeseo_twitter' - Hook to add all Yoast Minus Bloat Equals SEO Twitter output to so they're close together.
+		 * Action: 'ymbeseo_twitter' - Hook to add all YMBE SEO Twitter output to so they're close together.
 		 */
 		do_action( 'ymbeseo_twitter' );
 	}
@@ -97,7 +97,7 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_twitter_card_type' - Allow changing the Twitter Card type as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_card_type' - Allow changing the Twitter Card type as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $unsigned The type string
 		 */
@@ -166,7 +166,7 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_twitter_description' - Allow changing the Twitter description as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_description' - Allow changing the Twitter description as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $twitter The description string
 		 */
@@ -224,7 +224,7 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_twitter_title' - Allow changing the Twitter title as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_title' - Allow changing the Twitter title as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $twitter The title string
 		 */
@@ -265,7 +265,7 @@ class YMBESEO_Twitter {
 	 */
 	protected function site_twitter() {
 		/**
-		 * Filter: 'ymbeseo_twitter_site' - Allow changing the Twitter site account as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_site' - Allow changing the Twitter site account as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $unsigned Twitter site account string
 		 */
@@ -301,7 +301,7 @@ class YMBESEO_Twitter {
 	 */
 	protected function site_domain() {
 		/**
-		 * Filter: 'ymbeseo_twitter_domain' - Allow changing the Twitter domain as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_domain' - Allow changing the Twitter domain as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $unsigned Name string
 		 */
@@ -491,7 +491,7 @@ class YMBESEO_Twitter {
 	protected function author() {
 		$twitter = ltrim( trim( get_the_author_meta( 'twitter', get_post()->post_author ) ), '@' );
 		/**
-		 * Filter: 'ymbeseo_twitter_creator_account' - Allow changing the Twitter account as output in the Twitter card by Yoast Minus Bloat Equals SEO
+		 * Filter: 'ymbeseo_twitter_creator_account' - Allow changing the Twitter account as output in the Twitter card by YMBE SEO
 		 *
 		 * @api string $twitter The twitter account name string
 		 */

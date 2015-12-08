@@ -282,7 +282,7 @@ function ymbeseo_wpml_config( $config ) {
 add_filter( 'icl_wpml_config_array', 'ymbeseo_wpml_config' );
 
 /**
- * Yoast Minus Bloat Equals SEO breadcrumb shortcode
+ * YMBE SEO breadcrumb shortcode
  * [ymbeseo_breadcrumb]
  *
  * @return string

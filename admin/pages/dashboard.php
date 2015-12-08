@@ -107,9 +107,9 @@ if ( is_array( $options['blocking_files'] ) && count( $options['blocking_files']
 		echo esc_html( $file ), '<br/>';
 	}
 	unset( $file );
-	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+	/* translators: %1$s expands to YMBE SEO */
 	echo '
-			', sprintf( __( 'Either delete them (this can be done with the "Fix it" button) or disable %1$s XML sitemaps.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ), '
+			', sprintf( __( 'Either delete them (this can be done with the "Fix it" button) or disable %1$s XML sitemaps.', 'ymbeseo' ), 'YMBE SEO' ), '
 		</p>';
 }
 
@@ -118,8 +118,8 @@ if ( $options['theme_description_found'] !== '' ) {
 	echo '<p id="metadesc_found notice" class="wrong settings_error">';
 	echo '<a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'ymbeseo-fix-metadesc' ) ), admin_url( 'admin.php?page=ymbeseo_dashboard&fixmetadesc' ) ) ), '" class="button fixit">', __( 'Fix it.', 'ymbeseo' ), '</a>';
 	echo ' <a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'ymbeseo-check-metadesc' ) ), admin_url( 'admin.php?page=ymbeseo_dashboard&checkmetadesc' ) ) ), '" class="button checkit">', __( 'Re-check theme.', 'ymbeseo' ), '</a>';
-	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
-	echo sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly, please delete the following line, or press fix it:', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '<br />';
+	/* translators: %1$s expands to YMBE SEO */
+	echo sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly, please delete the following line, or press fix it:', 'ymbeseo' ), 'YMBE SEO' ) . '<br />';
 	echo '<code>', esc_html( $options['theme_description_found'] ), '</code>';
 	echo '</p>';
 }
@@ -167,8 +167,8 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		<p>
 			<strong><?php _e( 'Latest Changes', 'ymbeseo' ); ?></strong><br/>
 			<?php
-			/* translators: %s expands to Yoast Minus Bloat Equals SEO */
-			printf( __( 'We\'ve summarized the most recent changes in %s.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
+			/* translators: %s expands to YMBE SEO */
+			printf( __( 'We\'ve summarized the most recent changes in %s.', 'ymbeseo' ), 'YMBE SEO' );
 			?>
 		</p>
 		<p>
@@ -181,8 +181,8 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		<p>
 			<strong><?php _e( 'Restore Default Settings', 'ymbeseo' ); ?></strong><br/>
 			<?php
-			/* translators: %s expands to Yoast Minus Bloat Equals SEO */
-			printf( __( 'If you want to restore a site to the default %s settings, press this button.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
+			/* translators: %s expands to YMBE SEO */
+			printf( __( 'If you want to restore a site to the default %s settings, press this button.', 'ymbeseo' ), 'YMBE SEO' );
 			?>
 		</p>
 
@@ -239,8 +239,8 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 	<div id="security" class="ymbeseotab">
 		<?php
 		echo '<p>', __( 'Unchecking this box allows authors and editors to redirect posts, noindex them and do other things you might not want if you don\'t trust your authors.', 'ymbeseo' ), '</p>';
-		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
-		$yform->checkbox( 'disableadvanced_meta', sprintf( __( 'Disable the Advanced part of the %1$s meta box', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) );
+		/* translators: %1$s expands to YMBE SEO */
+		$yform->checkbox( 'disableadvanced_meta', sprintf( __( 'Disable the Advanced part of the %1$s meta box', 'ymbeseo' ), 'YMBE SEO' ) );
 		?>
 	</div>
 <?php

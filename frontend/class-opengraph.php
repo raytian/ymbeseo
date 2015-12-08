@@ -131,7 +131,7 @@ class YMBESEO_OpenGraph {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_opengraph_author_facebook' - Allow developers to filter the Yoast Minus Bloat Equals SEO post authors facebook profile URL
+		 * Filter: 'ymbeseo_opengraph_author_facebook' - Allow developers to filter the YMBE SEO post authors facebook profile URL
 		 *
 		 * @api bool|string $unsigned The Facebook author URL, return false to disable
 		 */
@@ -179,7 +179,7 @@ class YMBESEO_OpenGraph {
 		else if ( isset( $this->options['fb_admins'] ) && is_array( $this->options['fb_admins'] ) && $this->options['fb_admins'] !== array() ) {
 			$adminstr = implode( ',', array_keys( $this->options['fb_admins'] ) );
 			/**
-			 * Filter: 'ymbeseo_opengraph_admin' - Allow developer to filter the fb:admins string put out by Yoast Minus Bloat Equals SEO
+			 * Filter: 'ymbeseo_opengraph_admin' - Allow developer to filter the fb:admins string put out by YMBE SEO
 			 *
 			 * @api string $adminstr The admin string
 			 */
@@ -218,7 +218,7 @@ class YMBESEO_OpenGraph {
 				$title = $frontend->title( '' );
 			}
 			else {
-				// Replace Yoast Minus Bloat Equals SEO Variables.
+				// Replace YMBE SEO Variables.
 				$title = ymbeseo_replace_vars( $title, $post );
 			}
 		}
@@ -522,7 +522,7 @@ class YMBESEO_OpenGraph {
 			$post    = get_post( $post_id );
 			$ogdesc  = YMBESEO_Meta::get_value( 'opengraph-description', $post_id );
 
-			// Replace Yoast Minus Bloat Equals SEO Variables.
+			// Replace YMBE SEO Variables.
 			$ogdesc = ymbeseo_replace_vars( $ogdesc, $post );
 
 			// Use metadesc if $ogdesc is empty.

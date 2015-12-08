@@ -42,8 +42,8 @@ class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 	public function get_columns() {
 
 		$columns = array(
-			'col_existing_yoast_seo_title' => __( 'Existing Yoast Minus Bloat Equals SEO Title', 'ymbeseo' ),
-			'col_new_yoast_seo_title'      => __( 'New Yoast Minus Bloat Equals SEO Title', 'ymbeseo' ),
+			'col_existing_yoast_seo_title' => __( 'Existing YMBE SEO Title', 'ymbeseo' ),
+			'col_new_yoast_seo_title'      => __( 'New YMBE SEO Title', 'ymbeseo' ),
 		);
 
 		return $this->merge_columns( $columns );

@@ -181,8 +181,8 @@ class YMBESEO_Taxonomy {
 		$tax_meta = YMBESEO_Taxonomy_Meta::get_term_meta( (int) $term->term_id, $term->taxonomy );
 		$options  = YMBESEO_Options::get_all();
 
-		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
-		echo '<h3>', sprintf( __( '%1$s Settings', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</h3>';
+		/* translators: %1$s expands to YMBE SEO */
+		echo '<h3>', sprintf( __( '%1$s Settings', 'ymbeseo' ), 'YMBE SEO' ) . '</h3>';
 		echo '<table class="form-table ymbeseo-taxonomy-form">';
 
 		$this->form_row( 'ymbeseo_title', __( 'SEO Title', 'ymbeseo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'ymbeseo' ), $tax_meta );

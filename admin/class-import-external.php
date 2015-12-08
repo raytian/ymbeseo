@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Import_External
  *
- * Class with functionality to import Yoast Minus Bloat Equals SEO settings from other plugins
+ * Class with functionality to import YMBE SEO settings from other plugins
  */
 class YMBESEO_Import_External {
 

@@ -1,4 +1,4 @@
-=== Yoast Minus Bloat Equals SEO ===
+=== YMBE SEO ===
 Contributors: senlin
 Donate link: https://so-wp.com/donate
 License: GPLv3
@@ -18,7 +18,7 @@ bloat, seo, SEO, Yoast SEO, google, meta, meta description, search engine optimi
 == Installation ==
 
 1. Upload the `ymbwseo` folder to the `/wp-content/plugins/` directory
-1. Activate the Yoast Minus Bloat Equals SEO plugin through the 'Plugins' menu in WordPress
+1. Activate the YMBE SEO plugin through the 'Plugins' menu in WordPress
 1. Configure the plugin by going to the `SEO` menu that appears in your admin menu
 
 == Frequently Asked Questions ==

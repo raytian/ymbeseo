@@ -383,9 +383,9 @@ function so_ymbeseo_missing_autoload() {
  * Returns the notice in case of missing Composer autoload
  */
 function so_ymbeseo_missing_autoload_notice() {
-	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s / %3$s: links to the installation manual in the Readme for the Yoast Minus Bloat Equals SEO code repository on GitHub */
+	/* translators: %1$s expands to YMBE SEO, %2$s / %3$s: links to the installation manual in the Readme for the YMBE SEO code repository on GitHub */
 	$message = esc_html__( 'The %1$s plugin installation is incomplete. Please refer to %2$sinstallation instructions%3$s.', 'ymbeseo' );
-	$message = sprintf( $message, 'Yoast Minus Bloat Equals SEO', '<a href="https://github.com/Yoast/ymbeseo#installation">', '</a>' );
+	$message = sprintf( $message, 'YMBE SEO', '<a href="https://github.com/Yoast/ymbeseo#installation">', '</a>' );
 	so_ymbeseo_activation_failed_notice( $message );
 }
 

@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Yoast Minus Bloat Equals SEO 2.3.4\n"
+"Project-Id-Version: YMBE SEO 2.3.4\n"
 "Report-Msgid-Bugs-To: https://github.com/yoast/ymbeseo/issues\n"
 "POT-Creation-Date: 2015-09-16 10:00:43+00:00\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgid "You have used HTML in your value which is not allowed."
 msgstr ""
 
 #: admin/class-admin-init.php:71
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, $2%s to the version number, %3$s and
+#. translators: %1$s expands to YMBE SEO, $2%s to the version number, %3$s and
 #. %4$s to anchor tags with link to intro page
 msgid ""
 "%1$s has been updated to version %2$s. %3$sClick here%4$s to find out "
@@ -67,7 +67,7 @@ msgid "Just another WordPress site"
 msgstr ""
 
 #: admin/class-admin-init.php:157
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to 5.4.3, %3$s expands
+#. translators: %1$s expands to YMBE SEO, %2$s expands to 5.4.3, %3$s expands
 #. to Google Analytics by Yoast
 msgid ""
 "%1$s detected you are using version %2$s of %3$s, please update to the "
@@ -140,7 +140,7 @@ msgid "Template explanation"
 msgstr ""
 
 #: admin/class-admin.php:223
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "The title &amp; metas settings for %1$s are made up of variables that are "
 "replaced by specific values from the page when the page is displayed. The "
@@ -190,7 +190,7 @@ msgid "SEO Issue:"
 msgstr ""
 
 #: admin/class-admin.php:409
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to opening anchor and %3$s the
+#. translators: %1$s expands to YMBE SEO, %2$s to opening anchor and %3$s the
 #. anchor closing tag
 msgid ""
 "Your theme contains a meta description, which blocks %1$s from working "
@@ -306,11 +306,11 @@ msgid "Action"
 msgstr ""
 
 #: admin/class-bulk-title-editor-list-table.php:45
-msgid "Existing Yoast Minus Bloat Equals SEO Title"
+msgid "Existing YMBE SEO Title"
 msgstr ""
 
 #: admin/class-bulk-title-editor-list-table.php:46
-msgid "New Yoast Minus Bloat Equals SEO Title"
+msgid "New YMBE SEO Title"
 msgstr ""
 
 #: admin/class-config.php:95 admin/class-metabox.php:547
@@ -366,7 +366,7 @@ msgid "Export created: %1$sdownload your export file here%2$s."
 msgstr ""
 
 #: admin/class-export.php:71
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Error creating %1$s export: "
 msgstr ""
 
@@ -379,7 +379,7 @@ msgid "Could not write settings to file."
 msgstr ""
 
 #: admin/class-export.php:112
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "This is a settings export file for the %1$s plugin by Yoast.com"
 msgstr ""
 
@@ -1076,7 +1076,7 @@ msgid "%s Image"
 msgstr ""
 
 #: admin/class-plugin-conflict.php:128
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2%s: 'Facebook' plugin name of
+#. translators: %1$s expands to YMBE SEO, %2%s: 'Facebook' plugin name of
 #. possibly conflicting plugin with regard to creating OpenGraph output
 msgid ""
 "Both %1$s and %2$s create OpenGraph output, which might make Facebook, "
@@ -1085,12 +1085,12 @@ msgid ""
 msgstr ""
 
 #: admin/class-plugin-conflict.php:132
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Configure %1$s's OpenGraph settings"
 msgstr ""
 
 #: admin/class-plugin-conflict.php:135
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s: 'Google XML Sitemaps' plugin
+#. translators: %1$s expands to YMBE SEO, %2$s: 'Google XML Sitemaps' plugin
 #. name of possibly conflicting plugin with regard to the creation of sitemaps
 msgid ""
 "Both %1$s and %2$s can create XML sitemaps. Having two XML sitemaps is not "
@@ -1098,7 +1098,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-plugin-conflict.php:139
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Configure %1$s's XML Sitemap settings"
 msgstr ""
 
@@ -1111,7 +1111,7 @@ msgid "Congratulations!"
 msgstr ""
 
 #: admin/class-pointers.php:185
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a "
 "quick introduction of this plugin&#8217;s core functionality."
@@ -1134,7 +1134,7 @@ msgid "General settings"
 msgstr ""
 
 #: admin/class-pointers.php:241
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "These are the General settings for %1$s, here you can restart this tour or "
 "revert the %1$s settings to default."
@@ -1170,7 +1170,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-pointers.php:247
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "More %1$s"
 msgstr ""
 
@@ -1186,7 +1186,7 @@ msgid "Subscribe to our Newsletter"
 msgstr ""
 
 #: admin/class-pointers.php:254
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "If you would like us to keep you up-to-date regarding %1$s and other "
 "plugins by Yoast, subscribe to our newsletter:"
@@ -1362,7 +1362,7 @@ msgid "Extensions and Licenses"
 msgstr ""
 
 #: admin/class-pointers.php:343
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to Yoast Minus Bloat Equals SEO Premium, %3$s and
+#. translators: %1$s expands to YMBE SEO, %2$s to YMBE SEO Premium, %3$s and
 #. %4$s to an anchor with link about our premium plugins
 msgid ""
 "The powerful functions of %1$s can be extended with %3$sYoast premium "
@@ -1376,7 +1376,7 @@ msgid "Licenses"
 msgstr ""
 
 #: admin/class-pointers.php:347
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium
+#. translators: %1$s expands to YMBE SEO Premium
 msgid ""
 "Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, "
 "you&#8217;ll have to enter a license key. You can do so on the "
@@ -1505,7 +1505,7 @@ msgid "Never include"
 msgstr ""
 
 #: admin/class-taxonomy.php:185
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "%1$s Settings"
 msgstr ""
 
@@ -1600,7 +1600,7 @@ msgid "Remove these ads?"
 msgstr ""
 
 #: admin/class-yoast-form.php:230
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium
+#. translators: %1$s expands to YMBE SEO Premium
 msgid "Upgrade to %1$s &raquo;"
 msgstr ""
 
@@ -1614,7 +1614,7 @@ msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:163
 #. translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly
-#. conflicting plugin(s), %2$s to Yoast Minus Bloat Equals SEO
+#. conflicting plugin(s), %2$s to YMBE SEO
 msgid "The %1$s plugin(s) might cause issues when used in conjunction with %2$s."
 msgstr ""
 
@@ -1624,7 +1624,7 @@ msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:168
 #. translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly
-#. conflicting plugin(s). %2$s to Yoast Minus Bloat Equals SEO
+#. conflicting plugin(s). %2$s to YMBE SEO
 msgid ""
 "We recommend you deactivate %1$s and have another look at your %2$s "
 "configuration using the button above."
@@ -1636,7 +1636,7 @@ msgid "Deactivate %s"
 msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:176
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "This warning is generated by %1$s."
 msgstr ""
 
@@ -1724,7 +1724,7 @@ msgid ""
 msgstr ""
 
 #: admin/google_search_console/class-gsc-service.php:146
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to Google Analytics by
+#. translators: %1$s expands to YMBE SEO, %2$s expands to Google Analytics by
 #. Yoast
 msgid ""
 "%1$s detected you’re using a version of %2$s which is not compatible with "
@@ -1846,12 +1846,12 @@ msgid ""
 msgstr ""
 
 #: admin/google_search_console/views/gsc-create-redirect.php:60
-#. Translators: %s: expands to Yoast Minus Bloat Equals SEO Premium
+#. Translators: %s: expands to YMBE SEO Premium
 msgid "Creating redirects is a %s feature"
 msgstr ""
 
 #: admin/google_search_console/views/gsc-create-redirect.php:64
-#. Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO Premium', %2$s: links to Yoast Minus Bloat Equals SEO
+#. Translators: %1$s: expands to 'YMBE SEO Premium', %2$s: links to YMBE SEO
 #. Premium plugin page.
 msgid ""
 "To be able to create a redirect and fix this issue, you need %1$s. You can "
@@ -1863,7 +1863,7 @@ msgid "Reload crawl issues"
 msgstr ""
 
 #: admin/google_search_console/views/gsc-display.php:31
-#. Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO', %2$s expands to Google Search
+#. Translators: %1$s: expands to 'YMBE SEO', %2$s expands to Google Search
 #. Console.
 msgid ""
 "To allow %1$s to fetch your %2$s information, please enter your Google "
@@ -1948,7 +1948,7 @@ msgid ""
 msgstr ""
 
 #: admin/pages/dashboard.php:112
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "Either delete them (this can be done with the \"Fix it\" button) or disable "
 "%1$s XML sitemaps."
@@ -1959,7 +1959,7 @@ msgid "Re-check theme."
 msgstr ""
 
 #: admin/pages/dashboard.php:122
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "Your theme contains a meta description, which blocks %1$s from working "
 "properly, please delete the following line, or press fix it:"
@@ -2012,7 +2012,7 @@ msgid "Latest Changes"
 msgstr ""
 
 #: admin/pages/dashboard.php:171
-#. translators: %s expands to Yoast Minus Bloat Equals SEO
+#. translators: %s expands to YMBE SEO
 msgid "We've summarized the most recent changes in %s."
 msgstr ""
 
@@ -2025,7 +2025,7 @@ msgid "Restore Default Settings"
 msgstr ""
 
 #: admin/pages/dashboard.php:185
-#. translators: %s expands to Yoast Minus Bloat Equals SEO
+#. translators: %s expands to YMBE SEO
 msgid "If you want to restore a site to the default %s settings, press this button."
 msgstr ""
 
@@ -2109,12 +2109,12 @@ msgid ""
 msgstr ""
 
 #: admin/pages/dashboard.php:243
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Disable the Advanced part of the %1$s meta box"
 msgstr ""
 
 #: admin/pages/licenses.php:18
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "The premium version of %1$s with more features & support."
 msgstr ""
 
@@ -2133,12 +2133,12 @@ msgid "Rank better locally and in Google Maps, without breaking a sweat!"
 msgstr ""
 
 #: admin/pages/licenses.php:43
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Seamlessly integrate WooCommerce with %1$s and get extra features!"
 msgstr ""
 
 #: admin/pages/licenses.php:73
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "%1$s Extensions"
 msgstr ""
 
@@ -2173,7 +2173,7 @@ msgid "Enable force rewrite titles"
 msgstr ""
 
 #: admin/pages/metas.php:39
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "%1$s has auto-detected whether it needs to force rewrite the titles for "
 "your pages, if you think it's wrong and you know what you're doing, you can "
@@ -2257,7 +2257,7 @@ msgid "Date in Snippet Preview"
 msgstr ""
 
 #: admin/pages/metas.php:105 admin/pages/metas.php:165
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Hide"
 msgstr ""
 
@@ -2421,7 +2421,7 @@ msgid "spam"
 msgstr ""
 
 #: admin/pages/network.php:94
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Who should have access to the %1$s settings"
 msgstr ""
 
@@ -2644,7 +2644,7 @@ msgid ""
 msgstr ""
 
 #: admin/pages/tools.php:37
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "%1$s comes with some very powerful built-in tools:"
 msgstr ""
 
@@ -2738,7 +2738,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/about.php:32
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Thank you for updating %1$s!"
 msgstr ""
 
@@ -2756,7 +2756,7 @@ msgid "More Translations"
 msgstr ""
 
 #: admin/views/about.php:164
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s and %3$s to the anchor tags to
+#. translators: %1$s expands to YMBE SEO, %2$s and %3$s to the anchor tags to
 #. the translate.yoast.com link, %4$d to the number of translations, %5$d to
 #. the number of translations,
 msgid ""
@@ -2770,7 +2770,7 @@ msgid "Go to The General settings page →"
 msgstr ""
 
 #: admin/views/about.php:181
-#. translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s and %2$s expands to anchor tags, %3$s expands to YMBE SEO
 msgid ""
 "While most of the development team is at %1$sYoast%2$s in the Netherlands, "
 "%3$s is created by a worldwide team."
@@ -3141,7 +3141,7 @@ msgid "Import settings"
 msgstr ""
 
 #: admin/views/tool-import-export.php:124
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid ""
 "Export your %1$s settings here, to import them again later or to import "
 "them on another site."
@@ -3152,7 +3152,7 @@ msgid "Include Taxonomy Metadata"
 msgstr ""
 
 #: admin/views/tool-import-export.php:129
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "Export your %1$s settings"
 msgstr ""
 
@@ -3205,7 +3205,7 @@ msgid "Import from Yoast Breadcrumbs?"
 msgstr ""
 
 #: admin/views/user-profile.php:10
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to YMBE SEO
 msgid "%1$s settings"
 msgstr ""
 
@@ -3463,7 +3463,7 @@ msgid "Please select a valid post type for taxonomy \"%s\""
 msgstr ""
 
 #: inc/options/class-ymbeseo-option-ms.php:153
-#. translators: %1$s expands to the option name and %2$sexpands to Yoast Minus Bloat Equals SEO
+#. translators: %1$s expands to the option name and %2$sexpands to YMBE SEO
 msgid ""
 "%1$s is not a valid choice for who should be allowed access to the %2$s "
 "settings. Value reset to the default."
@@ -3820,8 +3820,8 @@ msgid ""
 msgstr ""
 
 #: ymbeseo-main.php:390
-#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s / %3$s: links to the
-#. installation manual in the Readme for the Yoast Minus Bloat Equals SEO code repository on
+#. translators: %1$s expands to YMBE SEO, %2$s / %3$s: links to the
+#. installation manual in the Readme for the YMBE SEO code repository on
 #. GitHub
 msgid ""
 "The %1$s plugin installation is incomplete. Please refer to "
@@ -3839,7 +3839,7 @@ msgid "Activation failed:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Yoast Minus Bloat Equals SEO"
+msgid "YMBE SEO"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

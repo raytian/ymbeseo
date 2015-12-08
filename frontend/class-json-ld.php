@@ -198,7 +198,7 @@ class YMBESEO_JSON_LD {
 	 */
 	private function get_home_url() {
 		/**
-		 * Filter: 'ymbeseo_json_home_url' - Allows filtering of the home URL for Yoast Minus Bloat Equals SEO's JSON+LD output
+		 * Filter: 'ymbeseo_json_home_url' - Allows filtering of the home URL for YMBE SEO's JSON+LD output
 		 *
 		 * @api unsigned string
 		 */
@@ -206,7 +206,7 @@ class YMBESEO_JSON_LD {
 	}
 
 	/**
-	 * Returns an alternate name if one was specified in the Yoast Minus Bloat Equals SEO settings
+	 * Returns an alternate name if one was specified in the YMBE SEO settings
 	 */
 	private function add_alternate_name() {
 		if ( '' !== $this->options['alternate_website_name'] ) {
@@ -227,7 +227,7 @@ class YMBESEO_JSON_LD {
 		 */
 		if ( ! apply_filters( 'disable_ymbeseo_json_ld_search', false ) ) {
 			/**
-			 * Filter: 'ymbeseo_json_ld_search_url' - Allows filtering of the search URL for Yoast Minus Bloat Equals SEO
+			 * Filter: 'ymbeseo_json_ld_search_url' - Allows filtering of the search URL for YMBE SEO
 			 *
 			 * @api string $search_url The search URL for this site with a `{search_term_string}` variable.
 			 */
@@ -242,7 +242,7 @@ class YMBESEO_JSON_LD {
 	}
 
 	/**
-	 * Returns the website name either from Yoast Minus Bloat Equals SEO's options or from the site settings
+	 * Returns the website name either from YMBE SEO's options or from the site settings
 	 *
 	 * @since 2.1
 	 *

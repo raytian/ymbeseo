@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Admin_Pages
  *
- * Class with functionality for the Yoast Minus Bloat Equals SEO admin pages.
+ * Class with functionality for the YMBE SEO admin pages.
  */
 class YMBESEO_Admin_Pages {
 

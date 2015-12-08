@@ -455,7 +455,7 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 	}
 
 	/**
-	 * Adds the Yoast Minus Bloat Equals SEO meta box to the edit boxes in the edit post / page  / cpt pages.
+	 * Adds the YMBE SEO meta box to the edit boxes in the edit post / page  / cpt pages.
 	 */
 	public function add_meta_box() {
 		$post_types = get_post_types( array( 'public' => true ) );
@@ -463,7 +463,7 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 		if ( is_array( $post_types ) && $post_types !== array() ) {
 			foreach ( $post_types as $post_type ) {
 				if ( $this->is_metabox_hidden( $post_type ) === false ) {
-					add_meta_box( 'ymbeseo_meta', 'Yoast Minus Bloat Equals SEO', array(
+					add_meta_box( 'ymbeseo_meta', 'YMBE SEO', array(
 						$this,
 						'meta_box',
 					), $post_type, 'normal', apply_filters( 'ymbeseo_metabox_prio', 'high' ) );
@@ -557,7 +557,7 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 	}
 
 	/**
-	 * Output a tab in the Yoast Minus Bloat Equals SEO Metabox
+	 * Output a tab in the YMBE SEO Metabox
 	 *
 	 * @param string $id      CSS ID of the tab.
 	 * @param string $heading Heading for the tab.
@@ -814,7 +814,7 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 	}
 
 	/**
-	 * Save the Yoast Minus Bloat Equals SEO metadata for posts.
+	 * Save the YMBE SEO metadata for posts.
 	 *
 	 * @internal $_POST parameters are validated via sanitize_post_meta()
 	 *

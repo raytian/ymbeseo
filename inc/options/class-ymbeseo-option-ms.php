@@ -149,8 +149,8 @@ class YMBESEO_Option_MS extends YMBESEO_Option {
 						add_settings_error(
 							$this->group_name, // Slug title of the setting.
 							'_' . $key, // Suffix-id for the error message box.
-							/* translators: %1$s expands to the option name and %2$sexpands to Yoast Minus Bloat Equals SEO */
-							sprintf( __( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'ymbeseo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'Yoast Minus Bloat Equals SEO' ), // The error message.
+							/* translators: %1$s expands to the option name and %2$sexpands to YMBE SEO */
+							sprintf( __( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'ymbeseo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'YMBE SEO' ), // The error message.
 							'error' // Error type, either 'error' or 'updated'.
 						);
 					}

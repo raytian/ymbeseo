@@ -1,7 +1,7 @@
 {
 	"name": "senlin/ymbeseo",
 	"type": "wordpress-plugin",
-	"description": "Yoast Minus Bloat Equals SEO - fork of Yoast SEO 2.3.5 back to basics",
+	"description": "YMBE SEO - fork of Yoast SEO 2.3.5 back to basics",
 	"homepage": "https://so-wp.com/plugins/ymbeseo",
 	"license": "GPL3+",
 	"authors": [
