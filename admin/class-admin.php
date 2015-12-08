@@ -576,7 +576,7 @@ class YMBESEO_Admin {
 		$users = get_users( array( 'who' => 'authors' ) );
 		if ( is_array( $users ) && $users !== array() ) {
 			foreach ( $users as $user ) {
-				update_user_meta( $user->ID, '_yoast_ymbeseo_profile_updated', time() );
+				update_user_meta( $user->ID, '_so_ymbeseo_profile_updated', time() );
 			}
 		}
 	}

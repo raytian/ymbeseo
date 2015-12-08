@@ -4,7 +4,7 @@
  */
 
 	// Admin header.
-	Yoast_Form::get_instance()->admin_header( false, 'ymbeseo-gsc', false, 'yoast_ymbeseo_gsc_options' );
+	Yoast_Form::get_instance()->admin_header( false, 'ymbeseo-gsc', false, 'so_ymbeseo_gsc_options' );
 ?>
 	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 <?php
@@ -58,7 +58,7 @@ switch ( $platform_tabs->current_tab() ) {
 			else {
 				echo "<form action='" . admin_url( 'options.php' ) . "' method='post'>";
 
-				settings_fields( 'yoast_ymbeseo_gsc_options' );
+				settings_fields( 'so_ymbeseo_gsc_options' );
 				Yoast_Form::get_instance()->set_option( 'ymbeseo-gsc' );
 
 				echo '<p>';

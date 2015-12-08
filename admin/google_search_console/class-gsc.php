@@ -86,7 +86,7 @@ class YMBESEO_GSC {
 	 * Be sure the settings will be registered, so data can be stored
 	 */
 	public function register_settings() {
-		register_setting( 'yoast_ymbeseo_gsc_options', self::OPTION_YMBESEO_GSC );
+		register_setting( 'so_ymbeseo_gsc_options', self::OPTION_YMBESEO_GSC );
 	}
 
 	/**

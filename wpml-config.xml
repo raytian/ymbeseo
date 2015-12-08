@@ -1,17 +1,17 @@
 <wpml-config>
     <custom-fields>
-        <custom-field action="translate">_yoast_ymbeseo_title</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_bctitle</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_metadesc</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_metakeywords</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_focuskw</custom-field>
-        <custom-field action="copy">_yoast_ymbeseo_meta-robots-noindex</custom-field>
-        <custom-field action="copy">_yoast_ymbeseo_meta-robots-nofollow</custom-field>
-        <custom-field action="copy">_yoast_ymbeseo_meta-robots-adv</custom-field>
-        <custom-field action="ignore">_yoast_ymbeseo_canonical</custom-field>
-        <custom-field action="ignore">_yoast_ymbeseo_redirect</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_opengraph-description</custom-field>
-        <custom-field action="translate">_yoast_ymbeseo_google-plus-description</custom-field>
+        <custom-field action="translate">_so_ymbeseo_title</custom-field>
+        <custom-field action="translate">_so_ymbeseo_bctitle</custom-field>
+        <custom-field action="translate">_so_ymbeseo_metadesc</custom-field>
+        <custom-field action="translate">_so_ymbeseo_metakeywords</custom-field>
+        <custom-field action="translate">_so_ymbeseo_focuskw</custom-field>
+        <custom-field action="copy">_so_ymbeseo_meta-robots-noindex</custom-field>
+        <custom-field action="copy">_so_ymbeseo_meta-robots-nofollow</custom-field>
+        <custom-field action="copy">_so_ymbeseo_meta-robots-adv</custom-field>
+        <custom-field action="ignore">_so_ymbeseo_canonical</custom-field>
+        <custom-field action="ignore">_so_ymbeseo_redirect</custom-field>
+        <custom-field action="translate">_so_ymbeseo_opengraph-description</custom-field>
+        <custom-field action="translate">_so_ymbeseo_google-plus-description</custom-field>
     </custom-fields>
     <admin-texts>
         <key name="ymbeseo_titles">

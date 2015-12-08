@@ -40,11 +40,11 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 		self::$meta_fields['general']['focuskw']['help']  = sprintf( __( 'Pick the main keyword or keyphrase that this post/page is about.<br/><br/>Read %sthis post%s for more info.', 'ymbeseo' ), '<a href="https://yoast.com/focus-keyword/#utm_source=ymbeseo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=focus-keyword">', '</a>' );
 
 		self::$meta_fields['general']['title']['title']       = __( 'SEO Title', 'ymbeseo' );
-		self::$meta_fields['general']['title']['description'] = '<p id="yoast_ymbeseo_title-length-warning"><span class="wrong">' . __( 'Warning:', 'ymbeseo' ) . '</span> ' . __( 'Title display in Google is limited to a fixed width, yours is too long.', 'ymbeseo' ) . '</p>';
+		self::$meta_fields['general']['title']['description'] = '<p id="so_ymbeseo_title-length-warning"><span class="wrong">' . __( 'Warning:', 'ymbeseo' ) . '</span> ' . __( 'Title display in Google is limited to a fixed width, yours is too long.', 'ymbeseo' ) . '</p>';
 		self::$meta_fields['general']['title']['help']        = __( 'The SEO title defaults to what is generated based on this sites title template for this posttype.', 'ymbeseo' );
 
 		self::$meta_fields['general']['metadesc']['title']       = __( 'Meta description', 'ymbeseo' );
-		self::$meta_fields['general']['metadesc']['description'] = sprintf( __( 'The <code>meta</code> description will be limited to %s chars%s, %s chars left.', 'ymbeseo' ), self::$meta_length, self::$meta_length_reason, '<span id="yoast_ymbeseo_metadesc-length"></span>' ) . ' <div id="yoast_ymbeseo_metadesc_notice"></div>';
+		self::$meta_fields['general']['metadesc']['description'] = sprintf( __( 'The <code>meta</code> description will be limited to %s chars%s, %s chars left.', 'ymbeseo' ), self::$meta_length, self::$meta_length_reason, '<span id="so_ymbeseo_metadesc-length"></span>' ) . ' <div id="so_ymbeseo_metadesc_notice"></div>';
 		self::$meta_fields['general']['metadesc']['help']        = sprintf( __( 'The meta description is often shown as the black text under the title in a search result. For this to work it has to contain the keyword that was searched for.<br/><br/>Read %sthis post%s for more info.', 'ymbeseo' ), '<a href="https://yoast.com/snippet-preview/#utm_source=ymbeseo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=focus-keyword">', '</a>' );
 
 		self::$meta_fields['general']['metakeywords']['title']       = __( 'Meta keywords', 'ymbeseo' );

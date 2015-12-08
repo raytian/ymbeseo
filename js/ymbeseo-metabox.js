@@ -234,7 +234,7 @@ function ystReplaceVariables( str, callback ) {
 	str = str.replace( /%%currentmonth%%/g, ymbeseoMetaboxL10n.currentmonth );
 	str = str.replace( /%%currentyear%%/g, ymbeseoMetaboxL10n.currentyear );
 
-	str = str.replace( /%%focuskw%%/g, jQuery( '#yoast_ymbeseo_focuskw' ).val().replace( /(<([^>]+)>)/ig, '' ) );
+	str = str.replace( /%%focuskw%%/g, jQuery( '#so_ymbeseo_focuskw' ).val().replace( /(<([^>]+)>)/ig, '' ) );
 	// excerpt
 	var excerpt = '';
 	if ( jQuery( '#excerpt' ).length ) {

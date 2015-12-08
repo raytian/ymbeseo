@@ -19,7 +19,7 @@ class YMBESEO_Option_MS extends YMBESEO_Option {
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_ymbeseo_multisite_options';
+	public $group_name = 'so_ymbeseo_multisite_options';
 
 	/**
 	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()

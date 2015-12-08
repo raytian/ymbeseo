@@ -39,7 +39,7 @@ class YMBESEO_Admin_User_Profile {
 	 * @param    int $user_id of the updated user.
 	 */
 	public function process_user_option_update( $user_id ) {
-		update_user_meta( $user_id, '_yoast_ymbeseo_profile_updated', time() );
+		update_user_meta( $user_id, '_so_ymbeseo_profile_updated', time() );
 
 		check_admin_referer( 'ymbeseo_user_profile_update', 'ymbeseo_nonce' );
 

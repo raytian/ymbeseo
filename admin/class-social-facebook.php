@@ -201,7 +201,7 @@ class Yoast_Social_Facebook {
 	 * @param string $notice_text
 	 */
 	private function success_notice( $notice_text ) {
-		add_settings_error( 'yoast_ymbeseo_social_options', 'success', $notice_text, 'updated' );
+		add_settings_error( 'so_ymbeseo_social_options', 'success', $notice_text, 'updated' );
 	}
 
 	/**

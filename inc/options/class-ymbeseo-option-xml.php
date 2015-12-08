@@ -16,7 +16,7 @@ class YMBESEO_Option_XML extends YMBESEO_Option {
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_ymbeseo_xml_sitemap_options';
+	public $group_name = 'so_ymbeseo_xml_sitemap_options';
 
 	/**
 	 * @var  array  Array of defaults for the option

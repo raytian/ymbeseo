@@ -71,7 +71,7 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'ymbeseo-fix-metadesc
 					ymbeseo_description_test();
 					$msg .= '<span class="warning">' . __( 'Earlier found meta description was not found in file. Renewed the description test data.', 'ymbeseo' ) . '</span>';
 				}
-				add_settings_error( 'yoast_ymbeseo_dashboard_options', 'error', $msg, 'updated' );
+				add_settings_error( 'so_ymbeseo_dashboard_options', 'error', $msg, 'updated' );
 			}
 		}
 	}

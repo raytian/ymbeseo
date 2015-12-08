@@ -499,7 +499,7 @@ class YMBESEO_Sitemaps {
 						INNER JOIN $wpdb->usermeta ON ($wpdb->users.ID = $wpdb->usermeta.user_id)
 						INNER JOIN $wpdb->usermeta AS mt1 ON ($wpdb->users.ID = mt1.user_id) WHERE 1=1
 						AND ( ($wpdb->usermeta.meta_key = %s AND CAST($wpdb->usermeta.meta_value AS CHAR) != '0')
-						AND mt1.meta_key = '_yoast_ymbeseo_profile_updated' ) ORDER BY mt1.meta_value
+						AND mt1.meta_key = '_so_ymbeseo_profile_updated' ) ORDER BY mt1.meta_value
 					";
 
 				if ( empty( $count ) || $count == $n ) {
@@ -1056,7 +1056,7 @@ class YMBESEO_Sitemaps {
 				'who'        => 'authors',
 				'meta_query' => array(
 					array(
-						'key'     => '_yoast_ymbeseo_profile_updated',
+						'key'     => '_so_ymbeseo_profile_updated',
 						'value'   => 'needs-a-value-anyway', // This is ignored, but is necessary...
 						'compare' => 'NOT EXISTS',
 					),
@@ -1066,7 +1066,7 @@ class YMBESEO_Sitemaps {
 
 		if ( is_array( $users ) && $users !== array() ) {
 			foreach ( $users as $user ) {
-				update_user_meta( $user->ID, '_yoast_ymbeseo_profile_updated', time() );
+				update_user_meta( $user->ID, '_so_ymbeseo_profile_updated', time() );
 			}
 		}
 		unset( $users, $user );
@@ -1077,7 +1077,7 @@ class YMBESEO_Sitemaps {
 				'who'      => 'authors',
 				'offset'   => $offset,
 				'number'   => $steps,
-				'meta_key' => '_yoast_ymbeseo_profile_updated',
+				'meta_key' => '_so_ymbeseo_profile_updated',
 				'orderby'  => 'meta_value_num',
 				'order'    => 'ASC',
 			)
@@ -1096,7 +1096,7 @@ class YMBESEO_Sitemaps {
 						'loc' => $author_link,
 						'pri' => 0.8,
 						'chf' => $this->filter_frequency( 'author_archive', 'daily', $author_link ),
-						'mod' => date( 'c', isset( $user->_yoast_ymbeseo_profile_updated ) ? $user->_yoast_ymbeseo_profile_updated : time() ),
+						'mod' => date( 'c', isset( $user->_so_ymbeseo_profile_updated ) ? $user->_so_ymbeseo_profile_updated : time() ),
 					);
 					// Use this filter to adjust the entry before it gets added to the sitemap.
 					$url = apply_filters( 'ymbeseo_sitemap_entry', $url, 'user', $user );
@@ -1307,7 +1307,7 @@ class YMBESEO_Sitemaps {
 
 
 	/**
-	 * Sorts an array of WP_User by the _yoast_ymbeseo_profile_updated meta field
+	 * Sorts an array of WP_User by the _so_ymbeseo_profile_updated meta field
 	 *
 	 * @since 1.6
 	 *
@@ -1317,18 +1317,18 @@ class YMBESEO_Sitemaps {
 	 * @return int 0 if equal, 1 if $a is larger else or -1;
 	 */
 	private function user_map_sorter( $a, $b ) {
-		if ( ! isset( $a->_yoast_ymbeseo_profile_updated ) ) {
-			$a->_yoast_ymbeseo_profile_updated = time();
+		if ( ! isset( $a->_so_ymbeseo_profile_updated ) ) {
+			$a->_so_ymbeseo_profile_updated = time();
 		}
-		if ( ! isset( $b->_yoast_ymbeseo_profile_updated ) ) {
-			$b->_yoast_ymbeseo_profile_updated = time();
+		if ( ! isset( $b->_so_ymbeseo_profile_updated ) ) {
+			$b->_so_ymbeseo_profile_updated = time();
 		}
 
-		if ( $a->_yoast_ymbeseo_profile_updated == $b->_yoast_ymbeseo_profile_updated ) {
+		if ( $a->_so_ymbeseo_profile_updated == $b->_so_ymbeseo_profile_updated ) {
 			return 0;
 		}
 
-		return ( ( $a->_yoast_ymbeseo_profile_updated > $b->_yoast_ymbeseo_profile_updated ) ? 1 : -1 );
+		return ( ( $a->_so_ymbeseo_profile_updated > $b->_so_ymbeseo_profile_updated ) ? 1 : -1 );
 	}
 
 	/**

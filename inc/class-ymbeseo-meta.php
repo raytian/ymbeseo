@@ -34,14 +34,14 @@ class YMBESEO_Meta {
 	 * @internal if at any point this would change, quite apart from an upgrade routine, this also will need to
 	 * be changed in the wpml-config.xml file.
 	 */
-	public static $meta_prefix = '_yoast_ymbeseo_';
+	public static $meta_prefix = '_so_ymbeseo_';
 
 
 	/**
 	 * @var    string   Prefix for all YMBESEO meta value form field names and ids
 	 * @static
 	 */
-	public static $form_prefix = 'yoast_ymbeseo_';
+	public static $form_prefix = 'so_ymbeseo_';
 
 
 	/**
@@ -780,13 +780,13 @@ class YMBESEO_Meta {
 		global $wpdb;
 
 		/**
-		 * Clean up '_yoast_ymbeseo_meta-robots'
+		 * Clean up '_so_ymbeseo_meta-robots'
 		 *
-		 * Retrieve all '_yoast_ymbeseo_meta-robots' meta values and convert if no new values found
+		 * Retrieve all '_so_ymbeseo_meta-robots' meta values and convert if no new values found
 		 *
 		 * @internal Query is pretty well optimized this way
 		 *
-		 * @todo [JRF => Yoast] find out all possible values which the old '_yoast_ymbeseo_meta-robots' could contain
+		 * @todo [JRF => Yoast] find out all possible values which the old '_so_ymbeseo_meta-robots' could contain
 		 * to convert the data correctly
 		 */
 		$query  = $wpdb->prepare(

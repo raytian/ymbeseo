@@ -59,7 +59,7 @@ if ( file_exists( YMBESEO_PATH . '/vendor/autoload_52.php' ) ) {
 	require YMBESEO_PATH . '/vendor/autoload_52.php';
 }
 elseif ( ! class_exists( 'YMBESEO_Options' ) ) { // Still checking since might be site-level autoload R.
-	add_action( 'admin_init', 'yoast_ymbeseo_missing_autoload', 1 );
+	add_action( 'admin_init', 'so_ymbeseo_missing_autoload', 1 );
 	return;
 }
 
@@ -298,11 +298,11 @@ $spl_autoload_exists = function_exists( 'spl_autoload_register' );
 $filter_exists       = function_exists( 'filter_input' );
 
 if ( ! $spl_autoload_exists ) {
-	add_action( 'admin_init', 'yoast_ymbeseo_missing_spl', 1 );
+	add_action( 'admin_init', 'so_ymbeseo_missing_spl', 1 );
 }
 
 if ( ! $filter_exists ) {
-	add_action( 'admin_init', 'yoast_ymbeseo_missing_filter', 1 );
+	add_action( 'admin_init', 'so_ymbeseo_missing_filter', 1 );
 }
 
 if ( ( ! defined( 'WP_INSTALLING' ) || WP_INSTALLING === false ) && ( $spl_autoload_exists && $filter_exists ) ) {
@@ -353,20 +353,20 @@ function load_yoast_notifications() {
  *
  * @return void
  */
-function yoast_ymbeseo_missing_spl() {
+function so_ymbeseo_missing_spl() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_ymbeseo_missing_spl_notice' );
+		add_action( 'admin_notices', 'so_ymbeseo_missing_spl_notice' );
 
-		yoast_ymbeseo_self_deactivate();
+		so_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing spl extension
  */
-function yoast_ymbeseo_missing_spl_notice() {
+function so_ymbeseo_missing_spl_notice() {
 	$message = esc_html__( 'The Standard PHP Library (SPL) extension seem to be unavailable. Please ask your web host to enable it.', 'ymbeseo' );
-	yoast_ymbeseo_activation_failed_notice( $message );
+	so_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -374,22 +374,22 @@ function yoast_ymbeseo_missing_spl_notice() {
  *
  * @return void
  */
-function yoast_ymbeseo_missing_autoload() {
+function so_ymbeseo_missing_autoload() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_ymbeseo_missing_autoload_notice' );
+		add_action( 'admin_notices', 'so_ymbeseo_missing_autoload_notice' );
 
-		yoast_ymbeseo_self_deactivate();
+		so_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing Composer autoload
  */
-function yoast_ymbeseo_missing_autoload_notice() {
+function so_ymbeseo_missing_autoload_notice() {
 	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s / %3$s: links to the installation manual in the Readme for the Yoast Minus Bloat Equals SEO code repository on GitHub */
 	$message = esc_html__( 'The %1$s plugin installation is incomplete. Please refer to %2$sinstallation instructions%3$s.', 'ymbeseo' );
 	$message = sprintf( $message, 'Yoast Minus Bloat Equals SEO', '<a href="https://github.com/Yoast/ymbeseo#installation">', '</a>' );
-	yoast_ymbeseo_activation_failed_notice( $message );
+	so_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -399,20 +399,20 @@ function yoast_ymbeseo_missing_autoload_notice() {
  *
  * @return void
  */
-function yoast_ymbeseo_missing_filter() {
+function so_ymbeseo_missing_filter() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_ymbeseo_missing_filter_notice' );
+		add_action( 'admin_notices', 'so_ymbeseo_missing_filter_notice' );
 
-		yoast_ymbeseo_self_deactivate();
+		so_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing filter extension
  */
-function yoast_ymbeseo_missing_filter_notice() {
+function so_ymbeseo_missing_filter_notice() {
 	$message = esc_html__( 'The filter extension seem to be unavailable. Please ask your web host to enable it.', 'ymbeseo' );
-	yoast_ymbeseo_activation_failed_notice( $message );
+	so_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -420,14 +420,14 @@ function yoast_ymbeseo_missing_filter_notice() {
  *
  * @param string $message
  */
-function yoast_ymbeseo_activation_failed_notice( $message ) {
+function so_ymbeseo_activation_failed_notice( $message ) {
 	echo '<div class="error"><p>' . __( 'Activation failed:', 'ymbeseo' ) . ' ' . $message . '</p></div>';
 }
 
 /**
  * The method will deactivate the plugin, but only once, done by the static $is_deactivated
  */
-function yoast_ymbeseo_self_deactivate() {
+function so_ymbeseo_self_deactivate() {
 	static $is_deactivated;
 
 	if ( $is_deactivated === null ) {

@@ -142,7 +142,7 @@ class YMBESEO_Upgrade {
 	 * Performs upgrade query to Yoast Minus Bloat Equals SEO 2.3
 	 */
 	public function upgrade_23_query() {
-		$wp_query = new WP_Query( 'post_type=any&meta_key=_yoast_ymbeseo_sitemap-include&meta_value=never&order=ASC' );
+		$wp_query = new WP_Query( 'post_type=any&meta_key=_so_ymbeseo_sitemap-include&meta_value=never&order=ASC' );
 
 		if ( ! empty( $wp_query->posts ) ) {
 			$options = get_option( 'ymbeseo_xml' );
@@ -166,7 +166,7 @@ class YMBESEO_Upgrade {
 		}
 
 		// Remove the meta fields.
-		delete_post_meta_by_key( '_yoast_ymbeseo_sitemap-include' );
+		delete_post_meta_by_key( '_so_ymbeseo_sitemap-include' );
 	}
 
 	/**
