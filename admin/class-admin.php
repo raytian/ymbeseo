@@ -14,11 +14,6 @@ class YMBESEO_Admin {
 	private $options;
 
 	/**
-	 * @var Yoast_Dashboard_Widget
-	 */
-	public $dashboard_widget;
-
-	/**
 	 * Class constructor
 	 */
 	function __construct() {
@@ -33,8 +28,6 @@ class YMBESEO_Admin {
 			add_action( 'edited_category', array( $this, 'schedule_rewrite_flush' ) );
 			add_action( 'delete_category', array( $this, 'schedule_rewrite_flush' ) );
 		}
-
-		$this->dashboard_widget = new Yoast_Dashboard_Widget();
 
 		// Needs the lower than default priority so other plugins can hook underneath it without issue.
 		add_action( 'admin_menu', array( $this, 'register_settings_page' ), 5 );

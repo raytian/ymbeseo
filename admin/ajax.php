@@ -344,5 +344,3 @@ function ymbeseo_add_fb_admin() {
 }
 
 add_action( 'wp_ajax_ymbeseo_add_fb_admin', 'ymbeseo_add_fb_admin' );
-
-new Yoast_Dashboard_Widget();
