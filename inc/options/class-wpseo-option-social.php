@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * Option: wpseo_social
  */
-class WPSEO_Option_Social extends WPSEO_Option {
+class YMBESEO_Option_Social extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -166,7 +166,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 												break;
 
 											case 'link':
-												$clean[ $key ][ $user_id ][ $fb_key ] = WPSEO_Utils::sanitize_url( $fb_value );
+												$clean[ $key ][ $user_id ][ $fb_key ] = YMBESEO_Utils::sanitize_url( $fb_value );
 												break;
 										}
 									}
@@ -184,7 +184,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 				case 'og_frontpage_desc':
 				case 'og_frontpage_title':
 					if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -256,7 +256,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 				case 'googleplus':
 				case 'opengraph':
 				case 'twitter':
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}

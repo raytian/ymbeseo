@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * @internal Clean routine for 1.5 not needed as values used to be saved as string 'on' and those will convert
  * automatically
  */
-class WPSEO_Option_Permalinks extends WPSEO_Option {
+class YMBESEO_Option_Permalinks extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -42,11 +42,11 @@ class WPSEO_Option_Permalinks extends WPSEO_Option {
 	 * is updated early on and if so, change the call to schedule these for a later action on add/update
 	 * instead of running them straight away
 	 *
-	 * @return \WPSEO_Option_Permalinks
+	 * @return \YMBESEO_Option_Permalinks
 	 */
 	protected function __construct() {
 		parent::__construct();
-		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_rewrites' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_rewrites' ) );
 	}
 
 
@@ -104,7 +104,7 @@ class WPSEO_Option_Permalinks extends WPSEO_Option {
 				 *		'trailingslash'
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}

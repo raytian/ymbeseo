@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin\Customizer
+ * @package YMBESEO\Admin\Customizer
  */
 
 /**
  * Class with functionality to support WP SEO settings in WordPress Customizer.
  */
-class WPSEO_Customizer {
+class YMBESEO_Customizer {
 
 	/**
 	 * @var WP_Customize_Manager
@@ -63,7 +63,7 @@ class WPSEO_Customizer {
 	 * @return bool
 	 */
 	public function breadcrumbs_active_callback() {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		return true === ( current_theme_supports( 'yoast-seo-breadcrumbs' ) || $options['breadcrumbs-enable'] );
 	}

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
  * Class that handles the edit boxes on taxonomy edit pages.
  */
-class WPSEO_Taxonomy {
+class YMBESEO_Taxonomy {
 
 	/**
 	 * @var array   Options array for the no-index options, including translated labels
@@ -22,7 +22,7 @@ class WPSEO_Taxonomy {
 	 * Class constructor
 	 */
 	function __construct() {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		if ( is_admin() && ( isset( $_GET['taxonomy'] ) && $_GET['taxonomy'] !== '' ) &&
 		     ( ! isset( $options[ 'hideeditbox-tax-' . $_GET['taxonomy'] ] ) || $options[ 'hideeditbox-tax-' . $_GET['taxonomy'] ] === false )
@@ -67,11 +67,11 @@ class WPSEO_Taxonomy {
 	 * Translate options text strings for use in the select fields
 	 *
 	 * @internal IMPORTANT: if you want to add a new string (option) somewhere, make sure you add
-	 * that array key to the main options definition array in the class WPSEO_Taxonomy_Meta() as well!!!!
+	 * that array key to the main options definition array in the class YMBESEO_Taxonomy_Meta() as well!!!!
 	 */
 	public function translate_meta_options() {
-		$this->no_index_options        = WPSEO_Taxonomy_Meta::$no_index_options;
-		$this->sitemap_include_options = WPSEO_Taxonomy_Meta::$sitemap_include_options;
+		$this->no_index_options        = YMBESEO_Taxonomy_Meta::$no_index_options;
+		$this->sitemap_include_options = YMBESEO_Taxonomy_Meta::$sitemap_include_options;
 
 		$this->no_index_options['default'] = __( 'Use %s default (Currently: %s)', 'wordpress-seo' );
 		$this->no_index_options['index']   = __( 'Always index', 'wordpress-seo' );
@@ -103,7 +103,7 @@ class WPSEO_Taxonomy {
 	 */
 	function admin_enqueue_scripts() {
 		if ( $GLOBALS['pagenow'] === 'edit-tags.php' && ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) {
-			wp_enqueue_style( 'yoast-taxonomy-css', plugins_url( 'css/taxonomy-meta' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
+			wp_enqueue_style( 'yoast-taxonomy-css', plugins_url( 'css/taxonomy-meta' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 		}
 	}
 
@@ -178,8 +178,8 @@ class WPSEO_Taxonomy {
 			return;
 		}
 
-		$tax_meta = WPSEO_Taxonomy_Meta::get_term_meta( (int) $term->term_id, $term->taxonomy );
-		$options  = WPSEO_Options::get_all();
+		$tax_meta = YMBESEO_Taxonomy_Meta::get_term_meta( (int) $term->term_id, $term->taxonomy );
+		$options  = YMBESEO_Options::get_all();
 
 		/* translators: %1$s expands to Yoast SEO */
 		echo '<h3>', sprintf( __( '%1$s Settings', 'wordpress-seo' ), 'Yoast SEO' ) . '</h3>';
@@ -232,7 +232,7 @@ class WPSEO_Taxonomy {
 
 		/* Create post array with only our values */
 		$new_meta_data = array();
-		foreach ( WPSEO_Taxonomy_Meta::$defaults_per_term as $key => $default ) {
+		foreach ( YMBESEO_Taxonomy_Meta::$defaults_per_term as $key => $default ) {
 			if ( isset( $_POST[ $key ] ) ) {
 				$new_meta_data[ $key ] = $_POST[ $key ];
 			}
@@ -240,8 +240,8 @@ class WPSEO_Taxonomy {
 		unset( $key, $default );
 
 		/* Validate the post values */
-		$old   = WPSEO_Taxonomy_Meta::get_term_meta( $term_id, $taxonomy );
-		$clean = WPSEO_Taxonomy_Meta::validate_term_meta_data( $new_meta_data, $old );
+		$old   = YMBESEO_Taxonomy_Meta::get_term_meta( $term_id, $taxonomy );
+		$clean = YMBESEO_Taxonomy_Meta::validate_term_meta_data( $new_meta_data, $old );
 
 		/* Add/remove the result to/from the original option value */
 		if ( $clean !== array() ) {

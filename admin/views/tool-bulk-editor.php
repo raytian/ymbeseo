@@ -1,10 +1,10 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.5.0
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -12,8 +12,8 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
 
 $options = get_option( 'wpseo' );
 
-$wpseo_bulk_titles_table      = new WPSEO_Bulk_Title_Editor_List_Table();
-$wpseo_bulk_description_table = new WPSEO_Bulk_Description_List_Table();
+$wpseo_bulk_titles_table      = new YMBESEO_Bulk_Title_Editor_List_Table();
+$wpseo_bulk_description_table = new YMBESEO_Bulk_Description_List_Table();
 
 // If type is empty, fill it with value of first tab (title).
 $_GET['type'] = ( ! empty( $_GET['type'] ) ) ? $_GET['type'] : 'title';

@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Admin\Import
+ * @package YMBESEO\Admin\Import
  */
 
 /**
- * Class WPSEO_Import
+ * Class YMBESEO_Import
  *
  * Class with functionality to import the Yoast SEO settings
  */
-class WPSEO_Import {
+class YMBESEO_Import {
 
 	/**
 	 * Message about the import
@@ -165,11 +165,11 @@ class WPSEO_Import {
 		}
 
 		// Make sure that the imported options are cleaned/converted on import.
-		$option_instance = WPSEO_Options::get_option_instance( $name );
+		$option_instance = YMBESEO_Options::get_option_instance( $name );
 		if ( is_object( $option_instance ) && method_exists( $option_instance, 'import' ) ) {
 			$option_instance->import( $opt_group, $this->old_wpseo_version, $options );
 		}
-		elseif ( WP_DEBUG === true || ( defined( 'WPSEO_DEBUG' ) && WPSEO_DEBUG === true ) ) {
+		elseif ( WP_DEBUG === true || ( defined( 'YMBESEO_DEBUG' ) && YMBESEO_DEBUG === true ) ) {
 			$this->msg = sprintf( __( 'Setting "%s" is no longer used and has been discarded.', 'wordpress-seo' ), $name );
 		}
 	}

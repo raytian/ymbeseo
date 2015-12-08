@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.7.0
  */
 
@@ -123,7 +123,7 @@ class Yoast_Plugin_Conflict {
 
 		$plugin_names = array();
 		foreach ( $plugins as $plugin ) {
-			if ( $name = WPSEO_Utils::get_plugin_name( $plugin ) ) {
+			if ( $name = YMBESEO_Utils::get_plugin_name( $plugin ) ) {
 				$plugin_names[] = '<em>' . $name . '</em>';
 			}
 		}
@@ -169,7 +169,7 @@ class Yoast_Plugin_Conflict {
 		foreach ( $this->active_plugins[ $plugin_section ] as $plugin_file ) {
 
 			/* translators: %s: 'Facebook' plugin name of possibly conflicting plugin */
-			$error_message .= '<a target="_blank" class="button-primary" href="' . wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $plugin_file . '&amp;plugin_status=all', 'deactivate-plugin_' . $plugin_file ) . '">' . sprintf( __( 'Deactivate %s', 'wordpress-seo' ), WPSEO_Utils::get_plugin_name( $plugin_file ) ) . '</a> ';
+			$error_message .= '<a target="_blank" class="button-primary" href="' . wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $plugin_file . '&amp;plugin_status=all', 'deactivate-plugin_' . $plugin_file ) . '">' . sprintf( __( 'Deactivate %s', 'wordpress-seo' ), YMBESEO_Utils::get_plugin_name( $plugin_file ) ) . '</a> ';
 		}
 
 		/* translators: %1$s expands to Yoast SEO */

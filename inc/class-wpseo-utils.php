@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  * @since      1.8.0
  */
 
 /**
- * Group of utility methods for use by WPSEO
+ * Group of utility methods for use by YMBESEO
  * All methods are static, this is just a sort of namespacing class wrapper.
  */
-class WPSEO_Utils {
+class YMBESEO_Utils {
 
 	/**
 	 * @var bool $has_filters Whether the PHP filter extension is enabled
@@ -499,7 +499,7 @@ class WPSEO_Utils {
 	 */
 	public static function register_cache_clear_option( $option, $type = '' ) {
 		self::$cache_clear[ $option ] = $type;
-		add_action( 'update_option', array( 'WPSEO_Utils', 'clear_transient_cache' ) );
+		add_action( 'update_option', array( 'YMBESEO_Utils', 'clear_transient_cache' ) );
 	}
 
 	/**
@@ -535,7 +535,7 @@ class WPSEO_Utils {
 		}
 
 		// Not sure about efficiency, but that's what code elsewhere does R.
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		if ( true !== $options['enablexmlsitemap'] ) {
 			return;
@@ -796,4 +796,4 @@ class WPSEO_Utils {
 		return false;
 	}
 
-} /* End of class WPSEO_Utils */
+} /* End of class YMBESEO_Utils */

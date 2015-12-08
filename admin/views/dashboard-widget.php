@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  *
  * @var array $statistics {
  *      An array of statistics to display

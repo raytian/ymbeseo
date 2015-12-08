@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * Option: wpseo_taxonomy_meta
  */
-class WPSEO_Taxonomy_Meta extends WPSEO_Option {
+class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -14,7 +14,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 	public $option_name = 'wpseo_taxonomy_meta';
 
 	/**
-	 * @var  bool  whether to include the option in the return for WPSEO_Options::get_all()
+	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()
 	 */
 	public $include_in_all = false;
 
@@ -55,7 +55,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 	 *
 	 * @static
 	 *
-	 * @internal  Labels (translation) added on admin_init via WPSEO_Taxonomy::translate_meta_options()
+	 * @internal  Labels (translation) added on admin_init via YMBESEO_Taxonomy::translate_meta_options()
 	 */
 	public static $no_index_options = array(
 		'default' => '',
@@ -69,7 +69,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 	 *
 	 * @static
 	 *
-	 * @internal  Labels (translation) added on admin_init via WPSEO_Taxonomy::translate_meta_options()
+	 * @internal  Labels (translation) added on admin_init via YMBESEO_Taxonomy::translate_meta_options()
 	 */
 	public static $sitemap_include_options = array(
 		'-'      => '',
@@ -85,14 +85,14 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 	 * is updated early on and if so, change the call to schedule these for a later action on add/update
 	 * instead of running them straight away
 	 *
-	 * @return \WPSEO_Taxonomy_Meta
+	 * @return \YMBESEO_Taxonomy_Meta
 	 */
 	protected function __construct() {
 		parent::__construct();
 
 		/* On succesfull update/add of the option, flush the W3TC cache */
-		add_action( 'add_option_' . $this->option_name, array( 'WPSEO_Utils', 'flush_w3tc_cache' ) );
-		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'flush_w3tc_cache' ) );
+		add_action( 'add_option_' . $this->option_name, array( 'YMBESEO_Utils', 'flush_w3tc_cache' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'flush_w3tc_cache' ) );
 	}
 
 
@@ -246,7 +246,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 	public static function validate_term_meta_data( $meta_data, $old_meta ) {
 
 		$clean     = self::$defaults_per_term;
-		$meta_data = array_map( array( 'WPSEO_Utils', 'trim_recursive' ), $meta_data );
+		$meta_data = array_map( array( 'YMBESEO_Utils', 'trim_recursive' ), $meta_data );
 
 		if ( ! is_array( $meta_data ) || $meta_data === array() ) {
 			return $clean;
@@ -275,7 +275,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 
 				case 'wpseo_canonical':
 					if ( isset( $meta_data[ $key ] ) && $meta_data[ $key ] !== '' ) {
-						$url = WPSEO_Utils::sanitize_url( $meta_data[ $key ] );
+						$url = YMBESEO_Utils::sanitize_url( $meta_data[ $key ] );
 						if ( $url !== '' ) {
 							$clean[ $key ] = $url;
 						}
@@ -286,7 +286,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 				case 'wpseo_metakey':
 				case 'wpseo_bctitle':
 					if ( isset( $meta_data[ $key ] ) ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
 					}
 					elseif ( isset( $old_meta[ $key ] ) ) {
 						// Retain old value if field currently not in use.
@@ -298,7 +298,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 				case 'wpseo_desc':
 				default:
 					if ( isset( $meta_data[ $key ] ) && is_string( $meta_data[ $key ] ) ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
 					}
 					break;
 			}

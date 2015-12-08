@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
@@ -8,7 +8,7 @@
  *
  * @link https://dev.twitter.com/docs/cards
  */
-class WPSEO_Twitter {
+class YMBESEO_Twitter {
 
 	/**
 	 * @var    object    Instance of this class
@@ -41,7 +41,7 @@ class WPSEO_Twitter {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 		$this->twitter();
 	}
 
@@ -158,7 +158,7 @@ class WPSEO_Twitter {
 		if ( is_singular() ) {
 			$meta_desc = $this->single_description();
 		}
-		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
+		elseif ( YMBESEO_Frontend::get_instance()->is_posts_page() ) {
 			$meta_desc = $this->single_description( get_option( 'page_for_posts' ) );
 		}
 		else {
@@ -184,7 +184,7 @@ class WPSEO_Twitter {
 	 * @return string
 	 */
 	private function single_description( $post_id = 0 ) {
-		$meta_desc = trim( WPSEO_Meta::get_value( 'twitter-description', $post_id ) );
+		$meta_desc = trim( YMBESEO_Meta::get_value( 'twitter-description', $post_id ) );
 
 		if ( is_string( $meta_desc ) && '' !== $meta_desc ) {
 			return $meta_desc;
@@ -204,7 +204,7 @@ class WPSEO_Twitter {
 	 * @return string
 	 */
 	private function fallback_description() {
-		return trim( WPSEO_Frontend::get_instance()->metadesc( false ) );
+		return trim( YMBESEO_Frontend::get_instance()->metadesc( false ) );
 	}
 
 	/**
@@ -216,7 +216,7 @@ class WPSEO_Twitter {
 		if ( is_singular() ) {
 			$title = $this->single_title();
 		}
-		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
+		elseif ( YMBESEO_Frontend::get_instance()->is_posts_page() ) {
 			$title = $this->single_title( get_option( 'page_for_posts' ) );
 		}
 		else {
@@ -242,7 +242,7 @@ class WPSEO_Twitter {
 	 * @return string
 	 */
 	private function single_title( $post_id = 0 ) {
-		$title = WPSEO_Meta::get_value( 'twitter-title', $post_id );
+		$title = YMBESEO_Meta::get_value( 'twitter-title', $post_id );
 		if ( ! is_string( $title ) || '' === $title ) {
 			return $this->fallback_title();
 		}
@@ -257,7 +257,7 @@ class WPSEO_Twitter {
 	 * @return string
 	 */
 	private function fallback_title() {
-		return WPSEO_Frontend::get_instance()->title( '' );
+		return YMBESEO_Frontend::get_instance()->title( '' );
 	}
 
 	/**
@@ -421,7 +421,7 @@ class WPSEO_Twitter {
 	 */
 	private function image_from_meta_values_output() {
 		foreach ( array( 'twitter-image', 'opengraph-image' ) as $tag ) {
-			$img = WPSEO_Meta::get_value( $tag );
+			$img = YMBESEO_Meta::get_value( $tag );
 			if ( $img !== '' ) {
 				$this->image_output( $img );
 

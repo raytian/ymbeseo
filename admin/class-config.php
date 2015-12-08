@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
- * Class WPSEO_Admin_Pages
+ * Class YMBESEO_Admin_Pages
  *
  * Class with functionality for the Yoast SEO admin pages.
  */
-class WPSEO_Admin_Pages {
+class YMBESEO_Admin_Pages {
 
 	/**
 	 * @var string $currentoption The option in use for the current admin page.
@@ -27,11 +27,11 @@ class WPSEO_Admin_Pages {
 	 */
 	function init() {
 		if ( filter_input( INPUT_GET, 'wpseo_reset_defaults' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'wpseo_reset_defaults' ) && current_user_can( 'manage_options' ) ) {
-			WPSEO_Options::reset();
+			YMBESEO_Options::reset();
 			wp_redirect( admin_url( 'admin.php?page=wpseo_dashboard' ) );
 		}
 
-		if ( WPSEO_Utils::grant_access() ) {
+		if ( YMBESEO_Utils::grant_access() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'config_page_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'config_page_styles' ) );
 		}
@@ -45,10 +45,10 @@ class WPSEO_Admin_Pages {
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_style( 'global' );
 		wp_enqueue_style( 'wp-admin' );
-		wp_enqueue_style( 'yoast-admin-css', plugins_url( 'css/yst_plugin_tools' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
+		wp_enqueue_style( 'yoast-admin-css', plugins_url( 'css/yst_plugin_tools' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( 'wpseo-rtl', plugins_url( 'css/wpseo-rtl' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
+			wp_enqueue_style( 'wpseo-rtl', plugins_url( 'css/wpseo-rtl' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 		}
 	}
 
@@ -56,10 +56,10 @@ class WPSEO_Admin_Pages {
 	 * Loads the required scripts for the config page.
 	 */
 	function config_page_scripts() {
-		wp_enqueue_script( 'wpseo-admin-script', plugins_url( 'js/wp-seo-admin' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array(
+		wp_enqueue_script( 'wpseo-admin-script', plugins_url( 'js/wp-seo-admin' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 			'jquery',
 			'jquery-ui-core',
-		), WPSEO_VERSION, true );
+		), YMBESEO_VERSION, true );
 		wp_localize_script( 'wpseo-admin-script', 'wpseoAdminL10n', $this->localize_admin_script() );
 		wp_enqueue_script( 'dashboard' );
 		wp_enqueue_script( 'thickbox' );
@@ -69,19 +69,19 @@ class WPSEO_Admin_Pages {
 
 		if ( in_array( $page, array( 'wpseo_social', 'wpseo_dashboard' ) ) ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'wpseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array(
+			wp_enqueue_script( 'wpseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
 				'jquery-ui-core',
-			), WPSEO_VERSION, true );
+			), YMBESEO_VERSION, true );
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
 		}
 
 		if ( 'wpseo_tools' === $page && 'bulk-editor' === $tool ) {
-			wp_enqueue_script( 'wpseo-bulk-editor', plugins_url( 'js/wp-seo-bulk-editor' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array( 'jquery' ), WPSEO_VERSION, true );
+			wp_enqueue_script( 'wpseo-bulk-editor', plugins_url( 'js/wp-seo-bulk-editor' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 
 		if ( 'wpseo_tools' === $page && 'import-export' === $tool ) {
-			wp_enqueue_script( 'wpseo-export', plugins_url( 'js/wp-seo-export' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array( 'jquery' ), WPSEO_VERSION, true );
+			wp_enqueue_script( 'wpseo-export', plugins_url( 'js/wp-seo-export' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 
@@ -120,9 +120,9 @@ class WPSEO_Admin_Pages {
 	 * @return bool|string $return False when failed, the URL to the export file when succeeded.
 	 */
 	public function export_settings( $include_taxonomy ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>WPSEO_Export</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>YMBESEO_Export</code> class.' );
 
-		$export = new WPSEO_Export( $include_taxonomy );
+		$export = new YMBESEO_Export( $include_taxonomy );
 		if ( $export->success ) {
 			return $export->export_zip_url;
 		}
@@ -142,7 +142,7 @@ class WPSEO_Admin_Pages {
 	 * @param bool   $contains_files   Whether the form should allow for file uploads.
 	 */
 	public function admin_header( $form = true, $option_long_name = false, $option = 'wpseo', $contains_files = false ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		Yoast_Form::get_instance()->admin_header( $form, $option, $contains_files, $option_long_name );
 	}
@@ -156,7 +156,7 @@ class WPSEO_Admin_Pages {
 	 * @param bool $show_sidebar Whether or not to show the banner sidebar - used by premium plugins to disable it.
 	 */
 	public function admin_footer( $submit = true, $show_sidebar = true ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		Yoast_Form::get_instance()->admin_footer( $submit, $show_sidebar );
 	}
@@ -167,7 +167,7 @@ class WPSEO_Admin_Pages {
 	 * @deprecated 2.0
 	 */
 	public function admin_sidebar() {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		Yoast_Form::get_instance()->admin_sidebar();
 	}
@@ -183,7 +183,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option     The option the variable belongs to.
 	 */
 	public function checkbox( $var, $label, $label_left = false, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -202,7 +202,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 */
 	function textinput( $var, $label, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -221,7 +221,7 @@ class WPSEO_Admin_Pages {
 	 * @param array  $attr   The CSS class to assign to the textarea.
 	 */
 	function textarea( $var, $label, $option = '', $attr = array() ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -239,7 +239,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 */
 	function hidden( $var, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -259,7 +259,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 */
 	function select( $var, $label, $values, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -278,7 +278,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 */
 	function file_upload( $var, $label, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -297,7 +297,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option
 	 */
 	function media_input( $var, $label, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -317,7 +317,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $option The option the variable belongs to.
 	 */
 	function radio( $var, $values, $label, $option = '' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		if ( $option !== '' ) {
 			Yoast_Form::get_instance()->set_option( $option );
@@ -336,7 +336,7 @@ class WPSEO_Admin_Pages {
 	 * @param string $content Content of the postbox.
 	 */
 	function postbox( $id, $title, $content ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
 
 		?>
 			<div id="<?php echo esc_attr( $id ); ?>" class="yoastbox">
@@ -356,7 +356,7 @@ class WPSEO_Admin_Pages {
 	 * @return string
 	 */
 	function form_table( $rows ) {
-		_deprecated_function( __METHOD__, 'WPSEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please re-implement the admin pages.' );
 
 		if ( ! is_array( $rows ) || $rows === array() ) {
 			return '';
@@ -388,12 +388,12 @@ class WPSEO_Admin_Pages {
 	 * whether force rewrite needs to be on.
 	 *
 	 * @deprecated 1.5.0
-	 * @deprecated use WPSEO_Options::reset()
-	 * @see        WPSEO_Options::reset()
+	 * @deprecated use YMBESEO_Options::reset()
+	 * @see        YMBESEO_Options::reset()
 	 */
 	function reset_defaults() {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.0', 'WPSEO_Options::reset()' );
-		WPSEO_Options::reset();
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Options::reset()' );
+		YMBESEO_Options::reset();
 	}
 
 

@@ -1,30 +1,30 @@
 <?php
 /**
- * @package WPSEO\admin|google_search_console
+ * @package YMBESEO\admin|google_search_console
  */
 
 /**
- * Class WPSEO_GSC
+ * Class YMBESEO_GSC
  */
-class WPSEO_GSC {
+class YMBESEO_GSC {
 
 	/**
 	 * The option where data will be stored
 	 */
-	const OPTION_WPSEO_GSC = 'wpseo-gsc';
+	const OPTION_YMBESEO_GSC = 'wpseo-gsc';
 
 	/**
-	 * @var WPSEO_GSC_Service
+	 * @var YMBESEO_GSC_Service
 	 */
 	private $service;
 
 	/**
-	 * @var WPSEO_GSC_Category_Filters
+	 * @var YMBESEO_GSC_Category_Filters
 	 */
 	protected $category_filter;
 
 	/**
-	 * @var WPSEO_GSC_Issues
+	 * @var YMBESEO_GSC_Issues
 	 */
 	protected $issue_fetch;
 
@@ -48,7 +48,7 @@ class WPSEO_GSC {
 		// Setting the screen option.
 		if ( filter_input( INPUT_GET, 'page' ) === 'wpseo_search_console' ) {
 
-			if ( filter_input( INPUT_GET, 'tab' ) !== 'settings' && WPSEO_GSC_Settings::get_profile() === '' ) {
+			if ( filter_input( INPUT_GET, 'tab' ) !== 'settings' && YMBESEO_GSC_Settings::get_profile() === '' ) {
 				wp_redirect( add_query_arg( 'tab', 'settings' ) );
 				exit;
 			}
@@ -57,7 +57,7 @@ class WPSEO_GSC {
 			$this->set_dependencies();
 			$this->request_handler();
 		}
-		elseif ( current_user_can( 'manage_options' ) && WPSEO_GSC_Settings::get_profile() === '' && get_user_option( 'wpseo_dismissed_gsc_notice', get_current_user_id() ) !== '1' ) {
+		elseif ( current_user_can( 'manage_options' ) && YMBESEO_GSC_Settings::get_profile() === '' && get_user_option( 'wpseo_dismissed_gsc_notice', get_current_user_id() ) !== '1' ) {
 			add_action( 'admin_init', array( $this, 'register_gsc_notification' ) );
 		}
 	}
@@ -86,14 +86,14 @@ class WPSEO_GSC {
 	 * Be sure the settings will be registered, so data can be stored
 	 */
 	public function register_settings() {
-		register_setting( 'yoast_wpseo_gsc_options', self::OPTION_WPSEO_GSC );
+		register_setting( 'yoast_wpseo_gsc_options', self::OPTION_YMBESEO_GSC );
 	}
 
 	/**
 	 * Function that outputs the redirect page
 	 */
 	public function display() {
-		require_once WPSEO_PATH . '/admin/google_search_console/views/gsc-display.php';
+		require_once YMBESEO_PATH . '/admin/google_search_console/views/gsc-display.php';
 	}
 
 	/**
@@ -101,7 +101,7 @@ class WPSEO_GSC {
 	 */
 	public function display_table() {
 		// The list table.
-		$list_table = new WPSEO_GSC_Table( $this->platform, $this->category, $this->issue_fetch->get_issues() );
+		$list_table = new YMBESEO_GSC_Table( $this->platform, $this->category, $this->issue_fetch->get_issues() );
 
 		// Adding filter to display the category filters.
 		add_filter( 'views_' . $list_table->get_screen_id(), array( $this->category_filter, 'as_array' ) );
@@ -116,16 +116,16 @@ class WPSEO_GSC {
 	 * Load the admin redirects scripts
 	 */
 	public function page_scripts() {
-		wp_enqueue_script( 'wp-seo-admin-gsc', plugin_dir_url( WPSEO_FILE ) . 'js/wp-seo-admin-gsc' . WPSEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), WPSEO_VERSION );
+		wp_enqueue_script( 'wp-seo-admin-gsc', plugin_dir_url( YMBESEO_FILE ) . 'js/wp-seo-admin-gsc' . YMBESEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), YMBESEO_VERSION );
 		add_screen_option( 'per_page', array(
 			'label'   => __( 'Crawl errors per page', 'wordpress-seo' ),
 			'default' => 50,
 			'option'  => 'errors_per_page',
 		) );
 
-		wp_enqueue_style( 'jquery-qtip.js', plugins_url( 'css/jquery.qtip' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
-		wp_enqueue_style( 'metabox-tabs', plugins_url( 'css/metabox-tabs' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
-		wp_enqueue_script( 'jquery-qtip', plugins_url( 'js/jquery.qtip.min.js', WPSEO_FILE ), array( 'jquery' ), WPSEO_VERSION, true );
+		wp_enqueue_style( 'jquery-qtip.js', plugins_url( 'css/jquery.qtip' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+		wp_enqueue_style( 'metabox-tabs', plugins_url( 'css/metabox-tabs' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+		wp_enqueue_script( 'jquery-qtip', plugins_url( 'js/jquery.qtip.min.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class WPSEO_GSC {
 		// Is there a reset post than we will remove the posts and data.
 		if ( filter_input( INPUT_GET, 'gsc_reset' ) ) {
 			// Clear the google data.
-			WPSEO_GSC_Settings::clear_data( $this->service );
+			YMBESEO_GSC_Settings::clear_data( $this->service );
 
 			// Adding notification to the notification center.
 			/* Translators: %1$s: expands to Google Search Console. */
@@ -179,7 +179,7 @@ class WPSEO_GSC {
 		// Reloads al the issues.
 		if ( wp_verify_nonce( filter_input( INPUT_POST, 'reload-crawl-issues-nonce' ), 'reload-crawl-issues' ) && filter_input( INPUT_POST, 'reload-crawl-issues' ) ) {
 			// Reloading all the issues.
-			WPSEO_GSC_Settings::reload_issues();
+			YMBESEO_GSC_Settings::reload_issues();
 
 			// Adding the notification.
 			$this->add_notification( __( 'The issues have been successfully reloaded!', 'wordpress-seo' ), 'updated' );
@@ -189,7 +189,7 @@ class WPSEO_GSC {
 		}
 
 		// Catch bulk action request.
-		new WPSEO_GSC_Bulk_Action();
+		new YMBESEO_GSC_Bulk_Action();
 	}
 
 	/**
@@ -212,7 +212,7 @@ class WPSEO_GSC {
 		$gsc_values = filter_input( INPUT_POST, 'gsc', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		// Catch the authorization code POST.
 		if ( ! empty( $gsc_values['authorization_code'] ) && wp_verify_nonce( $gsc_values['gsc_nonce'], 'wpseo-gsc_nonce' ) ) {
-			if ( ! WPSEO_GSC_Settings::validate_authorization( trim( $gsc_values['authorization_code'] ), $this->service->get_client() ) ) {
+			if ( ! YMBESEO_GSC_Settings::validate_authorization( trim( $gsc_values['authorization_code'] ), $this->service->get_client() ) ) {
 				$this->add_notification( __( 'Incorrect Google Authorization Code.', 'wordpress-seo' ), 'error' );
 			}
 
@@ -239,17 +239,17 @@ class WPSEO_GSC {
 	 */
 	private function set_dependencies() {
 		// Setting the service object.
-		$this->service         = new WPSEO_GSC_Service( WPSEO_GSC_Settings::get_profile() );
+		$this->service         = new YMBESEO_GSC_Service( YMBESEO_GSC_Settings::get_profile() );
 
 		// Setting the platform.
-		$this->platform        = WPSEO_GSC_Mapper::get_current_platform( 'tab' );
+		$this->platform        = YMBESEO_GSC_Mapper::get_current_platform( 'tab' );
 
 		// Loading the issue counter.
-		$issue_count           = new WPSEO_GSC_Count( $this->service );
+		$issue_count           = new YMBESEO_GSC_Count( $this->service );
 		$issue_count->fetch_counts();
 
 		// Loading the category filters.
-		$this->category_filter = new WPSEO_GSC_Category_Filters( $issue_count->get_platform_counts( $this->platform ) );
+		$this->category_filter = new YMBESEO_GSC_Category_Filters( $issue_count->get_platform_counts( $this->platform ) );
 
 		// Setting the current category.
 		$this->category        = $this->category_filter->get_category();
@@ -258,7 +258,7 @@ class WPSEO_GSC {
 		$issue_count->list_issues( $this->platform, $this->category );
 
 		// Fetching the issues.
-		$this->issue_fetch = new WPSEO_GSC_Issues( $this->platform, $this->category, $issue_count->get_issues() );
+		$this->issue_fetch = new YMBESEO_GSC_Issues( $this->platform, $this->category, $issue_count->get_issues() );
 	}
 
 	/**

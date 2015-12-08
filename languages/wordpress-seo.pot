@@ -3257,7 +3257,7 @@ msgstr ""
 #: inc/class-wpseo-replace-vars.php:109
 msgid ""
 "A replacement variable can not start with \"%%cf_\" or \"%%ct_\" as these "
-"are reserved for the WPSEO standard variable variables for custom fields "
+"are reserved for the YMBESEO standard variable variables for custom fields "
 "and custom taxonomies. Try making your variable name unique."
 msgstr ""
 
@@ -3269,7 +3269,7 @@ msgstr ""
 
 #: inc/class-wpseo-replace-vars.php:122
 msgid ""
-"You cannot overrule a WPSEO standard variable replacement by registering a "
+"You cannot overrule a YMBESEO standard variable replacement by registering a "
 "variable with the same name. Use the \"wpseo_replacements\" filter instead "
 "to adjust the replacement value."
 msgstr ""

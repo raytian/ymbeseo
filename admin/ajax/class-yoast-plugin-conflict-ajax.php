@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\admin|ajax
+ * @package YMBESEO\admin|ajax
  */
 
 /**

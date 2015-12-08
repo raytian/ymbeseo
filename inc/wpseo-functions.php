@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -14,7 +14,7 @@ if ( ! function_exists( 'initialize_wpseo_front' ) ) {
 	 * Wraps frontend class.
 	 */
 	function initialize_wpseo_front() {
-		WPSEO_Frontend::get_instance();
+		YMBESEO_Frontend::get_instance();
 	}
 }
 
@@ -37,7 +37,7 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 		}
 
 		if ( $breadcrumbs_enabled ) {
-			return WPSEO_Breadcrumbs::breadcrumb( $before, $after, $display );
+			return YMBESEO_Breadcrumbs::breadcrumb( $before, $after, $display );
 		}
 	}
 }
@@ -96,7 +96,7 @@ function wpseo_remove_capabilities() {
  * @return string
  */
 function wpseo_replace_vars( $string, $args, $omit = array() ) {
-	$replacer = new WPSEO_Replace_Vars;
+	$replacer = new YMBESEO_Replace_Vars;
 
 	return $replacer->replace( $string, $args, $omit );
 }
@@ -107,12 +107,12 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  * This function is for use by other plugins/themes to easily add their own additional variables to replace.
  * This function should be called from a function on the 'wpseo_register_extra_replacements' action hook.
  * The use of this function is preferred over the older 'wpseo_replacements' filter as a way to add new replacements.
- * The 'wpseo_replacements' filter should still be used to adjust standard WPSEO replacement values.
- * The function can not be used to replace standard WPSEO replacement value functions and will thrown a warning
+ * The 'wpseo_replacements' filter should still be used to adjust standard YMBESEO replacement values.
+ * The function can not be used to replace standard YMBESEO replacement value functions and will thrown a warning
  * if you accidently try.
- * To avoid conflicts with variables registered by WPSEO and other themes/plugins, try and make the
+ * To avoid conflicts with variables registered by YMBESEO and other themes/plugins, try and make the
  * name of your variable unique. Variable names also can not start with "%%cf_" or "%%ct_" as these are reserved
- * for the standard WPSEO variable variables 'cf_<custom-field-name>', 'ct_<custom-tax-name>' and
+ * for the standard YMBESEO variable variables 'cf_<custom-field-name>', 'ct_<custom-tax-name>' and
  * 'ct_desc_<custom-tax-name>'.
  * The replacement function will be passed the undelimited name (i.e. stripped of the %%) of the variable
  * to replace in case you need it.
@@ -145,7 +145,7 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  * @return bool  Whether the replacement function was succesfully registered
  */
 function wpseo_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
-	return WPSEO_Replace_Vars::register_replacement( $var, $replace_function, $type, $help_text );
+	return YMBESEO_Replace_Vars::register_replacement( $var, $replace_function, $type, $help_text );
 }
 
 /**
@@ -304,7 +304,7 @@ function wpseo_invalidate_sitemap_cache( $type ) {
 	delete_transient( 'wpseo_sitemap_cache_1' );
 	delete_transient( 'wpseo_sitemap_cache_' . $type );
 
-	WPSEO_Utils::clear_sitemap_cache( array( $type ) );
+	YMBESEO_Utils::clear_sitemap_cache( array( $type ) );
 }
 
 add_action( 'deleted_term_relationships', 'wpseo_invalidate_sitemap_cache' );
@@ -373,8 +373,8 @@ if ( ! extension_loaded( 'ctype' ) || ! function_exists( 'ctype_digit' ) ) {
  * Get the value from the post custom values
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Meta::get_value()
- * @see        WPSEO_Meta::get_value()
+ * @deprecated use YMBESEO_Meta::get_value()
+ * @see        YMBESEO_Meta::get_value()
  *
  * @param    string $val    Internal name of the value to get.
  * @param    int    $postid Post ID of the post to get the value for.
@@ -382,9 +382,9 @@ if ( ! extension_loaded( 'ctype' ) || ! function_exists( 'ctype_digit' ) ) {
  * @return    string
  */
 function wpseo_get_value( $val, $postid = 0 ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Meta::get_value()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_value()' );
 
-	return WPSEO_Meta::get_value( $val, $postid );
+	return YMBESEO_Meta::get_value( $val, $postid );
 }
 
 
@@ -392,8 +392,8 @@ function wpseo_get_value( $val, $postid = 0 ) {
  * Save a custom meta value
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Meta::set_value() or just use update_post_meta()
- * @see        WPSEO_Meta::set_value()
+ * @deprecated use YMBESEO_Meta::set_value() or just use update_post_meta()
+ * @see        YMBESEO_Meta::set_value()
  *
  * @param    string $meta_key   The meta to change.
  * @param    mixed  $meta_value The value to set the meta to.
@@ -402,9 +402,9 @@ function wpseo_get_value( $val, $postid = 0 ) {
  * @return    bool    whether the value was changed
  */
 function wpseo_set_value( $meta_key, $meta_value, $post_id ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Meta::set_value()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::set_value()' );
 
-	return WPSEO_Meta::set_value( $meta_key, $meta_value, $post_id );
+	return YMBESEO_Meta::set_value( $meta_key, $meta_value, $post_id );
 }
 
 
@@ -412,15 +412,15 @@ function wpseo_set_value( $meta_key, $meta_value, $post_id ) {
  * Retrieve an array of all the options the plugin uses. It can't use only one due to limitations of the options API.
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Options::get_option_names()
- * @see        WPSEO_Options::get_option_names()
+ * @deprecated use YMBESEO_Options::get_option_names()
+ * @see        YMBESEO_Options::get_option_names()
  *
  * @return array of options.
  */
 function get_wpseo_options_arr() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Options::get_option_names()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_option_names()' );
 
-	return WPSEO_Options::get_option_names();
+	return YMBESEO_Options::get_option_names();
 }
 
 
@@ -428,15 +428,15 @@ function get_wpseo_options_arr() {
  * Retrieve all the options for the SEO plugin in one go.
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Options::get_all()
- * @see        WPSEO_Options::get_all()
+ * @deprecated use YMBESEO_Options::get_all()
+ * @see        YMBESEO_Options::get_all()
  *
  * @return array of options
  */
 function get_wpseo_options() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Options::get_all()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_all()' );
 
-	return WPSEO_Options::get_all();
+	return YMBESEO_Options::get_all();
 }
 
 /**
@@ -444,16 +444,16 @@ function get_wpseo_options() {
  * $old_metakey into $new_metakey or just plain replaces $old_metakey with $new_metakey
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Meta::replace_meta()
- * @see        WPSEO_Meta::replace_meta()
+ * @deprecated use YMBESEO_Meta::replace_meta()
+ * @see        YMBESEO_Meta::replace_meta()
  *
  * @param string $old_metakey The old name of the meta value.
  * @param string $new_metakey The new name of the meta value, usually the Yoast SEO name.
  * @param bool   $replace     Whether to replace or to copy the values.
  */
 function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Meta::replace_meta()' );
-	WPSEO_Meta::replace_meta( $old_metakey, $new_metakey, $replace );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::replace_meta()' );
+	YMBESEO_Meta::replace_meta( $old_metakey, $new_metakey, $replace );
 }
 
 
@@ -461,8 +461,8 @@ function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
  * Retrieve a taxonomy term's meta value.
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Taxonomy_Meta::get_term_meta()
- * @see        WPSEO_Taxonomy_Meta::get_term_meta()
+ * @deprecated use YMBESEO_Taxonomy_Meta::get_term_meta()
+ * @see        YMBESEO_Taxonomy_Meta::get_term_meta()
  *
  * @param string|object $term     Term to get the meta value for.
  * @param string        $taxonomy Name of the taxonomy to which the term is attached.
@@ -471,8 +471,8 @@ function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
  * @return bool|mixed value when the meta exists, false when it does not
  */
 function wpseo_get_term_meta( $term, $taxonomy, $meta ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Taxonomy_Meta::get_term_meta()' );
-	return WPSEO_Taxonomy_Meta::get_term_meta( $term, $taxonomy, $meta );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Taxonomy_Meta::get_term_meta()' );
+	return YMBESEO_Taxonomy_Meta::get_term_meta( $term, $taxonomy, $meta );
 }
 
 /**
@@ -482,15 +482,15 @@ function wpseo_get_term_meta( $term, $taxonomy, $meta ) {
  * @deprecated 1.5.4 (removed)
  */
 function wpseo_invalid_custom_taxonomy() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.4' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4' );
 }
 
 /**
  * Retrieve a post's terms, comma delimited.
  *
  * @deprecated 1.5.4
- * @deprecated use WPSEO_Replace_Vars::get_terms()
- * @see        WPSEO_Replace_Vars::get_terms()
+ * @deprecated use YMBESEO_Replace_Vars::get_terms()
+ * @see        YMBESEO_Replace_Vars::get_terms()
  *
  * @param int    $id            ID of the post to get the terms for.
  * @param string $taxonomy      The taxonomy to get the terms for this post from.
@@ -499,8 +499,8 @@ function wpseo_invalid_custom_taxonomy() {
  * @return string either a single term or a comma delimited string of terms.
  */
 function wpseo_get_terms( $id, $taxonomy, $return_single = false ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.4', 'WPSEO_Replace_Vars::get_terms()' );
-	$replacer = new WPSEO_Replace_Vars;
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4', 'YMBESEO_Replace_Vars::get_terms()' );
+	$replacer = new YMBESEO_Replace_Vars;
 
 	return $replacer->get_terms( $id, $taxonomy, $return_single );
 }
@@ -517,7 +517,7 @@ function wpseo_get_terms( $id, $taxonomy, $return_single = false ) {
  * @return string
  */
 function wpseo_sitemap_handler( $atts ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast SEO Premium plugin soon.' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast SEO Premium plugin soon.' );
 
 	return '';
 }
@@ -528,17 +528,17 @@ add_shortcode( 'wpseo_sitemap', 'wpseo_sitemap_handler' );
  * Strip out the shortcodes with a filthy regex, because people don't properly register their shortcodes.
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::strip_shortcode()
- * @see        WPSEO_Utils::strip_shortcode()
+ * @deprecated use YMBESEO_Utils::strip_shortcode()
+ * @see        YMBESEO_Utils::strip_shortcode()
  *
  * @param string $text Input string that might contain shortcodes.
  *
  * @return string $text string without shortcodes
  */
 function wpseo_strip_shortcode( $text ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::strip_shortcode()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::strip_shortcode()' );
 
-	return WPSEO_Utils::strip_shortcode( $text );
+	return YMBESEO_Utils::strip_shortcode( $text );
 }
 
 /**
@@ -548,8 +548,8 @@ function wpseo_strip_shortcode( $text ) {
  * @see        the big red warning on http://php.net/language.types.float.php
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::calc()
- * @see        WPSEO_Utils::calc()
+ * @deprecated use YMBESEO_Utils::calc()
+ * @see        YMBESEO_Utils::calc()
  *
  * In the rare case that the bcmath extension would not be loaded, it will return the normal calculation results
  *
@@ -566,79 +566,79 @@ function wpseo_strip_shortcode( $text ) {
  *                                an invalid operation was passed
  */
 function wpseo_calc( $number1, $action, $number2, $round = false, $decimals = 0, $precision = 10 ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::calc()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::calc()' );
 
-	return WPSEO_Utils::calc( $number1, $action, $number2, $round, $decimals, $precision );
+	return YMBESEO_Utils::calc( $number1, $action, $number2, $round, $decimals, $precision );
 }
 
 /**
  * Check if the web server is running on Apache
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::is_apache()
- * @see        WPSEO_Utils::is_apache()
+ * @deprecated use YMBESEO_Utils::is_apache()
+ * @see        YMBESEO_Utils::is_apache()
  *
  * @return bool
  */
 function wpseo_is_apache() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::is_apache()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_apache()' );
 
-	return WPSEO_Utils::is_apache();
+	return YMBESEO_Utils::is_apache();
 }
 
 /**
  * Check if the web service is running on Nginx
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::is_nginx()
- * @see        WPSEO_Utils::is_nginx()
+ * @deprecated use YMBESEO_Utils::is_nginx()
+ * @see        YMBESEO_Utils::is_nginx()
  *
  * @return bool
  */
 function wpseo_is_nginx() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::is_nginx()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_nginx()' );
 
-	return WPSEO_Utils::is_nginx();
+	return YMBESEO_Utils::is_nginx();
 }
 
 /**
  * List all the available user roles
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::get_roles()
- * @see        WPSEO_Utils::get_roles()
+ * @deprecated use YMBESEO_Utils::get_roles()
+ * @see        YMBESEO_Utils::get_roles()
  *
  * @return array $roles
  */
 function wpseo_get_roles() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::get_roles()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::get_roles()' );
 
-	return WPSEO_Utils::get_roles();
+	return YMBESEO_Utils::get_roles();
 }
 
 /**
  * Check whether a url is relative
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::is_url_relative()
- * @see        WPSEO_Utils::is_url_relative()
+ * @deprecated use YMBESEO_Utils::is_url_relative()
+ * @see        YMBESEO_Utils::is_url_relative()
  *
  * @param string $url
  *
  * @return bool
  */
 function wpseo_is_url_relative( $url ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::is_url_relative()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_url_relative()' );
 
-	return WPSEO_Utils::is_url_relative( $url );
+	return YMBESEO_Utils::is_url_relative( $url );
 }
 
 /**
  * Standardize whitespace in a string
  *
  * @deprecated 1.6.1
- * @deprecated use WPSEO_Utils::standardize_whitespace()
- * @see        WPSEO_Utils::standardize_whitespace()
+ * @deprecated use YMBESEO_Utils::standardize_whitespace()
+ * @see        YMBESEO_Utils::standardize_whitespace()
  *
  * @since      1.6.0
  *
@@ -647,8 +647,7 @@ function wpseo_is_url_relative( $url ) {
  * @return string
  */
 function wpseo_standardize_whitespace( $string ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.6.1', 'WPSEO_Utils::standardize_whitespace()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::standardize_whitespace()' );
 
-	return WPSEO_Utils::standardize_whitespace( $string );
+	return YMBESEO_Utils::standardize_whitespace( $string );
 }
-

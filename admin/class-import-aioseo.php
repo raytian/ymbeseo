@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Admin\Import\External
+ * @package YMBESEO\Admin\Import\External
  */
 
 /**
- * Class WPSEO_Import_WooThemes_SEO
+ * Class YMBESEO_Import_WooThemes_SEO
  *
  * Class with functionality to import Yoast SEO settings from WooThemes SEO
  */
-class WPSEO_Import_AIOSEO extends WPSEO_Import_External {
+class YMBESEO_Import_AIOSEO extends YMBESEO_Import_External {
 
 	/**
 	 * Holds the AOIOSEO options
@@ -33,9 +33,9 @@ class WPSEO_Import_AIOSEO extends WPSEO_Import_External {
 	 * Import All In One SEO meta values
 	 */
 	private function import_metas() {
-		WPSEO_Meta::replace_meta( '_aioseop_description', WPSEO_Meta::$meta_prefix . 'metadesc', $this->replace );
-		WPSEO_Meta::replace_meta( '_aioseop_keywords', WPSEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
-		WPSEO_Meta::replace_meta( '_aioseop_title', WPSEO_Meta::$meta_prefix . 'title', $this->replace );
+		YMBESEO_Meta::replace_meta( '_aioseop_description', YMBESEO_Meta::$meta_prefix . 'metadesc', $this->replace );
+		YMBESEO_Meta::replace_meta( '_aioseop_keywords', YMBESEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
+		YMBESEO_Meta::replace_meta( '_aioseop_title', YMBESEO_Meta::$meta_prefix . 'title', $this->replace );
 	}
 
 	/**

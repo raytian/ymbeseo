@@ -1,19 +1,19 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Settings
+ * Class YMBESEO_GSC_Settings
  */
-class WPSEO_GSC_Settings {
+class YMBESEO_GSC_Settings {
 
 	/**
 	 * Clear all data from the database
 	 *
-	 * @param WPSEO_GSC_Service $service
+	 * @param YMBESEO_GSC_Service $service
 	 */
-	public static function clear_data( WPSEO_GSC_Service $service ) {
+	public static function clear_data( YMBESEO_GSC_Service $service ) {
 		// Remove issue and issue counts.
 		self::remove();
 
@@ -51,7 +51,7 @@ class WPSEO_GSC_Settings {
 	 */
 	public static function get_profile() {
 		// Get option.
-		$option = get_option( WPSEO_GSC::OPTION_WPSEO_GSC, array( 'profile' => '' ) );
+		$option = get_option( YMBESEO_GSC::OPTION_YMBESEO_GSC, array( 'profile' => '' ) );
 
 		// Set the profile.
 		$profile = '';
@@ -79,8 +79,8 @@ class WPSEO_GSC_Settings {
 	 */
 	private static function remove_issue_counts() {
 		// Remove the options which are holding the counts.
-		delete_option( WPSEO_GSC_Count::OPTION_CI_COUNTS );
-		delete_option( WPSEO_GSC_Count::OPTION_CI_LAST_FETCH );
+		delete_option( YMBESEO_GSC_Count::OPTION_CI_COUNTS );
+		delete_option( YMBESEO_GSC_Count::OPTION_CI_LAST_FETCH );
 	}
 
 	/**
@@ -97,7 +97,7 @@ class WPSEO_GSC_Settings {
 	 * Removes the options for GSC
 	 */
 	private static function remove_gsc_option() {
-		delete_option( WPSEO_GSC::OPTION_WPSEO_GSC );
+		delete_option( YMBESEO_GSC::OPTION_YMBESEO_GSC );
 	}
 
 }

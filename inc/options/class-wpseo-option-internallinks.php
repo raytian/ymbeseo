@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * Option: wpseo_internallinks
  */
-class WPSEO_Option_InternalLinks extends WPSEO_Option {
+class YMBESEO_Option_InternalLinks extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -225,7 +225,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 				 * 		'breadcrumbs-enable'
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -279,8 +279,8 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 
 		/* Make sure the old fall-back defaults for empty option keys are now added to the option */
 		if ( isset( $current_version ) && version_compare( $current_version, '1.5.2.3', '<' ) ) {
-			if ( has_action( 'init', array( 'WPSEO_Options', 'bring_back_breadcrumb_defaults' ) ) === false ) {
-				add_action( 'init', array( 'WPSEO_Options', 'bring_back_breadcrumb_defaults' ), 3 );
+			if ( has_action( 'init', array( 'YMBESEO_Options', 'bring_back_breadcrumb_defaults' ) ) === false ) {
+				add_action( 'init', array( 'YMBESEO_Options', 'bring_back_breadcrumb_defaults' ), 3 );
 			}
 		}
 

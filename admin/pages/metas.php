@@ -1,15 +1,15 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
 }
 
-$options = WPSEO_Options::get_all();
+$options = YMBESEO_Options::get_all();
 
 $yform = Yoast_Form::get_instance();
 
@@ -46,7 +46,7 @@ $yform->admin_header( true, 'wpseo_titles' );
 					</th>
 					<td>
 						<?php
-						$yform->radio( 'separator', WPSEO_Option_Titles::get_instance()->get_separator_options(), '' );
+						$yform->radio( 'separator', YMBESEO_Option_Titles::get_instance()->get_separator_options(), '' );
 						echo '<p class="description">', __( 'Choose the symbol to use as your title separator. This will display, for instance, between your post title and site name.', 'wordpress-seo' ), ' ', __( 'Symbols are shown in the size they\'ll appear in in search results.', 'wordpress-seo' ), '</p>';
 						?>
 					</td>
@@ -106,7 +106,7 @@ $yform->admin_header( true, 'wpseo_titles' );
 
 					/**
 					 * Allow adding a custom checkboxes to the admin meta page - Post Types tab
-					 * @api  WPSEO_Admin_Pages  $yform  The WPSEO_Admin_Pages object
+					 * @api  YMBESEO_Admin_Pages  $yform  The YMBESEO_Admin_Pages object
 					 * @api  String  $name  The post type name
 					 */
 					do_action( 'wpseo_admin_page_meta_post_types', $yform, $name );

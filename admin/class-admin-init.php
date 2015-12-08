@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
  * Performs the load on admin side.
  */
-class WPSEO_Admin_Init {
+class YMBESEO_Admin_Init {
 
 	/**
 	 * Holds the Yoast SEO Options
@@ -26,9 +26,9 @@ class WPSEO_Admin_Init {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
-		$GLOBALS['wpseo_admin'] = new WPSEO_Admin;
+		$GLOBALS['wpseo_admin'] = new YMBESEO_Admin;
 
 		$this->pagenow = $GLOBALS['pagenow'];
 
@@ -51,8 +51,8 @@ class WPSEO_Admin_Init {
 	 */
 	public function enqueue_dismissible() {
 		if ( version_compare( $GLOBALS['wp_version'], '4.2', '<' ) ) {
-			wp_enqueue_style( 'wpseo-dismissible', plugins_url( 'css/wpseo-dismissible' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
-			wp_enqueue_script( 'wpseo-dismissible', plugins_url( 'js/wp-seo-dismissible' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array( 'jquery' ), WPSEO_VERSION, true );
+			wp_enqueue_style( 'wpseo-dismissible', plugins_url( 'css/wpseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+			wp_enqueue_script( 'wpseo-dismissible', plugins_url( 'js/wp-seo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 	/**
@@ -62,7 +62,7 @@ class WPSEO_Admin_Init {
 		if ( current_user_can( 'manage_options' ) && ! $this->seen_about() ) {
 
 			if ( filter_input( INPUT_GET, 'intro' ) === '1' ) {
-				update_user_meta( get_current_user_id(), 'wpseo_seen_about_version' , WPSEO_VERSION );
+				update_user_meta( get_current_user_id(), 'wpseo_seen_about_version' , YMBESEO_VERSION );
 
 				return;
 			}
@@ -70,7 +70,7 @@ class WPSEO_Admin_Init {
 			$info_message = sprintf(
 				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'wordpress-seo' ),
 				'Yoast SEO',
-				WPSEO_VERSION,
+				YMBESEO_VERSION,
 				'<a href="' . admin_url( 'admin.php?page=wpseo_dashboard&intro=1' ) . '">',
 				'</a>'
 			);
@@ -91,7 +91,7 @@ class WPSEO_Admin_Init {
 	 * @return bool
 	 */
 	private function seen_about() {
-		return get_user_meta( get_current_user_id(), 'wpseo_seen_about_version', true ) === WPSEO_VERSION;
+		return get_user_meta( get_current_user_id(), 'wpseo_seen_about_version', true ) === YMBESEO_VERSION;
 	}
 
 	/**
@@ -183,7 +183,7 @@ class WPSEO_Admin_Init {
 	private function load_meta_boxes() {
 		/**
 		 * Filter: 'wpseo_always_register_metaboxes_on_admin' - Allow developers to change whether
-		 * the WPSEO metaboxes are only registered on the typical pages (lean loading) or always
+		 * the YMBESEO metaboxes are only registered on the typical pages (lean loading) or always
 		 * registered when in admin.
 		 *
 		 * @api bool Whether to always register the metaboxes or not. Defaults to false.
@@ -194,9 +194,9 @@ class WPSEO_Admin_Init {
 				'post-new.php',
 			) ) || apply_filters( 'wpseo_always_register_metaboxes_on_admin', false )
 		) {
-			$GLOBALS['wpseo_metabox'] = new WPSEO_Metabox;
+			$GLOBALS['wpseo_metabox'] = new YMBESEO_Metabox;
 			if ( $this->options['opengraph'] === true || $this->options['twitter'] === true || $this->options['googleplus'] === true ) {
-				new WPSEO_Social_Admin;
+				new YMBESEO_Social_Admin;
 			}
 		}
 	}
@@ -206,7 +206,7 @@ class WPSEO_Admin_Init {
 	 */
 	private function load_taxonomy_class() {
 		if ( 'edit-tags.php' === $this->pagenow ) {
-			new WPSEO_Taxonomy;
+			new YMBESEO_Taxonomy;
 		}
 	}
 
@@ -217,7 +217,7 @@ class WPSEO_Admin_Init {
 	 */
 	private function load_admin_user_class() {
 		if ( in_array( $this->pagenow, array( 'user-edit.php', 'profile.php' ) ) && current_user_can( 'edit_users' ) ) {
-			new WPSEO_Admin_User_Profile;
+			new YMBESEO_Admin_User_Profile;
 		}
 	}
 
@@ -230,7 +230,7 @@ class WPSEO_Admin_Init {
 
 		if ( $this->on_wpseo_admin_page() ) {
 			// For backwards compatabilty, this still needs a global, for now...
-			$GLOBALS['wpseo_admin_pages'] = new WPSEO_Admin_Pages;
+			$GLOBALS['wpseo_admin_pages'] = new YMBESEO_Admin_Pages;
 			$this->register_i18n_promo_class();
 		}
 	}
@@ -265,7 +265,7 @@ class WPSEO_Admin_Init {
 		}
 
 		if ( ! get_user_meta( get_current_user_id(), 'wpseo_ignore_tour' ) ) {
-			add_action( 'admin_enqueue_scripts', array( 'WPSEO_Pointers', 'get_instance' ) );
+			add_action( 'admin_enqueue_scripts', array( 'YMBESEO_Pointers', 'get_instance' ) );
 		}
 	}
 
@@ -274,7 +274,7 @@ class WPSEO_Admin_Init {
 	 */
 	private function load_xml_sitemaps_admin() {
 		if ( $this->options['enablexmlsitemap'] === true ) {
-			new WPSEO_Sitemaps_Admin;
+			new YMBESEO_Sitemaps_Admin;
 		}
 	}
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -23,7 +23,7 @@ function wpseo_title_test() {
 	// Setting title_test to > 0 forces the plugin to output the title below through a filter in class-frontend.php.
 	$expected_title = 'This is a Yoast Test Title';
 
-	WPSEO_Utils::clear_cache();
+	YMBESEO_Utils::clear_cache();
 
 
 	$args = array(
@@ -69,14 +69,14 @@ function wpseo_description_test() {
 	$options = get_option( 'wpseo' );
 
 	// Reset any related options - dirty way of getting the default to make sure it works on activation.
-	$options['theme_has_description']   = WPSEO_Option_Wpseo::$desc_defaults['theme_has_description'];
-	$options['theme_description_found'] = WPSEO_Option_Wpseo::$desc_defaults['theme_description_found'];
+	$options['theme_has_description']   = YMBESEO_Option_Wpseo::$desc_defaults['theme_has_description'];
+	$options['theme_description_found'] = YMBESEO_Option_Wpseo::$desc_defaults['theme_description_found'];
 
 	/**
 	 * @internal Should this be reset too ? Best to do so as test is done on re-activate and switch_theme
 	 * as well and new warning would be warranted then. Only might give irritation on theme upgrade.
 	 */
-	$options['ignore_meta_description_warning'] = WPSEO_Option_Wpseo::$desc_defaults['ignore_meta_description_warning'];
+	$options['ignore_meta_description_warning'] = YMBESEO_Option_Wpseo::$desc_defaults['ignore_meta_description_warning'];
 
 	$file = false;
 	if ( file_exists( get_stylesheet_directory() . '/header.php' ) ) {
@@ -243,11 +243,11 @@ function wpseo_admin_bar_menu() {
 					'post-new.php',
 				), true ) ) ) && isset( $post ) && is_object( $post ) && apply_filters( 'wpseo_use_page_analysis', true ) === true
 	) {
-		$focuskw    = WPSEO_Meta::get_value( 'focuskw', $post->ID );
-		$perc_score = WPSEO_Meta::get_value( 'linkdex', $post->ID );
-		$calc_score = WPSEO_Utils::calc( $perc_score, '/', 10, true );
-		$txtscore   = WPSEO_Utils::translate_score( $calc_score );
-		$title      = WPSEO_Utils::translate_score( $calc_score, false );
+		$focuskw    = YMBESEO_Meta::get_value( 'focuskw', $post->ID );
+		$perc_score = YMBESEO_Meta::get_value( 'linkdex', $post->ID );
+		$calc_score = YMBESEO_Utils::calc( $perc_score, '/', 10, true );
+		$txtscore   = YMBESEO_Utils::translate_score( $calc_score );
+		$title      = YMBESEO_Utils::translate_score( $calc_score, false );
 		$score      = '<div title="' . esc_attr( $title ) . '" class="' . esc_attr( 'wpseo-score-icon ' . $txtscore . ' ' . $perc_score ) . '"></div>';
 
 		$seo_url = get_edit_post_link( $post->ID );
@@ -290,7 +290,7 @@ function wpseo_admin_bar_menu() {
 	) );
 
 	if ( ! is_admin() ) {
-		$url = WPSEO_Frontend::get_instance()->canonical( false );
+		$url = YMBESEO_Frontend::get_instance()->canonical( false );
 
 		if ( is_string( $url ) ) {
 			$wp_admin_bar->add_menu( array(
@@ -446,7 +446,7 @@ add_action( 'admin_bar_menu', 'wpseo_admin_bar_menu', 95 );
  */
 function wpseo_admin_bar_css() {
 	if ( is_admin_bar_showing() && is_singular() ) {
-		wp_enqueue_style( 'boxes', plugins_url( 'css/adminbar' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
+		wp_enqueue_style( 'boxes', plugins_url( 'css/adminbar' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 	}
 }
 
@@ -469,8 +469,8 @@ function allow_custom_field_edits( $allcaps, $cap, $args ) {
 	// but this is safer to check).
 	if ( in_array( $args[0], array( 'edit_post_meta', 'add_post_meta' ) ) ) {
 		// Only allow editing rights for users who have the rights to edit this post and make sure
-		// the meta value starts with _yoast_wpseo (WPSEO_Meta::$meta_prefix).
-		if ( ( isset( $args[2] ) && current_user_can( 'edit_post', $args[2] ) ) && ( ( isset( $args[3] ) && $args[3] !== '' ) && strpos( $args[3], WPSEO_Meta::$meta_prefix ) === 0 ) ) {
+		// the meta value starts with _yoast_wpseo (YMBESEO_Meta::$meta_prefix).
+		if ( ( isset( $args[2] ) && current_user_can( 'edit_post', $args[2] ) ) && ( ( isset( $args[3] ) && $args[3] !== '' ) && strpos( $args[3], YMBESEO_Meta::$meta_prefix ) === 0 ) ) {
 			$allcaps[ $args[0] ] = true;
 		}
 	}
@@ -596,20 +596,20 @@ function wpseo_deactivate_robots_meta_notice() {
  * Set the default settings.
  *
  * @deprecated 1.5.0
- * @deprecated use WPSEO_Options::initialize()
- * @see        WPSEO_Options::initialize()
+ * @deprecated use YMBESEO_Options::initialize()
+ * @see        YMBESEO_Options::initialize()
  */
 function wpseo_defaults() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.0', 'WPSEO_Options::initialize()' );
-	WPSEO_Options::initialize();
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::initialize()' );
+	YMBESEO_Options::initialize();
 }
 
 /**
  * Translates a decimal analysis score into a textual one.
  *
  * @deprecated 1.5.6.1
- * @deprecated use WPSEO_Utils::translate_score()
- * @see        WPSEO_Utils::translate_score()
+ * @deprecated use YMBESEO_Utils::translate_score()
+ * @see        YMBESEO_Utils::translate_score()
  *
  * @param int  $val       The decimal score to translate.
  * @param bool $css_value Whether to return the i18n translated score or the CSS class value.
@@ -617,9 +617,9 @@ function wpseo_defaults() {
  * @return string
  */
 function wpseo_translate_score( $val, $css_value = true ) {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::translate_score()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.6.1', 'YMBESEO_Utils::translate_score()' );
 
-	return WPSEO_Utils::translate_score();
+	return YMBESEO_Utils::translate_score();
 }
 
 
@@ -627,15 +627,15 @@ function wpseo_translate_score( $val, $css_value = true ) {
  * Check whether file editing is allowed for the .htaccess and robots.txt files
  *
  * @deprecated 1.5.6.1
- * @deprecated use WPSEO_Utils::allow_system_file_edit()
- * @see        WPSEO_Utils::allow_system_file_edit()
+ * @deprecated use YMBESEO_Utils::allow_system_file_edit()
+ * @see        YMBESEO_Utils::allow_system_file_edit()
  *
  * @internal   current_user_can() checks internally whether a user is on wp-ms and adjusts accordingly.
  *
  * @return bool
  */
 function wpseo_allow_system_file_edit() {
-	_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::allow_system_file_edit()' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.6.1', 'YMBESEO_Utils::allow_system_file_edit()' );
 
-	return WPSEO_Utils::allow_system_file_edit();
+	return YMBESEO_Utils::allow_system_file_edit();
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
@@ -8,7 +8,7 @@
  *
  * @todo Add an introductory pointer on the edit post page too.
  */
-class WPSEO_Pointers {
+class YMBESEO_Pointers {
 
 	/**
 	 * @var object Instance of this class

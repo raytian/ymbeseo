@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.7.0
  */
 
 /**
  * Contains list of conflicting plugins.
  */
-class WPSEO_Plugin_Conflict extends Yoast_Plugin_Conflict {
+class YMBESEO_Plugin_Conflict extends Yoast_Plugin_Conflict {
 
 	/**
 	 * The plugins must be grouped per section.

@@ -1,23 +1,23 @@
 <?php
 /**
- * @package WPSEO\Internals
+ * @package YMBESEO\Internals
  * @since      1.5.4
  */
 
 // Avoid direct calls to this file.
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
 }
 
 /**
- * Class: WPSEO_Replace_Vars
+ * Class: YMBESEO_Replace_Vars
  *
  * This class implements the replacing of `%%variable_placeholders%%` with their real value based on the current
  * requested page/post/cpt/etc in text strings.
  */
-class WPSEO_Replace_Vars {
+class YMBESEO_Replace_Vars {
 
 	/**
 	 * @var    array    Default post/page/cpt information
@@ -42,7 +42,7 @@ class WPSEO_Replace_Vars {
 	protected $args;
 
 	/**
-	 * @var    array    Help texts for use in WPSEO -> Titles and Meta's help tabs
+	 * @var    array    Help texts for use in YMBESEO -> Titles and Meta's help tabs
 	 */
 	protected static $help_texts = array();
 
@@ -55,7 +55,7 @@ class WPSEO_Replace_Vars {
 	/**
 	 * Constructor
 	 *
-	 * @return \WPSEO_Replace_Vars
+	 * @return \YMBESEO_Replace_Vars
 	 */
 	public function __construct() {
 	}
@@ -106,7 +106,7 @@ class WPSEO_Replace_Vars {
 				trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
-				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the YMBESEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
 				if ( ! isset( self::$external_replacements[ $var ] ) ) {
@@ -119,7 +119,7 @@ class WPSEO_Replace_Vars {
 				}
 			}
 			else {
-				trigger_error( __( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( __( 'You cannot overrule a YMBESEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 		}
 
@@ -143,15 +143,15 @@ class WPSEO_Replace_Vars {
 
 		// Let's see if we can bail super early.
 		if ( strpos( $string, '%%' ) === false ) {
-			return WPSEO_Utils::standardize_whitespace( $string );
+			return YMBESEO_Utils::standardize_whitespace( $string );
 		}
 
 		$args = (array) $args;
 		if ( isset( $args['post_content'] ) && ! empty( $args['post_content'] ) ) {
-			$args['post_content'] = WPSEO_Utils::strip_shortcode( $args['post_content'] );
+			$args['post_content'] = YMBESEO_Utils::strip_shortcode( $args['post_content'] );
 		}
 		if ( isset( $args['post_excerpt'] ) && ! empty( $args['post_excerpt'] ) ) {
-			$args['post_excerpt'] = WPSEO_Utils::strip_shortcode( $args['post_excerpt'] );
+			$args['post_excerpt'] = YMBESEO_Utils::strip_shortcode( $args['post_excerpt'] );
 		}
 		$this->args = (object) wp_parse_args( $args, $this->defaults );
 
@@ -199,7 +199,7 @@ class WPSEO_Replace_Vars {
 		}
 
 		// Remove superfluous whitespace.
-		$string = WPSEO_Utils::standardize_whitespace( $string );
+		$string = YMBESEO_Utils::standardize_whitespace( $string );
 
 		return trim( $string );
 	}
@@ -399,11 +399,11 @@ class WPSEO_Replace_Vars {
 	 * @return string
 	 */
 	private function retrieve_sep() {
-		$replacement = WPSEO_Options::get_default( 'wpseo_titles', 'separator' );
+		$replacement = YMBESEO_Options::get_default( 'wpseo_titles', 'separator' );
 
 		// Get the titles option and the separator options.
 		$titles_options    = get_option( 'wpseo_titles' );
-		$seperator_options = WPSEO_Option_Titles::get_instance()->get_separator_options();
+		$seperator_options = YMBESEO_Option_Titles::get_instance()->get_separator_options();
 
 		// This should always be set, but just to be sure.
 		if ( isset( $seperator_options[ $titles_options['separator'] ] ) ) {
@@ -808,7 +808,7 @@ class WPSEO_Replace_Vars {
 		$replacement = null;
 
 		if ( ! empty( $this->args->ID ) ) {
-			$focus_kw = WPSEO_Meta::get_value( 'focuskw', $this->args->ID );
+			$focus_kw = YMBESEO_Meta::get_value( 'focuskw', $this->args->ID );
 			if ( $focus_kw !== '' ) {
 				$replacement = $focus_kw;
 			}
@@ -1078,7 +1078,7 @@ class WPSEO_Replace_Vars {
 
 
 	/**
-	 * Set/translate the help texts for the WPSEO standard basic variables.
+	 * Set/translate the help texts for the YMBESEO standard basic variables.
 	 */
 	private static function set_basic_help_texts() {
 		self::$help_texts['basic'] = array(
@@ -1101,7 +1101,7 @@ class WPSEO_Replace_Vars {
 	}
 
 	/**
-	 * Set/translate the help texts for the WPSEO standard advanced variables.
+	 * Set/translate the help texts for the YMBESEO standard advanced variables.
 	 */
 	private static function set_advanced_help_texts() {
 		self::$help_texts['advanced'] = array(
@@ -1199,10 +1199,10 @@ class WPSEO_Replace_Vars {
 		return apply_filters( 'wpseo_terms', $output );
 	}
 
-} /* End of class WPSEO_Replace_Vars */
+} /* End of class YMBESEO_Replace_Vars */
 
 
 /**
  * Setup the class statics when the file is first loaded
  */
-WPSEO_Replace_Vars::setup_statics_once();
+YMBESEO_Replace_Vars::setup_statics_once();

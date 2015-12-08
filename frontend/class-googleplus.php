@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This code handles the Google+ specific output that's not covered by OpenGraph.
  */
-class WPSEO_GooglePlus {
+class YMBESEO_GooglePlus {
 
 	/**
 	 * @var    object    Instance of this class
@@ -52,7 +52,7 @@ class WPSEO_GooglePlus {
 	 */
 	public function description() {
 		if ( is_singular() ) {
-			$desc = WPSEO_Meta::get_value( 'google-plus-description' );
+			$desc = YMBESEO_Meta::get_value( 'google-plus-description' );
 
 			/**
 			 * Filter: 'wpseo_googleplus_desc' - Allow developers to change the Google+ specific description output
@@ -72,7 +72,7 @@ class WPSEO_GooglePlus {
 	 */
 	public function google_plus_title() {
 		if ( is_singular() ) {
-			$title = WPSEO_Meta::get_value( 'google-plus-title' );
+			$title = YMBESEO_Meta::get_value( 'google-plus-title' );
 
 			/**
 			 * Filter: 'wpseo_googleplus_title' - Allow developers to change the Google+ specific title
@@ -94,7 +94,7 @@ class WPSEO_GooglePlus {
 	 */
 	public function google_plus_image() {
 		if ( is_singular() ) {
-			$image = WPSEO_Meta::get_value( 'google-plus-image' );
+			$image = YMBESEO_Meta::get_value( 'google-plus-image' );
 
 			/**
 			 * Filter: 'wpseo_googleplus_image' - Allow changing the Google+ image

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This code adds the OpenGraph output.
  */
-class WPSEO_OpenGraph {
+class YMBESEO_OpenGraph {
 
 	/**
 	 * @var array $options Options for the OpenGraph Settings
@@ -17,7 +17,7 @@ class WPSEO_OpenGraph {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
 		if ( isset( $GLOBALS['fb_ver'] ) || class_exists( 'Facebook_Loader', false ) ) {
 			add_filter( 'fb_meta_tags', array( $this, 'facebook_filter' ), 10, 1 );
@@ -205,14 +205,14 @@ class WPSEO_OpenGraph {
 	 */
 	public function og_title( $echo = true ) {
 
-		$frontend      = WPSEO_Frontend::get_instance();
+		$frontend      = YMBESEO_Frontend::get_instance();
 		$is_posts_page = $frontend->is_posts_page();
 
 		if ( is_singular() || $is_posts_page ) {
 
 			$post_id = ( $is_posts_page ) ? get_option( 'page_for_posts' ) : get_the_ID();
 			$post    = get_post( $post_id );
-			$title   = WPSEO_Meta::get_value( 'opengraph-title', $post_id );
+			$title   = YMBESEO_Meta::get_value( 'opengraph-title', $post_id );
 
 			if ( $title === '' ) {
 				$title = $frontend->title( '' );
@@ -263,7 +263,7 @@ class WPSEO_OpenGraph {
 		 *
 		 * @api string $unsigned Canonical URL
 		 */
-		$url = apply_filters( 'wpseo_opengraph_url', WPSEO_Frontend::get_instance()->canonical( false ) );
+		$url = apply_filters( 'wpseo_opengraph_url', YMBESEO_Frontend::get_instance()->canonical( false ) );
 
 		if ( is_string( $url ) && $url !== '' ) {
 			$this->og_tag( 'og:url', esc_url( $url ) );
@@ -443,7 +443,7 @@ class WPSEO_OpenGraph {
 		elseif ( is_singular() ) {
 
 			// This'll usually only be changed by plugins right now.
-			$type = WPSEO_Meta::get_value( 'og_type' );
+			$type = YMBESEO_Meta::get_value( 'og_type' );
 
 			if ( $type === '' ) {
 				$type = 'article';
@@ -474,12 +474,12 @@ class WPSEO_OpenGraph {
 	}
 
 	/**
-	 * Create new WPSEO_OpenGraph_Image class and get the images to set the og:image
+	 * Create new YMBESEO_OpenGraph_Image class and get the images to set the og:image
 	 *
 	 * @param mixed $image
 	 */
 	public function image( $image = false ) {
-		$opengraph_images = new WPSEO_OpenGraph_Image( $this->options, $image );
+		$opengraph_images = new YMBESEO_OpenGraph_Image( $this->options, $image );
 
 		foreach ( $opengraph_images->get_images() as $img ) {
 			$this->og_tag( 'og:image', esc_url( $img ) );
@@ -504,7 +504,7 @@ class WPSEO_OpenGraph {
 	 */
 	public function description( $echo = true ) {
 		$ogdesc   = '';
-		$frontend = WPSEO_Frontend::get_instance();
+		$frontend = YMBESEO_Frontend::get_instance();
 
 		if ( is_front_page() ) {
 			if ( isset( $this->options['og_frontpage_desc'] ) && $this->options['og_frontpage_desc'] !== '' ) {
@@ -520,7 +520,7 @@ class WPSEO_OpenGraph {
 		if ( is_singular() || $is_posts_page ) {
 			$post_id = ( $is_posts_page ) ? get_option( 'page_for_posts' ) : get_the_ID();
 			$post    = get_post( $post_id );
-			$ogdesc  = WPSEO_Meta::get_value( 'opengraph-description', $post_id );
+			$ogdesc  = YMBESEO_Meta::get_value( 'opengraph-description', $post_id );
 
 			// Replace Yoast SEO Variables.
 			$ogdesc = wpseo_replace_vars( $ogdesc, $post );
@@ -546,7 +546,7 @@ class WPSEO_OpenGraph {
 
 			if ( '' == $ogdesc ) {
 				$term   = $GLOBALS['wp_query']->get_queried_object();
-				$ogdesc = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
+				$ogdesc = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
 			}
 		}
 
@@ -669,9 +669,9 @@ class WPSEO_OpenGraph {
 } /* End of class */
 
 /**
- * Class WPSEO_OpenGraph_Image
+ * Class YMBESEO_OpenGraph_Image
  */
-class WPSEO_OpenGraph_Image {
+class YMBESEO_OpenGraph_Image {
 
 	/**
 	 * @var array $options Holds options passed to the constructor
@@ -763,7 +763,7 @@ class WPSEO_OpenGraph_Image {
 	 * @return bool
 	 */
 	private function get_opengraph_image() {
-		$ogimg = WPSEO_Meta::get_value( 'opengraph-image' );
+		$ogimg = YMBESEO_Meta::get_value( 'opengraph-image' );
 		if ( $ogimg !== '' ) {
 			$this->add_image( $ogimg );
 
@@ -843,7 +843,7 @@ class WPSEO_OpenGraph_Image {
 			return false;
 		}
 
-		if ( WPSEO_Utils::is_url_relative( $img ) === true ) {
+		if ( YMBESEO_Utils::is_url_relative( $img ) === true ) {
 			$img = $this->get_relative_path( $img );
 		}
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Issues
+ * Class YMBESEO_GSC_Issues
  */
-class WPSEO_GSC_Issues {
+class YMBESEO_GSC_Issues {
 
 	/**
 	 * @var string
@@ -99,7 +99,7 @@ class WPSEO_GSC_Issues {
 	 * @param stdClass $issue
 	 */
 	private function issue_compare( &$crawl_issues, $issue ) {
-		$issue->pageUrl = WPSEO_Utils::format_url( (string) $issue->pageUrl );
+		$issue->pageUrl = YMBESEO_Utils::format_url( (string) $issue->pageUrl );
 
 		if ( ! in_array( $issue->pageUrl, $this->current_issues ) ) {
 			array_push(
@@ -110,15 +110,15 @@ class WPSEO_GSC_Issues {
 	}
 
 	/**
-	 * The fetched issue from the API will be parsed as an WPSEO_Crawl_Issue object. After initializing the issue as an
+	 * The fetched issue from the API will be parsed as an YMBESEO_Crawl_Issue object. After initializing the issue as an
 	 * object, the object will be returned
 	 *
 	 * @param stdClass $issue
 	 *
-	 * @return WPSEO_GSC_Issue
+	 * @return YMBESEO_GSC_Issue
 	 */
 	private function create_issue( $issue ) {
-		return new WPSEO_GSC_Issue(
+		return new YMBESEO_GSC_Issue(
 			$issue->pageUrl,
 			new DateTime( (string) $issue->first_detected ),
 			new DateTime( (string) $issue->last_crawled ),
@@ -129,11 +129,11 @@ class WPSEO_GSC_Issues {
 	/**
 	 * Returns the crawl issue as an array.
 	 *
-	 * @param WPSEO_GSC_Issue $crawl_issue
+	 * @param YMBESEO_GSC_Issue $crawl_issue
 	 *
 	 * @return array()
 	 */
-	private function get_issue( WPSEO_GSC_Issue $crawl_issue ) {
+	private function get_issue( YMBESEO_GSC_Issue $crawl_issue ) {
 		return $crawl_issue->to_array();
 	}
 

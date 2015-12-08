@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -90,7 +90,7 @@ $yform->admin_header( true, 'wpseo_social' );
 		<?php $yform->checkbox( 'twitter', __( 'Add Twitter card meta data', 'wordpress-seo' ) ); ?>
 
 		<?php
-		$yform->select( 'twitter_card_type', __( 'The default card type to use', 'wordpress-seo' ), WPSEO_Option_Social::$twitter_card_types );
+		$yform->select( 'twitter_card_type', __( 'The default card type to use', 'wordpress-seo' ), YMBESEO_Option_Social::$twitter_card_types );
 		do_action( 'wpseo_admin_twitter_section' );
 		?>
 	</div>

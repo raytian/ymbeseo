@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * Main frontend class for Yoast SEO, responsible for the SEO output as well as removing
  * default WordPress output.
  */
-class WPSEO_Frontend {
+class YMBESEO_Frontend {
 
 	/**
 	 * @var    object    Instance of this class
@@ -66,7 +66,7 @@ class WPSEO_Frontend {
 	 */
 	protected function __construct() {
 
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
 		add_action( 'wp_head', array( $this, 'front_page_specific_init' ), 0 );
 		add_action( 'wp_head', array( $this, 'head' ), 1 );
@@ -156,7 +156,7 @@ class WPSEO_Frontend {
 			return;
 		}
 
-		new WPSEO_JSON_LD;
+		new YMBESEO_JSON_LD;
 		add_action( 'wpseo_head', array( $this, 'webmaster_tools_authentication' ), 90 );
 	}
 
@@ -172,13 +172,13 @@ class WPSEO_Frontend {
 				$this->$name = $default;
 			}
 		}
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 	}
 
 	/**
 	 * Get the singleton instance of this class
 	 *
-	 * @return WPSEO_Frontend
+	 * @return YMBESEO_Frontend
 	 */
 	public static function get_instance() {
 		if ( ! ( self::$instance instanceof self ) ) {
@@ -238,7 +238,7 @@ class WPSEO_Frontend {
 			$object = $GLOBALS['wp_query']->get_queried_object();
 		}
 
-		$title = WPSEO_Meta::get_value( 'title', $object->ID );
+		$title = YMBESEO_Meta::get_value( 'title', $object->ID );
 
 		if ( $title !== '' ) {
 			return wpseo_replace_vars( $title, $object );
@@ -257,7 +257,7 @@ class WPSEO_Frontend {
 	public function get_taxonomy_title() {
 		$object = $GLOBALS['wp_query']->get_queried_object();
 
-		$title = WPSEO_Taxonomy_Meta::get_term_meta( $object, $object->taxonomy, 'title' );
+		$title = YMBESEO_Taxonomy_Meta::get_term_meta( $object, $object->taxonomy, 'title' );
 
 		if ( is_string( $title ) && $title !== '' ) {
 			return wpseo_replace_vars( $title, $object );
@@ -507,7 +507,7 @@ class WPSEO_Frontend {
 			$title = $this->get_title_from_options( 'title-archive-wpseo' );
 
 			// @todo [JRF => Yoast] Should these not use the archive default if no title found ?
-			// WPSEO_Options::get_default( 'wpseo_titles', 'title-archive-wpseo' )
+			// YMBESEO_Options::get_default( 'wpseo_titles', 'title-archive-wpseo' )
 			// Replacement would be needed!
 			if ( empty( $title ) ) {
 				if ( is_month() ) {
@@ -548,7 +548,7 @@ class WPSEO_Frontend {
 				$title = $this->get_title_from_options( 'title-404-wpseo' );
 
 				// @todo [JRF => Yoast] Should these not use the 404 default if no title found ?
-				// WPSEO_Options::get_default( 'wpseo_titles', 'title-404-wpseo' )
+				// YMBESEO_Options::get_default( 'wpseo_titles', 'title-404-wpseo' )
 				// Replacement would be needed!
 				if ( empty( $title ) ) {
 					$title_part = __( 'Page not found', 'wordpress-seo' );
@@ -621,7 +621,7 @@ class WPSEO_Frontend {
 			 *
 			 * @api bool
 			 */
-			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . WPSEO_VERSION  )
+			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . YMBESEO_VERSION  )
 		);
 
 		if ( $echo === false ) {
@@ -729,7 +729,7 @@ class WPSEO_Frontend {
 				}
 
 				// Three possible values, index, noindex and default, do nothing for default.
-				$term_meta = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'noindex' );
+				$term_meta = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'noindex' );
 				if ( is_string( $term_meta ) && 'default' !== $term_meta ) {
 					$robots['index'] = $term_meta;
 				}
@@ -815,7 +815,7 @@ class WPSEO_Frontend {
 	 * @return    array
 	 */
 	public function robots_for_single_post( $robots, $post_id = 0 ) {
-		$noindex = WPSEO_Meta::get_value( 'meta-robots-noindex', $post_id );
+		$noindex = YMBESEO_Meta::get_value( 'meta-robots-noindex', $post_id );
 		if ( $noindex === '1' ) {
 			$robots['index'] = 'noindex';
 		}
@@ -823,11 +823,11 @@ class WPSEO_Frontend {
 			$robots['index'] = 'index';
 		}
 
-		if ( WPSEO_Meta::get_value( 'meta-robots-nofollow', $post_id ) === '1' ) {
+		if ( YMBESEO_Meta::get_value( 'meta-robots-nofollow', $post_id ) === '1' ) {
 			$robots['follow'] = 'nofollow';
 		}
 
-		$meta_robots_adv = WPSEO_Meta::get_value( 'meta-robots-adv', $post_id );
+		$meta_robots_adv = YMBESEO_Meta::get_value( 'meta-robots-adv', $post_id );
 
 		if ( $meta_robots_adv !== '' && ( $meta_robots_adv !== '-' && $meta_robots_adv !== 'none' ) ) {
 			$meta_robots_adv = explode( ',', $meta_robots_adv );
@@ -899,7 +899,7 @@ class WPSEO_Frontend {
 
 			$this->canonical_unpaged = $canonical;
 
-			$canonical_override = WPSEO_Meta::get_value( 'canonical' );
+			$canonical_override = YMBESEO_Meta::get_value( 'canonical' );
 
 			// Fix paginated pages canonical, but only if the page is truly paginated.
 			if ( get_query_var( 'page' ) > 1 ) {
@@ -927,7 +927,7 @@ class WPSEO_Frontend {
 			elseif ( is_tax() || is_tag() || is_category() ) {
 				$term = get_queried_object();
 
-				$canonical_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
+				$canonical_override = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
 
 				$canonical = get_term_link( $term, $term->taxonomy );
 			}
@@ -978,7 +978,7 @@ class WPSEO_Frontend {
 
 		if ( is_string( $canonical ) && $canonical !== '' ) {
 			// Force canonical links to be absolute, relative is NOT an option.
-			if ( WPSEO_Utils::is_url_relative( $canonical ) === true ) {
+			if ( YMBESEO_Utils::is_url_relative( $canonical ) === true ) {
 				$canonical = $this->base_url( $canonical );
 			}
 		}
@@ -1168,7 +1168,7 @@ class WPSEO_Frontend {
 		$keywords = '';
 
 		if ( is_singular() ) {
-			$keywords = WPSEO_Meta::get_value( 'metakeywords' );
+			$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
 			if ( $keywords === '' && ( is_object( $post ) && ( ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) ) {
 				$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 			}
@@ -1178,7 +1178,7 @@ class WPSEO_Frontend {
 				$keywords = wpseo_replace_vars( $this->options['metakey-home-wpseo'], array() );
 			}
 			elseif ( $this->is_home_static_page() ) {
-				$keywords = WPSEO_Meta::get_value( 'metakeywords' );
+				$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
 				if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) {
 					$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 				}
@@ -1187,7 +1187,7 @@ class WPSEO_Frontend {
 				$term = $wp_query->get_queried_object();
 
 				if ( is_object( $term ) ) {
-					$keywords = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
+					$keywords = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
 					if ( ( ! is_string( $keywords ) || $keywords === '' ) && ( isset( $this->options[ 'metakey-tax-' . $term->taxonomy ] ) && $this->options[ 'metakey-tax-' . $term->taxonomy ] !== '' ) ) {
 						$keywords = wpseo_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
 					}
@@ -1270,7 +1270,7 @@ class WPSEO_Frontend {
 				$template = $this->options[ 'metadesc-' . $post_type ];
 				$term     = $post;
 			}
-			$metadesc_override = WPSEO_Meta::get_value( 'metadesc' );
+			$metadesc_override = YMBESEO_Meta::get_value( 'metadesc' );
 		}
 		else {
 			if ( is_search() ) {
@@ -1285,7 +1285,7 @@ class WPSEO_Frontend {
 				}
 			}
 			elseif ( $this->is_posts_page() ) {
-				$metadesc = WPSEO_Meta::get_value( 'metadesc', get_option( 'page_for_posts' ) );
+				$metadesc = YMBESEO_Meta::get_value( 'metadesc', get_option( 'page_for_posts' ) );
 				if ( ( $metadesc === '' && $post_type !== '' ) && isset( $this->options[ 'metadesc-' . $post_type ] ) ) {
 					$page     = get_post( get_option( 'page_for_posts' ) );
 					$template = $this->options[ 'metadesc-' . $post_type ];
@@ -1293,14 +1293,14 @@ class WPSEO_Frontend {
 				}
 			}
 			elseif ( $this->is_home_static_page() ) {
-				$metadesc = WPSEO_Meta::get_value( 'metadesc' );
+				$metadesc = YMBESEO_Meta::get_value( 'metadesc' );
 				if ( ( $metadesc === '' && $post_type !== '' ) && isset( $this->options[ 'metadesc-' . $post_type ] ) ) {
 					$template = $this->options[ 'metadesc-' . $post_type ];
 				}
 			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
 				$term              = $wp_query->get_queried_object();
-				$metadesc_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
+				$metadesc_override = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
 				if ( is_object( $term ) && isset( $term->taxonomy, $this->options[ 'metadesc-tax-' . $term->taxonomy ] ) ) {
 					$template = $this->options[ 'metadesc-tax-' . $term->taxonomy ];
 				}
@@ -1372,7 +1372,7 @@ class WPSEO_Frontend {
 				return false;
 			}
 
-			$redir = WPSEO_Meta::get_value( 'redirect', $post->ID );
+			$redir = YMBESEO_Meta::get_value( 'redirect', $post->ID );
 			if ( $redir !== '' ) {
 				wp_redirect( $redir, 301 );
 				exit;
@@ -1868,12 +1868,12 @@ class WPSEO_Frontend {
 	}
 
 	/**
-	 * Check if this plugin is the premium version of WPSEO
+	 * Check if this plugin is the premium version of YMBESEO
 	 *
 	 * @return bool
 	 */
 	private function is_premium() {
-		return file_exists( WPSEO_PATH . 'premium/' );
+		return file_exists( YMBESEO_PATH . 'premium/' );
 	}
 
 } /* End of class */

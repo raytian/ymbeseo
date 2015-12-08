@@ -1,15 +1,15 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Category_Filters
+ * Class YMBESEO_GSC_Category_Filters
  *
  * This class will get all category counts from the options and will parse the filter links that are displayed above
  * the crawl issue tables.
  */
-class WPSEO_GSC_Category_Filters {
+class YMBESEO_GSC_Category_Filters {
 
 	/**
 	 * The counts per category

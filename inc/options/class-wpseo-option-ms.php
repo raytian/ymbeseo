@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
@@ -9,7 +9,7 @@
  * Overloads a number of methods of the abstract class to ensure the use of the correct site_option
  * WP functions.
  */
-class WPSEO_Option_MS extends WPSEO_Option {
+class YMBESEO_Option_MS extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -22,7 +22,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 	public $group_name = 'yoast_wpseo_multisite_options';
 
 	/**
-	 * @var  bool  whether to include the option in the return for WPSEO_Options::get_all()
+	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()
 	 */
 	public $include_in_all = false;
 
@@ -159,7 +159,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 
 				case 'defaultblog':
 					if ( isset( $dirty[ $key ] ) && ( $dirty[ $key ] !== '' && $dirty[ $key ] !== '-' ) ) {
-						$int = WPSEO_Utils::validate_int( $dirty[ $key ] );
+						$int = YMBESEO_Utils::validate_int( $dirty[ $key ] );
 						if ( $int !== false && $int > 0 ) {
 							// Check if a valid blog number has been received.
 							$exists = get_blog_details( $int, false );
@@ -189,7 +189,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 					break;
 
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}

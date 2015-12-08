@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -8,9 +8,9 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 }
 
 /**
- * Class WPSEO_GSC_Table
+ * Class YMBESEO_GSC_Table
  */
-class WPSEO_GSC_Table extends WP_List_Table {
+class YMBESEO_GSC_Table extends WP_List_Table {
 
 	/**
 	 * @var string
@@ -339,7 +339,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 		$current_redirect = false;
 		$view_type        = $this->modal_box_type( $url, $current_redirect );
 
-		require WPSEO_PATH . '/admin/google_search_console/views/gsc-create-redirect.php';
+		require YMBESEO_PATH . '/admin/google_search_console/views/gsc-create-redirect.php';
 
 		return $view_type;
 	}
@@ -353,11 +353,11 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 * @return string
 	 */
 	private function modal_box_type( $url, &$current_redirect ) {
-		if ( defined( 'WPSEO_PREMIUM_FILE' ) && class_exists( 'WPSEO_URL_Redirect_Manager' ) ) {
+		if ( defined( 'YMBESEO_PREMIUM_FILE' ) && class_exists( 'YMBESEO_URL_Redirect_Manager' ) ) {
 			static $redirect_manager;
 
 			if ( ! $redirect_manager ) {
-				$redirect_manager = new WPSEO_URL_Redirect_Manager();
+				$redirect_manager = new YMBESEO_URL_Redirect_Manager();
 			}
 
 			if ( $current_redirect = $redirect_manager->search_url( $url ) ) {

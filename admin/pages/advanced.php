@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -47,6 +47,6 @@ Yoast_Form::get_instance()->admin_header( true, $tabs[ $active_tab ]['opt_group'
 	<br/>
 <?php
 
-require_once WPSEO_PATH . 'admin/views/tab-' . $active_tab . '.php';
+require_once YMBESEO_PATH . 'admin/views/tab-' . $active_tab . '.php';
 
 Yoast_Form::get_instance()->admin_footer();

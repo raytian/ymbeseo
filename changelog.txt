@@ -185,7 +185,7 @@ Release Date: July 15th, 2014
 	* Fixed: Multisite issues, as reported by [GaryJones](https://github.com/GaryJones) and [chrisfromthelc](https://github.com/chrisfromthelc) in [issue #935](https://github.com/Yoast/wordpress-seo/issues/935) - props [Jrf](http://profiles.wordpress.org/jrf).
 		- saving of settings on the multisite settings page was not working.
 		- restoring site to default settings from multisite settings page was not working.
-		- initializing new blogs with settings from a chosen default blog was not working (might still not be completely stable for WP multisite with WPSEO in must-use plugins directory, stable in all other cases).
+		- initializing new blogs with settings from a chosen default blog was not working (might still not be completely stable for WP multisite with YMBESEO in must-use plugins directory, stable in all other cases).
 		- wrong option debug information shown on multisite settings page
 	* Fixed: an issue with sitemap transient caching for plugins not using paginated sitemaps (like news seo).
 	* Check if get_queried_object_id is not 0 before enqueueing wp_enqueue_media.
@@ -347,7 +347,7 @@ Release Date: May 15th, 2014
 	* Fixed a keyword density problem in the Page Analysis
 	* Fixed OpenGraph/GooglePlus/Twitter tags not showing in a select few themes, [issue #750](https://github.com/Yoast/wordpress-seo/issues/750) as reported by [Jovian](https://github.com/Jovian) and [wwdboer](https://github.com/wwdboer) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed Facebook Apps not being saved/ "Failed to retrieve your apps from Facebook" as reported by [kevinlisota](https://github.com/kevinlisota) in [issue #812](https://github.com/Yoast/wordpress-seo/issues/812) - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed duplicate feedback messages on WPSEO -> Social pages as reported by [steverep](https://github.com/steverep) in [issue #743](https://github.com/Yoast/wordpress-seo/issues/743) - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Fixed duplicate feedback messages on YMBESEO -> Social pages as reported by [steverep](https://github.com/steverep) in [issue #743](https://github.com/Yoast/wordpress-seo/issues/743) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Flush our force title rewrite buffer earlier in `wp_footer` so it can be used by other plugins in `wp_footer`. Props [Gabriel Pérez Salazar](http://www.guero.net/).
 	* Start the force rewrite buffer late (at 999) in `template_redirect` instead of `get_header` because of several themes not using `get_header`, issue [#817](https://github.com/Yoast/wordpress-seo/issues/817) as reported by [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed 'Page %d of %d' / %%page%% variable not being replaced when on pages, as reported by [SGr33n](https://github.com/SGr33n) in [issue #801](https://github.com/Yoast/wordpress-seo/issues/801) - props [Jrf](http://profiles.wordpress.org/jrf).
@@ -387,7 +387,7 @@ Release Date: May 15th, 2014
 	* Fix white screen/blog down issues caused by some (bloody stupid) webhosts actively disabling the filter extension - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fix for some PHP notices, [issue #747](https://github.com/Yoast/wordpress-seo/issues/747) as reported by [benfreke](https://github.com/benfreke) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed: GooglePlus vanity urls were saved without the `+` as reported by [ronimarin](https://github.com/ronimarin) in [issue #730](https://github.com/Yoast/wordpress-seo/issues/730) - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fix WP Admin menu items no longer clickable when on WPSEO pages as reported in [issue #733](https://github.com/Yoast/wordpress-seo/issues/733) and [#738](https://github.com/Yoast/wordpress-seo/issues/738) - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Fix WP Admin menu items no longer clickable when on YMBESEO pages as reported in [issue #733](https://github.com/Yoast/wordpress-seo/issues/733) and [#738](https://github.com/Yoast/wordpress-seo/issues/738) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fix strict warning for W3TC, [issue 721](https://github.com/Yoast/wordpress-seo/issues/721).
 	* Fix RSS text strings on options page being double escaped, [issue #731](https://github.com/Yoast/wordpress-seo/issues/731) as reported by [namaserajesh](https://github.com/namaserajesh) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Avoid potential confusion over Facebook OpenGraph front page usage, [issue #570](https://github.com/Yoast/wordpress-seo/issues/570) - props [Jrf](http://profiles.wordpress.org/jrf).
@@ -464,7 +464,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* Fixed: post meta -> page analysis -> text analysis did not respect the blog character encoding. This may or may not solve a number of related bugs.
 	* Fixed: post meta -> often wrong meta value was shown for meta robots follow and meta robots index in post meta box so it appeared as if the chosen value was not saved correctly.
 	* Fixed: post meta -> meta robots advanced entry could have strange (invalid) values.
-	* Fixed: post meta -> since v1.4.22 importing from other plugins would import data even when the post already had WP SEO values, effectively overwritting (empty by choice) WPSEO fields.
+	* Fixed: post meta -> since v1.4.22 importing from other plugins would import data even when the post already had WP SEO values, effectively overwritting (empty by choice) YMBESEO fields.
 	* Fixed: post meta -> A few of the meta values could contain line breaks where those aren't allowed.
 
 	* Fixed: taxonomy meta -> breadcrumb title entry field would show for taxonomy even when breadcrumbs were not enabled
@@ -480,17 +480,17 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 
 * Enhancements
 	* The [SEO Extended](http://wordpress.org/plugins/seo-extended/) plugin functionality has now been integrated into WP SEO.
-	* Added ability to add Pininterest and Yandex site verification tags. You can enter this info on the WPSEO Dashboard and it will auto-generate the relevant meta tags for your webpage headers.
+	* Added ability to add Pininterest and Yandex site verification tags. You can enter this info on the YMBESEO Dashboard and it will auto-generate the relevant meta tags for your webpage headers.
 	* New `[wpseo_breadcrumb]` shortcode.
 	* Post meta -> Don't show robots index/no-index choice in advanced meta box if there is a blog-wide override in place, i.e. the Settings -> Reading -> Block search engines checkbox is checked.
 	* Post meta -> Added 'Site-wide default' option to meta robots advanced field in advanced meta box.
 	* Post meta -> Added an option to decide whether to include/exclude `rel="author"` on a per post base as suggested by [GaryJones](https://github.com/GaryJones). (Added to the advanced meta box).
 	* Taxonomy meta -> Don't show robots index/no-index choice in taxonomy meta box if there is a blog-wide override in place, i.e. the Settings -> Reading -> Block search engines checkbox is checked.
-	* Admin -> If WP_DEBUG is on or if you have set the special constant WPSEO_DEBUG, a block with the currently saved options will be shown on the settings pages.
+	* Admin -> If WP_DEBUG is on or if you have set the special constant YMBESEO_DEBUG, a block with the currently saved options will be shown on the settings pages.
 	* Admin -> Dashboard -> Added error message for when meta description tag removal from theme file fails.
 	* Admin -> Titles & Meta -> Added option to add meta keywords to post type archives.
 	* Admin -> Social -> Facebook -> Added error messages for if communication with Facebook failed.
-	* Admin -> Import -> WPSEO settings -> Better error messages for when importing the settings fails and better clean up after itself.
+	* Admin -> Import -> YMBESEO settings -> Better error messages for when importing the settings fails and better clean up after itself.
 	* Adminbar -> Keyword research links now also search for the set the keyword when editing a post in the back-end.
 	* [Usability] Proper field labels for user profile form fields.
 	* The New Relic daemon (not the W3TC New Relic PHP module) realtime user monitoring will be turned off for xml/xsl files by default to prevent breaking the sitemaps as suggested by [szepeviktor](https://github.com/szepeviktor) in [issue #603](https://github.com/Yoast/wordpress-seo/issues/603)
@@ -524,7 +524,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* Fixed wrong use of `__FILE__`.
 
 * Enhancement
-	* WPSEO_FILE now has a 'defined' check.
+	* YMBESEO_FILE now has a 'defined' check.
 	* Removed unneeded `dirname` calls.
 
 * i18n
@@ -539,7 +539,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* When post published data is newer than last modified date, use that in XML sitemap, props [mindingdata](https://github.com/mindingdata).
 	* Check if tab hash is correct after being redirected from Facebook API, props [dannyvankooten](https://github.com/dannyvankooten).
 	* Fix 404 in category rewrites when `pagination_base` was changed, props [raugfer](https://github.com/raugfer).
-	* Make the metabox tabs jQuery only work for WPSEO tabs, props [imageinabox](https://github.com/imageinabox).
+	* Make the metabox tabs jQuery only work for YMBESEO tabs, props [imageinabox](https://github.com/imageinabox).
 	* Sitemap shortcode sql had hard-coded table name which could easily cause the shortcode display to fail. Fixed. - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fix issue with user capability authorisation check as reported by [scienceandpoetry](https://github.com/scienceandpoetry) in issue [#492](https://github.com/Yoast/wordpress-seo/issues/492) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed canonical rel links was causing an error when given an invalid taxonomy, issue [#306](https://github.com/Yoast/wordpress-seo/issues/306) - props [Jrf](http://profiles.wordpress.org/jrf).
@@ -556,7 +556,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 
 * Bugfixes
 	* Fix for serious sitemap issue which caused all pages of a split sitemap to be the same (show the first 1000 urls) - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed a bug in the WPSEO tour in WP Network installs
+	* Fixed a bug in the YMBESEO tour in WP Network installs
 	* clean_permalink 301 redirect issue when using https - props [pirategaspard](https://github.com/pirategaspard)
 
 * i18n
@@ -1681,7 +1681,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Plugin now properly reports which sitemap files are blocking it from working properly and asks you to delete them if it can't delete them itself.
 	* Some cosmetic fixes to dashboard widget.
 	* Removed some old links to Yoast CDN and replaced with images shipped with plugin, for SSL backends.
-	* New general settings panel on WPSEO Dashboard which allows you to disable WordPress SEO box on certain post types.
+	* New general settings panel on YMBESEO Dashboard which allows you to disable WordPress SEO box on certain post types.
 	* Option to use focus keyword in title, meta description and keyword templates.
 	* Changed the hook for the permalink cleaning from `get_header` to `template_redirect`, which means it redirects faster and is less error prone.
 

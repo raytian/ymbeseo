@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
@@ -11,16 +11,16 @@ class Yoast_Dashboard_Widget {
 	const CACHE_TRANSIENT_KEY = 'wpseo-dashboard-totals';
 
 	/**
-	 * @var WPSEO_Statistics
+	 * @var YMBESEO_Statistics
 	 */
 	protected $statistics;
 
 	/**
-	 * @param WPSEO_Statistics $statistics The statistics class to retrieve statistics from.
+	 * @param YMBESEO_Statistics $statistics The statistics class to retrieve statistics from.
 	 */
-	public function __construct( WPSEO_Statistics $statistics = null ) {
+	public function __construct( YMBESEO_Statistics $statistics = null ) {
 		if ( null === $statistics ) {
-			$statistics = new WPSEO_Statistics();
+			$statistics = new YMBESEO_Statistics();
 		}
 
 		$this->statistics = $statistics;
@@ -49,7 +49,7 @@ class Yoast_Dashboard_Widget {
 	public function display_dashboard_widget() {
 		$statistics = $this->statistic_items();
 
-		include WPSEO_PATH . '/admin/views/dashboard-widget.php';
+		include YMBESEO_PATH . '/admin/views/dashboard-widget.php';
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Yoast_Dashboard_Widget {
 	 */
 	public function enqueue_dashboard_stylesheet() {
 		if ( 'dashboard' === get_current_screen()->id ) {
-			wp_enqueue_style( 'wpseo-wp-dashboard', plugins_url( 'css/dashboard' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
+			wp_enqueue_style( 'wpseo-wp-dashboard', plugins_url( 'css/dashboard' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 		}
 	}
 

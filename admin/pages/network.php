@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -20,18 +20,18 @@ if ( isset( $_POST['wpseo_submit'] ) ) {
 		$options[ $opt ] = $_POST['wpseo_ms'][ $opt ];
 	}
 	unset( $opt );
-	WPSEO_Options::update_site_option( 'wpseo_ms', $options );
+	YMBESEO_Options::update_site_option( 'wpseo_ms', $options );
 	add_settings_error( 'wpseo_ms', 'settings_updated', __( 'Settings Updated.', 'wordpress-seo' ), 'updated' );
 }
 
 if ( isset( $_POST['wpseo_restore_blog'] ) ) {
 	check_admin_referer( 'wpseo-network-restore' );
 	if ( isset( $_POST['wpseo_ms']['restoreblog'] ) && is_numeric( $_POST['wpseo_ms']['restoreblog'] ) ) {
-		$restoreblog = (int) WPSEO_Utils::validate_int( $_POST['wpseo_ms']['restoreblog'] );
+		$restoreblog = (int) YMBESEO_Utils::validate_int( $_POST['wpseo_ms']['restoreblog'] );
 		$blog        = get_blog_details( $restoreblog );
 
 		if ( $blog ) {
-			WPSEO_Options::reset_ms_blog( $restoreblog );
+			YMBESEO_Options::reset_ms_blog( $restoreblog );
 			add_settings_error( 'wpseo_ms', 'settings_updated', sprintf( __( '%s restored to default SEO settings.', 'wordpress-seo' ), esc_html( $blog->blogname ) ), 'updated' );
 		}
 		else {
@@ -87,7 +87,7 @@ echo '<h2>', __( 'MultiSite Settings', 'wordpress-seo' ), '</h2>';
 echo '<form method="post" accept-charset="', esc_attr( get_bloginfo( 'charset' ) ), '">';
 wp_nonce_field( 'wpseo-network-settings', '_wpnonce', true, true );
 
-/* @internal Important: Make sure the options added to the array here are in line with the options set in the WPSEO_Option_MS::$allowed_access_options property */
+/* @internal Important: Make sure the options added to the array here are in line with the options set in the YMBESEO_Option_MS::$allowed_access_options property */
 $yform->select(
 	'access',
 	/* translators: %1$s expands to Yoast SEO */

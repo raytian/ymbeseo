@@ -1,16 +1,16 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
 }
 
 if ( filter_input( INPUT_GET, 'intro' ) ) {
-	require WPSEO_PATH . 'admin/views/about.php';
+	require YMBESEO_PATH . 'admin/views/about.php';
 	return;
 }
 

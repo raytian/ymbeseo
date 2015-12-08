@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Service
+ * Class YMBESEO_GSC_Service
  */
-class WPSEO_GSC_Service {
+class YMBESEO_GSC_Service {
 
 	/**
 	 * @var Yoast_Api_Google_Client
@@ -101,7 +101,7 @@ class WPSEO_GSC_Service {
 	 * @return bool
 	 */
 	public function mark_as_fixed( $url, $platform, $category ) {
-		$response = $this->client->do_request( 'sites/' .  urlencode( $this->profile ) .  '/urlCrawlErrorsSamples/' . urlencode( ltrim( $url, '/' ) ) . '?category=' . WPSEO_GSC_Mapper::category_to_api( $category ) . '&platform=' . WPSEO_GSC_Mapper::platform_to_api( $platform ) . '', false, 'DELETE' );
+		$response = $this->client->do_request( 'sites/' .  urlencode( $this->profile ) .  '/urlCrawlErrorsSamples/' . urlencode( ltrim( $url, '/' ) ) . '?category=' . YMBESEO_GSC_Mapper::category_to_api( $category ) . '&platform=' . YMBESEO_GSC_Mapper::platform_to_api( $platform ) . '', false, 'DELETE' );
 		return ( $response->getResponseHttpCode() === 204 );
 	}
 
@@ -156,7 +156,7 @@ class WPSEO_GSC_Service {
 			exit;
 		}
 
-		$this->client = new Yoast_Api_Google_Client( WPSEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
+		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
 	}
 
 	/**

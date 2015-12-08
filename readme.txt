@@ -324,7 +324,7 @@ Release Date: March 26th, 2015
 	* Makes sure every function in the plugin is documented using PHPDoc by having it checked automatically by the Codesniffer.
 	* Refactored a lot of legacy code in the admin, mainly with regard to the way output is rendered. Provides for a better separation of concerns, making the code more comprehensible and re-usable.
 	* Deprecated a large amount of form methods and moved them to the `Yoast_Form` class. Click [here](https://github.com/Yoast/wordpress-seo/blob/add975664d1f160eed262b02327a93bda5488f8b/admin/class-config.php#L172) for the list of deprecated methods.
-	* Deprecated a large amount of utility functions and moved them to the `WPSEO_Utils` class. Click [here](https://github.com/Yoast/wordpress-seo/blob/add975664d1f160eed262b02327a93bda5488f8b/inc/wpseo-functions.php#L496) for the list of deprecated functions.
+	* Deprecated a large amount of utility functions and moved them to the `YMBESEO_Utils` class. Click [here](https://github.com/Yoast/wordpress-seo/blob/add975664d1f160eed262b02327a93bda5488f8b/inc/wpseo-functions.php#L496) for the list of deprecated functions.
 
 = 1.7.4 =
 

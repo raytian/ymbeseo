@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
@@ -12,7 +12,7 @@
  */
 
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -61,7 +61,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 
 			<p>
 				<strong><?php _e( 'Entries per page', 'wordpress-seo' ); ?></strong><br/>
-				<?php printf( __( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), WPSEO_Options::get_default( 'wpseo_xml', 'entries-per-page' ) ); ?>
+				<?php printf( __( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), YMBESEO_Options::get_default( 'wpseo_xml', 'entries-per-page' ) ); ?>
 			</p>
 
 			<?php
@@ -77,7 +77,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 				<p><strong><?php _e( 'Exclude users without posts', 'wordpress-seo' ); ?></strong><br/>
 					<?php $yform->checkbox( 'disable_author_noposts', __( 'Disable all users with zero posts', 'wordpress-seo' ), false );
 
-					$roles = WPSEO_Utils::get_roles();
+					$roles = YMBESEO_Utils::get_roles();
 					if ( is_array( $roles ) && $roles !== array() ) {
 						echo '<p><strong>' . __( 'Exclude user roles', 'wordpress-seo' ) . '</strong><br/>';
 						echo __( 'Please check the appropriate box below if there\'s a user role that you do <strong>NOT</strong> want to include in your sitemap:', 'wordpress-seo' ) . '</p>';

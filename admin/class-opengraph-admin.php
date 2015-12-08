@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
  * This class adds the Social tab to the Yoast SEO metabox and makes sure the settings are saved.
  */
-class WPSEO_Social_Admin extends WPSEO_Metabox {
+class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 
 	/**
 	 * Class constructor
@@ -23,7 +23,7 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 	 * Translate text strings for use in the meta box
 	 *
 	 * IMPORTANT: if you want to add a new string (option) somewhere, make sure you add that array key to
-	 * the main meta box definition array in the class WPSEO_Meta() as well!!!!
+	 * the main meta box definition array in the class YMBESEO_Meta() as well!!!!
 	 */
 	public static function translate_meta_boxes() {
 		/* translators: %s expands to the social network's name */
@@ -35,7 +35,7 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 		/* translators: %1$s expands to the social network, %2$s to the recommended image size */
 		$image_size_text  = __( 'The recommended image size for %1$s is %2$spx.', 'wordpress-seo' );
 
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		$social_networks = array(
 			'opengraph'  => __( 'Facebook', 'wordpress-seo' ),
@@ -147,15 +147,15 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 	 * Define the meta boxes for the Social tab
 	 *
 	 * @deprecated 1.5.0
-	 * @deprecated use WPSEO_Meta::get_meta_field_defs()
-	 * @see        WPSEO_Meta::get_meta_field_defs()
+	 * @deprecated use YMBESEO_Meta::get_meta_field_defs()
+	 * @see        YMBESEO_Meta::get_meta_field_defs()
 	 *
 	 * @param    string $post_type
 	 *
 	 * @return    array    Array containing the meta boxes
 	 */
 	public function get_meta_boxes( $post_type = 'post' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.0', 'WPSEO_Meta::get_meta_field_defs()' );
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_meta_field_defs()' );
 
 		return $this->get_meta_field_defs( 'social' );
 	}

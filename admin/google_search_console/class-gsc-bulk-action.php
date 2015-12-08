@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Bulk_Action
+ * Class YMBESEO_GSC_Bulk_Action
  */
-class WPSEO_GSC_Bulk_Action {
+class YMBESEO_GSC_Bulk_Action {
 
 	/**
 	 * Setting the listener on the bulk action post
@@ -85,7 +85,7 @@ class WPSEO_GSC_Bulk_Action {
 	 * @return string
 	 */
 	private function action_mark_as_fixed( $issue ) {
-		new WPSEO_GSC_Marker( $issue );
+		new YMBESEO_GSC_Marker( $issue );
 
 		return $issue;
 	}

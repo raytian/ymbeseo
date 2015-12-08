@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    WPSEO
+ * @package    YMBESEO
  * @subpackage Admin
  */
 
@@ -172,7 +172,7 @@ class Yoast_Social_Facebook {
 		$this->verify_nonce( 'fbclearall' );
 
 		// Reset to defaults, don't unset as otherwise the old values will be retained.
-		$this->options['fb_admins'] = WPSEO_Options::get_default( 'wpseo_social', 'fb_admins' );
+		$this->options['fb_admins'] = YMBESEO_Options::get_default( 'wpseo_social', 'fb_admins' );
 
 		$this->save_options();
 		$this->success_notice( __( 'Successfully cleared all Facebook Data', 'wordpress-seo' ) );

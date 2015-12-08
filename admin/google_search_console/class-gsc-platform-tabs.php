@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Platform_Tabs
+ * Class YMBESEO_GSC_Platform_Tabs
  */
-class WPSEO_GSC_Platform_Tabs {
+class YMBESEO_GSC_Platform_Tabs {
 
 	/**
 	 * @var string
@@ -45,7 +45,7 @@ class WPSEO_GSC_Platform_Tabs {
 			'mobile'          => __( 'Feature phone', 'wordpress-seo' ),
 		);
 
-		if ( WPSEO_GSC_Settings::get_profile() !== '' ) {
+		if ( YMBESEO_GSC_Settings::get_profile() !== '' ) {
 			$tabs = array_merge( $platforms, $tabs );
 		}
 

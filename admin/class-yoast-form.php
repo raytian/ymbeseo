@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
 /**
@@ -46,7 +46,7 @@ class Yoast_Form {
 	 */
 	public function admin_header( $form = true, $option = 'wpseo', $contains_files = false, $option_long_name = false ) {
 		if ( ! $option_long_name ) {
-			$option_long_name = WPSEO_Options::get_group_name( $option );
+			$option_long_name = YMBESEO_Options::get_group_name( $option );
 		}
 		?>
 		<div class="wrap wpseo-admin-page page-<?php echo $option; ?>">
@@ -149,8 +149,8 @@ class Yoast_Form {
 	public function admin_sidebar() {
 
 		// No banners in Premium.
-		if ( class_exists( 'WPSEO_Product_Premium' ) ) {
-			$license_manager = new Yoast_Plugin_License_Manager( new WPSEO_Product_Premium() );
+		if ( class_exists( 'YMBESEO_Product_Premium' ) ) {
+			$license_manager = new Yoast_Plugin_License_Manager( new YMBESEO_Product_Premium() );
 			if ( $license_manager->license_is_valid() ) {
 				return;
 			}
@@ -188,7 +188,7 @@ class Yoast_Form {
 			);
 		}
 
-		if ( ! defined( 'WPSEO_LOCAL_VERSION' ) ) {
+		if ( ! defined( 'YMBESEO_LOCAL_VERSION' ) ) {
 			$plugin_banners[] = array(
 				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=local-seo-banner',
 				'img' => 'banner-local-seo.png',
@@ -196,7 +196,7 @@ class Yoast_Form {
 			);
 		}
 
-		if ( ! class_exists( 'WPSEO_News' ) ) {
+		if ( ! class_exists( 'YMBESEO_News' ) ) {
 			$plugin_banners[] = array(
 				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=news-seo-banner',
 				'img' => 'banner-news-seo.png',
@@ -213,14 +213,14 @@ class Yoast_Form {
 
 		$service_banner = $service_banners[0];
 
-		echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . plugins_url( 'images/' . $service_banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
+		echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . plugins_url( 'images/' . $service_banner['img'], YMBESEO_FILE ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
 
 		$i = 0;
 		foreach ( $plugin_banners as $banner ) {
 			if ( $i == 2 ) {
 				break;
 			}
-			echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" height="130" src="' . plugins_url( 'images/' . $banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
+			echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" height="130" src="' . plugins_url( 'images/' . $banner['img'], YMBESEO_FILE ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
 			$i ++;
 		}
 		?>

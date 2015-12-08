@@ -1,10 +1,10 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.5.0
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -45,16 +45,16 @@ $extensions = array(
 	),
 );
 
-if ( class_exists( 'WPSEO_Premium' ) ) {
+if ( class_exists( 'YMBESEO_Premium' ) ) {
 	$extensions['seo-premium']->installed = true;
 }
 if ( class_exists( 'wpseo_Video_Sitemap' ) ) {
 	$extensions['video-seo']->installed = true;
 }
-if ( class_exists( 'WPSEO_News' ) ) {
+if ( class_exists( 'YMBESEO_News' ) ) {
 	$extensions['news-seo']->installed = true;
 }
-if ( defined( 'WPSEO_LOCAL_VERSION' ) ) {
+if ( defined( 'YMBESEO_LOCAL_VERSION' ) ) {
 	$extensions['local-seo']->installed = true;
 }
 if ( ! class_exists( 'Woocommerce' ) ) {

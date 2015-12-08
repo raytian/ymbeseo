@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * Option: wpseo_rss
  */
-class WPSEO_Option_RSS extends WPSEO_Option {
+class YMBESEO_Option_RSS extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name

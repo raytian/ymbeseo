@@ -1,16 +1,16 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
- * Class WPSEO_JSON_LD
+ * Class YMBESEO_JSON_LD
  *
  * Outputs schema code specific for Google's JSON LD stuff
  *
  * @since 1.8
  */
-class WPSEO_JSON_LD {
+class YMBESEO_JSON_LD {
 
 	/**
 	 * @var array Holds the plugins options.
@@ -31,7 +31,7 @@ class WPSEO_JSON_LD {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
 		add_action( 'wpseo_head', array( $this, 'json_ld' ), 90 );
 		add_action( 'wpseo_json_ld', array( $this, 'website' ), 10 );
@@ -158,7 +158,7 @@ class WPSEO_JSON_LD {
 		$this->data = array(
 			'@context' => 'http://schema.org',
 			'@type'    => '',
-			'url'      => WPSEO_Frontend::get_instance()->canonical( false, true ),
+			'url'      => YMBESEO_Frontend::get_instance()->canonical( false, true ),
 			'sameAs'   => $this->profiles,
 		);
 	}
@@ -260,10 +260,10 @@ class WPSEO_JSON_LD {
 	 * Renders internal search schema markup
 	 *
 	 * @deprecated 2.1
-	 * @deprecated use WPSEO_JSON_LD::website()
+	 * @deprecated use YMBESEO_JSON_LD::website()
 	 */
 	public function internal_search() {
-		_deprecated_function( __METHOD__, 'WPSEO 2.1', 'WPSEO_JSON_LD::website()' );
+		_deprecated_function( __METHOD__, 'YMBESEO 2.1', 'YMBESEO_JSON_LD::website()' );
 
 		$this->website();
 	}

@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -75,7 +75,7 @@ function wpseo_dismiss_about() {
 
 	check_ajax_referer( 'wpseo-dismiss-about' );
 
-	update_user_meta( get_current_user_id(), 'wpseo_seen_about_version' , WPSEO_VERSION );
+	update_user_meta( get_current_user_id(), 'wpseo_seen_about_version' , YMBESEO_VERSION );
 
 	die( '1' );
 }
@@ -284,7 +284,7 @@ add_action( 'wp_ajax_wpseo_save_all_descriptions', 'wpseo_save_all_descriptions'
 function wpseo_save_all( $what ) {
 	check_ajax_referer( 'wpseo-bulk-editor' );
 
-	// @todo the WPSEO Utils class can't filter arrays in POST yet.
+	// @todo the YMBESEO Utils class can't filter arrays in POST yet.
 	$new_values      = $_POST['items'];
 	$original_values = $_POST['existing_items'];
 
@@ -310,7 +310,7 @@ function wpseo_save_all( $what ) {
  * @return string
  */
 function wpseo_upsert_new( $what, $post_id, $new, $original ) {
-	$meta_key = WPSEO_Meta::$meta_prefix . $what;
+	$meta_key = YMBESEO_Meta::$meta_prefix . $what;
 
 	return wpseo_upsert_meta( $post_id, $new, $original, $meta_key, $what );
 }
@@ -321,7 +321,7 @@ function wpseo_upsert_new( $what, $post_id, $new, $original ) {
 function wpseo_get_export() {
 
 	$include_taxonomy = ( filter_input( INPUT_POST, 'include_taxonomy' ) === 'true' );
-	$export           = new WPSEO_Export( $include_taxonomy );
+	$export           = new YMBESEO_Export( $include_taxonomy );
 
 	wpseo_ajax_json_echo_die( $export->get_results() );
 }

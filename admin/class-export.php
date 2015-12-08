@@ -1,14 +1,14 @@
 <?php
 /**
- * @package WPSEO\Admin\Export
+ * @package YMBESEO\Admin\Export
  */
 
 /**
- * Class WPSEO_Export
+ * Class YMBESEO_Export
  *
  * Class with functionality to export the WP SEO settings
  */
-class WPSEO_Export {
+class YMBESEO_Export {
 
 	/**
 	 * @var string
@@ -83,7 +83,7 @@ class WPSEO_Export {
 
 		$this->export_header();
 
-		foreach ( WPSEO_Options::get_option_names() as $opt_group ) {
+		foreach ( YMBESEO_Options::get_option_names() as $opt_group ) {
 			$this->write_opt_group( $opt_group, $this->export );
 		}
 

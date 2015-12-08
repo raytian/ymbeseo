@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This code handles the category rewrites.
  */
-class WPSEO_Rewrite {
+class YMBESEO_Rewrite {
 
 	/**
 	 * Class constructor
@@ -83,7 +83,7 @@ class WPSEO_Rewrite {
 	 * @return array
 	 */
 	function query_vars( $query_vars ) {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		if ( $options['stripcategorybase'] === true ) {
 			$query_vars[] = 'wpseo_category_redirect';

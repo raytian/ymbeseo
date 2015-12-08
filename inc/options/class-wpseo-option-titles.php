@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Internals\Options
+ * @package YMBESEO\Internals\Options
  */
 
 /**
  * Option: wpseo_titles
  */
-class WPSEO_Option_Titles extends WPSEO_Option {
+class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -93,7 +93,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	);
 
 	/**
-	 * @var array Array of the separator options. To get these options use WPSEO_Option_Titles::get_instance()->get_separator_options()
+	 * @var array Array of the separator options. To get these options use YMBESEO_Option_Titles::get_instance()->get_separator_options()
 	 */
 	private $separator_options = array(
 		'sc-dash'   => '-',
@@ -118,11 +118,11 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	 * is updated early on and if so, change the call to schedule these for a later action on add/update
 	 * instead of running them straight away
 	 *
-	 * @return \WPSEO_Option_Titles
+	 * @return \YMBESEO_Option_Titles
 	 */
 	protected function __construct() {
 		parent::__construct();
-		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_cache' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_cache' ) );
 		add_action( 'init', array( $this, 'end_of_init' ), 999 );
 	}
 
@@ -273,7 +273,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				*/
 				case 'title-':
 					if ( isset( $dirty[ $key ] ) ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -299,7 +299,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 					*/
 				case 'bctitle-ptarchive-':
 					if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -307,13 +307,13 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				/* integer field - not in form*/
 				case 'title_test':
 					if ( isset( $dirty[ $key ] ) ) {
-						$int = WPSEO_Utils::validate_int( $dirty[ $key ] );
+						$int = YMBESEO_Utils::validate_int( $dirty[ $key ] );
 						if ( $int !== false && $int >= 0 ) {
 							$clean[ $key ] = $int;
 						}
 					}
 					elseif ( isset( $old[ $key ] ) ) {
-						$int = WPSEO_Utils::validate_int( $old[ $key ] );
+						$int = YMBESEO_Utils::validate_int( $old[ $key ] );
 						if ( $int !== false && $int >= 0 ) {
 							$clean[ $key ] = $int;
 						}
@@ -358,7 +358,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				 *		'hideeditbox-tax-' . $tax->name
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -536,7 +536,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 					case 'metadesc-':
 					case 'metakey-':
 					case 'bctitle-ptarchive-':
-						$option_value[ $key ] = WPSEO_Utils::sanitize_text_field( $value );
+						$option_value[ $key ] = YMBESEO_Utils::sanitize_text_field( $value );
 						break;
 
 					case 'separator':
@@ -556,7 +556,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 					 * 		'hideeditbox-'
 					 */
 					default:
-						$option_value[ $key ] = WPSEO_Utils::validate_bool( $value );
+						$option_value[ $key ] = YMBESEO_Utils::validate_bool( $value );
 						break;
 				}
 			}

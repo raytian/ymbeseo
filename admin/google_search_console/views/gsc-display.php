@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 	// Admin header.
@@ -8,7 +8,7 @@
 ?>
 	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
 <?php
-if ( defined( 'WP_DEBUG' ) && WP_DEBUG && WPSEO_GSC_Settings::get_profile() !== '' ) {
+if ( defined( 'WP_DEBUG' ) && WP_DEBUG && YMBESEO_GSC_Settings::get_profile() !== '' ) {
 	?>
 		<form action="" method="post">
 			<input type='hidden' name='reload-crawl-issues-nonce' value='<?php echo wp_create_nonce( 'reload-crawl-issues' ); ?>' />
@@ -16,7 +16,7 @@ if ( defined( 'WP_DEBUG' ) && WP_DEBUG && WPSEO_GSC_Settings::get_profile() !== 
 				   style="float: right;" value="<?php _e( 'Reload crawl issues', 'wordpress-seo' ); ?>">
 		</form>
 <?php } ?>
-		<?php echo $platform_tabs = new WPSEO_GSC_Platform_Tabs; ?>
+		<?php echo $platform_tabs = new YMBESEO_GSC_Platform_Tabs; ?>
 	</h2>
 
 <?php
@@ -43,7 +43,7 @@ switch ( $platform_tabs->current_tab() ) {
 		else {
 			$reset_button = '<a class="button-secondary" href="' . add_query_arg( 'gsc_reset', 1 ). '">' . __( 'Reauthenticate with Google ', 'wordpress-seo' ) .'</a>';
 			echo '<h3>',  __( 'Current profile', 'wordpress-seo' ), '</h3>';
-			if ( ($profile = WPSEO_GSC_Settings::get_profile() ) !== '' ) {
+			if ( ($profile = YMBESEO_GSC_Settings::get_profile() ) !== '' ) {
 				echo '<p>';
 				echo Yoast_Form::get_instance()->label( __( 'Current profile', 'wordpress-seo' ), array() );
 				echo $profile;

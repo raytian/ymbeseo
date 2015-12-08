@@ -1,13 +1,13 @@
 <?php
 /**
- * @package    WPSEO
+ * @package    YMBESEO
  * @subpackage Internal
  */
 
 /**
  * This code handles the option upgrades
  */
-class WPSEO_Upgrade {
+class YMBESEO_Upgrade {
 
 	/**
 	 * Holds the Yoast SEO options
@@ -20,9 +20,9 @@ class WPSEO_Upgrade {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = WPSEO_Options::get_all();
+		$this->options = YMBESEO_Options::get_all();
 
-		WPSEO_Options::maybe_set_multisite_defaults( false );
+		YMBESEO_Options::maybe_set_multisite_defaults( false );
 
 		$this->init();
 
@@ -62,7 +62,7 @@ class WPSEO_Upgrade {
 	private function init() {
 		if ( $this->options['version'] === '' || version_compare( $this->options['version'], '1.4.13', '<' ) ) {
 			/* Make sure title_test and description_test functions are available */
-			require_once( WPSEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
+			require_once( YMBESEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
 
 			// Run description test once theme has loaded.
 			add_action( 'init', 'wpseo_description_test' );
@@ -76,15 +76,15 @@ class WPSEO_Upgrade {
 	 */
 	private function upgrade_15( $version ) {
 		// Clean up options and meta.
-		WPSEO_Options::clean_up( null, $version );
-		WPSEO_Meta::clean_up();
+		YMBESEO_Options::clean_up( null, $version );
+		YMBESEO_Meta::clean_up();
 
 		// Add new capabilities on upgrade.
 		wpseo_add_capabilities();
 	}
 
 	/**
-	 * Moves options that moved position in WPSEO 2.0
+	 * Moves options that moved position in YMBESEO 2.0
 	 */
 	private function upgrade_20() {
 		/**
@@ -205,12 +205,12 @@ class WPSEO_Upgrade {
 	 */
 	private function finish_up() {
 		$this->options = get_option( 'wpseo' );                             // Re-get to make sure we have the latest version.
-		update_option( 'wpseo', $this->options );                           // This also ensures the DB version is equal to WPSEO_VERSION.
+		update_option( 'wpseo', $this->options );                           // This also ensures the DB version is equal to YMBESEO_VERSION.
 
 		add_action( 'shutdown', 'flush_rewrite_rules' );                    // Just flush rewrites, always, to at least make them work after an upgrade.
-		WPSEO_Utils::clear_sitemap_cache();                                 // Flush the sitemap cache.
+		YMBESEO_Utils::clear_sitemap_cache();                                 // Flush the sitemap cache.
 
-		WPSEO_Options::ensure_options_exist();                              // Make sure all our options always exist - issue #1245.
+		YMBESEO_Options::ensure_options_exist();                              // Make sure all our options always exist - issue #1245.
 	}
 
 }

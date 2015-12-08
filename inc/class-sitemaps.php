@@ -1,15 +1,15 @@
 <?php
 /**
- * @package WPSEO\XML_Sitemaps
+ * @package YMBESEO\XML_Sitemaps
  */
 
 /**
- * Class WPSEO_Sitemaps
+ * Class YMBESEO_Sitemaps
  *
  * @todo: [JRF => whomever] If at all possible, move the adding of rewrite rules, actions and filters
  * elsewhere and only load this file when an actual sitemap is being requested.
  */
-class WPSEO_Sitemaps {
+class YMBESEO_Sitemaps {
 	/**
 	 * Content of the sitemap to output.
 	 *
@@ -81,7 +81,7 @@ class WPSEO_Sitemaps {
 	private $charset = '';
 
 	/**
-	 * @var WPSEO_Sitemap_Timezone
+	 * @var YMBESEO_Sitemap_Timezone
 	 */
 	private $timezone;
 
@@ -103,12 +103,12 @@ class WPSEO_Sitemaps {
 		// Default stylesheet.
 		$this->stylesheet = '<?xml-stylesheet type="text/xsl" href="' . preg_replace( '/(^http[s]?:)/', '', esc_url( home_url( 'main-sitemap.xsl' ) ) ) . '"?>';
 
-		$this->options     = WPSEO_Options::get_all();
+		$this->options     = YMBESEO_Options::get_all();
 		$this->max_entries = $this->options['entries-per-page'];
 		$this->home_url    = home_url();
 		$this->charset     = get_bloginfo( 'charset' );
 
-		$this->timezone    = new WPSEO_Sitemap_Timezone();
+		$this->timezone    = new YMBESEO_Sitemap_Timezone();
 
 	}
 
@@ -729,7 +729,7 @@ class WPSEO_Sitemaps {
 					$p->post_status = 'publish';
 					$p->filter      = 'sample';
 
-					if ( WPSEO_Meta::get_value( 'meta-robots-noindex', $p->ID ) === '1' ) {
+					if ( YMBESEO_Meta::get_value( 'meta-robots-noindex', $p->ID ) === '1' ) {
 						continue;
 					}
 					if ( in_array( $p->ID, $posts_to_exclude ) ) {
@@ -773,7 +773,7 @@ class WPSEO_Sitemaps {
 						continue;
 					}
 
-					$canonical = WPSEO_Meta::get_value( 'canonical', $p->ID );
+					$canonical = YMBESEO_Meta::get_value( 'canonical', $p->ID );
 					if ( $canonical !== '' && $canonical !== $url['loc'] ) {
 						/*
 						Let's assume that if a canonical is set for this page and it's different from
@@ -864,7 +864,7 @@ class WPSEO_Sitemaps {
 		foreach ( $matches[0] as $img ) {
 			if ( preg_match( '`src=["\']([^"\']+)["\']`', $img, $match ) ) {
 				$src = $match[1];
-				if ( WPSEO_Utils::is_url_relative( $src ) === true ) {
+				if ( YMBESEO_Utils::is_url_relative( $src ) === true ) {
 					if ( $src[0] !== '/' ) {
 						continue;
 					}
@@ -953,8 +953,8 @@ class WPSEO_Sitemaps {
 			foreach ( $terms as $c ) {
 				$url = array();
 
-				$tax_noindex     = WPSEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'noindex' );
-				$tax_sitemap_inc = WPSEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'sitemap_include' );
+				$tax_noindex     = YMBESEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'noindex' );
+				$tax_sitemap_inc = YMBESEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'sitemap_include' );
 
 				if ( ( is_string( $tax_noindex ) && $tax_noindex === 'noindex' ) && ( ! is_string( $tax_sitemap_inc ) || $tax_sitemap_inc !== 'always' ) ) {
 					continue;
@@ -964,7 +964,7 @@ class WPSEO_Sitemaps {
 					continue;
 				}
 
-				$url['loc'] = WPSEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'canonical' );
+				$url['loc'] = YMBESEO_Taxonomy_Meta::get_term_meta( $c, $c->taxonomy, 'canonical' );
 				if ( ! is_string( $url['loc'] ) || $url['loc'] === '' ) {
 					$url['loc'] = get_term_link( $c, $c->taxonomy );
 					if ( $this->options['trailingslash'] === true ) {
@@ -1148,7 +1148,7 @@ class WPSEO_Sitemaps {
 			header( 'Cache-Control: maxage=' . $expires );
 			header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', ( time() + $expires ) ) . ' GMT' );
 
-			require_once( WPSEO_PATH . 'css/xml-sitemap-xsl.php' );
+			require_once( YMBESEO_PATH . 'css/xml-sitemap-xsl.php' );
 		}
 		else {
 			do_action( 'wpseo_xsl_' . $type );
@@ -1174,7 +1174,7 @@ class WPSEO_Sitemaps {
 
 		$debug_display = defined( 'WP_DEBUG_DISPLAY' ) && true === WP_DEBUG_DISPLAY;
 		$debug         = defined( 'WP_DEBUG' ) && true === WP_DEBUG;
-		$wpseo_debug   = defined( 'WPSEO_DEBUG' ) && true === WPSEO_DEBUG;
+		$wpseo_debug   = defined( 'YMBESEO_DEBUG' ) && true === YMBESEO_DEBUG;
 
 		if ( $debug_display && ( $debug || $wpseo_debug ) ) {
 			if ( $this->transient ) {

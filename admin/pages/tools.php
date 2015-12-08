@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -26,7 +26,7 @@ if ( '' === $tool_page ) {
 			'desc' => __( 'Import settings from other SEO plugins and export your settings for re-use on (another) blog.', 'wordpress-seo' ),
 		),
 	);
-	if ( WPSEO_Utils::allow_system_file_edit() === true && ! is_multisite() ) {
+	if ( YMBESEO_Utils::allow_system_file_edit() === true && ! is_multisite() ) {
 		$tools['file-editor'] = array(
 			'title' => __( 'File editor', 'wordpress-seo' ),
 			'desc' => __( 'This tool allows you to quickly change important files for your SEO, like your robots.txt and, if you have one, your .htaccess file.', 'wordpress-seo' ),
@@ -50,7 +50,7 @@ if ( '' === $tool_page ) {
 }
 else {
 	echo '<a href="', admin_url( 'admin.php?page=wpseo_tools' ), '">', __( '&laquo; Back to Tools page', 'wordpress-seo' ), '</a>';
-	require_once WPSEO_PATH . 'admin/views/tool-' . $tool_page . '.php';
+	require_once YMBESEO_PATH . 'admin/views/tool-' . $tool_page . '.php';
 }
 
 $yform->admin_footer( false );

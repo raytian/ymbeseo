@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Frontend
+ * @package YMBESEO\Frontend
  */
 
 /**
  * This class handles the Breadcrumbs generation and display
  */
-class WPSEO_Breadcrumbs {
+class YMBESEO_Breadcrumbs {
 
 	/**
 	 * @var    object    Instance of this class
@@ -40,7 +40,7 @@ class WPSEO_Breadcrumbs {
 	private $post;
 
 	/**
-	 * @var    array    WPSEO options array from get_all()
+	 * @var    array    YMBESEO options array from get_all()
 	 */
 	private $options;
 
@@ -92,7 +92,7 @@ class WPSEO_Breadcrumbs {
 	 * Create the breadcrumb
 	 */
 	private function __construct() {
-		$this->options        = WPSEO_Options::get_all();
+		$this->options        = YMBESEO_Options::get_all();
 		$this->post           = ( isset( $GLOBALS['post'] ) ? $GLOBALS['post'] : null );
 		$this->show_on_front  = get_option( 'show_on_front' );
 		$this->page_for_posts = get_option( 'page_for_posts' );
@@ -667,7 +667,7 @@ class WPSEO_Breadcrumbs {
 		$link = array();
 
 		$link['url']  = get_permalink( $id );
-		$link['text'] = WPSEO_Meta::get_value( 'bctitle', $id );
+		$link['text'] = YMBESEO_Meta::get_value( 'bctitle', $id );
 		if ( $link['text'] === '' ) {
 			$link['text'] = strip_tags( get_the_title( $id ) );
 		}
@@ -694,7 +694,7 @@ class WPSEO_Breadcrumbs {
 	private function get_link_info_for_term( $term ) {
 		$link = array();
 
-		$bctitle = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'bctitle' );
+		$bctitle = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'bctitle' );
 		if ( ! is_string( $bctitle ) || $bctitle === '' ) {
 			$bctitle = $term->name;
 		}
@@ -753,7 +753,7 @@ class WPSEO_Breadcrumbs {
 	 *                     'url'    => (string) link url
 	 *                     (optional) 'allow_html'    => (bool) whether to (not) escape html in the link text
 	 *                     This prevents html stripping from the text strings set in the
-	 *                     WPSEO -> Internal Links options page.
+	 *                     YMBESEO -> Internal Links options page.
 	 * @param  int   $i    Index for the current breadcrumb.
 	 *
 	 * @return string
@@ -895,7 +895,7 @@ class WPSEO_Breadcrumbs {
 	 * @return void
 	 */
 	public function create_breadcrumbs_string( $links, $wrapper = 'span', $element = 'span' ) {
-		_deprecated_function( __METHOD__, 'WPSEO 1.5.2.3', 'yoast_breadcrumbs' );
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.2.3', 'yoast_breadcrumbs' );
 	}
 
 

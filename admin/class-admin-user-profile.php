@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  * @since      1.8.0
  */
 
 /**
  * Customizes user profile.
  */
-class WPSEO_Admin_User_Profile {
+class YMBESEO_Admin_User_Profile {
 	/**
 	 * Class constructor
 	 */
@@ -28,7 +28,7 @@ class WPSEO_Admin_User_Profile {
 	private function filter_input_post( $var_name ) {
 		$val = filter_input( INPUT_POST, $var_name );
 		if ( $val ) {
-			return WPSEO_Utils::sanitize_text_field( $val );
+			return YMBESEO_Utils::sanitize_text_field( $val );
 		}
 		return '';
 	}
@@ -55,7 +55,7 @@ class WPSEO_Admin_User_Profile {
 	 * @param    object $user
 	 */
 	public function user_profile( $user ) {
-		$options = WPSEO_Options::get_all();
+		$options = YMBESEO_Options::get_all();
 
 		wp_nonce_field( 'wpseo_user_profile_update', 'wpseo_nonce' );
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    WPSEO\Admin
+ * @package    YMBESEO\Admin
  * @since      1.5.3
  */
 

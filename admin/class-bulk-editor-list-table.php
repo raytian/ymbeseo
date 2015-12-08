@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin\Bulk Editor
+ * @package YMBESEO\Admin\Bulk Editor
  * @since      1.5.0
  */
 
 /**
  * Implements table for bulk editing.
  */
-class WPSEO_Bulk_List_Table extends WP_List_Table {
+class YMBESEO_Bulk_List_Table extends WP_List_Table {
 
 	/**
 	 * The nonce that was passed with the request
@@ -829,7 +829,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 		// Fill meta data if exists in $this->meta_data.
 		$meta_data  = ( ! empty( $this->meta_data[ $record_id ] ) ) ? $this->meta_data[ $record_id ] : array();
-		$meta_key   = WPSEO_Meta::$meta_prefix . $this->target_db_field;
+		$meta_key   = YMBESEO_Meta::$meta_prefix . $this->target_db_field;
 		$meta_value = ( ! empty( $meta_data[ $meta_key ] ) ) ? $meta_data[ $meta_key ] : '';
 
 		if ( ! empty( $values ) ) {
@@ -887,7 +887,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			"
 				 	SELECT *
 				 	FROM {$wpdb->postmeta}
-				 	WHERE post_id IN({$post_ids}) && meta_key = '" . WPSEO_Meta::$meta_prefix . $this->target_db_field . "'
+				 	WHERE post_id IN({$post_ids}) && meta_key = '" . YMBESEO_Meta::$meta_prefix . $this->target_db_field . "'
 				"
 		);
 

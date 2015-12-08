@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Admin|Google_Search_Console
+ * @package YMBESEO\Admin|Google_Search_Console
  */
 
 /**
- * Class WPSEO_GSC_Ajax
+ * Class YMBESEO_GSC_Ajax
  */
-class WPSEO_GSC_Ajax {
+class YMBESEO_GSC_Ajax {
 
 	/**
 	 * Setting the AJAX hooks for GSC
@@ -24,7 +24,7 @@ class WPSEO_GSC_Ajax {
 	 */
 	public function ajax_mark_as_fixed( ) {
 		if ( $this->valid_nonce() ) {
-			$marker = new WPSEO_GSC_Marker( filter_input( INPUT_POST, 'url' ) );
+			$marker = new YMBESEO_GSC_Marker( filter_input( INPUT_POST, 'url' ) );
 
 			wp_die( $marker->get_response() );
 		}
@@ -36,15 +36,15 @@ class WPSEO_GSC_Ajax {
 	 * Handling the request to create a new redirect from the issued URL
 	 */
 	public function ajax_create_redirect() {
-		if ( $this->valid_nonce() && class_exists( 'WPSEO_URL_Redirect_Manager' ) && defined( 'WPSEO_PREMIUM_PATH' ) ) {
-			$redirect_manager = new WPSEO_URL_Redirect_Manager();
+		if ( $this->valid_nonce() && class_exists( 'YMBESEO_URL_Redirect_Manager' ) && defined( 'YMBESEO_PREMIUM_PATH' ) ) {
+			$redirect_manager = new YMBESEO_URL_Redirect_Manager();
 
 			$old_url = filter_input( INPUT_POST, 'old_url' );
 
 			// Creates the redirect.
 			if ( $redirect_manager->create_redirect( $old_url, filter_input( INPUT_POST, 'new_url' ), filter_input( INPUT_POST, 'type' ) ) ) {
 				if ( filter_input( INPUT_POST, 'mark_as_fixed' ) === 'true' ) {
-					new WPSEO_GSC_Marker( $old_url );
+					new YMBESEO_GSC_Marker( $old_url );
 				}
 
 				wp_die( 'true' );

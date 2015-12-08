@@ -1,13 +1,13 @@
 <?php
 /**
- * @package WPSEO\Admin\Bulk Editor
+ * @package YMBESEO\Admin\Bulk Editor
  * @since      1.5.0
  */
 
 /**
  * Implements table for bulk title editing.
  */
-class WPSEO_Bulk_Title_Editor_List_Table extends WPSEO_Bulk_List_Table {
+class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 
 	/**
 	 * Current type for this class will be title

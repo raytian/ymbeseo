@@ -1,9 +1,9 @@
 <?php
 /**
- * @package WPSEO\Admin
+ * @package YMBESEO\Admin
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
+if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -30,30 +30,30 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 	}
 
 	if ( isset( $_POST['wpseo']['importwoo'] ) ) {
-		$import = new WPSEO_Import_WooThemes_SEO( $replace );
+		$import = new YMBESEO_Import_WooThemes_SEO( $replace );
 	}
 
 	if ( isset( $_POST['wpseo']['importaioseo'] ) || isset( $_GET['importaioseo'] ) ) {
-		$import = new WPSEO_Import_AIOSEO( $replace );
+		$import = new YMBESEO_Import_AIOSEO( $replace );
 	}
 
 	if ( isset( $_POST['wpseo']['importheadspace'] ) ) {
-		$import = new WPSEO_Import_External( $replace );
+		$import = new YMBESEO_Import_External( $replace );
 		$import->import_headspace();
 	}
 
 	if ( isset( $_POST['wpseo']['importrobotsmeta'] ) || isset( $_GET['importrobotsmeta'] ) ) {
-		$import = new WPSEO_Import_External( $replace );
+		$import = new YMBESEO_Import_External( $replace );
 		$import->import_robots_meta();
 	}
 
 	if ( isset( $_POST['wpseo']['importrssfooter'] ) ) {
-		$import = new WPSEO_Import_External( $replace );
+		$import = new YMBESEO_Import_External( $replace );
 		$import->import_rss_footer();
 	}
 
 	if ( isset( $_POST['wpseo']['importbreadcrumbs'] ) ) {
-		$import = new WPSEO_Import_External( $replace );
+		$import = new YMBESEO_Import_External( $replace );
 		$import->import_yoast_breadcrumbs();
 	}
 
@@ -65,7 +65,7 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 if ( isset( $_FILES['settings_import_file'] ) ) {
 	check_admin_referer( 'wpseo-import-file' );
 
-	$import = new WPSEO_Import();
+	$import = new YMBESEO_Import();
 }
 
 if ( isset( $import ) ) {
