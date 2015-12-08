@@ -869,34 +869,4 @@ class YMBESEO_Breadcrumbs {
 
 		return $class;
 	}
-
-
-	/********************** DEPRECATED METHODS **********************/
-
-	/**
-	 * Wrapper function for the breadcrumb so it can be output for the supported themes.
-	 *
-	 * @deprecated 1.5.0
-	 */
-	public function breadcrumb_output() {
-		_deprecated_function( __METHOD__, '1.5.0', 'yoast_breadcrumb' );
-		self::breadcrumb( '<div id="ymbeseobreadcrumb">', '</div>' );
-	}
-
-	/**
-	 * Take the links array and return a full breadcrumb string.
-	 *
-	 * @deprecated 1.5.2.3
-	 *
-	 * @param string $links
-	 * @param string $wrapper
-	 * @param string $element
-	 *
-	 * @return void
-	 */
-	public function create_breadcrumbs_string( $links, $wrapper = 'span', $element = 'span' ) {
-		_deprecated_function( __METHOD__, 'YMBESEO 1.5.2.3', 'yoast_breadcrumbs' );
-	}
-
-
-} /* End of class */
+}

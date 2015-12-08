@@ -139,25 +139,4 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 			}
 		}
 	}
-
-
-	/********************** DEPRECATED METHODS **********************/
-
-	/**
-	 * Define the meta boxes for the Social tab
-	 *
-	 * @deprecated 1.5.0
-	 * @deprecated use YMBESEO_Meta::get_meta_field_defs()
-	 * @see        YMBESEO_Meta::get_meta_field_defs()
-	 *
-	 * @param    string $post_type
-	 *
-	 * @return    array    Array containing the meta boxes
-	 */
-	public function get_meta_boxes( $post_type = 'post' ) {
-		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_meta_field_defs()' );
-
-		return $this->get_meta_field_defs( 'social' );
-	}
-
-} /* End of class */
+}
