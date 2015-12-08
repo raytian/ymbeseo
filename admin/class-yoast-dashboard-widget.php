@@ -38,7 +38,7 @@ class Yoast_Dashboard_Widget {
 		wp_add_dashboard_widget(
 			'ymbeseo-dashboard-overview',
 			/* translators: %s is the plugin name */
-			sprintf( __( '%s Posts Overview', 'ymbeseo' ), 'Yoast SEO' ),
+			sprintf( __( '%s Posts Overview', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 			array( $this, 'display_dashboard_widget' )
 		);
 	}

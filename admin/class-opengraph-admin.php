@@ -4,7 +4,7 @@
  */
 
 /**
- * This class adds the Social tab to the Yoast SEO metabox and makes sure the settings are saved.
+ * This class adds the Social tab to the Yoast Minus Bloat Equals SEO metabox and makes sure the settings are saved.
  */
 class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 

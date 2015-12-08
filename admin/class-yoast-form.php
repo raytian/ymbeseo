@@ -168,7 +168,7 @@ class Yoast_Form {
 			array(
 				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
 				'img' => 'banner-premium-seo.png',
-				'alt' => 'Banner Yoast SEO Premium',
+				'alt' => 'Banner Yoast Minus Bloat Equals SEO Premium',
 			),
 		);
 
@@ -226,8 +226,8 @@ class Yoast_Form {
 		?>
 				<strong><?php _e( 'Remove these ads?', 'ymbeseo' ); ?></strong><br/>
 				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
-				 /* translators: %1$s expands to Yoast SEO Premium */
-				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
+				 /* translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium */
+				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO Premium' ); ?></a><br/><br/>
 			</div>
 		</div>
 	<?php

@@ -28,12 +28,12 @@ function ymbeseo_display_contributors( $contributors ) {
 <div class="wrap about-wrap">
 
 	<h1><?php
-		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Thank you for updating %1$s!', 'ymbeseo' ), 'Yoast SEO' );
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		printf( __( 'Thank you for updating %1$s!', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 		?></h1>
 
 	<p class="about-text">
-		Yoast SEO 2.3 helps you optimize your site showing you errors straight from Google Search Console, and pointing you at posts that need work.
+		Yoast Minus Bloat Equals SEO 2.3 helps you optimize your site showing you errors straight from Google Search Console, and pointing you at posts that need work.
 	</p>
 
 	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
@@ -62,14 +62,14 @@ function ymbeseo_display_contributors( $contributors ) {
 					</p>
 
 					<p>
-						If you have <a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=textlink&utm_campaign=about-page">Yoast SEO Premium</a>, you'll even be able to fix those errors by redirecting the broken
+						If you have <a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=textlink&utm_campaign=about-page">Yoast Minus Bloat Equals SEO Premium</a>, you'll even be able to fix those errors by redirecting the broken
 						URLs. Through the integration, we'll mark them as fixed in Google Search Console too!
 					</p>
 				</div>
 				<div class="col">
 					<img class="aligncenter"
 					     src="https://yoast-mercury.s3.amazonaws.com/uploads/2015/07/search-console-screenshot.png"
-					     alt="Yoast SEO Search Console integration screenshot"/>
+					     alt="Yoast Minus Bloat Equals SEO Search Console integration screenshot"/>
 				</div>
 			</div>
 		</div>
@@ -78,7 +78,7 @@ function ymbeseo_display_contributors( $contributors ) {
 			<div class="feature-section">
 				<div class="col">
 					<img src="https://yoast-mercury.s3.amazonaws.com/uploads/2015/07/dashboard-widget.png"
-					     alt="Yoast SEO Dashboard widget"/>
+					     alt="Yoast Minus Bloat Equals SEO Dashboard widget"/>
 				</div>
 				<div class="col">
 					<h3 class="alignleft">Point you at posts that need work</h3>
@@ -103,7 +103,7 @@ function ymbeseo_display_contributors( $contributors ) {
 					<div class="clear"></div>
 					<p>
 						If your theme declares support for <code>yoast-seo-breadcrumbs</code>, you will get a Customizer
-						panel for Yoast SEO breadcrumbs. Automagically.
+						panel for Yoast Minus Bloat Equals SEO breadcrumbs. Automagically.
 					</p>
 
 					<p>
@@ -126,11 +126,11 @@ function ymbeseo_display_contributors( $contributors ) {
 			<div class="feature-section col two-col">
 				<div>
 					<span class="dashicons dashicons-megaphone"></span>
-					<h4>Yoast SEO now truly Yoast SEO</h4>
+					<h4>Yoast Minus Bloat Equals SEO now truly Yoast Minus Bloat Equals SEO</h4>
 					</ul>
 					<p>
 						Everyone already did it, so we finally caved. The plugin formerly known as WordPress SEO by
-						Yoast, will now officially be called Yoast SEO. for WordPress.
+						Yoast, will now officially be called Yoast Minus Bloat Equals SEO. for WordPress.
 					</p>
 				</div>
 
@@ -140,7 +140,7 @@ function ymbeseo_display_contributors( $contributors ) {
 
 					<p>
 						We've changed the default for the edit posts overview page. No longer will you see multiple
-						columns from Yoast SEO, you'll now only see one small column with the SEO score image.
+						columns from Yoast Minus Bloat Equals SEO, you'll now only see one small column with the SEO score image.
 					</p>
 				</div>
 
@@ -160,8 +160,8 @@ function ymbeseo_display_contributors( $contributors ) {
 
 					<p>
 						<?php
-						/* translators: %1$s expands to Yoast SEO, %2$s and %3$s to the anchor tags to the translate.yoast.com link, %4$d to the number of translations, %5$d to the number of translations, */
-						printf( __( '%1$s ships, at time of release, with %4$d translations, of which %5$d are complete. That\'s a huge improvement from last time, and we\'re improving every week. Join us at %2$stranslate.yoast.com%3$s!', 'ymbeseo' ), 'Yoast SEO', '<a target="_blank" href="https://translate.yoast.com/projects/ymbeseo">', '</a>', 32, 10 );
+						/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s and %3$s to the anchor tags to the translate.yoast.com link, %4$d to the number of translations, %5$d to the number of translations, */
+						printf( __( '%1$s ships, at time of release, with %4$d translations, of which %5$d are complete. That\'s a huge improvement from last time, and we\'re improving every week. Join us at %2$stranslate.yoast.com%3$s!', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO', '<a target="_blank" href="https://translate.yoast.com/projects/ymbeseo">', '</a>', 32, 10 );
 						?>
 					</p>
 				</div>
@@ -177,8 +177,8 @@ function ymbeseo_display_contributors( $contributors ) {
 	<div id="credits" class="ymbeseotab">
 		<p class="about-description">
 			<?php
-			/* translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast SEO */
-			printf( __( 'While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team.', 'ymbeseo' ), '<a target="_blank" href="https://yoast.com/">', '</a>', 'Yoast SEO' );
+			/* translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast Minus Bloat Equals SEO */
+			printf( __( 'While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team.', 'ymbeseo' ), '<a target="_blank" href="https://yoast.com/">', '</a>', 'Yoast Minus Bloat Equals SEO' );
 			echo ' ';
 			printf( __( 'Want to help us develop? Read our %1$scontribution guidelines%2$s!', 'ymbeseo' ), '<a target="_blank" href="http://yoa.st/ymbeseocontributionguidelines">', '</a>' );
 			?>
@@ -276,7 +276,7 @@ function ymbeseo_display_contributors( $contributors ) {
 			'Lars Schenk' => 'https://github.com/larsschenk',
 		);
 		?>
-		<p>We're always grateful for patches from non-regular contributors, in Yoast SEO 2.2 and 2.3, patches from the following people made it in:</p>
+		<p>We're always grateful for patches from non-regular contributors, in Yoast Minus Bloat Equals SEO 2.2 and 2.3, patches from the following people made it in:</p>
 		<ul class="ul-square">
 			<?php
 			foreach ( $patches_from as $patcher => $link ) {

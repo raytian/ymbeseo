@@ -56,13 +56,13 @@
 				break;
 
 			case 'no_premium' :
-				/* Translators: %s: expands to Yoast SEO Premium */
-				echo '<h3>', sprintf( __( 'Creating redirects is a %s feature', 'ymbeseo' ), 'Yoast SEO Premium' ), '</h3>';
+				/* Translators: %s: expands to Yoast Minus Bloat Equals SEO Premium */
+				echo '<h3>', sprintf( __( 'Creating redirects is a %s feature', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO Premium' ), '</h3>';
 				echo '<p>';
-				/* Translators: %1$s: expands to 'Yoast SEO Premium', %2$s: links to Yoast SEO Premium plugin page. */
+				/* Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO Premium', %2$s: links to Yoast Minus Bloat Equals SEO Premium plugin page. */
 				echo sprintf(
 					__( 'To be able to create a redirect and fix this issue, you need %1$s. You can buy the plugin, including one year support and updates, on %2$s.', 'ymbeseo' ),
-					'Yoast SEO Premium',
+					'Yoast Minus Bloat Equals SEO Premium',
 					'<a href="http://yoa.st/redirects" target="_blank">yoast.com</a>'
 				);
 				echo '</p>';

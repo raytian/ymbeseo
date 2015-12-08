@@ -4,7 +4,7 @@
  */
 
 /**
- * Plugin Name: Yoast SEO
+ * Plugin Name: Yoast Minus Bloat Equals SEO
  * Version: 0.1.0
  * Plugin URI: https://yoast.com/wordpress/plugins/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=ymbeseoplugin
  * Description: The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more.
@@ -16,7 +16,7 @@
  */
 
 /**
- * Yoast SEO plugin
+ * Yoast Minus Bloat Equals SEO plugin
  * Copyright (C) 2015-2016, SO WP - support@so-wp.com
  *
  * This program is free software: you can redistribute it and/or modify
@@ -43,5 +43,5 @@ if ( ! defined( 'YMBESEO_FILE' ) ) {
 	define( 'YMBESEO_FILE', __FILE__ );
 }
 
-// Load the Yoast SEO plugin.
+// Load the Yoast Minus Bloat Equals SEO plugin.
 require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );

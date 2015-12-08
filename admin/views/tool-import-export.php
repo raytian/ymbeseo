@@ -13,7 +13,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
  * @todo [JRF => testers] Extensively test the export & import of the (new) settings!
  * If that all works fine, getting testers to export before and after upgrade will make testing easier.
  *
- * @todo [Yoast] The import for the RSS Footer plugin checks for data already entered via Yoast SEO,
+ * @todo [Yoast] The import for the RSS Footer plugin checks for data already entered via Yoast Minus Bloat Equals SEO,
  * the other import routines should do that too.
  */
 
@@ -120,13 +120,13 @@ if ( isset( $import ) ) {
 
 <div id="ymbeseo-export" class="ymbeseotab">
 	<p><?php
-		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'ymbeseo' ), 'Yoast SEO' );
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		printf( __( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 		?></p>
 	<?php $yform->checkbox( 'include_taxonomy_meta', __( 'Include Taxonomy Metadata', 'ymbeseo' ) ); ?><br/>
 	<button class="button-primary" id="export-button"><?php
-		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings', 'ymbeseo' ), 'Yoast SEO' );
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		printf( __( 'Export your %1$s settings', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 		?></button>
 	<script>
 		var ymbeseo_export_nonce = '<?php echo wp_create_nonce( 'ymbeseo-export' ); ?>';

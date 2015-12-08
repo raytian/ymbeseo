@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Import
  *
- * Class with functionality to import the Yoast SEO settings
+ * Class with functionality to import the Yoast Minus Bloat Equals SEO settings
  */
 class YMBESEO_Import {
 

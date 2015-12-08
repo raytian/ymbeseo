@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Admin_Pages
  *
- * Class with functionality for the Yoast SEO admin pages.
+ * Class with functionality for the Yoast Minus Bloat Equals SEO admin pages.
  */
 class YMBESEO_Admin_Pages {
 
@@ -113,7 +113,7 @@ class YMBESEO_Admin_Pages {
 	/********************** DEPRECATED METHODS **********************/
 
 	/**
-	 * Exports the current site's Yoast SEO settings.
+	 * Exports the current site's Yoast Minus Bloat Equals SEO settings.
 	 *
 	 * @param bool $include_taxonomy Whether to include the taxonomy metadata the plugin creates.
 	 *
@@ -384,7 +384,7 @@ class YMBESEO_Admin_Pages {
 	}
 
 	/**
-	 * Resets the site to the default Yoast SEO settings and runs a title test to check
+	 * Resets the site to the default Yoast Minus Bloat Equals SEO settings and runs a title test to check
 	 * whether force rewrite needs to be on.
 	 *
 	 * @deprecated 1.5.0

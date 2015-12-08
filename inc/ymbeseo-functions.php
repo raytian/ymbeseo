@@ -282,7 +282,7 @@ function ymbeseo_wpml_config( $config ) {
 add_filter( 'icl_wpml_config_array', 'ymbeseo_wpml_config' );
 
 /**
- * Yoast SEO breadcrumb shortcode
+ * Yoast Minus Bloat Equals SEO breadcrumb shortcode
  * [ymbeseo_breadcrumb]
  *
  * @return string
@@ -448,7 +448,7 @@ function get_ymbeseo_options() {
  * @see        YMBESEO_Meta::replace_meta()
  *
  * @param string $old_metakey The old name of the meta value.
- * @param string $new_metakey The new name of the meta value, usually the Yoast SEO name.
+ * @param string $new_metakey The new name of the meta value, usually the Yoast Minus Bloat Equals SEO name.
  * @param bool   $replace     Whether to replace or to copy the values.
  */
 function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
@@ -509,15 +509,15 @@ function ymbeseo_get_terms( $id, $taxonomy, $return_single = false ) {
  * Generate an HTML sitemap
  *
  * @deprecated 1.5.5.4
- * @deprecated use plugin Yoast SEO Premium
- * @see        Yoast SEO Premium
+ * @deprecated use plugin Yoast Minus Bloat Equals SEO Premium
+ * @see        Yoast Minus Bloat Equals SEO Premium
  *
  * @param array $atts The attributes passed to the shortcode.
  *
  * @return string
  */
 function ymbeseo_sitemap_handler( $atts ) {
-	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast SEO Premium plugin soon.' );
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast Minus Bloat Equals SEO Premium plugin soon.' );
 
 	return '';
 }

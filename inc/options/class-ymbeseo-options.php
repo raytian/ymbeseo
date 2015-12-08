@@ -270,7 +270,7 @@ class YMBESEO_Options {
 		// Commented out? ymbeseo_title_test(); R.
 		ymbeseo_description_test();
 
-		/* Force WooThemes to use Yoast SEO data. */
+		/* Force WooThemes to use Yoast Minus Bloat Equals SEO data. */
 		if ( function_exists( 'woo_version_init' ) ) {
 			update_option( 'seo_woo_use_third_party_data', 'true' );
 		}

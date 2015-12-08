@@ -90,8 +90,8 @@ wp_nonce_field( 'ymbeseo-network-settings', '_wpnonce', true, true );
 /* @internal Important: Make sure the options added to the array here are in line with the options set in the YMBESEO_Option_MS::$allowed_access_options property */
 $yform->select(
 	'access',
-	/* translators: %1$s expands to Yoast SEO */
-	sprintf( __( 'Who should have access to the %1$s settings', 'ymbeseo' ), 'Yoast SEO' ),
+	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+	sprintf( __( 'Who should have access to the %1$s settings', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 	array(
 		'admin'      => __( 'Site Admins (default)', 'ymbeseo' ),
 		'superadmin' => __( 'Super Admins only', 'ymbeseo' ),

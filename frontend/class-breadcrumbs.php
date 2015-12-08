@@ -51,12 +51,12 @@ class YMBESEO_Breadcrumbs {
 	private $element = 'span';
 
 	/**
-	 * @var string    Yoast SEO breadcrumb separator
+	 * @var string    Yoast Minus Bloat Equals SEO breadcrumb separator
 	 */
 	private $separator = '';
 
 	/**
-	 * @var string    HTML wrapper element for the Yoast SEO breadcrumbs output
+	 * @var string    HTML wrapper element for the Yoast Minus Bloat Equals SEO breadcrumbs output
 	 */
 	private $wrapper = 'span';
 
@@ -156,7 +156,7 @@ class YMBESEO_Breadcrumbs {
 	}
 
 	/**
-	 * Filter: 'ymbeseo_breadcrumb_separator' - Allow (theme) developer to change the Yoast SEO breadcrumb separator.
+	 * Filter: 'ymbeseo_breadcrumb_separator' - Allow (theme) developer to change the Yoast Minus Bloat Equals SEO breadcrumb separator.
 	 *
 	 * @api string $breadcrumbs_sep Breadcrumbs separator
 	 */
@@ -166,7 +166,7 @@ class YMBESEO_Breadcrumbs {
 	}
 
 	/**
-	 * Filter: 'ymbeseo_breadcrumb_output_wrapper' - Allow changing the HTML wrapper element for the Yoast SEO breadcrumbs output
+	 * Filter: 'ymbeseo_breadcrumb_output_wrapper' - Allow changing the HTML wrapper element for the Yoast Minus Bloat Equals SEO breadcrumbs output
 	 *
 	 * @api string $wrapper The wrapper element
 	 */
@@ -278,7 +278,7 @@ class YMBESEO_Breadcrumbs {
 		}
 
 		/**
-		 * Filter: Allow changing the ancestors for the Yoast SEO breadcrumbs output
+		 * Filter: Allow changing the ancestors for the Yoast Minus Bloat Equals SEO breadcrumbs output
 		 *
 		 * @api array $ancestors Ancestors
 		 */
@@ -396,7 +396,7 @@ class YMBESEO_Breadcrumbs {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_breadcrumb_links' - Allow the developer to filter the Yoast SEO breadcrumb links, add to them, change order, etc.
+		 * Filter: 'ymbeseo_breadcrumb_links' - Allow the developer to filter the Yoast Minus Bloat Equals SEO breadcrumb links, add to them, change order, etc.
 		 *
 		 * @api array $crumbs The crumbs array
 		 */
@@ -673,7 +673,7 @@ class YMBESEO_Breadcrumbs {
 		}
 
 		/**
-		 * Filter: 'wp_seo_get_bc_title' - Allow developer to filter the Yoast SEO Breadcrumb title.
+		 * Filter: 'wp_seo_get_bc_title' - Allow developer to filter the Yoast Minus Bloat Equals SEO Breadcrumb title.
 		 *
 		 * @api string $link_text The Breadcrumb title text
 		 *
@@ -795,7 +795,7 @@ class YMBESEO_Breadcrumbs {
 		}
 
 		/**
-		 * Filter: 'ymbeseo_breadcrumb_single_link' - Allow changing of each link being put out by the Yoast SEO breadcrumbs class
+		 * Filter: 'ymbeseo_breadcrumb_single_link' - Allow changing of each link being put out by the Yoast Minus Bloat Equals SEO breadcrumbs class
 		 *
 		 * @api string $link_output The output string
 		 *
@@ -827,7 +827,7 @@ class YMBESEO_Breadcrumbs {
 			$output = '<' . $this->wrapper . $this->get_output_id() . $this->get_output_class() . ' xmlns:v="http://rdf.data-vocabulary.org/#">' . $this->output . '</' . $this->wrapper . '>';
 
 			/**
-			 * Filter: 'ymbeseo_breadcrumb_output' - Allow changing the HTML output of the Yoast SEO breadcrumbs class
+			 * Filter: 'ymbeseo_breadcrumb_output' - Allow changing the HTML output of the Yoast Minus Bloat Equals SEO breadcrumbs class
 			 *
 			 * @api string $unsigned HTML output
 			 */
@@ -843,7 +843,7 @@ class YMBESEO_Breadcrumbs {
 
 
 	/**
-	 * Filter: 'ymbeseo_breadcrumb_output_id' - Allow changing the HTML ID on the Yoast SEO breadcrumbs wrapper element
+	 * Filter: 'ymbeseo_breadcrumb_output_id' - Allow changing the HTML ID on the Yoast Minus Bloat Equals SEO breadcrumbs wrapper element
 	 *
 	 * @api string $unsigned ID to add to the wrapper element
 	 */
@@ -857,7 +857,7 @@ class YMBESEO_Breadcrumbs {
 	}
 
 	/**
-	 * Filter: 'ymbeseo_breadcrumb_output_class' - Allow changing the HTML class on the Yoast SEO breadcrumbs wrapper element
+	 * Filter: 'ymbeseo_breadcrumb_output_class' - Allow changing the HTML class on the Yoast Minus Bloat Equals SEO breadcrumbs wrapper element
 	 *
 	 * @api string $unsigned class to add to the wrapper element
 	 */

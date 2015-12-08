@@ -67,8 +67,8 @@ class YMBESEO_Export {
 		}
 		else {
 			$results['status'] = 'failure';
-			/* translators: %1$s expands to Yoast SEO */
-			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'ymbeseo' ), 'Yoast SEO' ) . $this->error;
+			/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . $this->error;
 		}
 
 		return $results;
@@ -108,8 +108,8 @@ class YMBESEO_Export {
 	 * Writes the header of the export file.
 	 */
 	private function export_header() {
-		/* translators: %1$s expands to Yoast SEO */
-		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'ymbeseo' ), 'Yoast SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
 		if ( $this->include_taxonomy ) {
 			$this->write_line( '; ' . __( 'This export includes taxonomy metadata', 'ymbeseo' ) );
 		}

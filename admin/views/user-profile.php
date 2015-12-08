@@ -6,8 +6,8 @@
 ?>
 
 <h3 id="ymbeseo"><?php
-	/* translators: %1$s expands to Yoast SEO */
-	printf( __( '%1$s settings', 'ymbeseo' ), 'Yoast SEO' );
+	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+	printf( __( '%1$s settings', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 	?></h3>
 <table class="form-table">
 	<tr>

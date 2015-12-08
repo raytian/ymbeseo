@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Import_WooThemes_SEO
  *
- * Class with functionality to import Yoast SEO settings from WooThemes SEO
+ * Class with functionality to import Yoast Minus Bloat Equals SEO settings from WooThemes SEO
  */
 class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 

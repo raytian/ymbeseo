@@ -27,8 +27,8 @@ switch ( $platform_tabs->current_tab() ) {
 		if ( null === $this->service->get_client()->getAccessToken() ) {
 			// Print auth screen.
 			echo '<p>';
-			/* Translators: %1$s: expands to 'Yoast SEO', %2$s expands to Google Search Console. */
-			echo sprintf( __( 'To allow %1$s to fetch your %2$s information, please enter your Google Authorization Code.', 'ymbeseo' ), 'Yoast SEO', 'Google Search Console' );
+			/* Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO', %2$s expands to Google Search Console. */
+			echo sprintf( __( 'To allow %1$s to fetch your %2$s information, please enter your Google Authorization Code.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO', 'Google Search Console' );
 			echo "</p>\n";
 			echo '<input type="hidden" id="gsc_auth_url" value="', $this->service->get_client()->createAuthUrl() , '" />';
 			echo "<button id='gsc_auth_code' class='button-secondary'>" , __( 'Get Google Authorization Code', 'ymbeseo' ) ,"</button>\n";

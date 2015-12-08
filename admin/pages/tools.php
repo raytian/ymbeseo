@@ -33,8 +33,8 @@ if ( '' === $tool_page ) {
 		);
 	}
 
-	/* translators: %1$s expands to Yoast SEO */
-	echo '<p>', sprintf( __( '%1$s comes with some very powerful built-in tools:', 'ymbeseo' ), 'Yoast SEO' ), '</p>';
+	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+	echo '<p>', sprintf( __( '%1$s comes with some very powerful built-in tools:', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ), '</p>';
 
 	asort( $tools );
 

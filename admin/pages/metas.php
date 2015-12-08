@@ -35,8 +35,8 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 					<td>
 						<?php
 						$yform->checkbox( 'forcerewritetitle', __( 'Enable force rewrite titles', 'ymbeseo' ) );
-						/* translators: %1$s expands to Yoast SEO */
-						echo '<p class="description">', sprintf( __( '%1$s has auto-detected whether it needs to force rewrite the titles for your pages, if you think it\'s wrong and you know what you\'re doing, you can change the setting here.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>';
+						/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+						echo '<p class="description">', sprintf( __( '%1$s has auto-detected whether it needs to force rewrite the titles for your pages, if you think it\'s wrong and you know what you\'re doing, you can change the setting here.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>';
 						?>
 					</td>
 				</tr>
@@ -101,8 +101,8 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 					}
 					$yform->checkbox( 'noindex-' . $name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
 					$yform->checkbox( 'showdate-' . $name, __( 'Show date in snippet preview?', 'ymbeseo' ), __( 'Date in Snippet Preview', 'ymbeseo' ) );
-					/* translators: %1$s expands to Yoast SEO */
-					$yform->checkbox( 'hideeditbox-' . $name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast SEO' ) );
+					/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+					$yform->checkbox( 'hideeditbox-' . $name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) );
 
 					/**
 					 * Allow adding a custom checkboxes to the admin meta page - Post Types tab
@@ -161,8 +161,8 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 						$yform->textinput( 'metakey-tax-' . $tax->name, __( 'Meta keywords template', 'ymbeseo' ) );
 					}
 					$yform->checkbox( 'noindex-tax-' . $tax->name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
-					/* translators: %1$s expands to Yoast SEO */
-					$yform->checkbox( 'hideeditbox-tax-' . $tax->name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast SEO' ) );
+					/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+					$yform->checkbox( 'hideeditbox-tax-' . $tax->name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) );
 					echo '<br/><br/>';
 				}
 				unset( $tax );

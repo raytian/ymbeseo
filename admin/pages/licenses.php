@@ -13,9 +13,9 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 $extensions = array(
 	'seo-premium'     => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/seo-premium/',
-		'title'     => 'Yoast SEO Premium',
-		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'The premium version of %1$s with more features & support.', 'ymbeseo' ), 'Yoast SEO' ),
+		'title'     => 'Yoast Minus Bloat Equals SEO Premium',
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		'desc'      => sprintf( __( 'The premium version of %1$s with more features & support.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 		'installed' => false,
 	),
 	'video-seo'       => (object) array(
@@ -39,8 +39,8 @@ $extensions = array(
 	'woocommerce-seo' => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/',
 		'title'     => 'Yoast WooCommerce SEO',
-		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'ymbeseo' ), 'Yoast SEO' ),
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		'desc'      => sprintf( __( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 		'installed' => false,
 	),
 );
@@ -69,8 +69,8 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 <div class="wrap ymbeseo_table_page">
 
 	<h2 id="ymbeseo-title"><?php
-		/* translators: %1$s expands to Yoast SEO */
-		printf( __( '%1$s Extensions', 'ymbeseo' ), 'Yoast SEO' );
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		printf( __( '%1$s Extensions', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 		?></h2>
 
 	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">

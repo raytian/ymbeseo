@@ -9,7 +9,7 @@
 class YMBESEO_Admin_Init {
 
 	/**
-	 * Holds the Yoast SEO Options
+	 * Holds the Yoast Minus Bloat Equals SEO Options
 	 *
 	 * @var array
 	 */
@@ -66,10 +66,10 @@ class YMBESEO_Admin_Init {
 
 				return;
 			}
-			/* translators: %1$s expands to Yoast SEO, $2%s to the version number, %3$s and %4$s to anchor tags with link to intro page  */
+			/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, $2%s to the version number, %3$s and %4$s to anchor tags with link to intro page  */
 			$info_message = sprintf(
 				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'ymbeseo' ),
-				'Yoast SEO',
+				'Yoast Minus Bloat Equals SEO',
 				YMBESEO_VERSION,
 				'<a href="' . admin_url( 'admin.php?page=ymbeseo_dashboard&intro=1' ) . '">',
 				'</a>'
@@ -153,9 +153,9 @@ class YMBESEO_Admin_Init {
 		if ( defined( 'GAWP_VERSION' ) && '5.4.3' === GAWP_VERSION ) {
 
 			$info_message = sprintf(
-				/* translators: %1$s expands to Yoast SEO, %2$s expands to 5.4.3, %3$s expands to Google Analytics by Yoast */
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to 5.4.3, %3$s expands to Google Analytics by Yoast */
 				__( '%1$s detected you are using version %2$s of %3$s, please update to the latest version to prevent compatibility issues.', 'ymbeseo' ),
-				'Yoast SEO',
+				'Yoast Minus Bloat Equals SEO',
 				'5.4.3',
 				'Google Analytics by Yoast'
 			);
@@ -245,7 +245,7 @@ class YMBESEO_Admin_Init {
 			array(
 				'textdomain'     => 'ymbeseo',
 				'project_slug'   => 'ymbeseo',
-				'plugin_name'    => 'Yoast SEO',
+				'plugin_name'    => 'Yoast Minus Bloat Equals SEO',
 				'hook'           => 'ymbeseo_admin_footer',
 				'glotpress_url'  => 'https://translate.yoast.com/',
 				'glotpress_name' => 'Yoast Translate',
