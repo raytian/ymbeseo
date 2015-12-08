@@ -5,14 +5,14 @@
 
 /**
  * Plugin Name: Yoast Minus Bloat Equals SEO
- * Version: 0.1.0
- * Plugin URI: https://yoast.com/wordpress/plugins/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=ymbeseoplugin
- * Description: The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more.
- * Author: Team Yoast
- * Author URI: https://yoast.com/
+ * Version:     0.1.0
+ * Plugin URI:  https://so-wp.com/plugins/ymbeseo
+ * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5.
+ * Author:      SO WP
+ * Author URI:  https://so-wp.com/
  * Text Domain: ymbeseo
  * Domain Path: /languages/
- * License: GPL v3
+ * License:     GPL v3
  */
 
 /**
