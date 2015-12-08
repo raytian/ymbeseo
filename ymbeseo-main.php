@@ -13,7 +13,7 @@ if ( ! function_exists( 'add_filter' ) ) {
  * @internal Nobody should be able to overrule the real version number as this can cause serious issues
  * with the options, so no if ( ! defined() )
  */
-define( 'YMBESEO_VERSION', '2.3.5' );
+define( 'YMBESEO_VERSION', '0.1.0' );
 
 if ( ! defined( 'YMBESEO_PATH' ) ) {
 	define( 'YMBESEO_PATH', plugin_dir_path( YMBESEO_FILE ) );
