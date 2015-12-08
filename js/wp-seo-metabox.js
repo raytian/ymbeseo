@@ -166,7 +166,7 @@ function ystTestFocusKw() {
 	var url;
 	if ( jQuery( '#editable-post-name-full' ).length ) {
 		postname = jQuery( '#editable-post-name-full' ).text();
-		url = wpseoMetaboxL10n.YMBESEO_permalink_template.replace( '%postname%', postname ).replace( 'http://', '' );
+		url = wpseoMetaboxL10n.wpseo_permalink_template.replace( '%postname%', postname ).replace( 'http://', '' );
 	}
 	var p = new RegExp( '(^|[ \\s\n\r\t\\.,\'\\("\\+;!?:\\-])' + ystRemoveLowerCaseDiacritics( focuskw ) + '($|[\\s\n\r\t.,\'\\)"\\+!?:;\\-])', 'gim' );
 
@@ -234,7 +234,7 @@ function ystReplaceVariables( str, callback ) {
 	str = str.replace( /%%currentmonth%%/g, wpseoMetaboxL10n.currentmonth );
 	str = str.replace( /%%currentyear%%/g, wpseoMetaboxL10n.currentyear );
 
-	str = str.replace( /%%focuskw%%/g, jQuery( '#so_YMBESEO_focuskw' ).val().replace( /(<([^>]+)>)/ig, '' ) );
+	str = str.replace( /%%focuskw%%/g, jQuery( '#yoast_wpseo_focuskw' ).val().replace( /(<([^>]+)>)/ig, '' ) );
 	// excerpt
 	var excerpt = '';
 	if ( jQuery( '#excerpt' ).length ) {
@@ -242,7 +242,7 @@ function ystReplaceVariables( str, callback ) {
 		str = str.replace( /%%excerpt_only%%/g, excerpt );
 	}
 	if ( '' === excerpt && jQuery( '#content' ).length ) {
-		excerpt = jQuery( '#content' ).val().replace( /(<([^>]+)>)/ig, '' ).substring( 0, wpseoMetaboxL10n.YMBESEO_meta_desc_length - 1 );
+		excerpt = jQuery( '#content' ).val().replace( /(<([^>]+)>)/ig, '' ).substring( 0, wpseoMetaboxL10n.wpseo_meta_desc_length - 1 );
 	}
 	str = str.replace( /%%excerpt%%/g, excerpt );
 
@@ -283,10 +283,10 @@ function ystReplaceVariables( str, callback ) {
  */
 function ystAjaxReplaceVariables( replaceableVar, callback ) {
 	jQuery.post( ajaxurl, {
-			action: 'YMBESEO_replace_vars',
+			action: 'wpseo_replace_vars',
 			string: replaceableVar,
 			post_id: jQuery( '#post_ID' ).val(),
-			_wpnonce: wpseoMetaboxL10n.YMBESEO_replace_vars_nonce
+			_wpnonce: wpseoMetaboxL10n.wpseo_replace_vars_nonce
 		}, function( data ) {
 			if ( data ) {
 				replacedVars[ replaceableVar ] = data;
@@ -313,7 +313,7 @@ function ystUpdateTitle( force ) {
 		title = titleElm.val().replace( /(<([^>]+)>)/ig, '' );
 	}
 	else {
-		title = wpseoMetaboxL10n.YMBESEO_title_template;
+		title = wpseoMetaboxL10n.wpseo_title_template;
 		title = divHtml.html( title ).text();
 	}
 	if ( title === '' ) {
@@ -377,8 +377,8 @@ function ystUpdateDesc() {
 	var divHtml = jQuery( '<div />' );
 	var snippet = jQuery( '#wpseosnippet' );
 
-	if ( desc === '' && wpseoMetaboxL10n.YMBESEO_metadesc_template !== '' ) {
-		desc = wpseoMetaboxL10n.YMBESEO_metadesc_template;
+	if ( desc === '' && wpseoMetaboxL10n.wpseo_metadesc_template !== '' ) {
+		desc = wpseoMetaboxL10n.wpseo_metadesc_template;
 	}
 
 	if ( desc !== '' ) {
@@ -386,7 +386,7 @@ function ystUpdateDesc() {
 				desc = divHtml.text( desc ).html();
 				desc = ystClean( desc );
 
-				var len = wpseoMetaboxL10n.YMBESEO_meta_desc_length - desc.length;
+				var len = wpseoMetaboxL10n.wpseo_meta_desc_length - desc.length;
 
 				if ( len < 0 ) {
 					len = '<span class="wrong">' + len + '</span>';
@@ -426,15 +426,15 @@ function ystUpdateDesc() {
 		var focuskw = ystEscapeFocusKw( jQuery.trim( jQuery( '#' + wpseoMetaboxL10n.field_prefix + 'focuskw' ).val() ) );
 		if ( focuskw !== '' ) {
 			var descsearch = new RegExp( focuskw, 'gim' );
-			if ( desc.search( descsearch ) !== -1 && desc.length > wpseoMetaboxL10n.YMBESEO_meta_desc_length ) {
-				desc = desc.substr( desc.search( descsearch ), wpseoMetaboxL10n.YMBESEO_meta_desc_length );
+			if ( desc.search( descsearch ) !== -1 && desc.length > wpseoMetaboxL10n.wpseo_meta_desc_length ) {
+				desc = desc.substr( desc.search( descsearch ), wpseoMetaboxL10n.wpseo_meta_desc_length );
 			}
 			else {
-				desc = desc.substr( 0, wpseoMetaboxL10n.YMBESEO_meta_desc_length );
+				desc = desc.substr( 0, wpseoMetaboxL10n.wpseo_meta_desc_length );
 			}
 		}
 		else {
-			desc = desc.substr( 0, wpseoMetaboxL10n.YMBESEO_meta_desc_length );
+			desc = desc.substr( 0, wpseoMetaboxL10n.wpseo_meta_desc_length );
 		}
 
 		desc = ystSanitizeDesc( desc );
@@ -463,13 +463,13 @@ function ystSanitizeDesc( desc ) {
  * @returns {string}
  */
 function ystTrimDesc( desc ) {
-	if ( desc.length > wpseoMetaboxL10n.YMBESEO_meta_desc_length ) {
+	if ( desc.length > wpseoMetaboxL10n.wpseo_meta_desc_length ) {
 		var space;
-		if ( desc.length > wpseoMetaboxL10n.YMBESEO_meta_desc_length ) {
-			space = desc.lastIndexOf( ' ', ( wpseoMetaboxL10n.YMBESEO_meta_desc_length - 3 ) );
+		if ( desc.length > wpseoMetaboxL10n.wpseo_meta_desc_length ) {
+			space = desc.lastIndexOf( ' ', ( wpseoMetaboxL10n.wpseo_meta_desc_length - 3 ) );
 		}
 		else {
-			space = wpseoMetaboxL10n.YMBESEO_meta_desc_length;
+			space = wpseoMetaboxL10n.wpseo_meta_desc_length;
 		}
 		desc = desc.substring( 0, space ).concat( ' ...' );
 	}
@@ -483,7 +483,7 @@ function ystUpdateURL() {
 	var url;
 	if ( jQuery( '#editable-post-name-full' ).length ) {
 		var name = jQuery( '#editable-post-name-full' ).text();
-		url = wpseoMetaboxL10n.YMBESEO_permalink_template.replace( '%postname%', name ).replace( 'http://', '' );
+		url = wpseoMetaboxL10n.wpseo_permalink_template.replace( '%postname%', name ).replace( 'http://', '' );
 	}
 	url = ystBoldKeywords( url, true );
 	jQuery( '#wpseosnippet' ).find( '.url' ).html( url );
@@ -567,7 +567,7 @@ jQuery( document ).ready( function() {
 				active_tab = 'general';
 			}
 			else {
-				active_tab = active_tab.replace( '#YMBESEO_', '' );
+				active_tab = active_tab.replace( '#wpseo_', '' );
 			}
 			jQuery( '.' + active_tab ).addClass( 'active' );
 
@@ -576,16 +576,16 @@ jQuery( document ).ready( function() {
 			desc = jQuery( '<div />' ).html( desc ).text();
 			descElm.val( desc );
 
-			jQuery( 'a.YMBESEO_tablink' ).click( function() {
+			jQuery( 'a.wpseo_tablink' ).click( function() {
 					jQuery( '.wpseo-metabox-tabs li' ).removeClass( 'active' );
 					jQuery( '.wpseotab' ).removeClass( 'active' );
 
-					var id = jQuery( this ).attr( 'href' ).replace( '#YMBESEO_', '' );
+					var id = jQuery( this ).attr( 'href' ).replace( '#wpseo_', '' );
 					jQuery( '.' + id ).addClass( 'active' );
 					jQuery( this ).parent('li').addClass( 'active' );
 
 					if ( jQuery( this ).hasClass( 'scroll' ) ) {
-						var scrollto = jQuery( this ).attr( 'href' ).replace( 'YMBESEO_', '' );
+						var scrollto = jQuery( this ).attr( 'href' ).replace( 'wpseo_', '' );
 						jQuery( 'html, body' ).animate( {
 								scrollTop: jQuery( scrollto ).offset().top
 							}, 500

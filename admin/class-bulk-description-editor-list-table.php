@@ -1,13 +1,13 @@
 <?php
 /**
- * @package YMBESEO\Admin\Bulk Editor
+ * @package WPSEO\Admin\Bulk Editor
  * @since      1.5.0
  */
 
 /**
  * Implements table for bulk description editing.
  */
-class YMBESEO_Bulk_Description_List_Table extends YMBESEO_Bulk_List_Table {
+class WPSEO_Bulk_Description_List_Table extends WPSEO_Bulk_List_Table {
 
 	/**
 	 * Current type for this class will be (meta) description.
@@ -22,8 +22,8 @@ class YMBESEO_Bulk_Description_List_Table extends YMBESEO_Bulk_List_Table {
 	 * @var array
 	 */
 	protected $settings = array(
-		'singular' => 'YMBESEO_bulk_description',
-		'plural'   => 'YMBESEO_bulk_descriptions',
+		'singular' => 'wpseo_bulk_description',
+		'plural'   => 'wpseo_bulk_descriptions',
 		'ajax'     => true,
 	);
 
@@ -40,8 +40,8 @@ class YMBESEO_Bulk_Description_List_Table extends YMBESEO_Bulk_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'col_existing_yoast_seo_metadesc' => __( 'Existing Yoast Meta Description', 'ymbeseo' ),
-			'col_new_yoast_seo_metadesc'      => __( 'New Yoast Meta Description', 'ymbeseo' ),
+			'col_existing_yoast_seo_metadesc' => __( 'Existing Yoast Meta Description', 'wordpress-seo' ),
+			'col_new_yoast_seo_metadesc'      => __( 'New Yoast Meta Description', 'wordpress-seo' ),
 		);
 
 		return $this->merge_columns( $columns );

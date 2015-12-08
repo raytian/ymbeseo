@@ -1,20 +1,20 @@
 <?php
 /**
- * @package YMBESEO\Admin|Google_Search_Console
+ * @package WPSEO\Admin|Google_Search_Console
  */
 
 /**
- * Class YMBESEO_GSC_Ajax
+ * Class WPSEO_GSC_Ajax
  */
-class YMBESEO_GSC_Ajax {
+class WPSEO_GSC_Ajax {
 
 	/**
 	 * Setting the AJAX hooks for GSC
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_YMBESEO_mark_fixed_crawl_issue',  array( $this, 'ajax_mark_as_fixed' ) );
-		add_action( 'wp_ajax_YMBESEO_gsc_create_redirect_url', array( $this, 'ajax_create_redirect' ) );
-		add_action( 'wp_ajax_YMBESEO_dismiss_gsc', array( $this, 'dismiss_notice' ) );
+		add_action( 'wp_ajax_wpseo_mark_fixed_crawl_issue',  array( $this, 'ajax_mark_as_fixed' ) );
+		add_action( 'wp_ajax_wpseo_gsc_create_redirect_url', array( $this, 'ajax_create_redirect' ) );
+		add_action( 'wp_ajax_wpseo_dismiss_gsc', array( $this, 'dismiss_notice' ) );
 	}
 
 	/**
@@ -24,7 +24,7 @@ class YMBESEO_GSC_Ajax {
 	 */
 	public function ajax_mark_as_fixed( ) {
 		if ( $this->valid_nonce() ) {
-			$marker = new YMBESEO_GSC_Marker( filter_input( INPUT_POST, 'url' ) );
+			$marker = new WPSEO_GSC_Marker( filter_input( INPUT_POST, 'url' ) );
 
 			wp_die( $marker->get_response() );
 		}
@@ -36,15 +36,15 @@ class YMBESEO_GSC_Ajax {
 	 * Handling the request to create a new redirect from the issued URL
 	 */
 	public function ajax_create_redirect() {
-		if ( $this->valid_nonce() && class_exists( 'YMBESEO_URL_Redirect_Manager' ) && defined( 'YMBESEO_PREMIUM_PATH' ) ) {
-			$redirect_manager = new YMBESEO_URL_Redirect_Manager();
+		if ( $this->valid_nonce() && class_exists( 'WPSEO_URL_Redirect_Manager' ) && defined( 'WPSEO_PREMIUM_PATH' ) ) {
+			$redirect_manager = new WPSEO_URL_Redirect_Manager();
 
 			$old_url = filter_input( INPUT_POST, 'old_url' );
 
 			// Creates the redirect.
 			if ( $redirect_manager->create_redirect( $old_url, filter_input( INPUT_POST, 'new_url' ), filter_input( INPUT_POST, 'type' ) ) ) {
 				if ( filter_input( INPUT_POST, 'mark_as_fixed' ) === 'true' ) {
-					new YMBESEO_GSC_Marker( $old_url );
+					new WPSEO_GSC_Marker( $old_url );
 				}
 
 				wp_die( 'true' );
@@ -60,7 +60,7 @@ class YMBESEO_GSC_Ajax {
 	public function dismiss_notice() {
 		check_ajax_referer( 'dismiss-gsc-notice' );
 
-		update_user_meta( get_current_user_id(), 'YMBESEO_dismissed_gsc_notice', true );
+		update_user_meta( get_current_user_id(), 'wpseo_dismissed_gsc_notice', true );
 
 		wp_die( 'true' );
 	}

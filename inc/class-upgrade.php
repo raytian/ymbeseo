@@ -7,7 +7,7 @@
 /**
  * This code handles the option upgrades
  */
-class YMBESEO_Upgrade {
+class WPSEO_Upgrade {
 
 	/**
 	 * Holds the Yoast SEO options
@@ -20,9 +20,9 @@ class YMBESEO_Upgrade {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = YMBESEO_Options::get_all();
+		$this->options = WPSEO_Options::get_all();
 
-		YMBESEO_Options::maybe_set_multisite_defaults( false );
+		WPSEO_Options::maybe_set_multisite_defaults( false );
 
 		$this->init();
 
@@ -47,11 +47,11 @@ class YMBESEO_Upgrade {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_run_upgrade' - Runs the upgrade hook which are dependent on Yoast SEO
+		 * Filter: 'wpseo_run_upgrade' - Runs the upgrade hook which are dependent on Yoast SEO
 		 *
 		 * @api string - The current version of Yoast SEO
 		 */
-		do_action( 'YMBESEO_run_upgrade', $this->options['version'] );
+		do_action( 'wpseo_run_upgrade', $this->options['version'] );
 
 		$this->finish_up();
 	}
@@ -62,10 +62,10 @@ class YMBESEO_Upgrade {
 	private function init() {
 		if ( $this->options['version'] === '' || version_compare( $this->options['version'], '1.4.13', '<' ) ) {
 			/* Make sure title_test and description_test functions are available */
-			require_once( YMBESEO_PATH . 'inc/ymbeseo-non-ajax-functions.php' );
+			require_once( WPSEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
 
 			// Run description test once theme has loaded.
-			add_action( 'init', 'YMBESEO_description_test' );
+			add_action( 'init', 'wpseo_description_test' );
 		}
 	}
 
@@ -76,11 +76,11 @@ class YMBESEO_Upgrade {
 	 */
 	private function upgrade_15( $version ) {
 		// Clean up options and meta.
-		YMBESEO_Options::clean_up( null, $version );
-		YMBESEO_Meta::clean_up();
+		WPSEO_Options::clean_up( null, $version );
+		WPSEO_Meta::clean_up();
 
 		// Add new capabilities on upgrade.
-		YMBESEO_add_capabilities();
+		wpseo_add_capabilities();
 	}
 
 	/**
@@ -88,10 +88,10 @@ class YMBESEO_Upgrade {
 	 */
 	private function upgrade_20() {
 		/**
-		 * Clean up stray YMBESEO_ms options from the options table, option should only exist in the sitemeta table.
+		 * Clean up stray wpseo_ms options from the options table, option should only exist in the sitemeta table.
 		 * This could have been caused in many version of Yoast SEO, so deleting it for everything below 2.0
 		 */
-		delete_option( 'YMBESEO_ms' );
+		delete_option( 'wpseo_ms' );
 
 		$this->move_hide_links_options();
 		$this->move_pinterest_option();
@@ -101,7 +101,7 @@ class YMBESEO_Upgrade {
 	 * Detects if taxonomy terms were split and updates the corresponding taxonomy meta's accordingly.
 	 */
 	private function upgrade_21() {
-		$taxonomies = get_option( 'YMBESEO_taxonomy_meta', array() );
+		$taxonomies = get_option( 'wpseo_taxonomy_meta', array() );
 
 		if ( ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy => $tax_metas ) {
@@ -113,7 +113,7 @@ class YMBESEO_Upgrade {
 				}
 			}
 
-			update_option( 'YMBESEO_taxonomy_meta', $taxonomies );
+			update_option( 'wpseo_taxonomy_meta', $taxonomies );
 		}
 	}
 
@@ -142,10 +142,10 @@ class YMBESEO_Upgrade {
 	 * Performs upgrade query to Yoast SEO 2.3
 	 */
 	public function upgrade_23_query() {
-		$wp_query = new WP_Query( 'post_type=any&meta_key=_so_YMBESEO_sitemap-include&meta_value=never&order=ASC' );
+		$wp_query = new WP_Query( 'post_type=any&meta_key=_yoast_wpseo_sitemap-include&meta_value=never&order=ASC' );
 
 		if ( ! empty( $wp_query->posts ) ) {
-			$options = get_option( 'YMBESEO_xml' );
+			$options = get_option( 'wpseo_xml' );
 
 			$excluded_posts = array();
 			if ( $options['excluded-posts'] !== '' ) {
@@ -162,40 +162,40 @@ class YMBESEO_Upgrade {
 			$options['excluded-posts'] = implode( ',', $excluded_posts );
 
 			// Update the option.
-			update_option( 'YMBESEO_xml', $options );
+			update_option( 'wpseo_xml', $options );
 		}
 
 		// Remove the meta fields.
-		delete_post_meta_by_key( '_so_YMBESEO_sitemap-include' );
+		delete_post_meta_by_key( '_yoast_wpseo_sitemap-include' );
 	}
 
 	/**
 	 * Moves the hide- links options from the permalinks option to the titles option
 	 */
 	private function move_hide_links_options() {
-		$options_titles = get_option( 'YMBESEO_titles' );
-		$options_permalinks = get_option( 'YMBESEO_permalinks' );
+		$options_titles = get_option( 'wpseo_titles' );
+		$options_permalinks = get_option( 'wpseo_permalinks' );
 
 		foreach ( array( 'hide-feedlinks', 'hide-rsdlink', 'hide-shortlink', 'hide-wlwmanifest' ) as $hide ) {
 			if ( isset( $options_titles[ $hide ] ) ) {
 				$options_permalinks[ $hide ] = $options_titles[ $hide ];
 				unset( $options_titles[ $hide ] );
-				update_option( 'YMBESEO_permalinks', $options_permalinks );
-				update_option( 'YMBESEO_titles', $options_titles );
+				update_option( 'wpseo_permalinks', $options_permalinks );
+				update_option( 'wpseo_titles', $options_titles );
 			}
 		}
 	}
 
 	/**
-	 * Move the pinterest verification option from the wpseo option to the YMBESEO_social option
+	 * Move the pinterest verification option from the wpseo option to the wpseo_social option
 	 */
 	private function move_pinterest_option() {
-		$options_social = get_option( 'YMBESEO_social' );
+		$options_social = get_option( 'wpseo_social' );
 
 		if ( isset( $option_wpseo['pinterestverify'] ) ) {
 			$options_social['pinterestverify'] = $option_wpseo['pinterestverify'];
 			unset( $option_wpseo['pinterestverify'] );
-			update_option( 'YMBESEO_social', $options_social );
+			update_option( 'wpseo_social', $options_social );
 			update_option( 'wpseo', $option_wpseo );
 		}
 	}
@@ -205,12 +205,12 @@ class YMBESEO_Upgrade {
 	 */
 	private function finish_up() {
 		$this->options = get_option( 'wpseo' );                             // Re-get to make sure we have the latest version.
-		update_option( 'wpseo', $this->options );                           // This also ensures the DB version is equal to YMBESEO_VERSION.
+		update_option( 'wpseo', $this->options );                           // This also ensures the DB version is equal to WPSEO_VERSION.
 
 		add_action( 'shutdown', 'flush_rewrite_rules' );                    // Just flush rewrites, always, to at least make them work after an upgrade.
-		YMBESEO_Utils::clear_sitemap_cache();                                 // Flush the sitemap cache.
+		WPSEO_Utils::clear_sitemap_cache();                                 // Flush the sitemap cache.
 
-		YMBESEO_Options::ensure_options_exist();                              // Make sure all our options always exist - issue #1245.
+		WPSEO_Options::ensure_options_exist();                              // Make sure all our options always exist - issue #1245.
 	}
 
 }

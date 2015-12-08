@@ -1,9 +1,9 @@
 <?php
 /**
- * @package YMBESEO\Admin
+ * @package WPSEO\Admin
  */
 
-if ( ! defined( 'YMBESEO_VERSION' ) ) {
+if ( ! defined( 'WPSEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -13,16 +13,16 @@ $active_tab = filter_input( INPUT_GET, 'tab' );
 
 $tabs = array(
 	'breadcrumbs' => array(
-		'label'     => __( 'Breadcrumbs', 'ymbeseo' ),
-		'opt_group' => 'YMBESEO_internallinks',
+		'label'     => __( 'Breadcrumbs', 'wordpress-seo' ),
+		'opt_group' => 'wpseo_internallinks',
 	),
 	'permalinks'  => array(
-		'label'     => __( 'Permalinks', 'ymbeseo' ),
-		'opt_group' => 'YMBESEO_permalinks',
+		'label'     => __( 'Permalinks', 'wordpress-seo' ),
+		'opt_group' => 'wpseo_permalinks',
 	),
 	'rss'         => array(
-		'label'     => __( 'RSS', 'ymbeseo' ),
-		'opt_group' => 'YMBESEO_rss',
+		'label'     => __( 'RSS', 'wordpress-seo' ),
+		'opt_group' => 'wpseo_rss',
 	),
 );
 
@@ -40,13 +40,13 @@ Yoast_Form::get_instance()->admin_header( true, $tabs[ $active_tab ]['opt_group'
 			if ( $active_tab == $tab_key ) {
 				$active = ' nav-tab-active';
 			}
-			echo '<a class="nav-tab' . $active . '" id="' . $tab_key . '-tab" href="' . admin_url( 'admin.php?page=YMBESEO_advanced&tab=' . $tab_key ) . '">' . $tab_opt['label'] . '</a>';
+			echo '<a class="nav-tab' . $active . '" id="' . $tab_key . '-tab" href="' . admin_url( 'admin.php?page=wpseo_advanced&tab=' . $tab_key ) . '">' . $tab_opt['label'] . '</a>';
 		}
 		?>
 	</h2>
 	<br/>
 <?php
 
-require_once YMBESEO_PATH . 'admin/views/tab-' . $active_tab . '.php';
+require_once WPSEO_PATH . 'admin/views/tab-' . $active_tab . '.php';
 
 Yoast_Form::get_instance()->admin_footer();

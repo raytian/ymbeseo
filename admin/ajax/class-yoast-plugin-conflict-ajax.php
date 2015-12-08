@@ -1,6 +1,6 @@
 <?php
 /**
- * @package YMBESEO\admin|ajax
+ * @package WPSEO\admin|ajax
  */
 
 /**
@@ -11,7 +11,7 @@ class Yoast_Plugin_Conflict_Ajax {
 	/**
 	 * @var string
 	 */
-	private $option_name = 'YMBESEO_dismissed_conflicts';
+	private $option_name = 'wpseo_dismissed_conflicts';
 
 	/**
 	 * @var array
@@ -22,7 +22,7 @@ class Yoast_Plugin_Conflict_Ajax {
 	 * Initialize the hooks for the AJAX request
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_YMBESEO_dismiss_plugin_conflict', array( $this, 'dismiss_notice' ) );
+		add_action( 'wp_ajax_wpseo_dismiss_plugin_conflict', array( $this, 'dismiss_notice' ) );
 	}
 
 	/**

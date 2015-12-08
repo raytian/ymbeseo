@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Admin|Google_Search_Console
+ * @package WPSEO\Admin|Google_Search_Console
  */
 
 /**
- * Class YMBESEO_GSC_Mapper
+ * Class WPSEO_GSC_Mapper
  */
-class YMBESEO_GSC_Mapper {
+class WPSEO_GSC_Mapper {
 
 	/**
 	 * The platforms which can be mapped.

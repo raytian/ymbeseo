@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Admin
+ * @package WPSEO\Admin
  */
 
 /**
- * Class YMBESEO_GSC_Config
+ * Class WPSEO_GSC_Config
  */
-class YMBESEO_GSC_Config {
+class WPSEO_GSC_Config {
 
 	/**
 	 * @var array

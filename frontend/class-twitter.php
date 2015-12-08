@@ -1,6 +1,6 @@
 <?php
 /**
- * @package YMBESEO\Frontend
+ * @package WPSEO\Frontend
  */
 
 /**
@@ -8,7 +8,7 @@
  *
  * @link https://dev.twitter.com/docs/cards
  */
-class YMBESEO_Twitter {
+class WPSEO_Twitter {
 
 	/**
 	 * @var    object    Instance of this class
@@ -41,7 +41,7 @@ class YMBESEO_Twitter {
 	 * Class constructor
 	 */
 	public function __construct() {
-		$this->options = YMBESEO_Options::get_all();
+		$this->options = WPSEO_Options::get_all();
 		$this->twitter();
 	}
 
@@ -62,15 +62,15 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Action: 'YMBESEO_twitter' - Hook to add all Yoast SEO Twitter output to so they're close together.
+		 * Action: 'wpseo_twitter' - Hook to add all Yoast SEO Twitter output to so they're close together.
 		 */
-		do_action( 'YMBESEO_twitter' );
+		do_action( 'wpseo_twitter' );
 	}
 
 	/**
 	 * Display the Twitter card type.
 	 *
-	 * This defaults to summary but can be filtered using the <code>YMBESEO_twitter_card_type</code> filter.
+	 * This defaults to summary but can be filtered using the <code>wpseo_twitter_card_type</code> filter.
 	 *
 	 * @link https://dev.twitter.com/docs/cards
 	 */
@@ -97,11 +97,11 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_twitter_card_type' - Allow changing the Twitter Card type as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_card_type' - Allow changing the Twitter Card type as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $unsigned The type string
 		 */
-		$this->type = apply_filters( 'YMBESEO_twitter_card_type', $this->type );
+		$this->type = apply_filters( 'wpseo_twitter_card_type', $this->type );
 	}
 
 	/**
@@ -139,11 +139,11 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_twitter_metatag_key' - Make the Twitter metatag key filterable
+		 * Filter: 'wpseo_twitter_metatag_key' - Make the Twitter metatag key filterable
 		 *
 		 * @api string $key The Twitter metatag key
 		 */
-		$metatag_key = apply_filters( 'YMBESEO_twitter_metatag_key', 'name' );
+		$metatag_key = apply_filters( 'wpseo_twitter_metatag_key', 'name' );
 
 		// Output meta.
 		echo '<meta ', esc_attr( $metatag_key ), '="twitter:', esc_attr( $name ), '" content="', $value, '"/>', "\n";
@@ -158,7 +158,7 @@ class YMBESEO_Twitter {
 		if ( is_singular() ) {
 			$meta_desc = $this->single_description();
 		}
-		elseif ( YMBESEO_Frontend::get_instance()->is_posts_page() ) {
+		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
 			$meta_desc = $this->single_description( get_option( 'page_for_posts' ) );
 		}
 		else {
@@ -166,11 +166,11 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_twitter_description' - Allow changing the Twitter description as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_description' - Allow changing the Twitter description as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $twitter The description string
 		 */
-		$meta_desc = apply_filters( 'YMBESEO_twitter_description', $meta_desc );
+		$meta_desc = apply_filters( 'wpseo_twitter_description', $meta_desc );
 		if ( is_string( $meta_desc ) && $meta_desc !== '' ) {
 			$this->output_metatag( 'description', $meta_desc );
 		}
@@ -184,7 +184,7 @@ class YMBESEO_Twitter {
 	 * @return string
 	 */
 	private function single_description( $post_id = 0 ) {
-		$meta_desc = trim( YMBESEO_Meta::get_value( 'twitter-description', $post_id ) );
+		$meta_desc = trim( WPSEO_Meta::get_value( 'twitter-description', $post_id ) );
 
 		if ( is_string( $meta_desc ) && '' !== $meta_desc ) {
 			return $meta_desc;
@@ -204,7 +204,7 @@ class YMBESEO_Twitter {
 	 * @return string
 	 */
 	private function fallback_description() {
-		return trim( YMBESEO_Frontend::get_instance()->metadesc( false ) );
+		return trim( WPSEO_Frontend::get_instance()->metadesc( false ) );
 	}
 
 	/**
@@ -216,7 +216,7 @@ class YMBESEO_Twitter {
 		if ( is_singular() ) {
 			$title = $this->single_title();
 		}
-		elseif ( YMBESEO_Frontend::get_instance()->is_posts_page() ) {
+		elseif ( WPSEO_Frontend::get_instance()->is_posts_page() ) {
 			$title = $this->single_title( get_option( 'page_for_posts' ) );
 		}
 		else {
@@ -224,11 +224,11 @@ class YMBESEO_Twitter {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_twitter_title' - Allow changing the Twitter title as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_title' - Allow changing the Twitter title as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $twitter The title string
 		 */
-		$title = apply_filters( 'YMBESEO_twitter_title', $title );
+		$title = apply_filters( 'wpseo_twitter_title', $title );
 		if ( is_string( $title ) && $title !== '' ) {
 			$this->output_metatag( 'title', $title );
 		}
@@ -242,7 +242,7 @@ class YMBESEO_Twitter {
 	 * @return string
 	 */
 	private function single_title( $post_id = 0 ) {
-		$title = YMBESEO_Meta::get_value( 'twitter-title', $post_id );
+		$title = WPSEO_Meta::get_value( 'twitter-title', $post_id );
 		if ( ! is_string( $title ) || '' === $title ) {
 			return $this->fallback_title();
 		}
@@ -257,7 +257,7 @@ class YMBESEO_Twitter {
 	 * @return string
 	 */
 	private function fallback_title() {
-		return YMBESEO_Frontend::get_instance()->title( '' );
+		return WPSEO_Frontend::get_instance()->title( '' );
 	}
 
 	/**
@@ -265,11 +265,11 @@ class YMBESEO_Twitter {
 	 */
 	protected function site_twitter() {
 		/**
-		 * Filter: 'YMBESEO_twitter_site' - Allow changing the Twitter site account as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_site' - Allow changing the Twitter site account as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $unsigned Twitter site account string
 		 */
-		$site = apply_filters( 'YMBESEO_twitter_site', $this->options['twitter_site'] );
+		$site = apply_filters( 'wpseo_twitter_site', $this->options['twitter_site'] );
 		$site = $this->get_twitter_id( $site );
 
 		if ( is_string( $site ) && $site !== '' ) {
@@ -301,11 +301,11 @@ class YMBESEO_Twitter {
 	 */
 	protected function site_domain() {
 		/**
-		 * Filter: 'YMBESEO_twitter_domain' - Allow changing the Twitter domain as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_domain' - Allow changing the Twitter domain as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $unsigned Name string
 		 */
-		$domain = apply_filters( 'YMBESEO_twitter_domain', get_bloginfo( 'name' ) );
+		$domain = apply_filters( 'wpseo_twitter_domain', get_bloginfo( 'name' ) );
 		if ( is_string( $domain ) && $domain !== '' ) {
 			$this->output_metatag( 'domain', $domain );
 		}
@@ -392,11 +392,11 @@ class YMBESEO_Twitter {
 	 */
 	protected function image_output( $img, $tag = 'image' ) {
 		/**
-		 * Filter: 'YMBESEO_twitter_image' - Allow changing the Twitter Card image
+		 * Filter: 'wpseo_twitter_image' - Allow changing the Twitter Card image
 		 *
 		 * @api string $img Image URL string
 		 */
-		$img = apply_filters( 'YMBESEO_twitter_image', $img );
+		$img = apply_filters( 'wpseo_twitter_image', $img );
 
 		$escaped_img = esc_url( $img );
 
@@ -421,7 +421,7 @@ class YMBESEO_Twitter {
 	 */
 	private function image_from_meta_values_output() {
 		foreach ( array( 'twitter-image', 'opengraph-image' ) as $tag ) {
-			$img = YMBESEO_Meta::get_value( $tag );
+			$img = WPSEO_Meta::get_value( $tag );
 			if ( $img !== '' ) {
 				$this->image_output( $img );
 
@@ -440,11 +440,11 @@ class YMBESEO_Twitter {
 	private function image_thumbnail_output() {
 		if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( get_the_ID() ) ) {
 			/**
-			 * Filter: 'YMBESEO_twitter_image_size' - Allow changing the Twitter Card image size
+			 * Filter: 'wpseo_twitter_image_size' - Allow changing the Twitter Card image size
 			 *
 			 * @api string $featured_img Image size string
 			 */
-			$featured_img = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), apply_filters( 'YMBESEO_twitter_image_size', 'full' ) );
+			$featured_img = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), apply_filters( 'wpseo_twitter_image_size', 'full' ) );
 
 			if ( $featured_img ) {
 				$this->image_output( $featured_img[0] );
@@ -463,14 +463,14 @@ class YMBESEO_Twitter {
 	 */
 	private function image_from_content_output() {
 		/**
-		 * Filter: 'YMBESEO_pre_analysis_post_content' - Allow filtering the content before analysis
+		 * Filter: 'wpseo_pre_analysis_post_content' - Allow filtering the content before analysis
 		 *
 		 * @api string $post_content The Post content string
 		 *
 		 * @param object $post - The post object.
 		 */
 		global $post;
-		$content = apply_filters( 'YMBESEO_pre_analysis_post_content', $post->post_content, $post );
+		$content = apply_filters( 'wpseo_pre_analysis_post_content', $post->post_content, $post );
 
 		if ( preg_match_all( '`<img [^>]+>`', $content, $matches ) ) {
 			foreach ( $matches[0] as $img ) {
@@ -491,11 +491,11 @@ class YMBESEO_Twitter {
 	protected function author() {
 		$twitter = ltrim( trim( get_the_author_meta( 'twitter', get_post()->post_author ) ), '@' );
 		/**
-		 * Filter: 'YMBESEO_twitter_creator_account' - Allow changing the Twitter account as output in the Twitter card by Yoast SEO
+		 * Filter: 'wpseo_twitter_creator_account' - Allow changing the Twitter account as output in the Twitter card by Yoast SEO
 		 *
 		 * @api string $twitter The twitter account name string
 		 */
-		$twitter = apply_filters( 'YMBESEO_twitter_creator_account', $twitter );
+		$twitter = apply_filters( 'wpseo_twitter_creator_account', $twitter );
 		$twitter = $this->get_twitter_id( $twitter );
 
 		if ( is_string( $twitter ) && $twitter !== '' ) {

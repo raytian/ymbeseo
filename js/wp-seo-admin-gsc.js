@@ -16,7 +16,7 @@ jQuery( function() {
 	);
 });
 
-function YMBESEO_gsc_post_redirect() {
+function wpseo_gsc_post_redirect() {
 	'use strict';
 
 	var target_form = jQuery( '#TB_ajaxContent' );
@@ -26,7 +26,7 @@ function YMBESEO_gsc_post_redirect() {
 	jQuery.post(
 		ajaxurl,
 		{
-			action: 'YMBESEO_gsc_create_redirect_url',
+			action: 'wpseo_gsc_create_redirect_url',
 			ajax_nonce: jQuery('.wpseo-gsc-ajax-security').val(),
 			old_url: old_url,
 			new_url: jQuery( target_form ).find('input[name=new_url]').val(),
@@ -49,7 +49,7 @@ function YMBESEO_gsc_post_redirect() {
 	return false;
 }
 
-function YMBESEO_update_category_count(category) {
+function wpseo_update_category_count(category) {
 	'use strict';
 
 	var count_element = jQuery('#gsc_count_' + category + '');
@@ -61,13 +61,13 @@ function YMBESEO_update_category_count(category) {
 	count_element.text(new_count);
 }
 
-function YMBESEO_mark_as_fixed(url) {
+function wpseo_mark_as_fixed(url) {
 	'use strict';
 
 	jQuery.post(
 		ajaxurl,
 		{
-			action: 'YMBESEO_mark_fixed_crawl_issue',
+			action: 'wpseo_mark_fixed_crawl_issue',
 			ajax_nonce: jQuery('.wpseo-gsc-ajax-security').val(),
 			platform: jQuery('#field_platform').val(),
 			category: jQuery('#field_category').val(),
@@ -75,7 +75,7 @@ function YMBESEO_mark_as_fixed(url) {
 		},
 		function(response) {
 			if ('true' === response) {
-				YMBESEO_update_category_count(jQuery('#field_category').val());
+				wpseo_update_category_count(jQuery('#field_category').val());
 				jQuery('span:contains(' + url + ')').closest('tr').remove();
 			}
 		}

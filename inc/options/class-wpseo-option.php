@@ -1,6 +1,6 @@
 <?php
 /**
- * @package YMBESEO\Internals\Options
+ * @package WPSEO\Internals\Options
  */
 
 /**
@@ -20,18 +20,18 @@
  *    Oh and the very few options where the default value is null, i.e. wpseo->'theme_has_description'
  *
  * [Updating/Adding options]
- * - For multisite site_options, please use the YMBESEO_Options::update_site_option() method.
+ * - For multisite site_options, please use the WPSEO_Options::update_site_option() method.
  * - For normal options, use the normal add/update_option() functions. As long a the classes here
  *   are instantiated, validation for all options and their subkeys will be automatic.
  * - On (succesfull) update of a couple of options, certain related actions will be run automatically.
  *    Some examples:
  *      - on change of wpseo[yoast_tracking], the cron schedule will be adjusted accordingly
- *      - on change of YMBESEO_permalinks and YMBESEO_xml, the rewrite rules will be flushed
- *      - on change of wpseo and YMBESEO_title, some caches will be cleared
+ *      - on change of wpseo_permalinks and wpseo_xml, the rewrite rules will be flushed
+ *      - on change of wpseo and wpseo_title, some caches will be cleared
  *
  *
  * [Important information about add/updating/changing these classes]
- * - Make sure that option array key names are unique across options. The YMBESEO_Options::get_all()
+ * - Make sure that option array key names are unique across options. The WPSEO_Options::get_all()
  *    method merges most options together. If any of them have non-unique names, even if they
  *    are in a different option, they *will* overwrite each other.
  * - When you add a new array key in an option: make sure you add proper defaults and add the key
@@ -41,7 +41,7 @@
  *    If the default value is a string which need translating, add this to the concrete class
  *    translate_defaults() method.
  * - When you remove an array key from an option: if it's important that the option is really removed,
- *    add the YMBESEO_Option::clean_up( $option_name ) method to the upgrade run.
+ *    add the WPSEO_Option::clean_up( $option_name ) method to the upgrade run.
  *    This will re-save the option and automatically remove the array key no longer in existance.
  * - When you rename a sub-option: add it to the clean_option() routine and run that in the upgrade run.
  * - When you change the default for an option sub-key, make sure you verify that the validation routine will
@@ -55,7 +55,7 @@
  * @todo       - [JRF => testers] double check that validation will not cause errors when called
  *               from upgrade routine (some of the WP functions may not yet be available)
  */
-abstract class YMBESEO_Option {
+abstract class WPSEO_Option {
 
 	/**
 	 * @var  string  Option name - MUST be set in concrete class and set to public.
@@ -71,7 +71,7 @@ abstract class YMBESEO_Option {
 	public $group_name;
 
 	/**
-	 * @var  bool  Whether to include the option in the return for YMBESEO_Options::get_all().
+	 * @var  bool  Whether to include the option in the return for WPSEO_Options::get_all().
 	 *             Also determines which options are copied over for ms_(re)set_blog().
 	 */
 	public $include_in_all = true;
@@ -110,7 +110,7 @@ abstract class YMBESEO_Option {
 	/**
 	 * Add all the actions and filters for the option
 	 *
-	 * @return \YMBESEO_Option
+	 * @return \WPSEO_Option
 	 */
 	protected function __construct() {
 
@@ -139,7 +139,7 @@ abstract class YMBESEO_Option {
 			   to insert an option if it's new. Let's add them back afterwards.
 
 			   For site_options, this method is not foolproof as these actions are not fired
-			   on an insert/update failure. Please use the YMBESEO_Options::update_site_option() method
+			   on an insert/update failure. Please use the WPSEO_Options::update_site_option() method
 			   for updating site options to make sure the filters are in place.
 			*/
 			add_action( 'add_site_option_' . $this->option_name, array( $this, 'add_default_filters' ) );
@@ -293,7 +293,7 @@ abstract class YMBESEO_Option {
 						add_settings_error(
 							$this->group_name, // Slug title of the setting.
 							'_' . $key, // Suffix-id for the error message box.
-							sprintf( __( '%s does not seem to be a valid %s verification string. Please correct.', 'ymbeseo' ), '<strong>' . esc_html( $meta ) . '</strong>', $service ), // The error message.
+							sprintf( __( '%s does not seem to be a valid %s verification string. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( $meta ) . '</strong>', $service ), // The error message.
 							'error' // Error type, either 'error' or 'updated'.
 						);
 					}
@@ -312,23 +312,23 @@ abstract class YMBESEO_Option {
 	 */
 	public function validate_url( $key, $dirty, $old, &$clean ) {
 		if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-			$url = YMBESEO_Utils::sanitize_url( $dirty[ $key ] );
+			$url = WPSEO_Utils::sanitize_url( $dirty[ $key ] );
 			if ( $url !== '' ) {
 				$clean[ $key ] = $url;
 			}
 			else {
 				if ( isset( $old[ $key ] ) && $old[ $key ] !== '' ) {
-					$url = YMBESEO_Utils::sanitize_url( $old[ $key ] );
+					$url = WPSEO_Utils::sanitize_url( $old[ $key ] );
 					if ( $url !== '' ) {
 						$clean[ $key ] = $url;
 					}
 				}
 				if ( function_exists( 'add_settings_error' ) ) {
-					$url = YMBESEO_Utils::sanitize_url( $dirty[ $key ] );
+					$url = WPSEO_Utils::sanitize_url( $dirty[ $key ] );
 					add_settings_error(
 						$this->group_name, // Slug title of the setting.
 						'_' . $key, // Suffix-id for the error message box.
-						sprintf( __( '%s does not seem to be a valid url. Please correct.', 'ymbeseo' ), '<strong>' . esc_html( $url ) . '</strong>' ), // The error message.
+						sprintf( __( '%s does not seem to be a valid url. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( $url ) . '</strong>' ), // The error message.
 						'error' // Error type, either 'error' or 'updated'.
 					);
 				}
@@ -366,7 +366,7 @@ abstract class YMBESEO_Option {
 			$this->enrich_defaults();
 		}
 
-		return apply_filters( 'YMBESEO_defaults', $this->defaults, $this->option_name );
+		return apply_filters( 'wpseo_defaults', $this->defaults, $this->option_name );
 	}
 
 
@@ -430,7 +430,7 @@ abstract class YMBESEO_Option {
 	 * @return void
 	 */
 	public function register_setting() {
-		if ( YMBESEO_Utils::grant_access() ) {
+		if ( WPSEO_Utils::grant_access() ) {
 			register_setting( $this->group_name, $this->option_name );
 		}
 	}
@@ -452,7 +452,7 @@ abstract class YMBESEO_Option {
 		}
 
 
-		$option_value = array_map( array( 'YMBESEO_Utils', 'trim_recursive' ), $option_value );
+		$option_value = array_map( array( 'WPSEO_Utils', 'trim_recursive' ), $option_value );
 		if ( $this->multisite_only !== true ) {
 			$old = get_option( $this->option_name );
 		}
@@ -511,7 +511,7 @@ abstract class YMBESEO_Option {
 	/**
 	 * Add the option if it doesn't exist for some strange reason
 	 *
-	 * @uses YMBESEO_Option::get_original_option()
+	 * @uses WPSEO_Option::get_original_option()
 	 *
 	 * @return void
 	 */
@@ -534,7 +534,7 @@ abstract class YMBESEO_Option {
 	 * The order in which certain functions and hooks are run is different between get_option() and
 	 * get_site_option() which means in practice that the removing of the default filters would be
 	 * done too late and the re-adding of the default filters might not be done at all.
-	 * Aka: use the YMBESEO_Options::update_site_option() method (which calls this method) for
+	 * Aka: use the WPSEO_Options::update_site_option() method (which calls this method) for
 	 * safely adding/updating multisite options.
 	 *
 	 * @param mixed $value The new value for the option.
@@ -558,8 +558,8 @@ abstract class YMBESEO_Option {
 	/**
 	 * Retrieve the real old value (unmerged with defaults), clean and re-save the option
 	 *
-	 * @uses YMBESEO_Option::get_original_option()
-	 * @uses YMBESEO_Option::import()
+	 * @uses WPSEO_Option::get_original_option()
+	 * @uses WPSEO_Option::import()
 	 *
 	 * @param  string $current_version (optional) Version from which to upgrade, if not set, version specific upgrades will be disregarded.
 	 *
@@ -660,7 +660,7 @@ abstract class YMBESEO_Option {
 	 * Make sure that any set option values relating to post_types and/or taxonomies are retained,
 	 * even when that post_type or taxonomy may not yet have been registered.
 	 *
-	 * @internal The YMBESEO_titles concrete class overrules this method. Make sure that any changes
+	 * @internal The wpseo_titles concrete class overrules this method. Make sure that any changes
 	 * applied here, also get ported to that version.
 	 *
 	 * @param  array $dirty Original option as retrieved from the database.
@@ -715,5 +715,145 @@ abstract class YMBESEO_Option {
 		}
 
 		return $key;
+	}
+
+
+	/* *********** DEPRECATED METHODS *********** */
+
+	/**
+	 * Emulate the WP native sanitize_text_field function in a %%variable%% safe way
+	 *
+	 * @see        https://core.trac.wordpress.org/browser/trunk/src/wp-includes/formatting.php for the original
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::sanitize_text_field()
+	 * @see        WPSEO_Utils::sanitize_text_field()
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public static function sanitize_text_field( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::sanitize_text_field()' );
+
+		return WPSEO_Utils::sanitize_text_field( $value );
+	}
+
+
+	/**
+	 * Sanitize a url for saving to the database
+	 * Not to be confused with the old native WP function
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::sanitize_url()
+	 * @see        WPSEO_Utils::sanitize_url()
+	 *
+	 * @param  string $value
+	 * @param  array  $allowed_protocols
+	 *
+	 * @return  string
+	 */
+	public static function sanitize_url( $value, $allowed_protocols = array( 'http', 'https' ) ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::sanitize_url()' );
+
+		return WPSEO_Utils::sanitize_url( $value, $allowed_protocols );
+	}
+
+	/**
+	 * Validate a value as boolean
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::validate_bool()
+	 * @see        WPSEO_Utils::validate_bool()
+	 *
+	 * @static
+	 *
+	 * @param  mixed $value
+	 *
+	 * @return  bool
+	 */
+	public static function validate_bool( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::validate_bool()' );
+
+		return WPSEO_Utils::validate_bool( $value );
+	}
+
+	/**
+	 * Cast a value to bool
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::emulate_filter_bool()
+	 * @see        WPSEO_Utils::emulate_filter_bool()
+	 *
+	 * @static
+	 *
+	 * @param    mixed $value Value to cast.
+	 *
+	 * @return    bool
+	 */
+	public static function emulate_filter_bool( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::emulate_filter_bool()' );
+
+		return WPSEO_Utils::emulate_filter_bool( $value );
+	}
+
+
+	/**
+	 * Validate a value as integer
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::validate_int()
+	 * @see        WPSEO_Utils::validate_int()
+	 *
+	 * @static
+	 *
+	 * @param  mixed $value
+	 *
+	 * @return  mixed  int or false in case of failure to convert to int
+	 */
+	public static function validate_int( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::validate_int()' );
+
+		return WPSEO_Utils::validate_int( $value );
+	}
+
+	/**
+	 * Cast a value to integer
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::emulate_filter_int()
+	 * @see        WPSEO_Utils::emulate_filter_int()
+	 *
+	 * @static
+	 *
+	 * @param    mixed $value Value to cast.
+	 *
+	 * @return    int|bool
+	 */
+	public static function emulate_filter_int( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::emulate_filter_int()' );
+
+		return WPSEO_Utils::emulate_filter_int( $value );
+	}
+
+
+	/**
+	 * Recursively trim whitespace round a string value or of string values within an array
+	 * Only trims strings to avoid typecasting a variable (to string)
+	 *
+	 * @deprecated 1.5.6.1
+	 * @deprecated use WPSEO_Utils::trim_recursive()
+	 * @see        WPSEO_Utils::trim_recursive()
+	 *
+	 * @static
+	 *
+	 * @param   mixed $value Value to trim or array of values to trim.
+	 *
+	 * @return  mixed      Trimmed value or array of trimmed values
+	 */
+	public static function trim_recursive( $value ) {
+		_deprecated_function( __FUNCTION__, 'WPSEO 1.5.6.1', 'WPSEO_Utils::trim_recursive()' );
+
+		return WPSEO_Utils::trim_recursive( $value );
 	}
 }

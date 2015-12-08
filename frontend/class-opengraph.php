@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Frontend
+ * @package WPSEO\Frontend
  */
 
 /**
  * This code adds the OpenGraph output.
  */
-class YMBESEO_OpenGraph {
+class WPSEO_OpenGraph {
 
 	/**
 	 * @var array $options Options for the OpenGraph Settings
@@ -17,7 +17,7 @@ class YMBESEO_OpenGraph {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->options = YMBESEO_Options::get_all();
+		$this->options = WPSEO_Options::get_all();
 
 		if ( isset( $GLOBALS['fb_ver'] ) || class_exists( 'Facebook_Loader', false ) ) {
 			add_filter( 'fb_meta_tags', array( $this, 'facebook_filter' ), 10, 1 );
@@ -25,25 +25,25 @@ class YMBESEO_OpenGraph {
 		else {
 			add_filter( 'language_attributes', array( $this, 'add_opengraph_namespace' ) );
 
-			add_action( 'YMBESEO_opengraph', array( $this, 'locale' ), 1 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'type' ), 5 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'og_title' ), 10 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'site_owner' ), 20 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'description' ), 11 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'url' ), 12 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'site_name' ), 13 );
-			add_action( 'YMBESEO_opengraph', array( $this, 'website_facebook' ), 14 );
+			add_action( 'wpseo_opengraph', array( $this, 'locale' ), 1 );
+			add_action( 'wpseo_opengraph', array( $this, 'type' ), 5 );
+			add_action( 'wpseo_opengraph', array( $this, 'og_title' ), 10 );
+			add_action( 'wpseo_opengraph', array( $this, 'site_owner' ), 20 );
+			add_action( 'wpseo_opengraph', array( $this, 'description' ), 11 );
+			add_action( 'wpseo_opengraph', array( $this, 'url' ), 12 );
+			add_action( 'wpseo_opengraph', array( $this, 'site_name' ), 13 );
+			add_action( 'wpseo_opengraph', array( $this, 'website_facebook' ), 14 );
 			if ( is_singular() && ! is_front_page() ) {
-				add_action( 'YMBESEO_opengraph', array( $this, 'article_author_facebook' ), 15 );
-				add_action( 'YMBESEO_opengraph', array( $this, 'tags' ), 16 );
-				add_action( 'YMBESEO_opengraph', array( $this, 'category' ), 17 );
-				add_action( 'YMBESEO_opengraph', array( $this, 'publish_date' ), 19 );
+				add_action( 'wpseo_opengraph', array( $this, 'article_author_facebook' ), 15 );
+				add_action( 'wpseo_opengraph', array( $this, 'tags' ), 16 );
+				add_action( 'wpseo_opengraph', array( $this, 'category' ), 17 );
+				add_action( 'wpseo_opengraph', array( $this, 'publish_date' ), 19 );
 			}
 
-			add_action( 'YMBESEO_opengraph', array( $this, 'image' ), 30 );
+			add_action( 'wpseo_opengraph', array( $this, 'image' ), 30 );
 		}
 		add_filter( 'jetpack_enable_open_graph', '__return_false' );
-		add_action( 'YMBESEO_head', array( $this, 'opengraph' ), 30 );
+		add_action( 'wpseo_head', array( $this, 'opengraph' ), 30 );
 	}
 
 	/**
@@ -52,9 +52,9 @@ class YMBESEO_OpenGraph {
 	public function opengraph() {
 		wp_reset_query();
 		/**
-		 * Action: 'YMBESEO_opengraph' - Hook to add all Facebook OpenGraph output to so they're close together.
+		 * Action: 'wpseo_opengraph' - Hook to add all Facebook OpenGraph output to so they're close together.
 		 */
-		do_action( 'YMBESEO_opengraph' );
+		do_action( 'wpseo_opengraph' );
 	}
 
 	/**
@@ -68,11 +68,11 @@ class YMBESEO_OpenGraph {
 	public function og_tag( $property, $content ) {
 		$og_property = str_replace( ':', '_', $property );
 		/**
-		 * Filter: 'YMBESEO_og_' . $og_property - Allow developers to change the content of specific OG meta tags.
+		 * Filter: 'wpseo_og_' . $og_property - Allow developers to change the content of specific OG meta tags.
 		 *
 		 * @api string $content The content of the property
 		 */
-		$content = apply_filters( 'YMBESEO_og_' . $og_property, $content );
+		$content = apply_filters( 'wpseo_og_' . $og_property, $content );
 		if ( empty( $content ) ) {
 			return false;
 		}
@@ -131,11 +131,11 @@ class YMBESEO_OpenGraph {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_opengraph_author_facebook' - Allow developers to filter the Yoast SEO post authors facebook profile URL
+		 * Filter: 'wpseo_opengraph_author_facebook' - Allow developers to filter the Yoast SEO post authors facebook profile URL
 		 *
 		 * @api bool|string $unsigned The Facebook author URL, return false to disable
 		 */
-		$facebook = apply_filters( 'YMBESEO_opengraph_author_facebook', get_the_author_meta( 'facebook', $GLOBALS['post']->post_author ) );
+		$facebook = apply_filters( 'wpseo_opengraph_author_facebook', get_the_author_meta( 'facebook', $GLOBALS['post']->post_author ) );
 
 		if ( $facebook && ( is_string( $facebook ) && $facebook !== '' ) ) {
 			$this->og_tag( 'article:author', $facebook );
@@ -179,11 +179,11 @@ class YMBESEO_OpenGraph {
 		else if ( isset( $this->options['fb_admins'] ) && is_array( $this->options['fb_admins'] ) && $this->options['fb_admins'] !== array() ) {
 			$adminstr = implode( ',', array_keys( $this->options['fb_admins'] ) );
 			/**
-			 * Filter: 'YMBESEO_opengraph_admin' - Allow developer to filter the fb:admins string put out by Yoast SEO
+			 * Filter: 'wpseo_opengraph_admin' - Allow developer to filter the fb:admins string put out by Yoast SEO
 			 *
 			 * @api string $adminstr The admin string
 			 */
-			$adminstr = apply_filters( 'YMBESEO_opengraph_admin', $adminstr );
+			$adminstr = apply_filters( 'wpseo_opengraph_admin', $adminstr );
 			if ( is_string( $adminstr ) && $adminstr !== '' ) {
 				$this->og_tag( 'fb:admins', $adminstr );
 
@@ -205,21 +205,21 @@ class YMBESEO_OpenGraph {
 	 */
 	public function og_title( $echo = true ) {
 
-		$frontend      = YMBESEO_Frontend::get_instance();
+		$frontend      = WPSEO_Frontend::get_instance();
 		$is_posts_page = $frontend->is_posts_page();
 
 		if ( is_singular() || $is_posts_page ) {
 
 			$post_id = ( $is_posts_page ) ? get_option( 'page_for_posts' ) : get_the_ID();
 			$post    = get_post( $post_id );
-			$title   = YMBESEO_Meta::get_value( 'opengraph-title', $post_id );
+			$title   = WPSEO_Meta::get_value( 'opengraph-title', $post_id );
 
 			if ( $title === '' ) {
 				$title = $frontend->title( '' );
 			}
 			else {
 				// Replace Yoast SEO Variables.
-				$title = YMBESEO_replace_vars( $title, $post );
+				$title = wpseo_replace_vars( $title, $post );
 			}
 		}
 		else if ( is_front_page() ) {
@@ -230,11 +230,11 @@ class YMBESEO_OpenGraph {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_opengraph_title' - Allow changing the title specifically for OpenGraph
+		 * Filter: 'wpseo_opengraph_title' - Allow changing the title specifically for OpenGraph
 		 *
 		 * @api string $unsigned The title string
 		 */
-		$title = trim( apply_filters( 'YMBESEO_opengraph_title', $title ) );
+		$title = trim( apply_filters( 'wpseo_opengraph_title', $title ) );
 
 		if ( is_string( $title ) && $title !== '' ) {
 			if ( $echo !== false ) {
@@ -259,11 +259,11 @@ class YMBESEO_OpenGraph {
 	 */
 	public function url() {
 		/**
-		 * Filter: 'YMBESEO_opengraph_url' - Allow changing the OpenGraph URL
+		 * Filter: 'wpseo_opengraph_url' - Allow changing the OpenGraph URL
 		 *
 		 * @api string $unsigned Canonical URL
 		 */
-		$url = apply_filters( 'YMBESEO_opengraph_url', YMBESEO_Frontend::get_instance()->canonical( false ) );
+		$url = apply_filters( 'wpseo_opengraph_url', WPSEO_Frontend::get_instance()->canonical( false ) );
 
 		if ( is_string( $url ) && $url !== '' ) {
 			$this->og_tag( 'og:url', esc_url( $url ) );
@@ -289,11 +289,11 @@ class YMBESEO_OpenGraph {
 	 */
 	public function locale( $echo = true ) {
 		/**
-		 * Filter: 'YMBESEO_locale' - Allow changing the locale output
+		 * Filter: 'wpseo_locale' - Allow changing the locale output
 		 *
 		 * @api string $unsigned Locale string
 		 */
-		$locale = apply_filters( 'YMBESEO_locale', get_locale() );
+		$locale = apply_filters( 'wpseo_locale', get_locale() );
 
 		// Catch some weird locales served out by WP that are not easily doubled up.
 		$fix_locales = array(
@@ -443,7 +443,7 @@ class YMBESEO_OpenGraph {
 		elseif ( is_singular() ) {
 
 			// This'll usually only be changed by plugins right now.
-			$type = YMBESEO_Meta::get_value( 'og_type' );
+			$type = WPSEO_Meta::get_value( 'og_type' );
 
 			if ( $type === '' ) {
 				$type = 'article';
@@ -455,11 +455,11 @@ class YMBESEO_OpenGraph {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_opengraph_type' - Allow changing the OpenGraph type of the page
+		 * Filter: 'wpseo_opengraph_type' - Allow changing the OpenGraph type of the page
 		 *
 		 * @api string $type The OpenGraph type string.
 		 */
-		$type = apply_filters( 'YMBESEO_opengraph_type', $type );
+		$type = apply_filters( 'wpseo_opengraph_type', $type );
 
 		if ( is_string( $type ) && $type !== '' ) {
 			if ( $echo !== false ) {
@@ -474,12 +474,12 @@ class YMBESEO_OpenGraph {
 	}
 
 	/**
-	 * Create new YMBESEO_OpenGraph_Image class and get the images to set the og:image
+	 * Create new WPSEO_OpenGraph_Image class and get the images to set the og:image
 	 *
 	 * @param mixed $image
 	 */
 	public function image( $image = false ) {
-		$opengraph_images = new YMBESEO_OpenGraph_Image( $this->options, $image );
+		$opengraph_images = new WPSEO_OpenGraph_Image( $this->options, $image );
 
 		foreach ( $opengraph_images->get_images() as $img ) {
 			$this->og_tag( 'og:image', esc_url( $img ) );
@@ -504,11 +504,11 @@ class YMBESEO_OpenGraph {
 	 */
 	public function description( $echo = true ) {
 		$ogdesc   = '';
-		$frontend = YMBESEO_Frontend::get_instance();
+		$frontend = WPSEO_Frontend::get_instance();
 
 		if ( is_front_page() ) {
 			if ( isset( $this->options['og_frontpage_desc'] ) && $this->options['og_frontpage_desc'] !== '' ) {
-				$ogdesc = YMBESEO_replace_vars( $this->options['og_frontpage_desc'], null );
+				$ogdesc = wpseo_replace_vars( $this->options['og_frontpage_desc'], null );
 			}
 			else {
 				$ogdesc = $frontend->metadesc( false );
@@ -520,10 +520,10 @@ class YMBESEO_OpenGraph {
 		if ( is_singular() || $is_posts_page ) {
 			$post_id = ( $is_posts_page ) ? get_option( 'page_for_posts' ) : get_the_ID();
 			$post    = get_post( $post_id );
-			$ogdesc  = YMBESEO_Meta::get_value( 'opengraph-description', $post_id );
+			$ogdesc  = WPSEO_Meta::get_value( 'opengraph-description', $post_id );
 
 			// Replace Yoast SEO Variables.
-			$ogdesc = YMBESEO_replace_vars( $ogdesc, $post );
+			$ogdesc = wpseo_replace_vars( $ogdesc, $post );
 
 			// Use metadesc if $ogdesc is empty.
 			if ( $ogdesc === '' ) {
@@ -546,7 +546,7 @@ class YMBESEO_OpenGraph {
 
 			if ( '' == $ogdesc ) {
 				$term   = $GLOBALS['wp_query']->get_queried_object();
-				$ogdesc = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
+				$ogdesc = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
 			}
 		}
 
@@ -554,11 +554,11 @@ class YMBESEO_OpenGraph {
 		$ogdesc = strip_shortcodes( $ogdesc );
 
 		/**
-		 * Filter: 'YMBESEO_opengraph_desc' - Allow changing the OpenGraph description
+		 * Filter: 'wpseo_opengraph_desc' - Allow changing the OpenGraph description
 		 *
 		 * @api string $ogdesc The description string.
 		 */
-		$ogdesc = trim( apply_filters( 'YMBESEO_opengraph_desc', $ogdesc ) );
+		$ogdesc = trim( apply_filters( 'wpseo_opengraph_desc', $ogdesc ) );
 
 		if ( is_string( $ogdesc ) && $ogdesc !== '' ) {
 			if ( $echo !== false ) {
@@ -574,11 +574,11 @@ class YMBESEO_OpenGraph {
 	 */
 	public function site_name() {
 		/**
-		 * Filter: 'YMBESEO_opengraph_site_name' - Allow changing the OpenGraph site name
+		 * Filter: 'wpseo_opengraph_site_name' - Allow changing the OpenGraph site name
 		 *
 		 * @api string $unsigned Blog name string
 		 */
-		$name = apply_filters( 'YMBESEO_opengraph_site_name', get_bloginfo( 'name' ) );
+		$name = apply_filters( 'wpseo_opengraph_site_name', get_bloginfo( 'name' ) );
 		if ( is_string( $name ) && $name !== '' ) {
 			$this->og_tag( 'og:site_name', $name );
 		}
@@ -643,13 +643,13 @@ class YMBESEO_OpenGraph {
 
 		if ( ! is_singular( 'post' ) ) {
 			/**
-			 * Filter: 'YMBESEO_opengraph_show_publish_date' - Allow showing publication date for other post types
+			 * Filter: 'wpseo_opengraph_show_publish_date' - Allow showing publication date for other post types
 			 *
 			 * @api bool $unsigned Whether or not to show publish date
 			 *
 			 * @param string $post_type The current URL's post type.
 			 */
-			if ( false === apply_filters( 'YMBESEO_opengraph_show_publish_date', false, get_post_type() ) ) {
+			if ( false === apply_filters( 'wpseo_opengraph_show_publish_date', false, get_post_type() ) ) {
 				return false;
 			}
 		}
@@ -669,9 +669,9 @@ class YMBESEO_OpenGraph {
 } /* End of class */
 
 /**
- * Class YMBESEO_OpenGraph_Image
+ * Class WPSEO_OpenGraph_Image
  */
-class YMBESEO_OpenGraph_Image {
+class WPSEO_OpenGraph_Image {
 
 	/**
 	 * @var array $options Holds options passed to the constructor
@@ -763,7 +763,7 @@ class YMBESEO_OpenGraph_Image {
 	 * @return bool
 	 */
 	private function get_opengraph_image() {
-		$ogimg = YMBESEO_Meta::get_value( 'opengraph-image' );
+		$ogimg = WPSEO_Meta::get_value( 'opengraph-image' );
 		if ( $ogimg !== '' ) {
 			$this->add_image( $ogimg );
 
@@ -781,11 +781,11 @@ class YMBESEO_OpenGraph_Image {
 	private function get_featured_image( $post_id ) {
 		if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( $post_id ) ) {
 			/**
-			 * Filter: 'YMBESEO_opengraph_image_size' - Allow changing the image size used for OpenGraph sharing
+			 * Filter: 'wpseo_opengraph_image_size' - Allow changing the image size used for OpenGraph sharing
 			 *
 			 * @api string $unsigned Size string
 			 */
-			$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), apply_filters( 'YMBESEO_opengraph_image_size', 'original' ) );
+			$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), apply_filters( 'wpseo_opengraph_image_size', 'original' ) );
 
 			if ( $this->check_featured_image_size( $thumb ) ) {
 				return $this->add_image( $thumb[0] );
@@ -794,14 +794,14 @@ class YMBESEO_OpenGraph_Image {
 	}
 
 	/**
-	 * Filter: 'YMBESEO_pre_analysis_post_content' - Allow filtering the content before analysis
+	 * Filter: 'wpseo_pre_analysis_post_content' - Allow filtering the content before analysis
 	 *
 	 * @api string $post_content The Post content string
 	 *
 	 * @param object $post - The post object.
 	 */
 	private function get_content_images( $post ) {
-		$content = apply_filters( 'YMBESEO_pre_analysis_post_content', $post->post_content, $post );
+		$content = apply_filters( 'wpseo_pre_analysis_post_content', $post->post_content, $post );
 
 		if ( preg_match_all( '`<img [^>]+>`', $content, $matches ) ) {
 			foreach ( $matches[0] as $img ) {
@@ -836,14 +836,14 @@ class YMBESEO_OpenGraph_Image {
 	 * @return bool
 	 */
 	private function add_image( $img ) {
-		// Filter: 'YMBESEO_opengraph_image' - Allow changing the OpenGraph image.
-		$img = trim( apply_filters( 'YMBESEO_opengraph_image', $img ) );
+		// Filter: 'wpseo_opengraph_image' - Allow changing the OpenGraph image.
+		$img = trim( apply_filters( 'wpseo_opengraph_image', $img ) );
 
 		if ( empty( $img ) ) {
 			return false;
 		}
 
-		if ( YMBESEO_Utils::is_url_relative( $img ) === true ) {
+		if ( WPSEO_Utils::is_url_relative( $img ) === true ) {
 			$img = $this->get_relative_path( $img );
 		}
 

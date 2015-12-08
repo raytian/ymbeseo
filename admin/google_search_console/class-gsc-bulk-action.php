@@ -1,18 +1,18 @@
 <?php
 /**
- * @package YMBESEO\Admin|Google_Search_Console
+ * @package WPSEO\Admin|Google_Search_Console
  */
 
 /**
- * Class YMBESEO_GSC_Bulk_Action
+ * Class WPSEO_GSC_Bulk_Action
  */
-class YMBESEO_GSC_Bulk_Action {
+class WPSEO_GSC_Bulk_Action {
 
 	/**
 	 * Setting the listener on the bulk action post
 	 */
 	public function __construct() {
-		if ( wp_verify_nonce( filter_input( INPUT_POST, 'YMBESEO_gsc_nonce' ), 'YMBESEO_gsc_nonce' ) ) {
+		if ( wp_verify_nonce( filter_input( INPUT_POST, 'wpseo_gsc_nonce' ), 'wpseo_gsc_nonce' ) ) {
 			$this->handle_bulk_action();
 		}
 	}
@@ -54,7 +54,7 @@ class YMBESEO_GSC_Bulk_Action {
 	 * @return array
 	 */
 	private function posted_issues() {
-		if ( $issues = filter_input( INPUT_POST, 'YMBESEO_crawl_issues', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) {
+		if ( $issues = filter_input( INPUT_POST, 'wpseo_crawl_issues', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) {
 			return $issues;
 		}
 
@@ -85,7 +85,7 @@ class YMBESEO_GSC_Bulk_Action {
 	 * @return string
 	 */
 	private function action_mark_as_fixed( $issue ) {
-		new YMBESEO_GSC_Marker( $issue );
+		new WPSEO_GSC_Marker( $issue );
 
 		return $issue;
 	}

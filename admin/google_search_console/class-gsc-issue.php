@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Admin|Google_Search_Console
+ * @package WPSEO\Admin|Google_Search_Console
  */
 
 /**
- * Class YMBESEO_GSC_Issue
+ * Class WPSEO_GSC_Issue
  */
-class YMBESEO_GSC_Issue {
+class WPSEO_GSC_Issue {
 
 	/**
 	 * @var string

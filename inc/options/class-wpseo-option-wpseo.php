@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Internals\Options
+ * @package WPSEO\Internals\Options
  */
 
 /**
  * Option: wpseo
  */
-class YMBESEO_Option_Wpseo extends YMBESEO_Option {
+class WPSEO_Option_Wpseo extends WPSEO_Option {
 
 	/**
 	 * @var  string  option name
@@ -78,7 +78,7 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 	 * is updated early on and if so, change the call to schedule these for a later action on add/update
 	 * instead of running them straight away
 	 *
-	 * @return \YMBESEO_Option_Wpseo
+	 * @return \WPSEO_Option_Wpseo
 	 */
 	protected function __construct() {
 		/*
@@ -92,8 +92,8 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 		parent::__construct();
 
 		/* Clear the cache on update/add */
-		add_action( 'add_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_cache' ) );
-		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_cache' ) );
+		add_action( 'add_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_cache' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_cache' ) );
 	}
 
 
@@ -124,7 +124,7 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 		foreach ( $clean as $key => $value ) {
 			switch ( $key ) {
 				case 'version':
-					$clean[ $key ] = YMBESEO_VERSION;
+					$clean[ $key ] = WPSEO_VERSION;
 					break;
 
 
@@ -185,10 +185,10 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 				/* boolean|null fields - if set a check was done, if null, it hasn't */
 				case 'theme_has_description':
 					if ( isset( $dirty[ $key ] ) ) {
-						$clean[ $key ] = YMBESEO_Utils::validate_bool( $dirty[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::validate_bool( $dirty[ $key ] );
 					}
 					elseif ( isset( $old[ $key ] ) ) {
-						$clean[ $key ] = YMBESEO_Utils::validate_bool( $old[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::validate_bool( $old[ $key ] );
 					}
 					break;
 
@@ -203,10 +203,10 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 				case 'ignore_permalink':
 				case 'ms_defaults_set':
 					if ( isset( $dirty[ $key ] ) ) {
-						$clean[ $key ] = YMBESEO_Utils::validate_bool( $dirty[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::validate_bool( $dirty[ $key ] );
 					}
 					elseif ( isset( $old[ $key ] ) ) {
-						$clean[ $key ] = YMBESEO_Utils::validate_bool( $old[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::validate_bool( $old[ $key ] );
 					}
 					break;
 
@@ -221,7 +221,7 @@ class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 				 * 		'yoast_tracking'
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}

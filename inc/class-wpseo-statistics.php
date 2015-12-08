@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\Internals
+ * @package WPSEO\Internals
  */
 
 /**
  * Class that generates interesting statistics about things
  */
-class YMBESEO_Statistics {
+class WPSEO_Statistics {
 
 	/**
 	 * Returns the amount of posts that have no focus keyword
@@ -65,7 +65,7 @@ class YMBESEO_Statistics {
 	/**
 	 * Returns the post count for a certain SEO ranking
 	 *
-	 * @todo Merge/DRY this with the logic virtually the same in YMBESEO_Metabox::column_sort_orderby()
+	 * @todo Merge/DRY this with the logic virtually the same in WPSEO_Metabox::column_sort_orderby()
 	 *
 	 * @param string $seo_ranking The SEO ranking to get the post count for.
 	 *     Possible values: no_seo, bad, poor, ok, good, no_focus.
@@ -78,7 +78,7 @@ class YMBESEO_Statistics {
 				'meta_query' => array(
 					'relation' => 'OR',
 					array(
-						'key'     => YMBESEO_Meta::$meta_prefix . 'linkdex',
+						'key'     => WPSEO_Meta::$meta_prefix . 'linkdex',
 						'value'   => 'needs-a-value-anyway',
 						'compare' => 'NOT EXISTS',
 					)
@@ -87,7 +87,7 @@ class YMBESEO_Statistics {
 		}
 		elseif ( 'no_index' === $seo_ranking ) {
 			$posts = array(
-				'meta_key'   => YMBESEO_Meta::$meta_prefix . 'meta-robots-noindex',
+				'meta_key'   => WPSEO_Meta::$meta_prefix . 'meta-robots-noindex',
 				'meta_value' => '1',
 				'compare'    => '=',
 			);
@@ -116,7 +116,7 @@ class YMBESEO_Statistics {
 			}
 
 			$posts = array(
-				'meta_key'     => YMBESEO_Meta::$meta_prefix . 'linkdex',
+				'meta_key'     => WPSEO_Meta::$meta_prefix . 'linkdex',
 				'meta_value'   => array( $start, $end ),
 				'meta_compare' => 'BETWEEN',
 				'meta_type'    => 'NUMERIC',

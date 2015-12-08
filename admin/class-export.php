@@ -1,14 +1,14 @@
 <?php
 /**
- * @package YMBESEO\Admin\Export
+ * @package WPSEO\Admin\Export
  */
 
 /**
- * Class YMBESEO_Export
+ * Class WPSEO_Export
  *
  * Class with functionality to export the WP SEO settings
  */
-class YMBESEO_Export {
+class WPSEO_Export {
 
 	/**
 	 * @var string
@@ -63,12 +63,12 @@ class YMBESEO_Export {
 		$results = array();
 		if ( $this->success ) {
 			$results['status'] = 'success';
-			$results['msg']    = sprintf( __( 'Export created: %1$sdownload your export file here%2$s.', 'ymbeseo' ), '<a href="' . $this->export_zip_url . '">', '</a>' );
+			$results['msg']    = sprintf( __( 'Export created: %1$sdownload your export file here%2$s.', 'wordpress-seo' ), '<a href="' . $this->export_zip_url . '">', '</a>' );
 		}
 		else {
 			$results['status'] = 'failure';
 			/* translators: %1$s expands to Yoast SEO */
-			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'ymbeseo' ), 'Yoast SEO' ) . $this->error;
+			$results['msg']    = sprintf( __( 'Error creating %1$s export: ', 'wordpress-seo' ), 'Yoast SEO' ) . $this->error;
 		}
 
 		return $results;
@@ -83,7 +83,7 @@ class YMBESEO_Export {
 
 		$this->export_header();
 
-		foreach ( YMBESEO_Options::get_option_names() as $opt_group ) {
+		foreach ( WPSEO_Options::get_option_names() as $opt_group ) {
 			$this->write_opt_group( $opt_group, $this->export );
 		}
 
@@ -94,12 +94,12 @@ class YMBESEO_Export {
 				return true;
 			}
 			else {
-				$this->error = __( 'Could not zip settings-file.', 'ymbeseo' );
+				$this->error = __( 'Could not zip settings-file.', 'wordpress-seo' );
 
 				return false;
 			}
 		}
-		$this->error = __( 'Could not write settings to file.', 'ymbeseo' );
+		$this->error = __( 'Could not write settings to file.', 'wordpress-seo' );
 
 		return false;
 	}
@@ -109,9 +109,9 @@ class YMBESEO_Export {
 	 */
 	private function export_header() {
 		/* translators: %1$s expands to Yoast SEO */
-		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'ymbeseo' ), 'Yoast SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
+		$this->write_line( '; ' . sprintf( __( 'This is a settings export file for the %1$s plugin by Yoast.com', 'wordpress-seo' ), 'Yoast SEO' ) . ' - https://yoast.com/wordpress/plugins/seo/' );
 		if ( $this->include_taxonomy ) {
-			$this->write_line( '; ' . __( 'This export includes taxonomy metadata', 'ymbeseo' ) );
+			$this->write_line( '; ' . __( 'This export includes taxonomy metadata', 'wordpress-seo' ) );
 		}
 	}
 
@@ -172,13 +172,13 @@ class YMBESEO_Export {
 	 */
 	private function taxonomy_metadata() {
 		if ( $this->include_taxonomy ) {
-			$taxonomy_meta = get_option( 'YMBESEO_taxonomy_meta' );
+			$taxonomy_meta = get_option( 'wpseo_taxonomy_meta' );
 			if ( is_array( $taxonomy_meta ) ) {
-				$this->write_line( '[YMBESEO_taxonomy_meta]', true );
-				$this->write_setting( 'YMBESEO_taxonomy_meta', urlencode( json_encode( $taxonomy_meta ) ) );
+				$this->write_line( '[wpseo_taxonomy_meta]', true );
+				$this->write_setting( 'wpseo_taxonomy_meta', urlencode( json_encode( $taxonomy_meta ) ) );
 			}
 			else {
-				$this->write_line( '; ' . __( 'No taxonomy metadata found', 'ymbeseo' ), true );
+				$this->write_line( '; ' . __( 'No taxonomy metadata found', 'wordpress-seo' ), true );
 			}
 		}
 	}

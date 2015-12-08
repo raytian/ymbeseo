@@ -1,12 +1,12 @@
 <?php
 /**
- * @package YMBESEO\XML_Sitemaps
+ * @package WPSEO\XML_Sitemaps
  */
 
 /**
- * Class YMBESEO_Sitemap_Timezone
+ * Class WPSEO_Sitemap_Timezone
  */
-class YMBESEO_Sitemap_Timezone {
+class WPSEO_Sitemap_Timezone {
 
 	/**
 	 * Holds the timezone string value to reuse for performance
@@ -32,7 +32,7 @@ class YMBESEO_Sitemap_Timezone {
 			$local_timezone = new DateTimeZone( $this->get_timezone_string() );
 		}
 
-		if ( ! empty( $datetime_string ) && YMBESEO_Utils::is_valid_datetime( $datetime_string ) ) {
+		if ( ! empty( $datetime_string ) && WPSEO_Utils::is_valid_datetime( $datetime_string ) ) {
 			$datetime = new DateTime( $datetime_string, $utc_timezone );
 			$datetime->setTimezone( $local_timezone );
 

@@ -1,14 +1,14 @@
 <?php
 /**
- * @package YMBESEO\Admin\Import\External
+ * @package WPSEO\Admin\Import\External
  */
 
 /**
- * Class YMBESEO_Import_WooThemes_SEO
+ * Class WPSEO_Import_WooThemes_SEO
  *
  * Class with functionality to import Yoast SEO settings from WooThemes SEO
  */
-class YMBESEO_Import_AIOSEO extends YMBESEO_Import_External {
+class WPSEO_Import_AIOSEO extends WPSEO_Import_External {
 
 	/**
 	 * Holds the AOIOSEO options
@@ -33,9 +33,9 @@ class YMBESEO_Import_AIOSEO extends YMBESEO_Import_External {
 	 * Import All In One SEO meta values
 	 */
 	private function import_metas() {
-		YMBESEO_Meta::replace_meta( '_aioseop_description', YMBESEO_Meta::$meta_prefix . 'metadesc', $this->replace );
-		YMBESEO_Meta::replace_meta( '_aioseop_keywords', YMBESEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
-		YMBESEO_Meta::replace_meta( '_aioseop_title', YMBESEO_Meta::$meta_prefix . 'title', $this->replace );
+		WPSEO_Meta::replace_meta( '_aioseop_description', WPSEO_Meta::$meta_prefix . 'metadesc', $this->replace );
+		WPSEO_Meta::replace_meta( '_aioseop_keywords', WPSEO_Meta::$meta_prefix . 'metakeywords', $this->replace );
+		WPSEO_Meta::replace_meta( '_aioseop_title', WPSEO_Meta::$meta_prefix . 'title', $this->replace );
 	}
 
 	/**
@@ -52,14 +52,14 @@ class YMBESEO_Import_AIOSEO extends YMBESEO_Import_External {
 
 			$this->set_msg( __( sprintf(
 				'All in One SEO data successfully imported. Would you like to %sdisable the All in One SEO plugin%s. You\'ve had Google Analytics enabled in All in One SEO, would you like to install our %sGoogle Analytics plugin%s?',
-				'<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=import-export&deactivate_aioseo=1#top#import-seo' ) ) . '">',
+				'<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=import-export&deactivate_aioseo=1#top#import-seo' ) ) . '">',
 				'</a>',
 				'<a href="' . esc_url( admin_url( 'update.php?action=install-plugin&plugin=google-analytics-for-wordpress&_wpnonce=' . $plugin_install_nonce ) ) . '">',
 				'</a>'
-			), 'ymbeseo' ) );
+			), 'wordpress-seo' ) );
 		}
 		else {
-			$this->set_msg( __( sprintf( 'All in One SEO data successfully imported. Would you like to %sdisable the All in One SEO plugin%s.', '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=import-export&deactivate_aioseo=1#top#import-seo' ) ) . '">', '</a>' ), 'ymbeseo' ) );
+			$this->set_msg( __( sprintf( 'All in One SEO data successfully imported. Would you like to %sdisable the All in One SEO plugin%s.', '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=import-export&deactivate_aioseo=1#top#import-seo' ) ) . '">', '</a>' ), 'wordpress-seo' ) );
 		}
 	}
 

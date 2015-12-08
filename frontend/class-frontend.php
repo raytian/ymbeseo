@@ -1,13 +1,13 @@
 <?php
 /**
- * @package YMBESEO\Frontend
+ * @package WPSEO\Frontend
  */
 
 /**
  * Main frontend class for Yoast SEO, responsible for the SEO output as well as removing
  * default WordPress output.
  */
-class YMBESEO_Frontend {
+class WPSEO_Frontend {
 
 	/**
 	 * @var    object    Instance of this class
@@ -66,21 +66,21 @@ class YMBESEO_Frontend {
 	 */
 	protected function __construct() {
 
-		$this->options = YMBESEO_Options::get_all();
+		$this->options = WPSEO_Options::get_all();
 
 		add_action( 'wp_head', array( $this, 'front_page_specific_init' ), 0 );
 		add_action( 'wp_head', array( $this, 'head' ), 1 );
 
-		// The head function here calls action YMBESEO_head, to which we hook all our functionality.
-		add_action( 'YMBESEO_head', array( $this, 'debug_marker' ), 2 );
-		add_action( 'YMBESEO_head', array( $this, 'robots' ), 6 );
-		add_action( 'YMBESEO_head', array( $this, 'metadesc' ), 10 );
-		add_action( 'YMBESEO_head', array( $this, 'metakeywords' ), 11 );
-		add_action( 'YMBESEO_head', array( $this, 'canonical' ), 20 );
-		add_action( 'YMBESEO_head', array( $this, 'adjacent_rel_links' ), 21 );
-		add_action( 'YMBESEO_head', array( $this, 'publisher' ), 22 );
+		// The head function here calls action wpseo_head, to which we hook all our functionality.
+		add_action( 'wpseo_head', array( $this, 'debug_marker' ), 2 );
+		add_action( 'wpseo_head', array( $this, 'robots' ), 6 );
+		add_action( 'wpseo_head', array( $this, 'metadesc' ), 10 );
+		add_action( 'wpseo_head', array( $this, 'metakeywords' ), 11 );
+		add_action( 'wpseo_head', array( $this, 'canonical' ), 20 );
+		add_action( 'wpseo_head', array( $this, 'adjacent_rel_links' ), 21 );
+		add_action( 'wpseo_head', array( $this, 'publisher' ), 22 );
 
-		// Remove actions that we will handle through our YMBESEO_head call, and probably change the output of.
+		// Remove actions that we will handle through our wpseo_head call, and probably change the output of.
 		remove_action( 'wp_head', 'rel_canonical' );
 		remove_action( 'wp_head', 'index_rel_link' );
 		remove_action( 'wp_head', 'start_post_rel_link' );
@@ -144,7 +144,7 @@ class YMBESEO_Frontend {
 		}
 
 		if ( $this->options['title_test'] > 0 ) {
-			add_filter( 'YMBESEO_title', array( $this, 'title_test_helper' ) );
+			add_filter( 'wpseo_title', array( $this, 'title_test_helper' ) );
 		}
 	}
 
@@ -156,8 +156,8 @@ class YMBESEO_Frontend {
 			return;
 		}
 
-		new YMBESEO_JSON_LD;
-		add_action( 'YMBESEO_head', array( $this, 'webmaster_tools_authentication' ), 90 );
+		new WPSEO_JSON_LD;
+		add_action( 'wpseo_head', array( $this, 'webmaster_tools_authentication' ), 90 );
 	}
 
 	/**
@@ -172,13 +172,13 @@ class YMBESEO_Frontend {
 				$this->$name = $default;
 			}
 		}
-		$this->options = YMBESEO_Options::get_all();
+		$this->options = WPSEO_Options::get_all();
 	}
 
 	/**
 	 * Get the singleton instance of this class
 	 *
-	 * @return YMBESEO_Frontend
+	 * @return WPSEO_Frontend
 	 */
 	public static function get_instance() {
 		if ( ! ( self::$instance instanceof self ) ) {
@@ -238,10 +238,10 @@ class YMBESEO_Frontend {
 			$object = $GLOBALS['wp_query']->get_queried_object();
 		}
 
-		$title = YMBESEO_Meta::get_value( 'title', $object->ID );
+		$title = WPSEO_Meta::get_value( 'title', $object->ID );
 
 		if ( $title !== '' ) {
-			return YMBESEO_replace_vars( $title, $object );
+			return wpseo_replace_vars( $title, $object );
 		}
 
 		$post_type = ( isset( $object->post_type ) ? $object->post_type : $object->query_var );
@@ -257,10 +257,10 @@ class YMBESEO_Frontend {
 	public function get_taxonomy_title() {
 		$object = $GLOBALS['wp_query']->get_queried_object();
 
-		$title = YMBESEO_Taxonomy_Meta::get_term_meta( $object, $object->taxonomy, 'title' );
+		$title = WPSEO_Taxonomy_Meta::get_term_meta( $object, $object->taxonomy, 'title' );
 
 		if ( is_string( $title ) && $title !== '' ) {
-			return YMBESEO_replace_vars( $title, $object );
+			return wpseo_replace_vars( $title, $object );
 		}
 		else {
 			return $this->get_title_from_options( 'title-tax-' . $object->taxonomy, $object );
@@ -274,10 +274,10 @@ class YMBESEO_Frontend {
 	 */
 	public function get_author_title() {
 		$author_id = get_query_var( 'author' );
-		$title     = trim( get_the_author_meta( 'YMBESEO_title', $author_id ) );
+		$title     = trim( get_the_author_meta( 'wpseo_title', $author_id ) );
 
 		if ( $title !== '' ) {
-			return YMBESEO_replace_vars( $title, array() );
+			return wpseo_replace_vars( $title, array() );
 		}
 
 		return $this->get_title_from_options( 'title-author-wpseo' );
@@ -286,7 +286,7 @@ class YMBESEO_Frontend {
 	/**
 	 * Simple function to use to pull data from $options.
 	 *
-	 * All titles pulled from options will be run through the YMBESEO_replace_vars function.
+	 * All titles pulled from options will be run through the wpseo_replace_vars function.
 	 *
 	 * @param string       $index      name of the page to get the title from the settings for.
 	 * @param object|array $var_source possible object to pull variables from.
@@ -296,14 +296,14 @@ class YMBESEO_Frontend {
 	public function get_title_from_options( $index, $var_source = array() ) {
 		if ( ! isset( $this->options[ $index ] ) || $this->options[ $index ] === '' ) {
 			if ( is_singular() ) {
-				return YMBESEO_replace_vars( '%%title%% %%sep%% %%sitename%%', $var_source );
+				return wpseo_replace_vars( '%%title%% %%sep%% %%sitename%%', $var_source );
 			}
 			else {
 				return '';
 			}
 		}
 		else {
-			return YMBESEO_replace_vars( $this->options[ $index ], $var_source );
+			return wpseo_replace_vars( $this->options[ $index ], $var_source );
 		}
 	}
 
@@ -412,7 +412,7 @@ class YMBESEO_Frontend {
 			return $title;
 		}
 
-		$separator = YMBESEO_replace_vars( '%%sep%%', array() );
+		$separator = wpseo_replace_vars( '%%sep%%', array() );
 		$separator = ' ' . trim( $separator ) . ' ';
 
 		if ( '' === trim( $separator_location ) ) {
@@ -452,7 +452,7 @@ class YMBESEO_Frontend {
 			$title = $this->get_title_from_options( 'title-search-wpseo' );
 
 			if ( ! is_string( $title ) || '' === $title ) {
-				$title_part = sprintf( __( 'Search for "%s"', 'ymbeseo' ), esc_html( get_search_query() ) );
+				$title_part = sprintf( __( 'Search for "%s"', 'wordpress-seo' ), esc_html( get_search_query() ) );
 			}
 		}
 		elseif ( is_category() || is_tag() || is_tax() ) {
@@ -507,20 +507,20 @@ class YMBESEO_Frontend {
 			$title = $this->get_title_from_options( 'title-archive-wpseo' );
 
 			// @todo [JRF => Yoast] Should these not use the archive default if no title found ?
-			// YMBESEO_Options::get_default( 'YMBESEO_titles', 'title-archive-wpseo' )
+			// WPSEO_Options::get_default( 'wpseo_titles', 'title-archive-wpseo' )
 			// Replacement would be needed!
 			if ( empty( $title ) ) {
 				if ( is_month() ) {
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), single_month_title( ' ', false ) );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), single_month_title( ' ', false ) );
 				}
 				elseif ( is_year() ) {
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_query_var( 'year' ) );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_query_var( 'year' ) );
 				}
 				elseif ( is_day() ) {
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_the_date() );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_the_date() );
 				}
 				else {
-					$title_part = __( 'Archives', 'ymbeseo' );
+					$title_part = __( 'Archives', 'wordpress-seo' );
 				}
 			}
 		}
@@ -532,26 +532,26 @@ class YMBESEO_Frontend {
 					$date       = sprintf( '%04d-%02d-%02d 00:00:00', get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
 					$date       = mysql2date( get_option( 'date_format' ), $date, true );
 					$date       = apply_filters( 'get_the_date', $date, '' );
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), $date );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), $date );
 				}
 				elseif ( 0 !== get_query_var( 'monthnum' ) ) {
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), single_month_title( ' ', false ) );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), single_month_title( ' ', false ) );
 				}
 				elseif ( 0 !== get_query_var( 'year' ) ) {
-					$title_part = sprintf( __( '%s Archives', 'ymbeseo' ), get_query_var( 'year' ) );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_query_var( 'year' ) );
 				}
 				else {
-					$title_part = __( 'Archives', 'ymbeseo' );
+					$title_part = __( 'Archives', 'wordpress-seo' );
 				}
 			}
 			else {
 				$title = $this->get_title_from_options( 'title-404-wpseo' );
 
 				// @todo [JRF => Yoast] Should these not use the 404 default if no title found ?
-				// YMBESEO_Options::get_default( 'YMBESEO_titles', 'title-404-wpseo' )
+				// WPSEO_Options::get_default( 'wpseo_titles', 'title-404-wpseo' )
 				// Replacement would be needed!
 				if ( empty( $title ) ) {
-					$title_part = __( 'Page not found', 'ymbeseo' );
+					$title_part = __( 'Page not found', 'wordpress-seo' );
 				}
 			}
 		}
@@ -574,12 +574,12 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_title' - Allow changing the Yoast SEO <title> output
+		 * Filter: 'wpseo_title' - Allow changing the Yoast SEO <title> output
 		 *
 		 * @api string $title The page title being put out.
 		 */
 
-		return esc_html( strip_tags( stripslashes( apply_filters( 'YMBESEO_title', $title ) ) ) );
+		return esc_html( strip_tags( stripslashes( apply_filters( 'wpseo_title', $title ) ) ) );
 	}
 
 	/**
@@ -617,11 +617,11 @@ class YMBESEO_Frontend {
 		$marker = sprintf(
 			'<!-- This site is optimized with the ' . $this->head_product_name() . '%1$s - https://yoast.com/wordpress/plugins/seo/ -->',
 			/**
-			 * Filter: 'YMBESEO_hide_version' - can be used to hide the Yoast SEO version in the debug marker (only available in Yoast SEO Premium)
+			 * Filter: 'wpseo_hide_version' - can be used to hide the Yoast SEO version in the debug marker (only available in Yoast SEO Premium)
 			 *
 			 * @api bool
 			 */
-			( ( apply_filters( 'YMBESEO_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . YMBESEO_VERSION  )
+			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . WPSEO_VERSION  )
 		);
 
 		if ( $echo === false ) {
@@ -676,9 +676,9 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Action: 'YMBESEO_head' - Allow other plugins to output inside the Yoast SEO section of the head section.
+		 * Action: 'wpseo_head' - Allow other plugins to output inside the Yoast SEO section of the head section.
 		 */
-		do_action( 'YMBESEO_head' );
+		do_action( 'wpseo_head' );
 
 		echo '<!-- / ', $this->head_product_name(), ". -->\n\n";
 
@@ -729,7 +729,7 @@ class YMBESEO_Frontend {
 				}
 
 				// Three possible values, index, noindex and default, do nothing for default.
-				$term_meta = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'noindex' );
+				$term_meta = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'noindex' );
 				if ( is_string( $term_meta ) && 'default' !== $term_meta ) {
 					$robots['index'] = $term_meta;
 				}
@@ -793,11 +793,11 @@ class YMBESEO_Frontend {
 		$robotsstr = preg_replace( '`^index,follow,?`', '', $robotsstr );
 
 		/**
-		 * Filter: 'YMBESEO_robots' - Allows filtering of the meta robots output of Yoast SEO
+		 * Filter: 'wpseo_robots' - Allows filtering of the meta robots output of Yoast SEO
 		 *
 		 * @api string $robotsstr The meta robots directives to be echoed.
 		 */
-		$robotsstr = apply_filters( 'YMBESEO_robots', $robotsstr );
+		$robotsstr = apply_filters( 'wpseo_robots', $robotsstr );
 
 		if ( is_string( $robotsstr ) && $robotsstr !== '' ) {
 			echo '<meta name="robots" content="', esc_attr( $robotsstr ), '"/>', "\n";
@@ -815,7 +815,7 @@ class YMBESEO_Frontend {
 	 * @return    array
 	 */
 	public function robots_for_single_post( $robots, $post_id = 0 ) {
-		$noindex = YMBESEO_Meta::get_value( 'meta-robots-noindex', $post_id );
+		$noindex = WPSEO_Meta::get_value( 'meta-robots-noindex', $post_id );
 		if ( $noindex === '1' ) {
 			$robots['index'] = 'noindex';
 		}
@@ -823,11 +823,11 @@ class YMBESEO_Frontend {
 			$robots['index'] = 'index';
 		}
 
-		if ( YMBESEO_Meta::get_value( 'meta-robots-nofollow', $post_id ) === '1' ) {
+		if ( WPSEO_Meta::get_value( 'meta-robots-nofollow', $post_id ) === '1' ) {
 			$robots['follow'] = 'nofollow';
 		}
 
-		$meta_robots_adv = YMBESEO_Meta::get_value( 'meta-robots-adv', $post_id );
+		$meta_robots_adv = WPSEO_Meta::get_value( 'meta-robots-adv', $post_id );
 
 		if ( $meta_robots_adv !== '' && ( $meta_robots_adv !== '-' && $meta_robots_adv !== 'none' ) ) {
 			$meta_robots_adv = explode( ',', $meta_robots_adv );
@@ -899,7 +899,7 @@ class YMBESEO_Frontend {
 
 			$this->canonical_unpaged = $canonical;
 
-			$canonical_override = YMBESEO_Meta::get_value( 'canonical' );
+			$canonical_override = WPSEO_Meta::get_value( 'canonical' );
 
 			// Fix paginated pages canonical, but only if the page is truly paginated.
 			if ( get_query_var( 'page' ) > 1 ) {
@@ -927,7 +927,7 @@ class YMBESEO_Frontend {
 			elseif ( is_tax() || is_tag() || is_category() ) {
 				$term = get_queried_object();
 
-				$canonical_override = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
+				$canonical_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
 
 				$canonical = get_term_link( $term, $term->taxonomy );
 			}
@@ -967,7 +967,7 @@ class YMBESEO_Frontend {
 				}
 				else {
 					if ( is_front_page() ) {
-						$canonical = YMBESEO_xml_sitemaps_base_url( '' );
+						$canonical = wpseo_xml_sitemaps_base_url( '' );
 					}
 					$canonical = user_trailingslashit( trailingslashit( $canonical ) . trailingslashit( $wp_rewrite->pagination_base ) . get_query_var( 'paged' ) );
 				}
@@ -978,17 +978,17 @@ class YMBESEO_Frontend {
 
 		if ( is_string( $canonical ) && $canonical !== '' ) {
 			// Force canonical links to be absolute, relative is NOT an option.
-			if ( YMBESEO_Utils::is_url_relative( $canonical ) === true ) {
+			if ( WPSEO_Utils::is_url_relative( $canonical ) === true ) {
 				$canonical = $this->base_url( $canonical );
 			}
 		}
 
 		/**
-		 * Filter: 'YMBESEO_canonical' - Allow filtering of the canonical URL put out by Yoast SEO
+		 * Filter: 'wpseo_canonical' - Allow filtering of the canonical URL put out by Yoast SEO
 		 *
 		 * @api string $canonical The canonical URL
 		 */
-		$canonical = apply_filters( 'YMBESEO_canonical', $canonical );
+		$canonical = apply_filters( 'wpseo_canonical', $canonical );
 
 		if ( is_string( $canonical_override ) && $canonical_override !== '' ) {
 			$this->canonical = $canonical_override;
@@ -1028,11 +1028,11 @@ class YMBESEO_Frontend {
 	public function adjacent_rel_links() {
 		// Don't do this for Genesis, as the way Genesis handles homepage functionality is different and causes issues sometimes.
 		/**
-		 * Filter 'YMBESEO_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by Yoast SEO on Genesis installs
+		 * Filter 'wpseo_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by Yoast SEO on Genesis installs
 		 *
 		 * @api bool $unsigned Whether or not to rel=next / rel=prev
 		 */
-		if ( is_home() && function_exists( 'genesis' ) && apply_filters( 'YMBESEO_genesis_force_adjacent_rel_home', false ) === false ) {
+		if ( is_home() && function_exists( 'genesis' ) && apply_filters( 'wpseo_genesis_force_adjacent_rel_home', false ) === false ) {
 			return;
 		}
 
@@ -1054,7 +1054,7 @@ class YMBESEO_Frontend {
 
 				// Make sure to use index.php when needed, done after paged == 2 check so the prev links to homepage will not have index.php erroneously.
 				if ( is_front_page() ) {
-					$url = YMBESEO_xml_sitemaps_base_url( '' );
+					$url = wpseo_xml_sitemaps_base_url( '' );
 				}
 
 				if ( $paged > 2 ) {
@@ -1126,11 +1126,11 @@ class YMBESEO_Frontend {
 			}
 		}
 		/**
-		 * Filter: 'YMBESEO_' . $rel . '_rel_link' - Allow changing link rel output by Yoast SEO
+		 * Filter: 'wpseo_' . $rel . '_rel_link' - Allow changing link rel output by Yoast SEO
 		 *
 		 * @api string $unsigned The full `<link` element.
 		 */
-		$link = apply_filters( 'YMBESEO_' . $rel . '_rel_link', '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
+		$link = apply_filters( 'wpseo_' . $rel . '_rel_link', '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
 
 		if ( is_string( $link ) && $link !== '' ) {
 			echo $link;
@@ -1168,28 +1168,28 @@ class YMBESEO_Frontend {
 		$keywords = '';
 
 		if ( is_singular() ) {
-			$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
+			$keywords = WPSEO_Meta::get_value( 'metakeywords' );
 			if ( $keywords === '' && ( is_object( $post ) && ( ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) ) {
-				$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
+				$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 			}
 		}
 		else {
 			if ( $this->is_home_posts_page() && $this->options['metakey-home-wpseo'] !== '' ) {
-				$keywords = YMBESEO_replace_vars( $this->options['metakey-home-wpseo'], array() );
+				$keywords = wpseo_replace_vars( $this->options['metakey-home-wpseo'], array() );
 			}
 			elseif ( $this->is_home_static_page() ) {
-				$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
+				$keywords = WPSEO_Meta::get_value( 'metakeywords' );
 				if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) {
-					$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
+					$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 				}
 			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
 				$term = $wp_query->get_queried_object();
 
 				if ( is_object( $term ) ) {
-					$keywords = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
+					$keywords = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
 					if ( ( ! is_string( $keywords ) || $keywords === '' ) && ( isset( $this->options[ 'metakey-tax-' . $term->taxonomy ] ) && $this->options[ 'metakey-tax-' . $term->taxonomy ] !== '' ) ) {
-						$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
+						$keywords = wpseo_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
 					}
 				}
 			}
@@ -1197,7 +1197,7 @@ class YMBESEO_Frontend {
 				$author_id = get_query_var( 'author' );
 				$keywords  = get_the_author_meta( 'metakey', $author_id );
 				if ( ! $keywords && $this->options['metakey-author-wpseo'] !== '' ) {
-					$keywords = YMBESEO_replace_vars( $this->options['metakey-author-wpseo'], $wp_query->get_queried_object() );
+					$keywords = wpseo_replace_vars( $this->options['metakey-author-wpseo'], $wp_query->get_queried_object() );
 				}
 			}
 			elseif ( is_post_type_archive() ) {
@@ -1206,19 +1206,19 @@ class YMBESEO_Frontend {
 					$post_type = reset( $post_type );
 				}
 				if ( isset( $this->options[ 'metakey-ptarchive-' . $post_type ] ) && $this->options[ 'metakey-ptarchive-' . $post_type ] !== '' ) {
-					$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-ptarchive-' . $post_type ], $wp_query->get_queried_object() );
+					$keywords = wpseo_replace_vars( $this->options[ 'metakey-ptarchive-' . $post_type ], $wp_query->get_queried_object() );
 				}
 			}
 		}
 
-		$keywords = apply_filters( 'YMBESEO_metakey', trim( $keywords ) ); // TODO Make deprecated.
+		$keywords = apply_filters( 'wpseo_metakey', trim( $keywords ) ); // TODO Make deprecated.
 
 		/**
-		 * Filter: 'YMBESEO_metakeywords' - Allow changing the Yoast SEO meta keywords
+		 * Filter: 'wpseo_metakeywords' - Allow changing the Yoast SEO meta keywords
 		 *
 		 * @api string $keywords The meta keywords to be echoed.
 		 */
-		$keywords = apply_filters( 'YMBESEO_metakeywords', trim( $keywords ) ); // More appropriately named.
+		$keywords = apply_filters( 'wpseo_metakeywords', trim( $keywords ) ); // More appropriately named.
 
 		if ( is_string( $keywords ) && $keywords !== '' ) {
 			echo '<meta name="keywords" content="', esc_attr( strip_tags( stripslashes( $keywords ) ) ), '"/>', "\n";
@@ -1242,7 +1242,7 @@ class YMBESEO_Frontend {
 				echo '<meta name="description" content="', esc_attr( strip_tags( stripslashes( $this->metadesc ) ) ), '"/>', "\n";
 			}
 			elseif ( current_user_can( 'manage_options' ) && is_singular() ) {
-				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'ymbeseo' ), ' -->', "\n";
+				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'wordpress-seo' ), ' -->', "\n";
 			}
 		}
 		else {
@@ -1270,7 +1270,7 @@ class YMBESEO_Frontend {
 				$template = $this->options[ 'metadesc-' . $post_type ];
 				$term     = $post;
 			}
-			$metadesc_override = YMBESEO_Meta::get_value( 'metadesc' );
+			$metadesc_override = WPSEO_Meta::get_value( 'metadesc' );
 		}
 		else {
 			if ( is_search() ) {
@@ -1285,7 +1285,7 @@ class YMBESEO_Frontend {
 				}
 			}
 			elseif ( $this->is_posts_page() ) {
-				$metadesc = YMBESEO_Meta::get_value( 'metadesc', get_option( 'page_for_posts' ) );
+				$metadesc = WPSEO_Meta::get_value( 'metadesc', get_option( 'page_for_posts' ) );
 				if ( ( $metadesc === '' && $post_type !== '' ) && isset( $this->options[ 'metadesc-' . $post_type ] ) ) {
 					$page     = get_post( get_option( 'page_for_posts' ) );
 					$template = $this->options[ 'metadesc-' . $post_type ];
@@ -1293,21 +1293,21 @@ class YMBESEO_Frontend {
 				}
 			}
 			elseif ( $this->is_home_static_page() ) {
-				$metadesc = YMBESEO_Meta::get_value( 'metadesc' );
+				$metadesc = WPSEO_Meta::get_value( 'metadesc' );
 				if ( ( $metadesc === '' && $post_type !== '' ) && isset( $this->options[ 'metadesc-' . $post_type ] ) ) {
 					$template = $this->options[ 'metadesc-' . $post_type ];
 				}
 			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
 				$term              = $wp_query->get_queried_object();
-				$metadesc_override = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
+				$metadesc_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' );
 				if ( is_object( $term ) && isset( $term->taxonomy, $this->options[ 'metadesc-tax-' . $term->taxonomy ] ) ) {
 					$template = $this->options[ 'metadesc-tax-' . $term->taxonomy ];
 				}
 			}
 			elseif ( is_author() ) {
 				$author_id = get_query_var( 'author' );
-				$metadesc  = get_the_author_meta( 'YMBESEO_metadesc', $author_id );
+				$metadesc  = get_the_author_meta( 'wpseo_metadesc', $author_id );
 				if ( ( ! is_string( $metadesc ) || $metadesc === '' ) && '' !== $this->options['metadesc-author-wpseo'] ) {
 					$template = $this->options['metadesc-author-wpseo'];
 				}
@@ -1350,14 +1350,14 @@ class YMBESEO_Frontend {
 			$post_data = $term;
 		}
 
-		$metadesc = YMBESEO_replace_vars( $metadesc, $post_data );
+		$metadesc = wpseo_replace_vars( $metadesc, $post_data );
 
 		/**
-		 * Filter: 'YMBESEO_metadesc' - Allow changing the Yoast SEO meta description sentence.
+		 * Filter: 'wpseo_metadesc' - Allow changing the Yoast SEO meta description sentence.
 		 *
 		 * @api string $metadesc The description sentence.
 		 */
-		$this->metadesc = apply_filters( 'YMBESEO_metadesc', trim( $metadesc ) );
+		$this->metadesc = apply_filters( 'wpseo_metadesc', trim( $metadesc ) );
 	}
 
 	/**
@@ -1372,7 +1372,7 @@ class YMBESEO_Frontend {
 				return false;
 			}
 
-			$redir = YMBESEO_Meta::get_value( 'redirect', $post->ID );
+			$redir = WPSEO_Meta::get_value( 'redirect', $post->ID );
 			if ( $redir !== '' ) {
 				wp_redirect( $redir, 301 );
 				exit;
@@ -1615,11 +1615,11 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_whitelist_permalink_vars' - Allow plugins to register their own variables not to clean
+		 * Filter: 'wpseo_whitelist_permalink_vars' - Allow plugins to register their own variables not to clean
 		 *
 		 * @api array $unsigned Array of permalink variables _not_ to clean. Empty by default.
 		 */
-		$whitelisted_extravars = apply_filters( 'YMBESEO_whitelist_permalink_vars', array() );
+		$whitelisted_extravars = apply_filters( 'wpseo_whitelist_permalink_vars', array() );
 
 		if ( $this->options['cleanpermalink-googlesitesearch'] === true ) {
 			// Prevent cleaning out Google Site searches.
@@ -1742,12 +1742,12 @@ class YMBESEO_Frontend {
 	function embed_rss( $content, $context = 'full' ) {
 
 		/**
-		 * Filter: 'YMBESEO_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
+		 * Filter: 'wpseo_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
 		 *
 		 * @api boolean $show_embed Indicates if the RSS footer should be shown or not
 		 * @param string $context The context of the RSS content - 'full' or 'excerpt'.
 		 */
-		if ( ! apply_filters( 'YMBESEO_include_rss_footer', true, $context ) ) {
+		if ( ! apply_filters( 'wpseo_include_rss_footer', true, $context ) ) {
 			return $content;
 		}
 
@@ -1821,17 +1821,17 @@ class YMBESEO_Frontend {
 	 * @return string
 	 */
 	function title_test_helper( $title ) {
-		$YMBESEO_titles = get_option( 'YMBESEO_titles' );
+		$wpseo_titles = get_option( 'wpseo_titles' );
 
-		$YMBESEO_titles['title_test'] ++;
-		update_option( 'YMBESEO_titles', $YMBESEO_titles );
+		$wpseo_titles['title_test'] ++;
+		update_option( 'wpseo_titles', $wpseo_titles );
 
 		// Prevent this setting from being on forever when something breaks, as it breaks caching.
-		if ( $YMBESEO_titles['title_test'] > 5 ) {
-			$YMBESEO_titles['title_test'] = 0;
-			update_option( 'YMBESEO_titles', $YMBESEO_titles );
+		if ( $wpseo_titles['title_test'] > 5 ) {
+			$wpseo_titles['title_test'] = 0;
+			update_option( 'wpseo_titles', $wpseo_titles );
 
-			remove_filter( 'YMBESEO_title', array( $this, 'title_test_helper' ) );
+			remove_filter( 'wpseo_title', array( $this, 'title_test_helper' ) );
 
 			return $title;
 		}
@@ -1873,7 +1873,7 @@ class YMBESEO_Frontend {
 	 * @return bool
 	 */
 	private function is_premium() {
-		return file_exists( YMBESEO_PATH . 'premium/' );
+		return file_exists( WPSEO_PATH . 'premium/' );
 	}
 
 } /* End of class */

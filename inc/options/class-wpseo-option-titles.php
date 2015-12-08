@@ -1,17 +1,17 @@
 <?php
 /**
- * @package YMBESEO\Internals\Options
+ * @package WPSEO\Internals\Options
  */
 
 /**
- * Option: YMBESEO_titles
+ * Option: wpseo_titles
  */
-class YMBESEO_Option_Titles extends YMBESEO_Option {
+class WPSEO_Option_Titles extends WPSEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'YMBESEO_titles';
+	public $option_name = 'wpseo_titles';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -93,7 +93,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	);
 
 	/**
-	 * @var array Array of the separator options. To get these options use YMBESEO_Option_Titles::get_instance()->get_separator_options()
+	 * @var array Array of the separator options. To get these options use WPSEO_Option_Titles::get_instance()->get_separator_options()
 	 */
 	private $separator_options = array(
 		'sc-dash'   => '-',
@@ -118,11 +118,11 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * is updated early on and if so, change the call to schedule these for a later action on add/update
 	 * instead of running them straight away
 	 *
-	 * @return \YMBESEO_Option_Titles
+	 * @return \WPSEO_Option_Titles
 	 */
 	protected function __construct() {
 		parent::__construct();
-		add_action( 'update_option_' . $this->option_name, array( 'YMBESEO_Utils', 'clear_cache' ) );
+		add_action( 'update_option_' . $this->option_name, array( 'WPSEO_Utils', 'clear_cache' ) );
 		add_action( 'init', array( $this, 'end_of_init' ), 999 );
 	}
 
@@ -131,7 +131,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * Make sure we can recognize the right action for the double cleaning
 	 */
 	public function end_of_init() {
-		do_action( 'YMBESEO_double_clean_titles' );
+		do_action( 'wpseo_double_clean_titles' );
 	}
 
 
@@ -160,7 +160,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		 * Allow altering the array with separator options
 		 * @api  array  $separator_options  Array with the separator options
 		 */
-		$filtered_separators = apply_filters( 'YMBESEO_separator_options', $separators );
+		$filtered_separators = apply_filters( 'wpseo_separator_options', $separators );
 
 		if ( is_array( $filtered_separators ) && $filtered_separators !== array() ) {
 			$separators = array_merge( $separators, $filtered_separators );
@@ -175,9 +175,9 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['title-author-wpseo'] = sprintf( __( '%s, Author at %s', 'ymbeseo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
-		$this->defaults['title-search-wpseo'] = sprintf( __( 'You searched for %s', 'ymbeseo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
-		$this->defaults['title-404-wpseo']    = __( 'Page not found', 'ymbeseo' ) . ' %%sep%% %%sitename%%';
+		$this->defaults['title-author-wpseo'] = sprintf( __( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
+		$this->defaults['title-search-wpseo'] = sprintf( __( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
+		$this->defaults['title-404-wpseo']    = __( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
 	}
 
 
@@ -209,7 +209,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		}
 
 		if ( $post_type_objects_custom !== array() ) {
-			$archive = sprintf( __( '%s Archive', 'ymbeseo' ), '%%pt_plural%%' );
+			$archive = sprintf( __( '%s Archive', 'wordpress-seo' ), '%%pt_plural%%' );
 			foreach ( $post_type_objects_custom as $pt ) {
 				if ( ! $pt->has_archive ) {
 					continue;
@@ -225,7 +225,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		}
 
 		if ( $taxonomy_names !== array() ) {
-			$archives = sprintf( __( '%s Archives', 'ymbeseo' ), '%%term_title%%' );
+			$archives = sprintf( __( '%s Archives', 'wordpress-seo' ), '%%term_title%%' );
 			foreach ( $taxonomy_names as $tax ) {
 				$this->defaults[ 'title-tax-' . $tax ]       = $archives . ' %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-tax-' . $tax ]    = ''; // Text area.
@@ -273,7 +273,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				*/
 				case 'title-':
 					if ( isset( $dirty[ $key ] ) ) {
-						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -299,7 +299,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 					*/
 				case 'bctitle-ptarchive-':
 					if ( isset( $dirty[ $key ] ) && $dirty[ $key ] !== '' ) {
-						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( $dirty[ $key ] );
+						$clean[ $key ] = WPSEO_Utils::sanitize_text_field( $dirty[ $key ] );
 					}
 					break;
 
@@ -307,13 +307,13 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				/* integer field - not in form*/
 				case 'title_test':
 					if ( isset( $dirty[ $key ] ) ) {
-						$int = YMBESEO_Utils::validate_int( $dirty[ $key ] );
+						$int = WPSEO_Utils::validate_int( $dirty[ $key ] );
 						if ( $int !== false && $int >= 0 ) {
 							$clean[ $key ] = $int;
 						}
 					}
 					elseif ( isset( $old[ $key ] ) ) {
-						$int = YMBESEO_Utils::validate_int( $old[ $key ] );
+						$int = WPSEO_Utils::validate_int( $old[ $key ] );
 						if ( $int !== false && $int >= 0 ) {
 							$clean[ $key ] = $int;
 						}
@@ -358,7 +358,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				 *		'hideeditbox-tax-' . $tax->name
 				 */
 				default:
-					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? YMBESEO_Utils::validate_bool( $dirty[ $key ] ) : false );
+					$clean[ $key ] = ( isset( $dirty[ $key ] ) ? WPSEO_Utils::validate_bool( $dirty[ $key ] ) : false );
 					break;
 			}
 		}
@@ -383,12 +383,12 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		static $original = null;
 
 		// Double-run this function to ensure renaming of the taxonomy options will work.
-		if ( ! isset( $original ) && has_action( 'YMBESEO_double_clean_titles', array(
+		if ( ! isset( $original ) && has_action( 'wpseo_double_clean_titles', array(
 				$this,
 				'clean',
 			) ) === false
 		) {
-			add_action( 'YMBESEO_double_clean_titles', array( $this, 'clean' ) );
+			add_action( 'wpseo_double_clean_titles', array( $this, 'clean' ) );
 			$original = $option_value;
 		}
 
@@ -401,12 +401,12 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		$old_option = null;
 		if ( isset( $all_old_option_values ) ) {
 			// Ok, we have an import.
-			if ( isset( $all_old_option_values['YMBESEO_indexation'] ) && is_array( $all_old_option_values['YMBESEO_indexation'] ) && $all_old_option_values['YMBESEO_indexation'] !== array() ) {
-				$old_option = $all_old_option_values['YMBESEO_indexation'];
+			if ( isset( $all_old_option_values['wpseo_indexation'] ) && is_array( $all_old_option_values['wpseo_indexation'] ) && $all_old_option_values['wpseo_indexation'] !== array() ) {
+				$old_option = $all_old_option_values['wpseo_indexation'];
 			}
 		}
 		else {
-			$old_option = get_option( 'YMBESEO_indexation' );
+			$old_option = get_option( 'wpseo_indexation' );
 		}
 		if ( is_array( $old_option ) && $old_option !== array() ) {
 			$move = array(
@@ -474,7 +474,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		 * @internal This clean-up action can only be done effectively once the taxonomies and post_types
 		 * have been registered, i.e. at the end of the init action.
 		 */
-		if ( isset( $original ) && current_filter() === 'YMBESEO_double_clean_titles' || did_action( 'YMBESEO_double_clean_titles' ) > 0 ) {
+		if ( isset( $original ) && current_filter() === 'wpseo_double_clean_titles' || did_action( 'wpseo_double_clean_titles' ) > 0 ) {
 			$rename          = array(
 				'title-'           => 'title-tax-',
 				'metadesc-'        => 'metadesc-tax-',
@@ -536,7 +536,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 					case 'metadesc-':
 					case 'metakey-':
 					case 'bctitle-ptarchive-':
-						$option_value[ $key ] = YMBESEO_Utils::sanitize_text_field( $value );
+						$option_value[ $key ] = WPSEO_Utils::sanitize_text_field( $value );
 						break;
 
 					case 'separator':
@@ -556,7 +556,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 					 * 		'hideeditbox-'
 					 */
 					default:
-						$option_value[ $key ] = YMBESEO_Utils::validate_bool( $value );
+						$option_value[ $key ] = WPSEO_Utils::validate_bool( $value );
 						break;
 				}
 			}
@@ -592,7 +592,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			 * Allow altering the array with variable array key patterns
 			 * @api  array  $patterns  Array with the variable array key patterns
 			 */
-			$patterns = apply_filters( 'YMBESEO_option_titles_variable_array_key_patterns', $patterns );
+			$patterns = apply_filters( 'wpseo_option_titles_variable_array_key_patterns', $patterns );
 
 			foreach ( $dirty as $key => $value ) {
 

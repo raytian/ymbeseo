@@ -1,13 +1,13 @@
 <?php
 /**
- * @package YMBESEO\Admin\Bulk Editor
+ * @package WPSEO\Admin\Bulk Editor
  * @since      1.5.0
  */
 
 /**
  * Implements table for bulk title editing.
  */
-class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
+class WPSEO_Bulk_Title_Editor_List_Table extends WPSEO_Bulk_List_Table {
 
 	/**
 	 * Current type for this class will be title
@@ -23,8 +23,8 @@ class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 	 * @var array
 	 */
 	protected $settings = array(
-		'singular' => 'YMBESEO_bulk_title',
-		'plural'   => 'YMBESEO_bulk_titles',
+		'singular' => 'wpseo_bulk_title',
+		'plural'   => 'wpseo_bulk_titles',
 		'ajax'     => true,
 	);
 
@@ -42,8 +42,8 @@ class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 	public function get_columns() {
 
 		$columns = array(
-			'col_existing_yoast_seo_title' => __( 'Existing Yoast SEO Title', 'ymbeseo' ),
-			'col_new_yoast_seo_title'      => __( 'New Yoast SEO Title', 'ymbeseo' ),
+			'col_existing_yoast_seo_title' => __( 'Existing Yoast SEO Title', 'wordpress-seo' ),
+			'col_new_yoast_seo_title'      => __( 'New Yoast SEO Title', 'wordpress-seo' ),
 		);
 
 		return $this->merge_columns( $columns );

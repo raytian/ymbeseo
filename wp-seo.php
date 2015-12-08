@@ -1,19 +1,23 @@
 <?php
 /**
- * Plugin Name: Yoast Minus Bloat Equals SEO
- * Version: 0.1 (fork from Yoast SEO 2.3.5)
- * Plugin URI: https://so-wp.com/plugins/ymbeseo
- * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5
- * Author: SO WP
- * Author URI: https://so-wp.com/
- * Text Domain: ymbeseo
+ * @package WPSEO\Main
+ */
+
+/**
+ * Plugin Name: Yoast SEO
+ * Version: 2.3.5
+ * Plugin URI: https://yoast.com/wordpress/plugins/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpseoplugin
+ * Description: The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more.
+ * Author: Team Yoast
+ * Author URI: https://yoast.com/
+ * Text Domain: wordpress-seo
  * Domain Path: /languages/
  * License: GPL v3
  */
 
 /**
- * Yoast Minus Bloat Equals SEO plugin
- * Copyright (C) 2015-2016, SO WP - support@so-wp.com
+ * Yoast SEO Plugin
+ * Copyright (C) 2008-2014, Yoast BV - support@yoast.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,9 +39,9 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-if ( ! defined( 'YMBESEO_FILE' ) ) {
-	define( 'YMBESEO_FILE', __FILE__ );
+if ( ! defined( 'WPSEO_FILE' ) ) {
+	define( 'WPSEO_FILE', __FILE__ );
 }
 
 // Load the Yoast SEO plugin.
-require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );
+require_once( dirname( __FILE__ ) . '/wp-seo-main.php' );

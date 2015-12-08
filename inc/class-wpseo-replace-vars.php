@@ -1,23 +1,23 @@
 <?php
 /**
- * @package YMBESEO\Internals
+ * @package WPSEO\Internals
  * @since      1.5.4
  */
 
 // Avoid direct calls to this file.
-if ( ! defined( 'YMBESEO_VERSION' ) ) {
+if ( ! defined( 'WPSEO_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
 }
 
 /**
- * Class: YMBESEO_Replace_Vars
+ * Class: WPSEO_Replace_Vars
  *
  * This class implements the replacing of `%%variable_placeholders%%` with their real value based on the current
  * requested page/post/cpt/etc in text strings.
  */
-class YMBESEO_Replace_Vars {
+class WPSEO_Replace_Vars {
 
 	/**
 	 * @var    array    Default post/page/cpt information
@@ -55,7 +55,7 @@ class YMBESEO_Replace_Vars {
 	/**
 	 * Constructor
 	 *
-	 * @return \YMBESEO_Replace_Vars
+	 * @return \WPSEO_Replace_Vars
 	 */
 	public function __construct() {
 	}
@@ -72,10 +72,10 @@ class YMBESEO_Replace_Vars {
 
 		if ( self::$external_replacements === array() ) {
 			/**
-			 * Action: 'YMBESEO_register_extra_replacements' - Allows for registration of additional
+			 * Action: 'wpseo_register_extra_replacements' - Allows for registration of additional
 			 * variables to replace
 			 */
-			do_action( 'YMBESEO_register_extra_replacements' );
+			do_action( 'wpseo_register_extra_replacements' );
 		}
 	}
 
@@ -84,7 +84,7 @@ class YMBESEO_Replace_Vars {
 	 * Register new replacement %%variables%%
 	 * For use by other plugins/themes to register extra variables
 	 *
-	 * @see YMBESEO_register_var_replacement() for a usage example
+	 * @see wpseo_register_var_replacement() for a usage example
 	 *
 	 * @param  string $var              The name of the variable to replace, i.e. '%%var%%'
 	 *                                  - the surrounding %% are optional.
@@ -103,10 +103,10 @@ class YMBESEO_Replace_Vars {
 			$var = self::remove_var_delimiter( $var );
 
 			if ( preg_match( '`^[A-Z0-9_-]+$`i', $var ) === false ) {
-				trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'ymbeseo' ), E_USER_WARNING );
+				trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
-				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'ymbeseo' ), E_USER_WARNING );
+				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
 				if ( ! isset( self::$external_replacements[ $var ] ) ) {
@@ -115,11 +115,11 @@ class YMBESEO_Replace_Vars {
 					$success = true;
 				}
 				else {
-					trigger_error( __( 'A replacement variable with the same name has already been registered. Try making your variable name more unique.', 'ymbeseo' ), E_USER_WARNING );
+					trigger_error( __( 'A replacement variable with the same name has already been registered. Try making your variable name more unique.', 'wordpress-seo' ), E_USER_WARNING );
 				}
 			}
 			else {
-				trigger_error( __( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "YMBESEO_replacements" filter instead to adjust the replacement value.', 'ymbeseo' ), E_USER_WARNING );
+				trigger_error( __( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 		}
 
@@ -143,15 +143,15 @@ class YMBESEO_Replace_Vars {
 
 		// Let's see if we can bail super early.
 		if ( strpos( $string, '%%' ) === false ) {
-			return YMBESEO_Utils::standardize_whitespace( $string );
+			return WPSEO_Utils::standardize_whitespace( $string );
 		}
 
 		$args = (array) $args;
 		if ( isset( $args['post_content'] ) && ! empty( $args['post_content'] ) ) {
-			$args['post_content'] = YMBESEO_Utils::strip_shortcode( $args['post_content'] );
+			$args['post_content'] = WPSEO_Utils::strip_shortcode( $args['post_content'] );
 		}
 		if ( isset( $args['post_excerpt'] ) && ! empty( $args['post_excerpt'] ) ) {
-			$args['post_excerpt'] = YMBESEO_Utils::strip_shortcode( $args['post_excerpt'] );
+			$args['post_excerpt'] = WPSEO_Utils::strip_shortcode( $args['post_excerpt'] );
 		}
 		$this->args = (object) wp_parse_args( $args, $this->defaults );
 
@@ -166,11 +166,11 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements' - Allow customization of the replacements before they are applied
+		 * Filter: 'wpseo_replacements' - Allow customization of the replacements before they are applied
 		 *
 		 * @api array $replacements The replacements
 		 */
-		$replacements = apply_filters( 'YMBESEO_replacements', $replacements );
+		$replacements = apply_filters( 'wpseo_replacements', $replacements );
 
 		// Do the actual replacements.
 		if ( is_array( $replacements ) && $replacements !== array() ) {
@@ -178,14 +178,14 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements_final' - Allow overruling of whether or not to remove placeholders
+		 * Filter: 'wpseo_replacements_final' - Allow overruling of whether or not to remove placeholders
 		 * which didn't yield a replacement
 		 *
-		 * @example <code>add_filter( 'YMBESEO_replacements_final', '__return_false' );</code>
+		 * @example <code>add_filter( 'wpseo_replacements_final', '__return_false' );</code>
 		 *
 		 * @api     bool $final
 		 */
-		if ( apply_filters( 'YMBESEO_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
+		if ( apply_filters( 'wpseo_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
 			// Remove non-replaced variables.
 			$remove = array_diff( $matches[1], $omit ); // Make sure the $omit variables do not get removed.
 			$remove = array_map( array( __CLASS__, 'add_var_delimiter' ), $remove );
@@ -199,7 +199,7 @@ class YMBESEO_Replace_Vars {
 		}
 
 		// Remove superfluous whitespace.
-		$string = YMBESEO_Utils::standardize_whitespace( $string );
+		$string = WPSEO_Utils::standardize_whitespace( $string );
 
 		return trim( $string );
 	}
@@ -399,11 +399,11 @@ class YMBESEO_Replace_Vars {
 	 * @return string
 	 */
 	private function retrieve_sep() {
-		$replacement = YMBESEO_Options::get_default( 'YMBESEO_titles', 'separator' );
+		$replacement = WPSEO_Options::get_default( 'wpseo_titles', 'separator' );
 
 		// Get the titles option and the separator options.
-		$titles_options    = get_option( 'YMBESEO_titles' );
-		$seperator_options = YMBESEO_Option_Titles::get_instance()->get_separator_options();
+		$titles_options    = get_option( 'wpseo_titles' );
+		$seperator_options = WPSEO_Option_Titles::get_instance()->get_separator_options();
 
 		// This should always be set, but just to be sure.
 		if ( isset( $seperator_options[ $titles_options['separator'] ] ) ) {
@@ -412,12 +412,12 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements_filter_sep' - Allow customization of the separator character(s)
+		 * Filter: 'wpseo_replacements_filter_sep' - Allow customization of the separator character(s)
 		 *
 		 * @api string $replacement The current separator
 		 */
 
-		return apply_filters( 'YMBESEO_replacements_filter_sep', $replacement );
+		return apply_filters( 'wpseo_replacements_filter_sep', $replacement );
 	}
 
 	/**
@@ -808,7 +808,7 @@ class YMBESEO_Replace_Vars {
 		$replacement = null;
 
 		if ( ! empty( $this->args->ID ) ) {
-			$focus_kw = YMBESEO_Meta::get_value( 'focuskw', $this->args->ID );
+			$focus_kw = WPSEO_Meta::get_value( 'focuskw', $this->args->ID );
 			if ( $focus_kw !== '' ) {
 				$replacement = $focus_kw;
 			}
@@ -894,7 +894,7 @@ class YMBESEO_Replace_Vars {
 		$sep = $this->retrieve_sep();
 
 		if ( $max > 1 && $nr > 1 ) {
-			$replacement = sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'ymbeseo' ), $nr, $max );
+			$replacement = sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'wordpress-seo' ), $nr, $max );
 		}
 
 		return $replacement;
@@ -1082,21 +1082,21 @@ class YMBESEO_Replace_Vars {
 	 */
 	private static function set_basic_help_texts() {
 		self::$help_texts['basic'] = array(
-			'date'                 => __( 'Replaced with the date of the post/page', 'ymbeseo' ),
-			'title'                => __( 'Replaced with the title of the post/page', 'ymbeseo' ),
-			'parent_title'         => __( 'Replaced with the title of the parent page of the current page', 'ymbeseo' ),
-			'sitename'             => __( 'The site\'s name', 'ymbeseo' ),
-			'sitedesc'             => __( 'The site\'s tag line / description', 'ymbeseo' ),
-			'excerpt'              => __( 'Replaced with the post/page excerpt (or auto-generated if it does not exist)', 'ymbeseo' ),
-			'excerpt_only'         => __( 'Replaced with the post/page excerpt (without auto-generation)', 'ymbeseo' ),
-			'tag'                  => __( 'Replaced with the current tag/tags', 'ymbeseo' ),
-			'category'             => __( 'Replaced with the post categories (comma separated)', 'ymbeseo' ),
-			'category_description' => __( 'Replaced with the category description', 'ymbeseo' ),
-			'tag_description'      => __( 'Replaced with the tag description', 'ymbeseo' ),
-			'term_description'     => __( 'Replaced with the term description', 'ymbeseo' ),
-			'term_title'           => __( 'Replaced with the term name', 'ymbeseo' ),
-			'searchphrase'         => __( 'Replaced with the current search phrase', 'ymbeseo' ),
-			'sep'                  => __( 'The separator defined in your theme\'s <code>wp_title()</code> tag.', 'ymbeseo' ),
+			'date'                 => __( 'Replaced with the date of the post/page', 'wordpress-seo' ),
+			'title'                => __( 'Replaced with the title of the post/page', 'wordpress-seo' ),
+			'parent_title'         => __( 'Replaced with the title of the parent page of the current page', 'wordpress-seo' ),
+			'sitename'             => __( 'The site\'s name', 'wordpress-seo' ),
+			'sitedesc'             => __( 'The site\'s tag line / description', 'wordpress-seo' ),
+			'excerpt'              => __( 'Replaced with the post/page excerpt (or auto-generated if it does not exist)', 'wordpress-seo' ),
+			'excerpt_only'         => __( 'Replaced with the post/page excerpt (without auto-generation)', 'wordpress-seo' ),
+			'tag'                  => __( 'Replaced with the current tag/tags', 'wordpress-seo' ),
+			'category'             => __( 'Replaced with the post categories (comma separated)', 'wordpress-seo' ),
+			'category_description' => __( 'Replaced with the category description', 'wordpress-seo' ),
+			'tag_description'      => __( 'Replaced with the tag description', 'wordpress-seo' ),
+			'term_description'     => __( 'Replaced with the term description', 'wordpress-seo' ),
+			'term_title'           => __( 'Replaced with the term name', 'wordpress-seo' ),
+			'searchphrase'         => __( 'Replaced with the current search phrase', 'wordpress-seo' ),
+			'sep'                  => __( 'The separator defined in your theme\'s <code>wp_title()</code> tag.', 'wordpress-seo' ),
 		);
 	}
 
@@ -1105,27 +1105,27 @@ class YMBESEO_Replace_Vars {
 	 */
 	private static function set_advanced_help_texts() {
 		self::$help_texts['advanced'] = array(
-			'pt_single'                 => __( 'Replaced with the post type single label', 'ymbeseo' ),
-			'pt_plural'                 => __( 'Replaced with the post type plural label', 'ymbeseo' ),
-			'modified'                  => __( 'Replaced with the post/page modified time', 'ymbeseo' ),
-			'id'                        => __( 'Replaced with the post/page ID', 'ymbeseo' ),
-			'name'                      => __( 'Replaced with the post/page author\'s \'nicename\'', 'ymbeseo' ),
-			'user_description'          => __( 'Replaced with the post/page author\'s \'Biographical Info\'', 'ymbeseo' ),
-			'userid'                    => __( 'Replaced with the post/page author\'s userid', 'ymbeseo' ),
-			'currenttime'               => __( 'Replaced with the current time', 'ymbeseo' ),
-			'currentdate'               => __( 'Replaced with the current date', 'ymbeseo' ),
-			'currentday'                => __( 'Replaced with the current day', 'ymbeseo' ),
-			'currentmonth'              => __( 'Replaced with the current month', 'ymbeseo' ),
-			'currentyear'               => __( 'Replaced with the current year', 'ymbeseo' ),
-			'page'                      => __( 'Replaced with the current page number with context (i.e. page 2 of 4)', 'ymbeseo' ),
-			'pagetotal'                 => __( 'Replaced with the current page total', 'ymbeseo' ),
-			'pagenumber'                => __( 'Replaced with the current page number', 'ymbeseo' ),
-			'caption'                   => __( 'Attachment caption', 'ymbeseo' ),
-			'focuskw'                   => __( 'Replaced with the posts focus keyword', 'ymbeseo' ),
-			'term404'                   => __( 'Replaced with the slug which caused the 404', 'ymbeseo' ),
-			'cf_<custom-field-name>'    => __( 'Replaced with a posts custom field value', 'ymbeseo' ),
-			'ct_<custom-tax-name>'      => __( 'Replaced with a posts custom taxonomies, comma separated.', 'ymbeseo' ),
-			'ct_desc_<custom-tax-name>' => __( 'Replaced with a custom taxonomies description', 'ymbeseo' ),
+			'pt_single'                 => __( 'Replaced with the post type single label', 'wordpress-seo' ),
+			'pt_plural'                 => __( 'Replaced with the post type plural label', 'wordpress-seo' ),
+			'modified'                  => __( 'Replaced with the post/page modified time', 'wordpress-seo' ),
+			'id'                        => __( 'Replaced with the post/page ID', 'wordpress-seo' ),
+			'name'                      => __( 'Replaced with the post/page author\'s \'nicename\'', 'wordpress-seo' ),
+			'user_description'          => __( 'Replaced with the post/page author\'s \'Biographical Info\'', 'wordpress-seo' ),
+			'userid'                    => __( 'Replaced with the post/page author\'s userid', 'wordpress-seo' ),
+			'currenttime'               => __( 'Replaced with the current time', 'wordpress-seo' ),
+			'currentdate'               => __( 'Replaced with the current date', 'wordpress-seo' ),
+			'currentday'                => __( 'Replaced with the current day', 'wordpress-seo' ),
+			'currentmonth'              => __( 'Replaced with the current month', 'wordpress-seo' ),
+			'currentyear'               => __( 'Replaced with the current year', 'wordpress-seo' ),
+			'page'                      => __( 'Replaced with the current page number with context (i.e. page 2 of 4)', 'wordpress-seo' ),
+			'pagetotal'                 => __( 'Replaced with the current page total', 'wordpress-seo' ),
+			'pagenumber'                => __( 'Replaced with the current page number', 'wordpress-seo' ),
+			'caption'                   => __( 'Attachment caption', 'wordpress-seo' ),
+			'focuskw'                   => __( 'Replaced with the posts focus keyword', 'wordpress-seo' ),
+			'term404'                   => __( 'Replaced with the slug which caused the 404', 'wordpress-seo' ),
+			'cf_<custom-field-name>'    => __( 'Replaced with a posts custom field value', 'wordpress-seo' ),
+			'ct_<custom-tax-name>'      => __( 'Replaced with a posts custom taxonomies, comma separated.', 'wordpress-seo' ),
+			'ct_desc_<custom-tax-name>' => __( 'Replaced with a custom taxonomies description', 'wordpress-seo' ),
 		);
 	}
 
@@ -1196,13 +1196,13 @@ class YMBESEO_Replace_Vars {
 		 * @api    string    $output    Comma-delimited string containing the terms
 		 */
 
-		return apply_filters( 'YMBESEO_terms', $output );
+		return apply_filters( 'wpseo_terms', $output );
 	}
 
-} /* End of class YMBESEO_Replace_Vars */
+} /* End of class WPSEO_Replace_Vars */
 
 
 /**
  * Setup the class statics when the file is first loaded
  */
-YMBESEO_Replace_Vars::setup_statics_once();
+WPSEO_Replace_Vars::setup_statics_once();

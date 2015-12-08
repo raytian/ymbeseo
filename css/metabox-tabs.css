@@ -52,7 +52,7 @@ ul.wpseo-metabox-tabs li {
 	background-color: #fdfdfd;
 }
 
-#YMBESEO_meta .postbox .inside .wpseotab {
+#wpseo_meta .postbox .inside .wpseotab {
 	font-size: 13px !important;
 }
 
@@ -175,7 +175,7 @@ ul.wpseo-metabox-tabs li {
 	list-style-type: disc;
 }
 
-.YMBESEO_hidden {
+.wpseo_hidden {
 	display: none;
 }
 
@@ -203,7 +203,7 @@ table.wpseoanalysis td.score {
 	padding-left: 10px;
 }
 
-.YMBESEO_msg {
+.wpseo_msg {
 	margin: 5px 0 10px 0;
 	padding: 0 5px;
 	border: 1px solid #e6db55;
@@ -337,6 +337,6 @@ img.yoast_help {
 	line-height: 18px !important;
 }
 
-.YMBESEO_content_wrapper p.search-box {
+.wpseo_content_wrapper p.search-box {
 	margin: 10px 0 5px 0;
 }

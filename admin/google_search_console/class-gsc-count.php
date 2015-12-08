@@ -1,21 +1,21 @@
 <?php
 /**
- * @package YMBESEO\Admin|Google_Search_Console
+ * @package WPSEO\Admin|Google_Search_Console
  */
 
 /**
- * Class YMBESEO_GSC_Count
+ * Class WPSEO_GSC_Count
  */
-class YMBESEO_GSC_Count {
+class WPSEO_GSC_Count {
 
 	// The last checked timestamp.
-	const OPTION_CI_LAST_FETCH = 'YMBESEO_gsc_last_fetch';
+	const OPTION_CI_LAST_FETCH = 'wpseo_gsc_last_fetch';
 
 	// The option name where the issues counts are saved.
-	const OPTION_CI_COUNTS     = 'YMBESEO_gsc_issues_counts';
+	const OPTION_CI_COUNTS     = 'wpseo_gsc_issues_counts';
 
 	/**
-	 * @var YMBESEO_GSC_Service
+	 * @var WPSEO_GSC_Service
 	 */
 	private $service;
 
@@ -29,9 +29,9 @@ class YMBESEO_GSC_Count {
 	/**
 	 * Fetching the counts
 	 *
-	 * @param YMBESEO_GSC_Service $service
+	 * @param WPSEO_GSC_Service $service
 	 */
-	public function __construct( YMBESEO_GSC_Service $service ) {
+	public function __construct( WPSEO_GSC_Service $service ) {
 		$this->service = $service;
 	}
 
@@ -116,7 +116,7 @@ class YMBESEO_GSC_Count {
 	 * Fetching the counts from the GSC API
 	 */
 	public function fetch_counts() {
-		if ( YMBESEO_GSC_Settings::get_profile() && $this->get_last_fetch() <= strtotime( '-12 hours' ) ) {
+		if ( WPSEO_GSC_Settings::get_profile() && $this->get_last_fetch() <= strtotime( '-12 hours' ) ) {
 			// Remove the timestamp.
 			$this->remove_last_fetch();
 
@@ -141,10 +141,10 @@ class YMBESEO_GSC_Count {
 	private function parse_counts( array $fetched_counts ) {
 		$counts = array();
 		foreach ( $fetched_counts as $platform_name => $categories ) {
-			$new_platform = YMBESEO_GSC_Mapper::platform_from_api( $platform_name );
+			$new_platform = WPSEO_GSC_Mapper::platform_from_api( $platform_name );
 
 			foreach ( $categories as $category_name => $category ) {
-				$new_category = YMBESEO_GSC_Mapper::category_from_api( $category_name );
+				$new_category = WPSEO_GSC_Mapper::category_from_api( $category_name );
 				$counts[ $new_platform ][ $new_category ] = $category;
 			}
 		}
@@ -164,7 +164,7 @@ class YMBESEO_GSC_Count {
 	private function list_category_issues( array $counts, $platform, $category ) {
 		// When the issues have to be fetched.
 		if ( array_key_exists( $category, $counts ) && $counts[ $category ]['count'] > 0 && $counts[ $category ]['last_fetch'] <= strtotime( '-12 hours' ) ) {
-			if ( $issues = $this->service->fetch_category_issues( YMBESEO_GSC_Mapper::platform_to_api( $platform ), YMBESEO_GSC_Mapper::category_to_api( $category ) ) ) {
+			if ( $issues = $this->service->fetch_category_issues( WPSEO_GSC_Mapper::platform_to_api( $platform ), WPSEO_GSC_Mapper::category_to_api( $category ) ) ) {
 				$this->issues = $issues;
 			}
 
