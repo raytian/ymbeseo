@@ -19,11 +19,6 @@ class YMBESEO_Admin {
 	public $dashboard_widget;
 
 	/**
-	 * @var YMBESEO_GSC
-	 */
-	private $page_gsc;
-
-	/**
 	 * Class constructor
 	 */
 	function __construct() {
@@ -39,7 +34,6 @@ class YMBESEO_Admin {
 			add_action( 'delete_category', array( $this, 'schedule_rewrite_flush' ) );
 		}
 
-		$this->page_gsc = new YMBESEO_GSC();
 		$this->dashboard_widget = new Yoast_Dashboard_Widget();
 
 		// Needs the lower than default priority so other plugins can hook underneath it without issue.
@@ -155,15 +149,6 @@ class YMBESEO_Admin {
 				'ymbeseo_tools',
 				array( $this, 'load_page' ),
 				null,
-			),
-			array(
-				'ymbeseo_dashboard',
-				'',
-				__( 'Search Console', 'ymbeseo' ),
-				$manage_options_cap,
-				'ymbeseo_search_console',
-				array( $this->page_gsc, 'display' ),
-				array( array( $this->page_gsc, 'set_help' ) ),
 			),
 		);
 

@@ -312,9 +312,6 @@ if ( ( ! defined( 'WP_INSTALLING' ) || WP_INSTALLING === false ) && ( $spl_autol
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			require_once( YMBESEO_PATH . 'admin/ajax.php' );
 
-			// Crawl Issue Manager AJAX hooks.
-			new YMBESEO_GSC_Ajax;
-
 			// Plugin conflict ajax hooks.
 			new Yoast_Plugin_Conflict_Ajax();
 

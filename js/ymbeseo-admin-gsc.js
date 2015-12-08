@@ -16,39 +16,6 @@ jQuery( function() {
 	);
 });
 
-function ymbeseo_gsc_post_redirect() {
-	'use strict';
-
-	var target_form = jQuery( '#TB_ajaxContent' );
-	var old_url     = jQuery( target_form ).find('input[name=current_url]').val();
-	var is_checked  = jQuery( target_form ).find('input[name=mark_as_fixed]').prop('checked');
-
-	jQuery.post(
-		ajaxurl,
-		{
-			action: 'ymbeseo_gsc_create_redirect_url',
-			ajax_nonce: jQuery('.ymbeseo-gsc-ajax-security').val(),
-			old_url: old_url,
-			new_url: jQuery( target_form ).find('input[name=new_url]').val(),
-			mark_as_fixed: is_checked,
-			platform: jQuery('#field_platform').val(),
-			category: jQuery('#field_category').val(),
-			type: '301'
-		},
-		function() {
-			if( is_checked === true ) {
-				// Remove the row with old url
-				jQuery('span:contains(' + old_url + ')').closest('tr').remove();
-			}
-
-			// Remove the thickbox
-			tb_remove();
-		}
-	);
-
-	return false;
-}
-
 function ymbeseo_update_category_count(category) {
 	'use strict';
 
