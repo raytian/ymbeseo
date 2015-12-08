@@ -56,7 +56,7 @@ class YMBESEO_Admin_Pages {
 	 * Loads the required scripts for the config page.
 	 */
 	function config_page_scripts() {
-		wp_enqueue_script( 'ymbeseo-admin-script', plugins_url( 'js/wp-seo-admin' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+		wp_enqueue_script( 'ymbeseo-admin-script', plugins_url( 'js/ymbeseo-admin' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 			'jquery',
 			'jquery-ui-core',
 		), YMBESEO_VERSION, true );
@@ -69,7 +69,7 @@ class YMBESEO_Admin_Pages {
 
 		if ( in_array( $page, array( 'ymbeseo_social', 'ymbeseo_dashboard' ) ) ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/ymbeseo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
 				'jquery-ui-core',
 			), YMBESEO_VERSION, true );
@@ -77,11 +77,11 @@ class YMBESEO_Admin_Pages {
 		}
 
 		if ( 'ymbeseo_tools' === $page && 'bulk-editor' === $tool ) {
-			wp_enqueue_script( 'ymbeseo-bulk-editor', plugins_url( 'js/wp-seo-bulk-editor' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_script( 'ymbeseo-bulk-editor', plugins_url( 'js/ymbeseo-bulk-editor' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 
 		if ( 'ymbeseo_tools' === $page && 'import-export' === $tool ) {
-			wp_enqueue_script( 'ymbeseo-export', plugins_url( 'js/wp-seo-export' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_script( 'ymbeseo-export', plugins_url( 'js/ymbeseo-export' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 

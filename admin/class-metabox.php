@@ -900,16 +900,16 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 			// Always enqueue minified as it's not our code.
 			wp_enqueue_script( 'jquery-qtip', plugins_url( 'js/jquery.qtip.min.js', YMBESEO_FILE ), array( 'jquery' ), '2.2.1', true );
 
-			wp_enqueue_script( 'wp-seo-metabox', plugins_url( 'js/wp-seo-metabox' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+			wp_enqueue_script( 'ymbeseo-metabox', plugins_url( 'js/ymbeseo-metabox' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
 				'jquery-ui-core',
 			), YMBESEO_VERSION, true );
 
 			if ( post_type_supports( get_post_type(), 'thumbnail' ) ) {
-				wp_enqueue_script( 'wp-seo-featured-image', plugins_url( 'js/wp-seo-featured-image' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+				wp_enqueue_script( 'ymbeseo-featured-image', plugins_url( 'js/ymbeseo-featured-image' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 			}
 
-			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/ymbeseo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
 				'jquery-ui-core',
 			), YMBESEO_VERSION, true );
@@ -917,7 +917,7 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 			wp_localize_script( 'ymbeseo-admin-media', 'ymbeseoMediaL10n', $this->localize_media_script() );
 
 			// Text strings to pass to metabox for keyword analysis.
-			wp_localize_script( 'wp-seo-metabox', 'ymbeseoMetaboxL10n', $this->localize_script() );
+			wp_localize_script( 'ymbeseo-metabox', 'ymbeseoMetaboxL10n', $this->localize_script() );
 		}
 	}
 

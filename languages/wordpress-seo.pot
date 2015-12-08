@@ -3813,13 +3813,13 @@ msgstr ""
 msgid "%sRenew your license now%s."
 msgstr ""
 
-#: wp-seo-main.php:368
+#: ymbeseo-main.php:368
 msgid ""
 "The Standard PHP Library (SPL) extension seem to be unavailable. Please ask "
 "your web host to enable it."
 msgstr ""
 
-#: wp-seo-main.php:390
+#: ymbeseo-main.php:390
 #. translators: %1$s expands to Yoast SEO, %2$s / %3$s: links to the
 #. installation manual in the Readme for the Yoast SEO code repository on
 #. GitHub
@@ -3828,13 +3828,13 @@ msgid ""
 "%2$sinstallation instructions%3$s."
 msgstr ""
 
-#: wp-seo-main.php:414
+#: ymbeseo-main.php:414
 msgid ""
 "The filter extension seem to be unavailable. Please ask your web host to "
 "enable it."
 msgstr ""
 
-#: wp-seo-main.php:424
+#: ymbeseo-main.php:424
 msgid "Activation failed:"
 msgstr ""
 

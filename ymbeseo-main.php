@@ -438,5 +438,3 @@ function yoast_ymbeseo_self_deactivate() {
 		}
 	}
 }
-
-

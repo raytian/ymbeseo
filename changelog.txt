@@ -584,7 +584,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 * Bugfixes
 	* Fixed bug where posts set to _always_ index would not end up in XML sitemap.
 	* Fix _Invalid argument supplied for foreach()_ notice for WPML as reported by [pbearne](https://github.com/pbearne) - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Yoast tracking cron job will now unschedule on disallowing of tracking, on deactivation and on uninstall, inspired by [Bluebird Blvd.](http://wordpress.org/support/topic/found-active-tracking-device-after-deleting-wp-seo-months-ago) - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Yoast tracking cron job will now unschedule on disallowing of tracking, on deactivation and on uninstall, inspired by [Bluebird Blvd.](http://wordpress.org/support/topic/found-active-tracking-device-after-deleting-ymbeseo-months-ago) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fix issue [#453](https://github.com/Yoast/ymbeseo/issues/435): setting shop as homepage caused a notice and wrong title with WooCommerce.
 	* Fixed a bug [#449](https://github.com/Yoast/ymbeseo/issues/449) where a canonical, when manually set for a category, tag or term, could get pagination added to it on paginated pages, when it shouldn't.
 	* Fixed a bug where manually set canonicals would end up in `rel="next"` and `rel="prev"` tags.
@@ -1806,7 +1806,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed canonical for paginated archives of any kind when permalink structure doesn't end with /
 	* Fixed permalink redirect for paginated archives of any kind when permalink structure doesn't end with /
 	* Made sure blog shows up in breadcrumbs when you want it too.
-	* Fixed small javascript notice for js/wp-seo-metabox.js
+	* Fixed small javascript notice for js/ymbeseo-metabox.js
 	* Rewrote parts of XML Sitemap generation so it's now fully compliant with MultiSite. You no longer have to choose paths for sitemaps, they'll all have fixed locations and using WP Rewrite will be placed in the correct positions, f.i. example.com/sitemap.xml.
 	* Heavily reduced memory usage on admin pages.
 	* Rewrote module structure and added some API's to be used in the modules.

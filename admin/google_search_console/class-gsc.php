@@ -116,7 +116,7 @@ class YMBESEO_GSC {
 	 * Load the admin redirects scripts
 	 */
 	public function page_scripts() {
-		wp_enqueue_script( 'wp-seo-admin-gsc', plugin_dir_url( YMBESEO_FILE ) . 'js/wp-seo-admin-gsc' . YMBESEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), YMBESEO_VERSION );
+		wp_enqueue_script( 'ymbeseo-admin-gsc', plugin_dir_url( YMBESEO_FILE ) . 'js/ymbeseo-admin-gsc' . YMBESEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), YMBESEO_VERSION );
 		add_screen_option( 'per_page', array(
 			'label'   => __( 'Crawl errors per page', 'ymbeseo' ),
 			'default' => 50,

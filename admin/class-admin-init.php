@@ -52,7 +52,7 @@ class YMBESEO_Admin_Init {
 	public function enqueue_dismissible() {
 		if ( version_compare( $GLOBALS['wp_version'], '4.2', '<' ) ) {
 			wp_enqueue_style( 'ymbeseo-dismissible', plugins_url( 'css/ymbeseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
-			wp_enqueue_script( 'ymbeseo-dismissible', plugins_url( 'js/wp-seo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_script( 'ymbeseo-dismissible', plugins_url( 'js/ymbeseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 	/**

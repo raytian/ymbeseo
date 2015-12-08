@@ -451,7 +451,7 @@ class YMBESEO_Admin {
 	 */
 	function config_page_scripts() {
 		if ( YMBESEO_Utils::grant_access() ) {
-			wp_enqueue_script( 'ymbeseo-admin-global-script', plugins_url( 'js/wp-seo-admin-global' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_script( 'ymbeseo-admin-global-script', plugins_url( 'js/ymbeseo-admin-global' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 

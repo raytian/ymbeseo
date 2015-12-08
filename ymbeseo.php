@@ -5,7 +5,7 @@
 
 /**
  * Plugin Name: Yoast SEO
- * Version: 2.3.5
+ * Version: 0.1.0
  * Plugin URI: https://yoast.com/wordpress/plugins/seo/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=ymbeseoplugin
  * Description: The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more.
  * Author: Team Yoast
@@ -16,8 +16,8 @@
  */
 
 /**
- * Yoast SEO Plugin
- * Copyright (C) 2008-2014, Yoast BV - support@yoast.com
+ * Yoast SEO plugin
+ * Copyright (C) 2015-2016, SO WP - support@so-wp.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,4 +44,4 @@ if ( ! defined( 'YMBESEO_FILE' ) ) {
 }
 
 // Load the Yoast SEO plugin.
-require_once( dirname( __FILE__ ) . '/wp-seo-main.php' );
+require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );
