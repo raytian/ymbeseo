@@ -1,25 +1,20 @@
 {
-	"name": "yoast/ymbeseo",
-	"description": "Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast Minus Bloat Equals SEO plugin.",
-	"keywords": [
-		"wordpress",
-		"seo"
-	],
-	"homepage": "https://yoast.com/wordpress/plugins/seo/",
-	"license": "GPL-2.0+",
+	"name": "senlin/ymbeseo",
+	"type": "wordpress-plugin",
+	"description": "Yoast Minus Bloat Equals SEO - fork of Yoast SEO 2.3.5 back to basics",
+	"homepage": "https://so-wp.com/plugins/ymbeseo",
+	"license": "GPL3+",
 	"authors": [
 		{
-			"name": "Team Yoast",
-			"email": "support@yoast.com",
-			"homepage": "https://yoast.com"
+			"name": "Piet Bos",
+			"homepage": "https://github.com/senlin"
 		}
 	],
-	"type": "wordpress-plugin",
+	"keywords": [
+		"wordpress", "yoast", "seo"
+	],
 	"support": {
-		"issues": "https://github.com/Yoast/ymbeseo/issues",
-		"forum": "https://wordpress.org/support/plugin/ymbeseo",
-		"wiki": "https://github.com/Yoast/ymbeseo/wiki",
-		"source": "https://github.com/Yoast/ymbeseo"
+		"issues": "https://github.com/senlin/ymbeseo/issues"
 	},
 	"require": {
 		"composer/installers": "~1.0",
