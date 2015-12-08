@@ -430,12 +430,6 @@ function ymbeseo_admin_bar_menu() {
 			'title'  => __( 'Advanced', 'ymbeseo' ),
 			'href'   => admin_url( 'admin.php?page=ymbeseo_advanced' ),
 		) );
-		$wp_admin_bar->add_menu( array(
-			'parent' => 'ymbeseo-settings',
-			'id'     => 'ymbeseo-licenses',
-			'title'  => __( 'Extensions', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=ymbeseo_licenses' ),
-		) );
 	}
 }
 

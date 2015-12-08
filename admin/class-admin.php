@@ -145,17 +145,6 @@ class YMBESEO_Admin {
 			),
 		);
 
-		// Add Extension submenu page.
-		$submenu_pages[] = array(
-			'ymbeseo_dashboard',
-			'',
-			'<span style="color:#f18500">' . __( 'Extensions', 'ymbeseo' ) . '</span>',
-			$manage_options_cap,
-			'ymbeseo_licenses',
-			array( $this, 'load_page' ),
-			null,
-		);
-
 		// Allow submenu pages manipulation.
 		$submenu_pages = apply_filters( 'ymbeseo_submenu_pages', $submenu_pages );
 
@@ -237,12 +226,6 @@ class YMBESEO_Admin {
 					'load_page',
 				) );
 			}
-
-			// Add Extension submenu page.
-			add_submenu_page( 'ymbeseo_dashboard', 'YMBE SEO: ' . __( 'Extensions', 'ymbeseo' ), __( 'Extensions', 'ymbeseo' ), 'delete_users', 'ymbeseo_licenses', array(
-				$this,
-				'load_page',
-			) );
 		}
 	}
 
@@ -272,10 +255,6 @@ class YMBESEO_Admin {
 
 			case 'ymbeseo_xml':
 				require_once( YMBESEO_PATH . 'admin/pages/xml-sitemaps.php' );
-				break;
-
-			case 'ymbeseo_licenses':
-				require_once( YMBESEO_PATH . 'admin/pages/licenses.php' );
 				break;
 
 			case 'ymbeseo_files':
@@ -404,13 +383,6 @@ class YMBESEO_Admin {
 		if ( YMBESEO_BASENAME === $file && YMBESEO_Utils::grant_access() ) {
 			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) . '">' . __( 'Settings', 'ymbeseo' ) . '</a>';
 			array_unshift( $links, $settings_link );
-		}
-
-		if ( class_exists( 'Yoast_Product_YMBESEO_Premium' ) ) {
-			$license_manager = new Yoast_Plugin_License_Manager( new Yoast_Product_YMBESEO_Premium() );
-			if ( $license_manager->license_is_valid() ) {
-				return $links;
-			}
 		}
 
 		// Add link to premium support landing page.

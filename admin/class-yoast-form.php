@@ -148,14 +148,6 @@ class Yoast_Form {
 	 */
 	public function admin_sidebar() {
 
-		// No banners in Premium.
-		if ( class_exists( 'YMBESEO_Product_Premium' ) ) {
-			$license_manager = new Yoast_Plugin_License_Manager( new YMBESEO_Product_Premium() );
-			if ( $license_manager->license_is_valid() ) {
-				return;
-			}
-		}
-
 		$service_banners = array(
 			array(
 				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=website-review-banner',
