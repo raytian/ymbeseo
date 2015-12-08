@@ -72,10 +72,10 @@ class YMBESEO_Replace_Vars {
 
 		if ( self::$external_replacements === array() ) {
 			/**
-			 * Action: 'wpseo_register_extra_replacements' - Allows for registration of additional
+			 * Action: 'ymbeseo_register_extra_replacements' - Allows for registration of additional
 			 * variables to replace
 			 */
-			do_action( 'wpseo_register_extra_replacements' );
+			do_action( 'ymbeseo_register_extra_replacements' );
 		}
 	}
 
@@ -84,7 +84,7 @@ class YMBESEO_Replace_Vars {
 	 * Register new replacement %%variables%%
 	 * For use by other plugins/themes to register extra variables
 	 *
-	 * @see wpseo_register_var_replacement() for a usage example
+	 * @see ymbeseo_register_var_replacement() for a usage example
 	 *
 	 * @param  string $var              The name of the variable to replace, i.e. '%%var%%'
 	 *                                  - the surrounding %% are optional.
@@ -119,7 +119,7 @@ class YMBESEO_Replace_Vars {
 				}
 			}
 			else {
-				trigger_error( __( 'You cannot overrule a YMBESEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( __( 'You cannot overrule a YMBESEO standard variable replacement by registering a variable with the same name. Use the "ymbeseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 		}
 
@@ -166,11 +166,11 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'wpseo_replacements' - Allow customization of the replacements before they are applied
+		 * Filter: 'ymbeseo_replacements' - Allow customization of the replacements before they are applied
 		 *
 		 * @api array $replacements The replacements
 		 */
-		$replacements = apply_filters( 'wpseo_replacements', $replacements );
+		$replacements = apply_filters( 'ymbeseo_replacements', $replacements );
 
 		// Do the actual replacements.
 		if ( is_array( $replacements ) && $replacements !== array() ) {
@@ -178,14 +178,14 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'wpseo_replacements_final' - Allow overruling of whether or not to remove placeholders
+		 * Filter: 'ymbeseo_replacements_final' - Allow overruling of whether or not to remove placeholders
 		 * which didn't yield a replacement
 		 *
-		 * @example <code>add_filter( 'wpseo_replacements_final', '__return_false' );</code>
+		 * @example <code>add_filter( 'ymbeseo_replacements_final', '__return_false' );</code>
 		 *
 		 * @api     bool $final
 		 */
-		if ( apply_filters( 'wpseo_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
+		if ( apply_filters( 'ymbeseo_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
 			// Remove non-replaced variables.
 			$remove = array_diff( $matches[1], $omit ); // Make sure the $omit variables do not get removed.
 			$remove = array_map( array( __CLASS__, 'add_var_delimiter' ), $remove );
@@ -399,10 +399,10 @@ class YMBESEO_Replace_Vars {
 	 * @return string
 	 */
 	private function retrieve_sep() {
-		$replacement = YMBESEO_Options::get_default( 'wpseo_titles', 'separator' );
+		$replacement = YMBESEO_Options::get_default( 'ymbeseo_titles', 'separator' );
 
 		// Get the titles option and the separator options.
-		$titles_options    = get_option( 'wpseo_titles' );
+		$titles_options    = get_option( 'ymbeseo_titles' );
 		$seperator_options = YMBESEO_Option_Titles::get_instance()->get_separator_options();
 
 		// This should always be set, but just to be sure.
@@ -412,12 +412,12 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'wpseo_replacements_filter_sep' - Allow customization of the separator character(s)
+		 * Filter: 'ymbeseo_replacements_filter_sep' - Allow customization of the separator character(s)
 		 *
 		 * @api string $replacement The current separator
 		 */
 
-		return apply_filters( 'wpseo_replacements_filter_sep', $replacement );
+		return apply_filters( 'ymbeseo_replacements_filter_sep', $replacement );
 	}
 
 	/**
@@ -1196,7 +1196,7 @@ class YMBESEO_Replace_Vars {
 		 * @api    string    $output    Comma-delimited string containing the terms
 		 */
 
-		return apply_filters( 'wpseo_terms', $output );
+		return apply_filters( 'ymbeseo_terms', $output );
 	}
 
 } /* End of class YMBESEO_Replace_Vars */

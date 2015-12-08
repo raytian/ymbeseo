@@ -49,7 +49,7 @@ class YMBESEO_GSC_Platform_Tabs {
 			$tabs = array_merge( $platforms, $tabs );
 		}
 
-		$admin_link = admin_url( 'admin.php?page=wpseo_search_console&tab=' );
+		$admin_link = admin_url( 'admin.php?page=ymbeseo_search_console&tab=' );
 
 		$this->set_current_tab( $tabs );
 

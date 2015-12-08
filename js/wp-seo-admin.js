@@ -1,4 +1,4 @@
-/* global wpseoAdminL10n */
+/* global ymbeseoAdminL10n */
 /* global ajaxurl */
 /* global setWPOption */
 /* global tb_remove */
@@ -34,9 +34,9 @@ jQuery( document ).ready( function() {
 			}
 		).change();
 
-		jQuery( '#wpseo-tabs' ).find( 'a' ).click( function() {
-				jQuery( '#wpseo-tabs' ).find( 'a' ).removeClass( 'nav-tab-active' );
-				jQuery( '.wpseotab' ).removeClass( 'active' );
+		jQuery( '#ymbeseo-tabs' ).find( 'a' ).click( function() {
+				jQuery( '#ymbeseo-tabs' ).find( 'a' ).removeClass( 'nav-tab-active' );
+				jQuery( '.ymbeseotab' ).removeClass( 'active' );
 
 				var id = jQuery( this ).attr( 'id' ).replace( '-tab', '' );
 				jQuery( '#' + id ).addClass( 'active' );
@@ -62,7 +62,7 @@ jQuery( document ).ready( function() {
 		).change();
 
 		jQuery( '.template' ).change( function() {
-				wpseoDetectWrongVariables( jQuery( this ) );
+				ymbeseoDetectWrongVariables( jQuery( this ) );
 			}
 		).change();
 
@@ -71,7 +71,7 @@ jQuery( document ).ready( function() {
 
 		// default to first tab
 		if ( activeTab === '' || activeTab === '#_=_' ) {
-			activeTab = jQuery( '.wpseotab' ).attr( 'id' );
+			activeTab = jQuery( '.ymbeseotab' ).attr( 'id' );
 		}
 
 		jQuery( '#' + activeTab ).addClass( 'active' );
@@ -86,7 +86,7 @@ jQuery( document ).ready( function() {
  *
  * @param {element} e
  */
-function wpseoDetectWrongVariables( e ) {
+function ymbeseoDetectWrongVariables( e ) {
 	var warn = false;
 	var error_id = '';
 	var wrongVariables = [];
@@ -120,13 +120,13 @@ function wpseoDetectWrongVariables( e ) {
 	jQuery.each( wrongVariables, function( index, variable ) {
 			error_id = e.attr( 'id' ) + '-' + variable + '-warning';
 			if ( e.val().search( '%%' + variable + '%%' ) !== -1 ) {
-				e.addClass( 'wpseo_variable_warning' );
-				var msg = wpseoAdminL10n.variable_warning.replace( '%s', '%%' + variable + '%%' );
+				e.addClass( 'ymbeseo_variable_warning' );
+				var msg = ymbeseoAdminL10n.variable_warning.replace( '%s', '%%' + variable + '%%' );
 				if ( jQuery( '#' + error_id ).length ) {
 					jQuery( '#' + error_id ).html( msg );
 				}
 				else {
-					e.after( ' <div id="' + error_id + '" class="wpseo_variable_warning"><div class="clear"></div>' + msg + '</div>' );
+					e.after( ' <div id="' + error_id + '" class="ymbeseo_variable_warning"><div class="clear"></div>' + msg + '</div>' );
 				}
 				warn = true;
 			}
@@ -138,7 +138,7 @@ function wpseoDetectWrongVariables( e ) {
 		}
 	);
 	if ( warn === false ) {
-		e.removeClass( 'wpseo_variable_warning' );
+		e.removeClass( 'ymbeseo_variable_warning' );
 	}
 }
 
@@ -152,7 +152,7 @@ function wpseoDetectWrongVariables( e ) {
  */
 function setWPOption( option, newval, hide, nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_set_option',
+			action: 'ymbeseo_set_option',
 			option: option,
 			newval: newval,
 			_wpnonce: nonce
@@ -169,9 +169,9 @@ function setWPOption( option, newval, hide, nonce ) {
  *
  * @param {string} nonce
  */
-function wpseoKillBlockingFiles( nonce ) {
+function ymbeseoKillBlockingFiles( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_kill_blocking_files',
+			action: 'ymbeseo_kill_blocking_files',
 			_ajax_nonce: nonce
 		}, function( data ) {
 			if ( data === 'success' ) {
@@ -187,15 +187,15 @@ function wpseoKillBlockingFiles( nonce ) {
 /**
  * Copies the meta description for the homepage
  */
-function wpseoCopyHomeMeta() {
+function ymbeseoCopyHomeMeta() {
 	jQuery( '#og_frontpage_desc' ).val( jQuery( '#meta_description' ).val() );
 }
 
 /**
  * Makes sure we store the action hash so we can return to the right hash
  */
-function wpseoSetTabHash() {
-	var conf = jQuery( '#wpseo-conf' );
+function ymbeseoSetTabHash() {
+	var conf = jQuery( '#ymbeseo-conf' );
 	if ( conf.length ) {
 		var currentUrl = conf.attr( 'action' ).split( '#' )[ 0 ];
 		conf.attr( 'action', currentUrl + window.location.hash );
@@ -205,14 +205,14 @@ function wpseoSetTabHash() {
 /**
  * When the hash changes, get the base url from the action and then add the current hash
  */
-jQuery( window ).on( 'hashchange', wpseoSetTabHash );
+jQuery( window ).on( 'hashchange', ymbeseoSetTabHash );
 
 /**
  * When the hash changes, get the base url from the action and then add the current hash
  */
-jQuery( document ).on( 'ready', wpseoSetTabHash );
+jQuery( document ).on( 'ready', ymbeseoSetTabHash );
 
-function wpseo_add_fb_admin() {
+function ymbeseo_add_fb_admin() {
 	var target_form = jQuery('#TB_ajaxContent');
 
 	jQuery.post(
@@ -221,7 +221,7 @@ function wpseo_add_fb_admin() {
 			_wpnonce: target_form.find('input[name=fb_admin_nonce]').val(),
 			admin_name: target_form.find('input[name=fb_admin_name]').val(),
 			admin_id: target_form.find('input[name=fb_admin_id]').val(),
-			action: 'wpseo_add_fb_admin'
+			action: 'ymbeseo_add_fb_admin'
 		},
 		function( response ) {
 			var resp = jQuery.parseJSON( response );

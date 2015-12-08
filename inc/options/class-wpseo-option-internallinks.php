@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo_internallinks
+ * Option: ymbeseo_internallinks
  */
 class YMBESEO_Option_InternalLinks extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_internallinks';
+	public $option_name = 'ymbeseo_internallinks';
 
 	/**
 	 * @var  array  Array of defaults for the option

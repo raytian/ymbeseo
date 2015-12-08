@@ -12,11 +12,11 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 * Class constructor
 	 */
 	public function __construct() {
-		add_action( 'wpseo_tab_translate', array( $this, 'translate_meta_boxes' ) );
-		add_action( 'wpseo_tab_header', array( $this, 'tab_header' ), 60 );
-		add_action( 'wpseo_tab_content', array( $this, 'tab_content' ) );
-		add_filter( 'wpseo_save_metaboxes', array( $this, 'save_meta_boxes' ), 10, 1 );
-		add_action( 'wpseo_save_compare_data', array( $this, 'og_data_compare' ), 10, 1 );
+		add_action( 'ymbeseo_tab_translate', array( $this, 'translate_meta_boxes' ) );
+		add_action( 'ymbeseo_tab_header', array( $this, 'tab_header' ), 60 );
+		add_action( 'ymbeseo_tab_content', array( $this, 'tab_content' ) );
+		add_filter( 'ymbeseo_save_metaboxes', array( $this, 'save_meta_boxes' ), 10, 1 );
+		add_action( 'ymbeseo_save_compare_data', array( $this, 'og_data_compare' ), 10, 1 );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 * Output the tab header for the Social tab
 	 */
 	public function tab_header() {
-		echo '<li class="social"><a class="wpseo_tablink" href="#wpseo_social">', __( 'Social', 'wordpress-seo' ), '</a></li>';
+		echo '<li class="social"><a class="ymbeseo_tablink" href="#ymbeseo_social">', __( 'Social', 'wordpress-seo' ), '</a></li>';
 	}
 
 	/**

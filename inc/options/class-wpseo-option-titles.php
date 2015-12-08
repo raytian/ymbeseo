@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo_titles
+ * Option: ymbeseo_titles
  */
 class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_titles';
+	public $option_name = 'ymbeseo_titles';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -27,22 +27,22 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		'noodp'                  => false,
 		'noydir'                 => false,
 		'usemetakeywords'        => false,
-		'title-home-wpseo'       => '%%sitename%% %%page%% %%sep%% %%sitedesc%%', // Text field.
-		'title-author-wpseo'     => '', // Text field.
-		'title-archive-wpseo'    => '%%date%% %%page%% %%sep%% %%sitename%%', // Text field.
-		'title-search-wpseo'     => '', // Text field.
-		'title-404-wpseo'        => '', // Text field.
+		'title-home-ymbeseo'       => '%%sitename%% %%page%% %%sep%% %%sitedesc%%', // Text field.
+		'title-author-ymbeseo'     => '', // Text field.
+		'title-archive-ymbeseo'    => '%%date%% %%page%% %%sep%% %%sitename%%', // Text field.
+		'title-search-ymbeseo'     => '', // Text field.
+		'title-404-ymbeseo'        => '', // Text field.
 
-		'metadesc-home-wpseo'    => '', // Text area.
-		'metadesc-author-wpseo'  => '', // Text area.
-		'metadesc-archive-wpseo' => '', // Text area.
+		'metadesc-home-ymbeseo'    => '', // Text area.
+		'metadesc-author-ymbeseo'  => '', // Text area.
+		'metadesc-archive-ymbeseo' => '', // Text area.
 
-		'metakey-home-wpseo'     => '', // Text field.
-		'metakey-author-wpseo'   => '', // Text field.
+		'metakey-home-ymbeseo'     => '', // Text field.
+		'metakey-author-ymbeseo'   => '', // Text field.
 
-		'noindex-subpages-wpseo' => false,
-		'noindex-author-wpseo'   => false,
-		'noindex-archive-wpseo'  => true,
+		'noindex-subpages-ymbeseo' => false,
+		'noindex-author-ymbeseo'   => false,
+		'noindex-archive-ymbeseo'  => true,
 		'disable-author'         => false,
 		'disable-date'           => false,
 
@@ -131,7 +131,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * Make sure we can recognize the right action for the double cleaning
 	 */
 	public function end_of_init() {
-		do_action( 'wpseo_double_clean_titles' );
+		do_action( 'ymbeseo_double_clean_titles' );
 	}
 
 
@@ -160,7 +160,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		 * Allow altering the array with separator options
 		 * @api  array  $separator_options  Array with the separator options
 		 */
-		$filtered_separators = apply_filters( 'wpseo_separator_options', $separators );
+		$filtered_separators = apply_filters( 'ymbeseo_separator_options', $separators );
 
 		if ( is_array( $filtered_separators ) && $filtered_separators !== array() ) {
 			$separators = array_merge( $separators, $filtered_separators );
@@ -175,9 +175,9 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['title-author-wpseo'] = sprintf( __( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
-		$this->defaults['title-search-wpseo'] = sprintf( __( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
-		$this->defaults['title-404-wpseo']    = __( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
+		$this->defaults['title-author-ymbeseo'] = sprintf( __( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
+		$this->defaults['title-search-ymbeseo'] = sprintf( __( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
+		$this->defaults['title-404-ymbeseo']    = __( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
 	}
 
 
@@ -265,8 +265,8 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 				/*
 				Covers:
-					   'title-home-wpseo', 'title-author-wpseo', 'title-archive-wpseo',
-					   'title-search-wpseo', 'title-404-wpseo'
+					   'title-home-ymbeseo', 'title-author-ymbeseo', 'title-archive-ymbeseo',
+					   'title-search-ymbeseo', 'title-404-ymbeseo'
 					   'title-' . $pt->name
 					   'title-ptarchive-' . $pt->name
 					   'title-tax-' . $tax->name
@@ -279,7 +279,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 				/*
 				Covers:
-					   'metadesc-home-wpseo', 'metadesc-author-wpseo', 'metadesc-archive-wpseo'
+					   'metadesc-home-ymbeseo', 'metadesc-author-ymbeseo', 'metadesc-archive-ymbeseo'
 					   'metadesc-' . $pt->name
 					   'metadesc-ptarchive-' . $pt->name
 					   'metadesc-tax-' . $tax->name
@@ -287,7 +287,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				case 'metadesc-':
 					/*
 					Covers:
-							 'metakey-home-wpseo', 'metakey-author-wpseo'
+							 'metakey-home-ymbeseo', 'metakey-author-ymbeseo'
 							 'metakey-' . $pt->name
 							 'metakey-ptarchive-' . $pt->name
 							 'metakey-tax-' . $tax->name
@@ -340,7 +340,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 				/*
 				Covers:
-				 *		'noindex-subpages-wpseo', 'noindex-author-wpseo', 'noindex-archive-wpseo'
+				 *		'noindex-subpages-ymbeseo', 'noindex-author-ymbeseo', 'noindex-archive-ymbeseo'
 				 *		'noindex-' . $pt->name
 				 *		'noindex-ptarchive-' . $pt->name
 				 *		'noindex-tax-' . $tax->name
@@ -383,12 +383,12 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		static $original = null;
 
 		// Double-run this function to ensure renaming of the taxonomy options will work.
-		if ( ! isset( $original ) && has_action( 'wpseo_double_clean_titles', array(
+		if ( ! isset( $original ) && has_action( 'ymbeseo_double_clean_titles', array(
 				$this,
 				'clean',
 			) ) === false
 		) {
-			add_action( 'wpseo_double_clean_titles', array( $this, 'clean' ) );
+			add_action( 'ymbeseo_double_clean_titles', array( $this, 'clean' ) );
 			$original = $option_value;
 		}
 
@@ -401,12 +401,12 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		$old_option = null;
 		if ( isset( $all_old_option_values ) ) {
 			// Ok, we have an import.
-			if ( isset( $all_old_option_values['wpseo_indexation'] ) && is_array( $all_old_option_values['wpseo_indexation'] ) && $all_old_option_values['wpseo_indexation'] !== array() ) {
-				$old_option = $all_old_option_values['wpseo_indexation'];
+			if ( isset( $all_old_option_values['ymbeseo_indexation'] ) && is_array( $all_old_option_values['ymbeseo_indexation'] ) && $all_old_option_values['ymbeseo_indexation'] !== array() ) {
+				$old_option = $all_old_option_values['ymbeseo_indexation'];
 			}
 		}
 		else {
-			$old_option = get_option( 'wpseo_indexation' );
+			$old_option = get_option( 'ymbeseo_indexation' );
 		}
 		if ( is_array( $old_option ) && $old_option !== array() ) {
 			$move = array(
@@ -434,7 +434,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 		// Fix wrongness created by buggy version 1.2.2.
 		if ( isset( $option_value['title-home'] ) && $option_value['title-home'] === '%%sitename%% - %%sitedesc%% - 12345' ) {
-			$option_value['title-home-wpseo'] = '%%sitename%% - %%sitedesc%%';
+			$option_value['title-home-ymbeseo'] = '%%sitename%% - %%sitedesc%%';
 		}
 
 
@@ -447,19 +447,19 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			   with the same name occupying the same option
 		*/
 		$rename = array(
-			'title-home'       => 'title-home-wpseo',
-			'title-author'     => 'title-author-wpseo',
-			'title-archive'    => 'title-archive-wpseo',
-			'title-search'     => 'title-search-wpseo',
-			'title-404'        => 'title-404-wpseo',
-			'metadesc-home'    => 'metadesc-home-wpseo',
-			'metadesc-author'  => 'metadesc-author-wpseo',
-			'metadesc-archive' => 'metadesc-archive-wpseo',
-			'metakey-home'     => 'metakey-home-wpseo',
-			'metakey-author'   => 'metakey-author-wpseo',
-			'noindex-subpages' => 'noindex-subpages-wpseo',
-			'noindex-author'   => 'noindex-author-wpseo',
-			'noindex-archive'  => 'noindex-archive-wpseo',
+			'title-home'       => 'title-home-ymbeseo',
+			'title-author'     => 'title-author-ymbeseo',
+			'title-archive'    => 'title-archive-ymbeseo',
+			'title-search'     => 'title-search-ymbeseo',
+			'title-404'        => 'title-404-ymbeseo',
+			'metadesc-home'    => 'metadesc-home-ymbeseo',
+			'metadesc-author'  => 'metadesc-author-ymbeseo',
+			'metadesc-archive' => 'metadesc-archive-ymbeseo',
+			'metakey-home'     => 'metakey-home-ymbeseo',
+			'metakey-author'   => 'metakey-author-ymbeseo',
+			'noindex-subpages' => 'noindex-subpages-ymbeseo',
+			'noindex-author'   => 'noindex-author-ymbeseo',
+			'noindex-archive'  => 'noindex-archive-ymbeseo',
 		);
 		foreach ( $rename as $old => $new ) {
 			if ( isset( $option_value[ $old ] ) && ! isset( $option_value[ $new ] ) ) {
@@ -474,7 +474,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		 * @internal This clean-up action can only be done effectively once the taxonomies and post_types
 		 * have been registered, i.e. at the end of the init action.
 		 */
-		if ( isset( $original ) && current_filter() === 'wpseo_double_clean_titles' || did_action( 'wpseo_double_clean_titles' ) > 0 ) {
+		if ( isset( $original ) && current_filter() === 'ymbeseo_double_clean_titles' || did_action( 'ymbeseo_double_clean_titles' ) > 0 ) {
 			$rename          = array(
 				'title-'           => 'title-tax-',
 				'metadesc-'        => 'metadesc-tax-',
@@ -592,7 +592,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			 * Allow altering the array with variable array key patterns
 			 * @api  array  $patterns  Array with the variable array key patterns
 			 */
-			$patterns = apply_filters( 'wpseo_option_titles_variable_array_key_patterns', $patterns );
+			$patterns = apply_filters( 'ymbeseo_option_titles_variable_array_key_patterns', $patterns );
 
 			foreach ( $dirty as $key => $value ) {
 

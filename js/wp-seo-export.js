@@ -1,12 +1,12 @@
 /* jshint strict:true */
 /* global ajaxurl */
-/* global wpseo_export_nonce */
+/* global ymbeseo_export_nonce */
 jQuery( document ).ready( function( $ ) {
 		'use strict';
 		$( '#export-button' ).click( function() {
 				$.post( ajaxurl, {
-						action: 'wpseo_export',
-						_wpnonce: wpseo_export_nonce,
+						action: 'ymbeseo_export',
+						_wpnonce: ymbeseo_export_nonce,
 						include_taxonomy: $( '#include_taxonomy_meta' ).is( ':checked' )
 					}, function( resp ) {
 						resp = JSON.parse( resp );
@@ -14,7 +14,7 @@ jQuery( document ).ready( function( $ ) {
 						if ( resp.status === 'success' ) {
 							dclass = 'updated';
 						}
-						$( '#wpseo-title' ).append( '<div class="' + dclass + ' settings-error"><p><strong>' + resp.msg + '</strong></p></div>' );
+						$( '#ymbeseo-title' ).append( '<div class="' + dclass + ' settings-error"><p><strong>' + resp.msg + '</strong></p></div>' );
 					}
 				);
 				event.preventDefault();

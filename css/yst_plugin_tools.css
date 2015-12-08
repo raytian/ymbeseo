@@ -83,7 +83,7 @@ label.checkbox {
 	background-color: transparent;
 }
 
-table.wpseo th {
+table.ymbeseo th {
 	text-align: left;
 }
 
@@ -91,12 +91,12 @@ label.radio {
 	margin-right: 20px;
 }
 
-.wpseo_content_wrapper {
+.ymbeseo_content_wrapper {
 	display: table;
 	width: 100%;
 }
 
-.wpseo_content_cell {
+.ymbeseo_content_cell {
 	display: table-cell;
 	height: 500px;
 	margin: 0;
@@ -104,26 +104,26 @@ label.radio {
 	vertical-align: top;
 }
 
-#wpseo_content_top {
+#ymbeseo_content_top {
 	min-width: 800px;
 }
 
-div.wpseo_variable_warning {
+div.ymbeseo_variable_warning {
 	margin: 5px 0 0 0;
 	padding: 5px;
 	color: red;
 }
 
-input.wpseo_variable_warning,
-textarea.wpseo_variable_warning {
+input.ymbeseo_variable_warning,
+textarea.ymbeseo_variable_warning {
 	border: 1px solid red;
 }
 
-.wpseo_variable_warning a {
+.ymbeseo_variable_warning a {
 	color: red;
 }
 
-.wpseo_content_wrapper div.wpseo-warning {
+.ymbeseo_content_wrapper div.ymbeseo-warning {
 	margin: 2em 0 0 0;
 	padding-right: 10px;
 	padding-left: 10px;
@@ -131,11 +131,11 @@ textarea.wpseo_variable_warning {
 	background-color: #dedede;
 }
 
-.wpseo_content_wrapper div.wpseo-warning h4 {
+.ymbeseo_content_wrapper div.ymbeseo-warning h4 {
 	margin: 1em 0 0 0;
 }
 
-.wpseo_content_wrapper div.wpseo-warning p.error-message {
+.ymbeseo_content_wrapper div.ymbeseo-warning p.error-message {
 	font-weight: normal;
 }
 
@@ -145,15 +145,15 @@ textarea.wpseo_variable_warning {
 }
 
 @media (max-width: 1020px) {
-	#wpseo_content_top {
+	#ymbeseo_content_top {
 		margin-left: 0;
 		padding-left: 0;
 	}
 }
 
-.wpseo-admin-page .form-table tr,
-.wpseo-admin-page .form-table th,
-.wpseo-admin-page .form-table td {
+.ymbeseo-admin-page .form-table tr,
+.ymbeseo-admin-page .form-table th,
+.ymbeseo-admin-page .form-table td {
 	vertical-align: top;
 }
 
@@ -257,16 +257,16 @@ table.yoast_help tr:hover {
 	border: 2px green;
 }
 
-.wpseotab {
+.ymbeseotab {
 	display: none;
 	margin-top: 15px;
 }
 
-.wpseotab.active {
+.ymbeseotab.active {
 	display: block;
 }
 
-.wpseotab strong {
+.ymbeseotab strong {
 	font-size: 115%;
 }
 
@@ -299,7 +299,7 @@ h2 code {
 	font-size: 23px;
 }
 
-#wpseo-conf {
+#ymbeseo-conf {
 	/*max-width: 600px;*/
 	;
 }
@@ -308,31 +308,31 @@ h2 code {
 	margin: 0 5px 0 0;
 }
 
-#wpseo-debug-info {
+#ymbeseo-debug-info {
 	clear: both;
 }
 
-#wpseo-debug-info .hndle {
+#ymbeseo-debug-info .hndle {
 	cursor: auto;
 }
 
-#wpseo-debug-info h3 span:last-child {
+#ymbeseo-debug-info h3 span:last-child {
 	padding-left: 16px;
 }
 
-#wpseo-debug-info .wpseo-debug {
+#ymbeseo-debug-info .ymbeseo-debug {
 	display: inline-block;
 	padding-left: 20px;
 	color: #c00;
 }
 
-input.wpseo-new-title,
-textarea.wpseo-new-metadesc {
+input.ymbeseo-new-title,
+textarea.ymbeseo-new-metadesc {
 	width: 100%;
 	max-width: 100%;
 }
 
-.wpseotab .extension {
+.ymbeseotab .extension {
 	float: left;
 	box-sizing: border-box;
 	width: 300px;
@@ -341,12 +341,12 @@ textarea.wpseo-new-metadesc {
 	border: 1px solid #ccc;
 }
 
-.wpseotab .extension p {
+.ymbeseotab .extension p {
 	margin: 0;
 	padding: 10px;
 }
 
-.wpseotab .extension h3 {
+.ymbeseotab .extension h3 {
 	box-sizing: border-box;
 	height: 110px;
 	margin: 0;
@@ -356,33 +356,33 @@ textarea.wpseo-new-metadesc {
 	background-size: 130px 100px;
 }
 
-.wpseotab .extension a {
+.ymbeseotab .extension a {
 	text-decoration: none;
 }
 
-.wpseotab .extension button.installed {
+.ymbeseotab .extension button.installed {
 	border-color: #00a000;
 	background-color: #00a000;
 	cursor: default;
 }
 
-.wpseotab .seo-premium h3 {
+.ymbeseotab .seo-premium h3 {
 	background-image: url(../images/Premium_130x100.png);
 }
 
-.wpseotab .video-seo h3 {
+.ymbeseotab .video-seo h3 {
 	background-image: url(../images/Video_130x100.png);
 }
 
-.wpseotab .local-seo h3 {
+.ymbeseotab .local-seo h3 {
 	background-image: url(../images/Local_130x100.png);
 }
 
-.wpseotab .woocommerce-seo h3 {
+.ymbeseotab .woocommerce-seo h3 {
 	background-image: url(../images/Woo_130x100.png);
 }
 
-.wpseotab .news-seo h3 {
+.ymbeseotab .news-seo h3 {
 	background-image: url(../images/News_SEO.png);
 	background-size: 115px 100px;
 }
@@ -431,12 +431,12 @@ div#separator input.radio:checked + label {
 	line-height: 24px;
 }
 
-#TB_window .wpseo_content_wrapper p {
+#TB_window .ymbeseo_content_wrapper p {
 	font-size: 14px;
 	font-style: normal;
 }
 
-#TB_window .wpseo_content_wrapper label {
+#TB_window .ymbeseo_content_wrapper label {
 	margin: 0 10px 0 0;
 	font-size: 14px;
 	font-weight: bold;

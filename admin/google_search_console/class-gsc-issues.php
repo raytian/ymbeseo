@@ -35,7 +35,7 @@ class YMBESEO_GSC_Issues {
 	 * @param array|bool $fetched_issues
 	 */
 	public function __construct( $platform, $category, $fetched_issues = false ) {
-		$this->option_name = strtolower( 'wpseo-gsc-issues-' . $platform . '-' . $category );
+		$this->option_name = strtolower( 'ymbeseo-gsc-issues-' . $platform . '-' . $category );
 		$this->issues      = $this->get_issues();
 
 		if ( ! empty( $fetched_issues ) && is_array( $fetched_issues ) ) {

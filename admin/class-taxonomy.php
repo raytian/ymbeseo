@@ -54,12 +54,12 @@ class YMBESEO_Taxonomy {
 	 * @param string $taxonomy         The taxonomy that the taxonomy term was splitted for.
 	 */
 	public function split_shared_term( $old_term_id, $new_term_id, $term_taxonomy_id, $taxonomy ) {
-		$tax_meta = get_option( 'wpseo_taxonomy_meta', array() );
+		$tax_meta = get_option( 'ymbeseo_taxonomy_meta', array() );
 
 		if ( ! empty( $tax_meta[ $taxonomy ][ $old_term_id ] ) ) {
 			$tax_meta[ $taxonomy ][ $new_term_id ] = $tax_meta[ $taxonomy ][ $old_term_id ];
 			unset( $tax_meta[ $taxonomy ][ $old_term_id ] );
-			update_option( 'wpseo_taxonomy_meta', $tax_meta );
+			update_option( 'ymbeseo_taxonomy_meta', $tax_meta );
 		}
 	}
 
@@ -183,19 +183,19 @@ class YMBESEO_Taxonomy {
 
 		/* translators: %1$s expands to Yoast SEO */
 		echo '<h3>', sprintf( __( '%1$s Settings', 'wordpress-seo' ), 'Yoast SEO' ) . '</h3>';
-		echo '<table class="form-table wpseo-taxonomy-form">';
+		echo '<table class="form-table ymbeseo-taxonomy-form">';
 
-		$this->form_row( 'wpseo_title', __( 'SEO Title', 'wordpress-seo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
-		$this->form_row( 'wpseo_desc', __( 'SEO Description', 'wordpress-seo' ), esc_html__( 'The SEO description is used for the meta description on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_title', __( 'SEO Title', 'wordpress-seo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_desc', __( 'SEO Description', 'wordpress-seo' ), esc_html__( 'The SEO description is used for the meta description on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
 
 		if ( $options['usemetakeywords'] === true ) {
-			$this->form_row( 'wpseo_metakey', __( 'Meta keywords', 'wordpress-seo' ), esc_html__( 'Meta keywords used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+			$this->form_row( 'ymbeseo_metakey', __( 'Meta keywords', 'wordpress-seo' ), esc_html__( 'Meta keywords used on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
 		}
 
-		$this->form_row( 'wpseo_canonical', __( 'Canonical', 'wordpress-seo' ), esc_html__( 'The canonical link is shown on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
+		$this->form_row( 'ymbeseo_canonical', __( 'Canonical', 'wordpress-seo' ), esc_html__( 'The canonical link is shown on the archive page for this term.', 'wordpress-seo' ), $tax_meta );
 
 		if ( $options['breadcrumbs-enable'] === true ) {
-			$this->form_row( 'wpseo_bctitle', __( 'Breadcrumbs title', 'wordpress-seo' ), sprintf( esc_html__( 'The Breadcrumbs title is used in the breadcrumbs where this %s appears.', 'wordpress-seo' ), $term->taxonomy ), $tax_meta );
+			$this->form_row( 'ymbeseo_bctitle', __( 'Breadcrumbs title', 'wordpress-seo' ), sprintf( esc_html__( 'The Breadcrumbs title is used in the breadcrumbs where this %s appears.', 'wordpress-seo' ), $term->taxonomy ), $tax_meta );
 		}
 
 		$current = 'index';
@@ -211,11 +211,11 @@ class YMBESEO_Taxonomy {
 			$desc .= '<br /><span class="error-message">' . esc_html__( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'wordpress-seo' ) . '</span>';
 		}
 
-		$this->form_row( 'wpseo_noindex', sprintf( __( 'Noindex this %s', 'wordpress-seo' ), $term->taxonomy ), $desc, $tax_meta, 'select', $noindex_options );
+		$this->form_row( 'ymbeseo_noindex', sprintf( __( 'Noindex this %s', 'wordpress-seo' ), $term->taxonomy ), $desc, $tax_meta, 'select', $noindex_options );
 		unset( $current, $no_index_options, $desc );
 
 
-		$this->form_row( 'wpseo_sitemap_include', __( 'Include in sitemap?', 'wordpress-seo' ), '', $tax_meta, 'select', $this->sitemap_include_options );
+		$this->form_row( 'ymbeseo_sitemap_include', __( 'Include in sitemap?', 'wordpress-seo' ), '', $tax_meta, 'select', $this->sitemap_include_options );
 
 		echo '</table>';
 	}
@@ -228,7 +228,7 @@ class YMBESEO_Taxonomy {
 	 * @param string $taxonomy The taxonomy the term belongs to.
 	 */
 	function update_term( $term_id, $tt_id, $taxonomy ) {
-		$tax_meta = get_option( 'wpseo_taxonomy_meta' );
+		$tax_meta = get_option( 'ymbeseo_taxonomy_meta' );
 
 		/* Create post array with only our values */
 		$new_meta_data = array();
@@ -255,9 +255,9 @@ class YMBESEO_Taxonomy {
 		}
 
 		// Prevent complete array validation.
-		$tax_meta['wpseo_already_validated'] = true;
+		$tax_meta['ymbeseo_already_validated'] = true;
 
-		update_option( 'wpseo_taxonomy_meta', $tax_meta );
+		update_option( 'ymbeseo_taxonomy_meta', $tax_meta );
 	}
 
 

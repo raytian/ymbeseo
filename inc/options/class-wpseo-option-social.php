@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo_social
+ * Option: ymbeseo_social
  */
 class YMBESEO_Option_Social extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_social';
+	public $option_name = 'ymbeseo_social';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -291,12 +291,12 @@ class YMBESEO_Option_Social extends YMBESEO_Option {
 		$old_option = null;
 		if ( isset( $all_old_option_values ) ) {
 			// Ok, we have an import.
-			if ( isset( $all_old_option_values['wpseo_indexation'] ) && is_array( $all_old_option_values['wpseo_indexation'] ) && $all_old_option_values['wpseo_indexation'] !== array() ) {
-				$old_option = $all_old_option_values['wpseo_indexation'];
+			if ( isset( $all_old_option_values['ymbeseo_indexation'] ) && is_array( $all_old_option_values['ymbeseo_indexation'] ) && $all_old_option_values['ymbeseo_indexation'] !== array() ) {
+				$old_option = $all_old_option_values['ymbeseo_indexation'];
 			}
 		}
 		else {
-			$old_option = get_option( 'wpseo_indexation' );
+			$old_option = get_option( 'ymbeseo_indexation' );
 		}
 
 		if ( is_array( $old_option ) && $old_option !== array() ) {

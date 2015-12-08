@@ -4,19 +4,19 @@
  */
 
 /**
- * Option: wpseo_xml
+ * Option: ymbeseo_xml
  */
 class YMBESEO_Option_XML extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_xml';
+	public $option_name = 'ymbeseo_xml';
 
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_wpseo_xml_sitemap_options';
+	public $group_name = 'yoast_ymbeseo_xml_sitemap_options';
 
 	/**
 	 * @var  array  Array of defaults for the option
@@ -84,7 +84,7 @@ class YMBESEO_Option_XML extends YMBESEO_Option {
 	public function enrich_defaults() {
 
 		$user_roles          = YMBESEO_Utils::get_roles();
-		$filtered_user_roles = apply_filters( 'wpseo_sitemaps_supported_user_roles', $user_roles );
+		$filtered_user_roles = apply_filters( 'ymbeseo_sitemaps_supported_user_roles', $user_roles );
 		if ( is_array( $filtered_user_roles ) && $filtered_user_roles !== array() ) {
 			foreach ( $filtered_user_roles as $role_name => $role_value ) {
 				$this->defaults[ 'user_role-' . $role_name . '-not_in_sitemap' ] = false;
@@ -96,7 +96,7 @@ class YMBESEO_Option_XML extends YMBESEO_Option {
 		unset( $user_roles, $filtered_user_roles );
 
 		$post_type_names     = get_post_types( array( 'public' => true ), 'names' );
-		$filtered_post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', $post_type_names );
+		$filtered_post_types = apply_filters( 'ymbeseo_sitemaps_supported_post_types', $post_type_names );
 
 		if ( is_array( $filtered_post_types ) && $filtered_post_types !== array() ) {
 			foreach ( $filtered_post_types as $pt ) {
@@ -112,7 +112,7 @@ class YMBESEO_Option_XML extends YMBESEO_Option {
 		unset( $post_type_names, $filtered_post_types );
 
 		$taxonomy_objects    = get_taxonomies( array( 'public' => true ), 'objects' );
-		$filtered_taxonomies = apply_filters( 'wpseo_sitemaps_supported_taxonomies', $taxonomy_objects );
+		$filtered_taxonomies = apply_filters( 'ymbeseo_sitemaps_supported_taxonomies', $taxonomy_objects );
 		if ( is_array( $filtered_taxonomies ) && $filtered_taxonomies !== array() ) {
 			foreach ( $filtered_taxonomies as $tax ) {
 				if ( isset( $tax->labels->name ) && trim( $tax->labels->name ) != '' ) {

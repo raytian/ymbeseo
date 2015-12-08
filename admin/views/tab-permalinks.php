@@ -10,7 +10,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 }
 
 $yform = Yoast_Form::get_instance();
-$yform->currentoption = 'wpseo_permalinks';
+$yform->currentoption = 'ymbeseo_permalinks';
 
 echo '<h3>', __( 'Change URLs', 'wordpress-seo' ), '</h3>';
 $yform->checkbox( 'stripcategorybase', __( 'Strip the category base (usually <code>/category/</code>) from the category URL.', 'wordpress-seo' ) );

@@ -25,9 +25,9 @@
 		?>
 		<tr>
 			<th>
-				<div class="wpseo-score-icon <?php echo sanitize_html_class( $statistic['seo_rank'] ); ?>"></div>
+				<div class="ymbeseo-score-icon <?php echo sanitize_html_class( $statistic['seo_rank'] ); ?>"></div>
 				<a href="<?php echo $url; ?>"
-				   class="wpseo-glance <?php echo esc_attr( $statistic['class'] ); ?>">
+				   class="ymbeseo-glance <?php echo esc_attr( $statistic['class'] ); ?>">
 					<?php printf( $statistic['title'], intval( $statistic['count'] ) ); ?>
 				</a>
 			</th>

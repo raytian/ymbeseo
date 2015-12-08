@@ -34,14 +34,14 @@ class YMBESEO_Meta {
 	 * @internal if at any point this would change, quite apart from an upgrade routine, this also will need to
 	 * be changed in the wpml-config.xml file.
 	 */
-	public static $meta_prefix = '_yoast_wpseo_';
+	public static $meta_prefix = '_yoast_ymbeseo_';
 
 
 	/**
 	 * @var    string   Prefix for all YMBESEO meta value form field names and ids
 	 * @static
 	 */
-	public static $form_prefix = 'yoast_wpseo_';
+	public static $form_prefix = 'yoast_ymbeseo_';
 
 
 	/**
@@ -266,7 +266,7 @@ class YMBESEO_Meta {
 		 * Allow add-on plugins to register their meta fields for management by this class
 		 * add_filter() calls must be made before plugins_loaded prio 14
 		 */
-		$extra_fields = apply_filters( 'add_extra_wpseo_meta_fields', array() );
+		$extra_fields = apply_filters( 'add_extra_ymbeseo_meta_fields', array() );
 		if ( is_array( $extra_fields ) ) {
 			self::$meta_fields = self::array_merge_recursive_distinct( $extra_fields, self::$meta_fields );
 		}
@@ -337,10 +337,10 @@ class YMBESEO_Meta {
 
 
 			case 'general':
-				$options = get_option( 'wpseo_titles' );
+				$options = get_option( 'ymbeseo_titles' );
 				if ( $options['usemetakeywords'] === true ) {
 					/* Adjust the link in the keywords description text string based on the post type */
-					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=wpseo_titles#top#post_types' ) ) . '">', '</a>' );
+					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', '</a>' );
 				}
 				else {
 					/* Don't show the keywords field if keywords aren't enabled */
@@ -350,14 +350,14 @@ class YMBESEO_Meta {
 				 * Filter the YMBESEO metabox form field definitions for the general tab, backward compatibility
 				 *
 				 * @deprecated 1.5.0
-				 * @deprecated use the 'wpseo_metabox_entries_general' filter instead
+				 * @deprecated use the 'ymbeseo_metabox_entries_general' filter instead
 				 * @see        YMBESEO_Meta::get_meta_field_defs()
 				 *
 				 * @param      array $field_defs Metabox orm definitions.
 				 *
 				 * @return     array
 				 */
-				$field_defs = apply_filters( 'wpseo_metabox_entries', $field_defs );
+				$field_defs = apply_filters( 'ymbeseo_metabox_entries', $field_defs );
 				break;
 
 
@@ -423,7 +423,7 @@ class YMBESEO_Meta {
 		 * @return array
 		 */
 
-		return apply_filters( 'wpseo_metabox_entries_' . $tab, $field_defs, $post_type );
+		return apply_filters( 'ymbeseo_metabox_entries_' . $tab, $field_defs, $post_type );
 	}
 
 
@@ -512,7 +512,7 @@ class YMBESEO_Meta {
 				break;
 		}
 
-		$clean = apply_filters( 'wpseo_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
+		$clean = apply_filters( 'ymbeseo_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
 
 		return $clean;
 	}
@@ -731,7 +731,7 @@ class YMBESEO_Meta {
 		global $wpdb;
 
 		/*
-		Get only those rows where no wpseo meta values exist for the same post
+		Get only those rows where no ymbeseo meta values exist for the same post
 		   (with the exception of linkdex as that will be set independently of whether the post has been edited)
 		   @internal Query is pretty well optimized this way
 		*/
@@ -780,13 +780,13 @@ class YMBESEO_Meta {
 		global $wpdb;
 
 		/**
-		 * Clean up '_yoast_wpseo_meta-robots'
+		 * Clean up '_yoast_ymbeseo_meta-robots'
 		 *
-		 * Retrieve all '_yoast_wpseo_meta-robots' meta values and convert if no new values found
+		 * Retrieve all '_yoast_ymbeseo_meta-robots' meta values and convert if no new values found
 		 *
 		 * @internal Query is pretty well optimized this way
 		 *
-		 * @todo [JRF => Yoast] find out all possible values which the old '_yoast_wpseo_meta-robots' could contain
+		 * @todo [JRF => Yoast] find out all possible values which the old '_yoast_ymbeseo_meta-robots' could contain
 		 * to convert the data correctly
 		 */
 		$query  = $wpdb->prepare(
@@ -936,7 +936,7 @@ class YMBESEO_Meta {
 		}
 		unset( $query, $oldies, $old, $clean );
 
-		do_action( 'wpseo_meta_clean_up' );
+		do_action( 'ymbeseo_meta_clean_up' );
 	}
 
 

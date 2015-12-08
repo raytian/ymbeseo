@@ -30,8 +30,8 @@ This is an archive of older changelog entries. Most recent entries are maintaine
 
 * Enhancements:
 	* New admin icon using SVG, which uses proper color.
-	* Introduced a filter for the XML Sitemap base URL, `wpseo_sitemaps_base_url`
-	* Introduced a filter for the JSON+LD output: `wpseo_json_ld_search_output`
+	* Introduced a filter for the XML Sitemap base URL, `ymbeseo_sitemaps_base_url`
+	* Introduced a filter for the JSON+LD output: `ymbeseo_json_ld_search_output`
 
 * For developers: the [GitHub version](https://github.com/Yoast/wordpress-seo) now contains a full Grunt implementation for many actions.
 
@@ -45,7 +45,7 @@ This update removes more code than it adds, because Google stopped support for r
 	* Fix the way we [replace whitespace](https://github.com/Yoast/wordpress-seo/pull/1542) to be more compatible with different encoding, props [Jrf](http://profiles.wordpress.org/jrf).
 
 * Enhancements:
-	* Implement new [sitelinks search box json+ld code](https://developers.google.com/webmasters/richsnippets/sitelinkssearch). Enabled by default, to disable use the new `disable_wpseo_json_ld_search` filter. To change the URL being put out use the `wpseo_json_ld_search_url` filter.
+	* Implement new [sitelinks search box json+ld code](https://developers.google.com/webmasters/richsnippets/sitelinkssearch). Enabled by default, to disable use the new `disable_ymbeseo_json_ld_search` filter. To change the URL being put out use the `ymbeseo_json_ld_search_url` filter.
 	* Improved the onboarding tour to be more in line with the current status of the plugin.
 
 * Other:
@@ -152,7 +152,7 @@ Release Date: July 16th, 2014
 	* Fixed several notices for undefined variables.
 	* Properly trim meta description to its desired size again, regression caused in 1.5.4.
 	* Fix empty last modified date for term sitemaps in sitemap index.
-	* Fix bug where `wpseo_sitemap_exclude_empty_terms` filter wouldn't work for index sitemap.
+	* Fix bug where `ymbeseo_sitemap_exclude_empty_terms` filter wouldn't work for index sitemap.
 
 * Enhancements:
 	* Improve nonce checking in bulk title & description editor.
@@ -172,7 +172,7 @@ Release Date: July 15th, 2014
 
 * Bugfixes
 	* Refactored the variable replacement function for better and faster results and more stability. This should fix most if not all problems users where having with variables not being replaced in the title, meta description, snippet preview etc - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed: `wpseo_replacements` filter was being run before all replacements were known.
+	* Fixed: `ymbeseo_replacements` filter was being run before all replacements were known.
 	* Fixed: `%%pt_single%%` and `%%pt_plural%%` didn't work in preview mode.
 	* Fixed: `%%page_total%%` would sometimes be one short.
 	* Fixed: `%%term404%%` would sometimes be empty while the pagename causing the 404 was known.
@@ -193,7 +193,7 @@ Release Date: July 15th, 2014
 	* Fixed: Bing URL - props [GodThor](https://github.com/GodThor).
 	* Prevent from loading if WP is installing - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed: Incorrect timezone in the root sitemap.
-	* Fixed: Multiselect fields are now properly saved in wpseo meta boxes.
+	* Fixed: Multiselect fields are now properly saved in ymbeseo meta boxes.
 	* Force canonical links to be absolute, relative is NOT an option.
 	* Fixed: Breadcrumb on search pages.
 	* Added CDATA in sitemap image captions and titles.
@@ -201,10 +201,10 @@ Release Date: July 15th, 2014
 
 * Enhancements
 	* Heavily reduce query load for XML sitemaps by caching XML sitemaps in transients.
-	* New `wpseo_register_extra_replacements` action hook which lets plugin/theme builders add new `%%...%%` replacement variables - including relevant help texts -. See [function documentation](https://github.com/Yoast/wordpress-seo/blob/master/inc/wpseo-functions.php) for an example of how to use this new functionality.
+	* New `ymbeseo_register_extra_replacements` action hook which lets plugin/theme builders add new `%%...%%` replacement variables - including relevant help texts -. See [function documentation](https://github.com/Yoast/wordpress-seo/blob/master/inc/ymbeseo-functions.php) for an example of how to use this new functionality.
 	* If the final string - after replacement - would contain two separators with nothing between them, this extra separator will be removed.
 	* All remaining not replaced replacement vars are now stripped from the strings (without breaking the snippet preview).
-	* New filter `wpseo_replacements_filter_sep` which can be used to change the seperator character passed by the theme.
+	* New filter `ymbeseo_replacements_filter_sep` which can be used to change the seperator character passed by the theme.
 	* When using the 'Reset default settings' button on a blog in a network while another blog has been chosen to be used as a basis for the settings for all new blogs, the reset will respect that setting and reset the blog to the settings from the chosen blog.
 	* For small networks ( < 100 sites ), the network page user interface has been improved, by offering drop-down lists of the blogs for blog selection fields. For larger networks, the interface remains the same.
 	* Added an action to allow adding content to the Post Type tab on the meta admin page.
@@ -230,7 +230,7 @@ Release Date: June 2nd, 2014
 	* Check whether snippet preview is shown on page before hiding / showing errors, deducted from [#1178](https://github.com/Yoast/wordpress-seo/issues/1178)
 	* Fixed incorrect sitemap last modified date as reported in [issue 1136](https://github.com/Yoast/wordpress-seo/issues/1136) - props [rscs](https://github.com/rscs).
 	* Specify post ID when using `wp_enqueue_media()` to set up correctly for the post being edited. [Pull #1165](https://github.com/Yoast/wordpress-seo/pull/1165), props [benhuson](https://github.com/benhuson).
-	* Fixed unreachable filter `wpseo_sitemap_[post_type]_content` as reported in [pull #1163](https://github.com/Yoast/wordpress-seo/pull/1163), also fixes unreachable filter `wpseo_sitemap_author_content`. Props [jakub-klapka](https://github.com/jakub-klapka).
+	* Fixed unreachable filter `ymbeseo_sitemap_[post_type]_content` as reported in [pull #1163](https://github.com/Yoast/wordpress-seo/pull/1163), also fixes unreachable filter `ymbeseo_sitemap_author_content`. Props [jakub-klapka](https://github.com/jakub-klapka).
 	* Fixed PHP notice as reported by [maxiwheat](https://github.com/maxiwheat) in [issue #1160](https://github.com/Yoast/wordpress-seo/issues/1160).
 	* Backed out pagination overflow redirect as it's causing too many issues.
 
@@ -323,7 +323,7 @@ Release Date: May 15th, 2014
 = 1.5.2.4 =
 
 * Bugfixes
-	* Changed 'wpseo_frontend_head_init' hook to 'template_redirect' to prevent incorrect canonical redirect.
+	* Changed 'ymbeseo_frontend_head_init' hook to 'template_redirect' to prevent incorrect canonical redirect.
 	* Improved upgrade routine for breadcrumbs maintax/pt option as reported by [benfreke](https://github.com/benfreke) in [issue #849](https://github.com/Yoast/wordpress-seo/issues/849) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed a bug where the banners overlapped WordPress notices/errors.
 	* Fixed: Slashes in Taxonomy text inputs as reported by [chuckreynolds](https://github.com/chuckreynolds) in [issue #868](https://github.com/Yoast/wordpress-seo/issues/868) - props [Jrf](http://profiles.wordpress.org/jrf).
@@ -361,7 +361,7 @@ Release Date: May 15th, 2014
 
 * Enhancements
 	* Added filters for the change frequencies of different URLs added to the sitemap. Props to [haroldkyle](https://github.com/haroldkyle) for the idea.
-	* Added filter `wpseo_sitemap_exclude_empty_terms` to allow including empty terms in the XML sitemap.
+	* Added filter `ymbeseo_sitemap_exclude_empty_terms` to allow including empty terms in the XML sitemap.
 	* Private posts now default to noindex (even though they technically probably couldn't be indexed anyway).
 	* Show a warning message underneath a post's robots meta settings when site is set to noindex sitewide in WP core.
 	* Updated licensing class to show a notice when requests to yoast.com are blocked because of `WP_HTTP_BLOCK_EXTERNALS`.
@@ -392,14 +392,14 @@ Release Date: May 15th, 2014
 	* Fix RSS text strings on options page being double escaped, [issue #731](https://github.com/Yoast/wordpress-seo/issues/731) as reported by [namaserajesh](https://github.com/namaserajesh) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Avoid potential confusion over Facebook OpenGraph front page usage, [issue #570](https://github.com/Yoast/wordpress-seo/issues/570) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Potentially fix [issue 565](https://github.com/Yoast/wordpress-seo/issues/565) bbpress warning message. Thanks [inetbiz](https://github.com/inetbiz) for reporting and [tobylewis](https://github.com/tobylewis) for finding the likely cause.
-	* Filter 'wpseo_pre_analysis_post_content' output is now only loaded in DOM object if not empty. - props [mgmartel](https://github.com/mgmartel).
+	* Filter 'ymbeseo_pre_analysis_post_content' output is now only loaded in DOM object if not empty. - props [mgmartel](https://github.com/mgmartel).
 	* $post_content is now unset after loading in DOM object. - props [mgmartel](https://github.com/mgmartel).
 	* Fix Alexa ID string validation, as reported by [kyasajin](https://github.com/kyasajin) and [Bubichka](https://github.com/Bubichka) in [issue 736](https://github.com/Yoast/wordpress-seo/issues/736) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fix issue with Soliloquy image query, as reported by [osalcedo](https://github.com/osalcedo) and [mattisherwood](https://github.com/mattisherwood) in [issue #733](https://github.com/Yoast/wordpress-seo/issues/733) - props [Jrf](http://profiles.wordpress.org/jrf).
 
 * Enhancements
-	* Twitter metatag key is now filterable by 'wpseo_twitter_metatag_key'.
-	* Added a filter called "wpseo_replacements" in wpseo_replace_vars to allow customization of the replacements before they are applied - props [martinernst](https://github.com/martinernst).
+	* Twitter metatag key is now filterable by 'ymbeseo_twitter_metatag_key'.
+	* Added a filter called "ymbeseo_replacements" in ymbeseo_replace_vars to allow customization of the replacements before they are applied - props [martinernst](https://github.com/martinernst).
 	* Added useful links for page analysis - props [bhubbard](https://github.com/bhubbard).
 
 * i18n Updates
@@ -459,8 +459,8 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* Prevent the SEO score filter from displaying on a post type overview page if the metabox has been hidden for the post type as suggested by [coreyworrell](https://github.com/coreyworrell) in issue [#601](https://github.com/Yoast/wordpress-seo/issues/601).
 
 	* Improved: post meta -> the keyword density calculation for non-latin, non-ideograph languages - i.e. cyrillic, hebrew etc - has been improved. Related issues [#703](https://github.com/Yoast/wordpress-seo/issues/703), [#681](https://github.com/Yoast/wordpress-seo/issues/681), [#349](https://github.com/Yoast/wordpress-seo/issues/349) and [#264](https://github.com/Yoast/wordpress-seo/issues/264). The keyword density calculation for ideograph based languages such as Japanese and Chinese will not work yet, issue [#145](https://github.com/Yoast/wordpress-seo/issues/145) remains open.
-	* Fixed: post meta -> SEO score indicator -> wpseo_translate_score() would never return score, but always the css value.
-	* Fixed: post meta -> SEO score indicator -> wpseo_translate_score() calls were passing unintended wrong parameters
+	* Fixed: post meta -> SEO score indicator -> ymbeseo_translate_score() would never return score, but always the css value.
+	* Fixed: post meta -> SEO score indicator -> ymbeseo_translate_score() calls were passing unintended wrong parameters
 	* Fixed: post meta -> page analysis -> text analysis did not respect the blog character encoding. This may or may not solve a number of related bugs.
 	* Fixed: post meta -> often wrong meta value was shown for meta robots follow and meta robots index in post meta box so it appeared as if the chosen value was not saved correctly.
 	* Fixed: post meta -> meta robots advanced entry could have strange (invalid) values.
@@ -481,7 +481,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 * Enhancements
 	* The [SEO Extended](http://wordpress.org/plugins/seo-extended/) plugin functionality has now been integrated into WP SEO.
 	* Added ability to add Pininterest and Yandex site verification tags. You can enter this info on the YMBESEO Dashboard and it will auto-generate the relevant meta tags for your webpage headers.
-	* New `[wpseo_breadcrumb]` shortcode.
+	* New `[ymbeseo_breadcrumb]` shortcode.
 	* Post meta -> Don't show robots index/no-index choice in advanced meta box if there is a blog-wide override in place, i.e. the Settings -> Reading -> Block search engines checkbox is checked.
 	* Post meta -> Added 'Site-wide default' option to meta robots advanced field in advanced meta box.
 	* Post meta -> Added an option to decide whether to include/exclude `rel="author"` on a per post base as suggested by [GaryJones](https://github.com/GaryJones). (Added to the advanced meta box).
@@ -627,7 +627,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* Fixed appropriate use of plugins_url() to avoid breaking hooked in filters - props [Jrf](http://profiles.wordpress.org/jrf).
 	* (Temporary) fix for metabox styling for users using the MP6 plugin - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Minor fix in localization loading - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed [Missing argument 3 for wpseo_upgrader_process_complete](https://github.com/Yoast/wordpress-seo/issues/327) notice for WP 3.7+, thanks [vickyindo](https://github.com/vickyindo), [Wendyhihi](https://github.com/Wendihihi) and [Theressa1](https://github.com/Theressa1) for reporting - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Fixed [Missing argument 3 for ymbeseo_upgrader_process_complete](https://github.com/Yoast/wordpress-seo/issues/327) notice for WP 3.7+, thanks [vickyindo](https://github.com/vickyindo), [Wendyhihi](https://github.com/Wendihihi) and [Theressa1](https://github.com/Theressa1) for reporting - props [Jrf](http://profiles.wordpress.org/jrf).
 
 * i18n
   * Updated ru_RU, tr_TK and Hr
@@ -668,7 +668,7 @@ This version also incorporates the [SEO Extended](http://wordpress.org/plugins/s
 	* Fix the fact that meta description template for archive pages didn't work, props [MarcQueralt](https://github.com/MarcQueralt).
 	* Prevent wrong shortcodes (that echo instead of return) from causing erroneous output.
 	* Fix edge cases issue for keyword in first paragraph test not working.
-	* Revert change in 1.4.14 that did a `do_shortcode` while in the `head` to retrieve images from posts, as too many plugins crash then, instead added `wpseo_pre_analysis_post_content` filter there as well.
+	* Revert change in 1.4.14 that did a `do_shortcode` while in the `head` to retrieve images from posts, as too many plugins crash then, instead added `ymbeseo_pre_analysis_post_content` filter there as well.
 
 = 1.4.14 =
 
@@ -683,7 +683,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed [issue with canonical links](http://wordpress.org/support/topic/serious-canonical-issue-with-paginated-posts) on last page of paginated posts - props [maxbugfiy](http://wordpress.org/support/profile/maxbuxfiy)
 	* Fixed bug in shortcode removal from meta description as reported by [professor44](http://profiles.wordpress.org/professor44/) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed bug preventing saving of taxonomy meta data on first try - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed small (potential) issue in wpseo_title_test() - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Fixed small (potential) issue in ymbeseo_title_test() - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed bug where RSS excerpt would be double wrapped in `&lt;p&gt;` tags as reported by [mikeprince](http://profiles.wordpress.org/mikeprince) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed HTML validation error: Duplicate id Twitter on Social tab - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed undefined index notice as reported by [szepeviktor](http://profiles.wordpress.org/szepeviktor).
@@ -695,7 +695,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed: no more empty og: or twitter: tags. Also added additional escaping where needed - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed: Meta description tag discovery looked in parent theme header file even when a child theme is the current theme - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed: Using the 'Fix it' button would remove the meta description tag from the parent theme header file, even when a child theme is the current theme - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Fixed: Using the 'Fix it' button would fail if it had already been used once (i.e. if a wpseo backup file already existed) - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Fixed: Using the 'Fix it' button would fail if it had already been used once (i.e. if a ymbeseo backup file already existed) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed repeated unnecessary meta description tag checks on each visit to dashboard page - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Fixed: Meta description 'Fix it' feedback message was not shown - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Mini-fix for plugin_dir_url - props [Jrf](http://profiles.wordpress.org/jrf).
@@ -706,17 +706,17 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed some PHP warnings
 
 * Enhancements
-	* Added `wpseo_pre_analysis_post_content` filter. This allows plugins to add content to the content that is analyzed by the page analysis functionality.
-	* Added `wpseo_genesis_force_adjacent_rel_home` filter to allow forcing of rel=next / rel=prev links on the homepage pagination for Genesis users, they're off by default.
-	* Make `$wpseo_metabox` a global, props [Peter Chester](http://tri.be/).
+	* Added `ymbeseo_pre_analysis_post_content` filter. This allows plugins to add content to the content that is analyzed by the page analysis functionality.
+	* Added `ymbeseo_genesis_force_adjacent_rel_home` filter to allow forcing of rel=next / rel=prev links on the homepage pagination for Genesis users, they're off by default.
+	* Make `$ymbeseo_metabox` a global, props [Peter Chester](http://tri.be/).
 	* No need to show Twitter image when OpenGraph is showing, props [Gary Jones](http://garyjones.co.uk/).
 	* Make sure WPML works again, props [dominykasgel](https://github.com/dominykasgel).
 	* Added checks for the meta description tag on theme switch, on theme update and on (re-)activation of the WP SEO plugin including a visual warning if the check would warrant it - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Added the ability to request re-checking a theme for the meta description tag. Useful when you've manually removed it (to get rid of the warning), inspired by [tzeldin88](http://wordpress.org/support/topic/plugin-wordpress-seo-by-yoast-your-theme-contains-a-meta-description-which-blocks-wordpress-seo) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* OpenGraph image tags will now also be added for images added to the post via shortcodes, as suggested by [msebald](http://wordpress.org/support/topic/ogimage-set-to-default-image-but-articlepage-has-own-images?replies=3#post-4436317) - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Added 'wpseo_breadcrumb_single_link_with_sep' filter which allows users to filter a complete breadcrumb element including the separator - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Added 'wpseo_stopwords' filter which allows users to filter the stopwords list - props [Jrf](http://profiles.wordpress.org/jrf).
-	* Added 'wpseo_terms' filter which allows users to filter the terms string - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Added 'ymbeseo_breadcrumb_single_link_with_sep' filter which allows users to filter a complete breadcrumb element including the separator - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Added 'ymbeseo_stopwords' filter which allows users to filter the stopwords list - props [Jrf](http://profiles.wordpress.org/jrf).
+	* Added 'ymbeseo_terms' filter which allows users to filter the terms string - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Hide advanced tab for users for which it has been disabled, as [suggested by jrgmartin](https://github.com/jdevalk/wordpress-seo/issues/93) - props [Jrf](http://profiles.wordpress.org/jrf).
 	* Updated Facebook supported locales list for og:locale
 
@@ -789,7 +789,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed sitemap "loc" element to have encoded entities.
 	* Honor the language setting if other plugins set the language.
 	* sitemap.xml will now redirect to sitemap_index.xml if it doesn't exist statically.
-	* Added filters 'wpseo_sitemap_exclude_post_type' and 'wpseo_sitemap_exclude_taxonomy' to allow themes/plugins to exclude entries in the XML sitemap.
+	* Added filters 'ymbeseo_sitemap_exclude_post_type' and 'ymbeseo_sitemap_exclude_taxonomy' to allow themes/plugins to exclude entries in the XML sitemap.
 	* Added RTL support, some CSS fixes.
 	* Focus word gets counted in meta description when defined by a template.
 	* Fixed some bugs with the focus keyword in the first paragraph test.
@@ -800,7 +800,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Fixed post save error when page analysis is disabled.
 	* OpenGraph frontpage og:description and og:image tags now properly added to the frontpage.
 * Enhancements
-	* Added an HTML sitemap shortcode [wpseo_sitemap].
+	* Added an HTML sitemap shortcode [ymbeseo_sitemap].
 	* Added an XML sitemap listing the author profile URLs.
 	* Added detection of Yoast's robots meta plugin and All In One SEO plugins, plugin now gives a notice to import settings and disable those plugins.
 	* Prevent empty image tags in Twitter Cards - props [Mike Bijon](https://github.com/mbijon).
@@ -812,7 +812,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 
 * Properly fix security bug that should've been fixed in 1.4.5.
 * Move from using several $options arrays in the frontend to 1 class wide option.
-* Instead of firing all plugin options as function within head function, attach them to `wpseo_head` action, allowing easier filtering and changing.
+* Instead of firing all plugin options as function within head function, attach them to `ymbeseo_head` action, allowing easier filtering and changing.
 * Where possible, use larger images for Facebook Opengraph.
 * Add several filters and actions around social settings.
 
@@ -919,7 +919,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 * Fix bug in custom field value retrieval for new drafts.
 * Fix bug in meta box value for checkboxes (only used currently in News extension).
 * Remove redirect added in 1.3.3 as it seems to cause loops on some servers, will investigate later.
-* Add option to filter `wpseo_admin_pages` so more pages can use WP SEO admin stylesheets.
+* Add option to filter `ymbeseo_admin_pages` so more pages can use WP SEO admin stylesheets.
 * Prevent notice for images without alt tags.
 * Use mb_string when possible.
 
@@ -982,7 +982,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 * Fixed a bug for MultiSite due to a missing attribute in calling `get_admin_url`.
 * Updated Hebrew (he_IL), Dutch (nl_NL) French (fr_FR), Czech (cs_CZ), Italian (it_IT), Brazilian Portuguese (pt_BR).
 * Added Norwegian (nb_NO) and Portuguese (pt_PT).
-* Added a `wpseo_robots` filter for the robots meta tag.
+* Added a `ymbeseo_robots` filter for the robots meta tag.
 * Fixed integration with the [Facebook plugin](https://wordpress.org/plugins/facebook).
 
 = 1.2.8.4 =
@@ -1123,8 +1123,8 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 * Some small bug fixes.
 * Made loading the TextStatistics class conditional on the existence of said class.
 * Added a posts filter option for SEO quality in the edit posts / pages overview.
-* Added a filter `wpseo_use_page_analysis` that disables the page analysis functionality when false is returned.
-* Added a filter `wpseo_show_date_in_snippet` that disables the date in the preview snippet when false is returned.
+* Added a filter `ymbeseo_use_page_analysis` that disables the page analysis functionality when false is returned.
+* Added a filter `ymbeseo_show_date_in_snippet` that disables the date in the preview snippet when false is returned.
 
 = 1.2.1 =
 
@@ -1183,10 +1183,10 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Only embed images in the XML sitemap that match the main domain, subdomains should not matter but images from other domains are now ignored.
 	* Fixed a bug where homepage wouldn't be in the XML sitemap when there are no posts, yet the homepage is set to display recent posts.
 * API Improvements:
-	* Added a filter to allow adding URLs to specific XML sitemaps, see [this thread](http://wordpress.org/support/topic/plugin-wordpress-seo-by-yoast-how-to-add-a-non-wordpress-page-to-the-sitemap). The filter is `wpseo_sitemap_<$post_type>_content`.
-	* Added a filter for the meta keywords, `wpseo_metakey`.
-	* Added a filter to allow disabling `rel="next"` and `rel="prev"` links, use `wpseo_<prev|next>_rel_link`.
-	* Added a filter `wpseo_xml_sitemap_img_src` to allow changing the hostname of images, most common use case is to force them to the CDN.
+	* Added a filter to allow adding URLs to specific XML sitemaps, see [this thread](http://wordpress.org/support/topic/plugin-wordpress-seo-by-yoast-how-to-add-a-non-wordpress-page-to-the-sitemap). The filter is `ymbeseo_sitemap_<$post_type>_content`.
+	* Added a filter for the meta keywords, `ymbeseo_metakey`.
+	* Added a filter to allow disabling `rel="next"` and `rel="prev"` links, use `ymbeseo_<prev|next>_rel_link`.
+	* Added a filter `ymbeseo_xml_sitemap_img_src` to allow changing the hostname of images, most common use case is to force them to the CDN.
 	* See the new [WordPress SEO API docs](http://yoast.com/wordpress/seo/api-docs/).
 
 = 1.1.9 =
@@ -1226,8 +1226,8 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 		* Force XML Sitemap descriptions for images to be clean to prevent XML parse errors.
 		* Tiny change in CSS for explanatory text in XSL.
 * New filters:
-	* Add filter `wpseo_locale` for the locale in the opengraph settings.
-	* Add filter `wpseo_metabox_prio` to allow WP SEO metabox priority to be changed.
+	* Add filter `ymbeseo_locale` for the locale in the opengraph settings.
+	* Add filter `ymbeseo_metabox_prio` to allow WP SEO metabox priority to be changed.
 * Documentation:
 	* Removed the "Other Notes" tab from the plugin page, enough tabs there already.
 	* Added %%cf_ options to config page for titles.
@@ -1421,8 +1421,8 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Added the option to use custom fields in title and description templates. Use `%%cf_&lt;custom-field-name&gt;%%` and it'll be replaced with your custom field. So for instance %%cf_city%% when your custom field is named "city".
 	* Removed some of the tabs and empty lines the plugin was outputting.
 	* Added some filters:
-		* `wpseo_sitemap_urlimages` so you can add images to the sitemap, found in inc/class-sitemaps.php
-		* `wpseo_title` and `wpseo_metadesc` in frontend/class-frontend.php
+		* `ymbeseo_sitemap_urlimages` so you can add images to the sitemap, found in inc/class-sitemaps.php
+		* `ymbeseo_title` and `ymbeseo_metadesc` in frontend/class-frontend.php
 
 
 = 0.3.5 =
@@ -1474,7 +1474,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 * Also:
 	* Removed 3 no longer needed JavaScript files.
 	* Added the new bug tracker to the plugins sidebar notice under support.
-	* Canonical now has a filter (`wpseo_canonical`) so you can remove it or change it.
+	* Canonical now has a filter (`ymbeseo_canonical`) so you can remove it or change it.
 
 = 0.3.1 =
 
@@ -1589,7 +1589,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 
 * Bugs fixed:
 	* Comma in priority in sitemap which should be dot. I hate European servers.
-	* Fixed a notice in generating a path to the wpseo directory in the uploads dir.
+	* Fixed a notice in generating a path to the ymbeseo directory in the uploads dir.
 	* Fixed a rather annoying XML Sitemap date issue, props to [Staze in wp.org forums](http://wordpress.org/support/topic/plugin-wordpress-seo-by-yoast-sitemapxml-wrong-date-for-blog?replies=8).
 
 * Feature enhancement:
@@ -1615,7 +1615,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 
 * New features:
 	* First stab at (Facebook) OpenGraph implementation.
-	* Meta Description can now be returned, using `$wpseo_front->metadesc( false );` for use elsewhere.
+	* Meta Description can now be returned, using `$ymbeseo_front->metadesc( false );` for use elsewhere.
 	* Plugins can now register their own variables to not be cleaned out when permalink redirect is enabled.
 
 * Bugs fixed:
@@ -1649,7 +1649,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Plugin frontend URL should now be properly defined for sites with https admin.
 	* Manually entered category title now actually works.
 	* Import now works properly again for HeadSpace and AIOSEO, even for meta keywords.
-	* Fixed typo in *wpseo-functions.php*, apparently `udpate_option` is not the same as `update_option`.
+	* Fixed typo in *ymbeseo-functions.php*, apparently `udpate_option` is not the same as `update_option`.
 	* Fixed a notice about date snippet.
 	* Fixed a notice about empty canonical.
 	* Prevent cleaning out the WP Subscription managers interface for everyone.
@@ -1661,7 +1661,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 
 * Changes:
 	* Moved all rewrites to their own class, *inc/class-rewrite.php*.
-	* Further improved error handling when *uploads/wpseo* dir creation fails.
+	* Further improved error handling when *uploads/ymbeseo* dir creation fails.
 
 * New features:
 	* Remove category base, removes `/category/` from category URL's. Find it under Permalinks. Props to [WP No Category Base](http://wordpresssupplies.com/wordpress-plugins/no-category-base/) for having the cleanest code I could find in this area, which I reused and modified.
@@ -1758,7 +1758,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* You can now supply extra variables to prevent from being cleaned out when clean permalinks is on.
 
 * Bugs fixed:
-	* No longer throw errors when wpseo dir cannot be created.
+	* No longer throw errors when ymbeseo dir cannot be created.
 	* Your blog is not public warning can now be properly dismissed.
 	* Fixed rewrite issues: apparently if you only load rewrite rules on the front-end, they don't get added when changing rewrites in the backend. D0h.
 	* Rewrite rule for sitemap is now forced even harder when regenerating sitemap by hand.
@@ -1810,7 +1810,7 @@ This release contains tons and tons of bugfixes, thanks in *large* part to [Jrf]
 	* Rewrote parts of XML Sitemap generation so it's now fully compliant with MultiSite. You no longer have to choose paths for sitemaps, they'll all have fixed locations and using WP Rewrite will be placed in the correct positions, f.i. example.com/sitemap.xml.
 	* Heavily reduced memory usage on admin pages.
 	* Rewrote module structure and added some API's to be used in the modules.
-	* Plugin now creates uploads/wpseo dir to store all files it creates and takes in.
+	* Plugin now creates uploads/ymbeseo dir to store all files it creates and takes in.
 	* Fixed several notices throughout the code.
 	* Made sure SEO title in edit posts screen shows correct SEO Title.
 	* Changed table sorting javascript for XSL's to Yoast CDN.

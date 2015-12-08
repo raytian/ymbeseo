@@ -1,5 +1,5 @@
 /* jshint -W097 */
-/* global wpseoMakeDismissible */
+/* global ymbeseoMakeDismissible */
 'use strict';
 /**
  * Make notices dismissible
@@ -9,5 +9,5 @@
  * if no such button has been added yet.
  */
 jQuery(document).ready( function() {
-	wpseoMakeDismissible();
+	ymbeseoMakeDismissible();
 });

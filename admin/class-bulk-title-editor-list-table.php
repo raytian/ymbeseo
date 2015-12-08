@@ -23,8 +23,8 @@ class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 	 * @var array
 	 */
 	protected $settings = array(
-		'singular' => 'wpseo_bulk_title',
-		'plural'   => 'wpseo_bulk_titles',
+		'singular' => 'ymbeseo_bulk_title',
+		'plural'   => 'ymbeseo_bulk_titles',
 		'ajax'     => true,
 	);
 
@@ -71,8 +71,8 @@ class YMBESEO_Bulk_Title_Editor_List_Table extends YMBESEO_Bulk_List_Table {
 
 			case 'col_new_yoast_seo_title':
 				return sprintf(
-					'<input type="text" id="%1$s" name="%1$s" class="wpseo-new-title" data-id="%2$s" />',
-					'wpseo-new-title-' . $record->ID,
+					'<input type="text" id="%1$s" name="%1$s" class="ymbeseo-new-title" data-id="%2$s" />',
+					'ymbeseo-new-title-' . $record->ID,
 					$record->ID
 				);
 				break;

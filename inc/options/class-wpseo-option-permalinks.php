@@ -12,7 +12,7 @@ class YMBESEO_Option_Permalinks extends YMBESEO_Option {
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_permalinks';
+	public $option_name = 'ymbeseo_permalinks';
 
 	/**
 	 * @var  array  Array of defaults for the option

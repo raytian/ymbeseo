@@ -14,12 +14,12 @@ class YMBESEO_Option_MS extends YMBESEO_Option {
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_ms';
+	public $option_name = 'ymbeseo_ms';
 
 	/**
 	 * @var  string  option group name for use in settings forms
 	 */
-	public $group_name = 'yoast_wpseo_multisite_options';
+	public $group_name = 'yoast_ymbeseo_multisite_options';
 
 	/**
 	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()

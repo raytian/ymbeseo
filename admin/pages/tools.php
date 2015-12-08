@@ -41,7 +41,7 @@ if ( '' === $tool_page ) {
 	echo '<ul class="ul-disc">';
 	foreach ( $tools as $slug => $tool ) {
 		echo '<li>';
-		echo '<strong><a href="', admin_url( 'admin.php?page=wpseo_tools&tool=' . $slug ), '">', $tool['title'], '</a></strong><br/>';
+		echo '<strong><a href="', admin_url( 'admin.php?page=ymbeseo_tools&tool=' . $slug ), '">', $tool['title'], '</a></strong><br/>';
 		echo $tool['desc'];
 		echo '</li>';
 	}
@@ -49,7 +49,7 @@ if ( '' === $tool_page ) {
 
 }
 else {
-	echo '<a href="', admin_url( 'admin.php?page=wpseo_tools' ), '">', __( '&laquo; Back to Tools page', 'wordpress-seo' ), '</a>';
+	echo '<a href="', admin_url( 'admin.php?page=ymbeseo_tools' ), '">', __( '&laquo; Back to Tools page', 'wordpress-seo' ), '</a>';
 	require_once YMBESEO_PATH . 'admin/views/tool-' . $tool_page . '.php';
 }
 

@@ -38,7 +38,7 @@ class Yoast_Notification_Center {
 		add_action( 'all_admin_notices', array( $this, 'display_notifications' ) );
 		add_action( 'shutdown', array( $this, 'set_transient' ) );
 		add_action( 'wp_ajax_yoast_get_notifications', array( $this, 'ajax_get_notifications' ) );
-		add_action( 'wpseo_deactivate', array( $this, 'deactivate_hook' ) );
+		add_action( 'ymbeseo_deactivate', array( $this, 'deactivate_hook' ) );
 	}
 
 	/**

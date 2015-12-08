@@ -1,17 +1,17 @@
 /* global ajaxurl */
-/* global wpseo_bulk_editor_nonce */
+/* global ymbeseo_bulk_editor_nonce */
 /* jshint -W097 */
 'use strict';
 var bulk_editor = function( current_table ) {
-	var new_class = current_table.find( '[class^=wpseo-new]' ).first().attr( 'class' );
+	var new_class = current_table.find( '[class^=ymbeseo-new]' ).first().attr( 'class' );
 	var new_id = '#' + new_class + '-';
 	var existing_id = new_id.replace( 'new', 'existing' );
 	var column_value = current_table.find( 'th[id^=col_existing_yoast]' ).first().text().replace( 'Existing ', '' );
 
 	var save_method = new_class.replace( '-new-', '_save_' );
-	var save_all_method = 'wpseo_save_all_' + current_table.attr( 'class' ).split( 'wpseo_bulk_' )[ 1 ];
+	var save_all_method = 'ymbeseo_save_all_' + current_table.attr( 'class' ).split( 'ymbeseo_bulk_' )[ 1 ];
 
-	var bulk_type = save_method.replace( 'wpseo_save_', '' );
+	var bulk_type = save_method.replace( 'ymbeseo_save_', '' );
 
 	var options = {
 		new_class: '.' + new_class,
@@ -47,8 +47,8 @@ var bulk_editor = function( current_table ) {
 
 				var data = {
 					action: save_method,
-					_ajax_nonce: wpseo_bulk_editor_nonce,
-					wpseo_post_id: id,
+					_ajax_nonce: ymbeseo_bulk_editor_nonce,
+					ymbeseo_post_id: id,
 					new_value: new_value,
 					existing_value: current_value
 				};
@@ -62,7 +62,7 @@ var bulk_editor = function( current_table ) {
 
 			var data = {
 				action: save_all_method,
-				_ajax_nonce: wpseo_bulk_editor_nonce
+				_ajax_nonce: ymbeseo_bulk_editor_nonce
 			};
 
 			data.send = false;
@@ -127,13 +127,13 @@ var bulk_editor = function( current_table ) {
 		},
 
 		set_events: function() {
-			current_table.find( '.wpseo-save' ).click( function() {
+			current_table.find( '.ymbeseo-save' ).click( function() {
 					var id = jQuery( this ).data( 'id' );
 					instance.submit_new( id, this );
 				}
 			);
 
-			current_table.find( '.wpseo-save-all' ).click( instance.submit_all );
+			current_table.find( '.ymbeseo-save-all' ).click( instance.submit_all );
 
 			current_table.find( options.new_class ).keypress(
 				function( event ) {
@@ -151,7 +151,7 @@ var bulk_editor = function( current_table ) {
 };
 
 jQuery( document ).ready( function() {
-		var parent_tables = jQuery( 'table[class*="wpseo_bulk"]' );
+		var parent_tables = jQuery( 'table[class*="ymbeseo_bulk"]' );
 		parent_tables.each(
 			function( number, parent_table ) {
 				var current_table = jQuery( parent_table );

@@ -48,7 +48,7 @@ $extensions = array(
 if ( class_exists( 'YMBESEO_Premium' ) ) {
 	$extensions['seo-premium']->installed = true;
 }
-if ( class_exists( 'wpseo_Video_Sitemap' ) ) {
+if ( class_exists( 'ymbeseo_Video_Sitemap' ) ) {
 	$extensions['video-seo']->installed = true;
 }
 if ( class_exists( 'YMBESEO_News' ) ) {
@@ -66,20 +66,20 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 
 ?>
 
-<div class="wrap wpseo_table_page">
+<div class="wrap ymbeseo_table_page">
 
-	<h2 id="wpseo-title"><?php
+	<h2 id="ymbeseo-title"><?php
 		/* translators: %1$s expands to Yoast SEO */
 		printf( __( '%1$s Extensions', 'wordpress-seo' ), 'Yoast SEO' );
 		?></h2>
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" id="extensions-tab" href="#top#extensions"><?php _e( 'Extensions', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="licenses-tab" href="#top#licenses"><?php _e( 'Licenses', 'wordpress-seo' ); ?></a>
 	</h2>
 
 	<div class="tabwrapper">
-		<div id="extensions" class="wpseotab">
+		<div id="extensions" class="ymbeseotab">
 			<?php
 			foreach ( $extensions as $id => $extension ) {
 				$utm = '#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners';
@@ -106,18 +106,18 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 			unset( $extensions, $id, $extension, $utm );
 			?>
 		</div>
-		<div id="licenses" class="wpseotab">
+		<div id="licenses" class="ymbeseotab">
 			<?php
 
 			/**
 			 * Display license page
 			 */
 			settings_errors();
-			if ( ! has_action( 'wpseo_licenses_forms' ) ) {
+			if ( ! has_action( 'ymbeseo_licenses_forms' ) ) {
 				echo '<div class="msg"><p>', __( 'This is where you would enter the license keys for one of our premium plugins, should you activate one.', 'wordpress-seo' ), '</p></div>';
 			}
 			else {
-				do_action( 'wpseo_licenses_forms' );
+				do_action( 'ymbeseo_licenses_forms' );
 			}
 			?>
 		</div>

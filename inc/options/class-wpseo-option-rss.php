@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo_rss
+ * Option: ymbeseo_rss
  */
 class YMBESEO_Option_RSS extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_rss';
+	public $option_name = 'ymbeseo_rss';
 
 	/**
 	 * @var  array  Array of defaults for the option

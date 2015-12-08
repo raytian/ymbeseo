@@ -17,7 +17,7 @@ class YMBESEO_Customizer {
 	 * Construct Method.
 	 */
 	public function __construct() {
-		add_action( 'customize_register', array( $this, 'wpseo_customize_register' ) );
+		add_action( 'customize_register', array( $this, 'ymbeseo_customize_register' ) );
 	}
 
 	/**
@@ -25,7 +25,7 @@ class YMBESEO_Customizer {
 	 *
 	 * @param WP_Customize_Manager $wp_customize
 	 */
-	public function wpseo_customize_register( $wp_customize ) {
+	public function ymbeseo_customize_register( $wp_customize ) {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -47,7 +47,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_section() {
 		$this->wp_customize->add_section(
-			'wpseo_breadcrumbs_customizer_section', array(
+			'ymbeseo_breadcrumbs_customizer_section', array(
 				/* translators: %s is the name of the plugin */
 				'title'           => sprintf( __( '%s Breadcrumbs', 'wordpress-seo' ), 'Yoast SEO' ),
 				'priority'        => 999,
@@ -73,7 +73,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_blog_remove_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-blog-remove]', array(
+			'ymbeseo_internallinks[breadcrumbs-blog-remove]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -82,11 +82,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-blog-remove', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-blog-remove', array(
 					'label'           => __( 'Remove blog page from breadcrumbs', 'wordpress-seo' ),
 					'type'            => 'checkbox',
-					'section'         => 'wpseo_breadcrumbs_customizer_section',
-					'settings'        => 'wpseo_internallinks[breadcrumbs-blog-remove]',
+					'section'         => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings'        => 'ymbeseo_internallinks[breadcrumbs-blog-remove]',
 					'context'         => '',
 					'active_callback' => array( $this, 'breadcrumbs_blog_remove_active_cb' ),
 				)
@@ -108,7 +108,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_separator_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-sep]', array(
+			'ymbeseo_internallinks[breadcrumbs-sep]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -117,11 +117,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-separator', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-separator', array(
 					'label'    => __( 'Breadcrumbs separator:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-sep]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-sep]',
 					'context'  => '',
 				)
 			)
@@ -133,7 +133,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_home_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-home]', array(
+			'ymbeseo_internallinks[breadcrumbs-home]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -142,11 +142,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-home', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-home', array(
 					'label'    => __( 'Anchor text for the homepage:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-home]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-home]',
 					'context'  => '',
 				)
 			)
@@ -158,7 +158,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_prefix_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-prefix]', array(
+			'ymbeseo_internallinks[breadcrumbs-prefix]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -167,11 +167,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-prefix', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-prefix', array(
 					'label'    => __( 'Prefix for breadcrumbs:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-prefix]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-prefix]',
 					'context'  => '',
 				)
 			)
@@ -183,7 +183,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_archiveprefix_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-archiveprefix]', array(
+			'ymbeseo_internallinks[breadcrumbs-archiveprefix]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -192,11 +192,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-archiveprefix', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-archiveprefix', array(
 					'label'    => __( 'Prefix for archive pages:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-archiveprefix]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-archiveprefix]',
 					'context'  => '',
 				)
 			)
@@ -208,7 +208,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_searchprefix_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-searchprefix]', array(
+			'ymbeseo_internallinks[breadcrumbs-searchprefix]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -217,11 +217,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-searchprefix', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-searchprefix', array(
 					'label'    => __( 'Prefix for search result pages:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-searchprefix]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-searchprefix]',
 					'context'  => '',
 				)
 			)
@@ -233,7 +233,7 @@ class YMBESEO_Customizer {
 	 */
 	private function breadcrumbs_404_setting() {
 		$this->wp_customize->add_setting(
-			'wpseo_internallinks[breadcrumbs-404crumb]', array(
+			'ymbeseo_internallinks[breadcrumbs-404crumb]', array(
 				'default'   => '',
 				'type'      => 'option',
 				'transport' => 'refresh',
@@ -242,11 +242,11 @@ class YMBESEO_Customizer {
 
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
-				$this->wp_customize, 'wpseo-breadcrumbs-404crumb', array(
+				$this->wp_customize, 'ymbeseo-breadcrumbs-404crumb', array(
 					'label'    => __( 'Breadcrumb for 404 pages:', 'wordpress-seo' ),
 					'type'     => 'text',
-					'section'  => 'wpseo_breadcrumbs_customizer_section',
-					'settings' => 'wpseo_internallinks[breadcrumbs-404crumb]',
+					'section'  => 'ymbeseo_breadcrumbs_customizer_section',
+					'settings' => 'ymbeseo_internallinks[breadcrumbs-404crumb]',
 					'context'  => '',
 				)
 			)

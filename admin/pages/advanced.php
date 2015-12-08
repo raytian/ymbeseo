@@ -14,15 +14,15 @@ $active_tab = filter_input( INPUT_GET, 'tab' );
 $tabs = array(
 	'breadcrumbs' => array(
 		'label'     => __( 'Breadcrumbs', 'wordpress-seo' ),
-		'opt_group' => 'wpseo_internallinks',
+		'opt_group' => 'ymbeseo_internallinks',
 	),
 	'permalinks'  => array(
 		'label'     => __( 'Permalinks', 'wordpress-seo' ),
-		'opt_group' => 'wpseo_permalinks',
+		'opt_group' => 'ymbeseo_permalinks',
 	),
 	'rss'         => array(
 		'label'     => __( 'RSS', 'wordpress-seo' ),
-		'opt_group' => 'wpseo_rss',
+		'opt_group' => 'ymbeseo_rss',
 	),
 );
 
@@ -40,7 +40,7 @@ Yoast_Form::get_instance()->admin_header( true, $tabs[ $active_tab ]['opt_group'
 			if ( $active_tab == $tab_key ) {
 				$active = ' nav-tab-active';
 			}
-			echo '<a class="nav-tab' . $active . '" id="' . $tab_key . '-tab" href="' . admin_url( 'admin.php?page=wpseo_advanced&tab=' . $tab_key ) . '">' . $tab_opt['label'] . '</a>';
+			echo '<a class="nav-tab' . $active . '" id="' . $tab_key . '-tab" href="' . admin_url( 'admin.php?page=ymbeseo_advanced&tab=' . $tab_key ) . '">' . $tab_opt['label'] . '</a>';
 		}
 		?>
 	</h2>

@@ -30,7 +30,7 @@ class YMBESEO_Import {
 	/**
 	 * @var string
 	 */
-	private $old_wpseo_version = null;
+	private $old_ymbeseo_version = null;
 
 	/**
 	 * @var string
@@ -102,7 +102,7 @@ class YMBESEO_Import {
 		if ( ! defined( 'DIRECTORY_SEPARATOR' ) ) {
 			define( 'DIRECTORY_SEPARATOR', '/' );
 		}
-		$this->path = $this->upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'wpseo-import' . DIRECTORY_SEPARATOR;
+		$this->path = $this->upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'ymbeseo-import' . DIRECTORY_SEPARATOR;
 
 		if ( ! isset( $GLOBALS['wp_filesystem'] ) || ! is_object( $GLOBALS['wp_filesystem'] ) ) {
 			WP_Filesystem();
@@ -139,8 +139,8 @@ class YMBESEO_Import {
 		$options = parse_ini_file( $this->filename, true );
 
 		if ( is_array( $options ) && $options !== array() ) {
-			if ( isset( $options['wpseo']['version'] ) && $options['wpseo']['version'] !== '' ) {
-				$this->old_wpseo_version = $options['wpseo']['version'];
+			if ( isset( $options['ymbeseo']['version'] ) && $options['ymbeseo']['version'] !== '' ) {
+				$this->old_ymbeseo_version = $options['ymbeseo']['version'];
 			}
 			foreach ( $options as $name => $opt_group ) {
 				$this->parse_option_group( $name, $opt_group, $options );
@@ -160,14 +160,14 @@ class YMBESEO_Import {
 	 * @param array  $options
 	 */
 	private function parse_option_group( $name, $opt_group, $options ) {
-		if ( $name === 'wpseo_taxonomy_meta' ) {
-			$opt_group = json_decode( urldecode( $opt_group['wpseo_taxonomy_meta'] ), true );
+		if ( $name === 'ymbeseo_taxonomy_meta' ) {
+			$opt_group = json_decode( urldecode( $opt_group['ymbeseo_taxonomy_meta'] ), true );
 		}
 
 		// Make sure that the imported options are cleaned/converted on import.
 		$option_instance = YMBESEO_Options::get_option_instance( $name );
 		if ( is_object( $option_instance ) && method_exists( $option_instance, 'import' ) ) {
-			$option_instance->import( $opt_group, $this->old_wpseo_version, $options );
+			$option_instance->import( $opt_group, $this->old_ymbeseo_version, $options );
 		}
 		elseif ( WP_DEBUG === true || ( defined( 'YMBESEO_DEBUG' ) && YMBESEO_DEBUG === true ) ) {
 			$this->msg = sprintf( __( 'Setting "%s" is no longer used and has been discarded.', 'wordpress-seo' ), $name );

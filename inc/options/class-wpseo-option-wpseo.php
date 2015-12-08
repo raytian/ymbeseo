@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo
+ * Option: ymbeseo
  */
 class YMBESEO_Option_Wpseo extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo';
+	public $option_name = 'ymbeseo';
 
 	/**
 	 * @var  array  Array of defaults for the option

@@ -45,7 +45,7 @@ class YMBESEO_Sitemaps_Admin {
 			unset( $file );
 
 			if ( $new_files_found === true ) {
-				update_option( 'wpseo', $options );
+				update_option( 'ymbeseo', $options );
 			}
 		}
 	}
@@ -72,17 +72,17 @@ class YMBESEO_Sitemaps_Admin {
 		}
 
 		if ( WP_CACHE ) {
-			wp_schedule_single_event( ( time() + 300 ), 'wpseo_hit_sitemap_index' );
+			wp_schedule_single_event( ( time() + 300 ), 'ymbeseo_hit_sitemap_index' );
 		}
 
 		// Allow the pinging to happen slightly after the hit sitemap index so the sitemap is fully regenerated when the ping happens.
 		$excluded_posts = explode( ',', $options['excluded-posts'] );
 		if ( ! in_array( $post->ID, $excluded_posts ) ) {
 			if ( defined( 'YOAST_SEO_PING_IMMEDIATELY' ) && YOAST_SEO_PING_IMMEDIATELY ) {
-				wpseo_ping_search_engines();
+				ymbeseo_ping_search_engines();
 			}
 			else {
-				wp_schedule_single_event( ( time() + 300 ), 'wpseo_ping_search_engines' );
+				wp_schedule_single_event( ( time() + 300 ), 'ymbeseo_ping_search_engines' );
 			}
 		}
 	}

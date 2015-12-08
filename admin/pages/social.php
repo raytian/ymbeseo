@@ -13,10 +13,10 @@ $yform = Yoast_Form::get_instance();
 
 $social_facebook = new Yoast_Social_Facebook( );
 
-$yform->admin_header( true, 'wpseo_social' );
+$yform->admin_header( true, 'ymbeseo_social' );
 ?>
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" id="accounts-tab" href="#top#accounts"><?php _e( 'Accounts', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="facebook-tab" href="#top#facebook"><span class="dashicons dashicons-facebook-alt"></span> <?php _e( 'Facebook', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="twitterbox-tab" href="#top#twitterbox"><span class="dashicons dashicons-twitter"></span> <?php _e( 'Twitter', 'wordpress-seo' ); ?></a>
@@ -24,7 +24,7 @@ $yform->admin_header( true, 'wpseo_social' );
 		<a class="nav-tab" id="google-tab" href="#top#google"><span class="dashicons dashicons-googleplus"></span> <?php _e( 'Google+', 'wordpress-seo' ); ?></a>
 	</h2>
 
-	<div id="accounts" class="wpseotab">
+	<div id="accounts" class="ymbeseotab">
 		<p>
 			<?php _e( 'To inform Google about your social profiles, we need to know their URLs.', 'wordpress-seo' ); ?>
 			<?php _e( 'For each, pick the main account associated with this site and please enter them below:', 'wordpress-seo' ); ?>
@@ -39,11 +39,11 @@ $yform->admin_header( true, 'wpseo_social' );
 		$yform->textinput( 'youtube_url', __( 'YouTube URL', 'wordpress-seo' ) );
 		$yform->textinput( 'google_plus_url', __( 'Google+ URL', 'wordpress-seo' ) );
 
-		do_action( 'wpseo_admin_other_section' );
+		do_action( 'ymbeseo_admin_other_section' );
 		?>
 	</div>
 
-	<div id="facebook" class="wpseotab">
+	<div id="facebook" class="ymbeseotab">
 		<p>
 			<?php
 				/* translators: %s expands to <code>&lt;head&gt;</code> */
@@ -62,9 +62,9 @@ $yform->admin_header( true, 'wpseo_social' );
 			$yform->textinput( 'og_frontpage_desc', __( 'Description', 'wordpress-seo' ) );
 
 			// Offer copying of meta description.
-			$meta_options = get_option( 'wpseo_titles' );
-			echo '<input type="hidden" id="meta_description" value="', esc_attr( $meta_options['metadesc-home-wpseo'] ), '" />';
-			echo '<p class="label desc" style="border:0;"><a href="javascript:;" onclick="wpseoCopyHomeMeta();" class="button">', esc_html__( 'Copy home meta description', 'wordpress-seo' ), '</a></p>';
+			$meta_options = get_option( 'ymbeseo_titles' );
+			echo '<input type="hidden" id="meta_description" value="', esc_attr( $meta_options['metadesc-home-ymbeseo'] ), '" />';
+			echo '<p class="label desc" style="border:0;"><a href="javascript:;" onclick="ymbeseoCopyHomeMeta();" class="button">', esc_html__( 'Copy home meta description', 'wordpress-seo' ), '</a></p>';
 
 		} ?>
 
@@ -76,10 +76,10 @@ $yform->admin_header( true, 'wpseo_social' );
 
 		<?php $social_facebook->show_form(); ?>
 
-		<?php do_action( 'wpseo_admin_opengraph_section' ); ?>
+		<?php do_action( 'ymbeseo_admin_opengraph_section' ); ?>
 	</div>
 
-	<div id="twitterbox" class="wpseotab">
+	<div id="twitterbox" class="ymbeseotab">
 		<p>
 			<?php
 			/* translators: %s expands to <code>&lt;head&gt;</code> */
@@ -91,11 +91,11 @@ $yform->admin_header( true, 'wpseo_social' );
 
 		<?php
 		$yform->select( 'twitter_card_type', __( 'The default card type to use', 'wordpress-seo' ), YMBESEO_Option_Social::$twitter_card_types );
-		do_action( 'wpseo_admin_twitter_section' );
+		do_action( 'ymbeseo_admin_twitter_section' );
 		?>
 	</div>
 
-	<div id="pinterest" class="wpseotab">
+	<div id="pinterest" class="ymbeseotab">
 		<p>
 			<?php _e( 'Pinterest uses Open Graph metadata just like Facebook, so be sure to keep the Open Graph checkbox on the Facebook tab checked if you want to optimize your site for Pinterest.', 'wordpress-seo' ); ?>
 		</p>
@@ -109,11 +109,11 @@ $yform->admin_header( true, 'wpseo_social' );
 		<?php $yform->textinput( 'pinterestverify', __( 'Pinterest verification', 'wordpress-seo' ) ); ?>
 
 		<?php
-		do_action( 'wpseo_admin_pinterest_section' );
+		do_action( 'ymbeseo_admin_pinterest_section' );
 		?>
 	</div>
 
-	<div id="google" class="wpseotab">
+	<div id="google" class="ymbeseotab">
 		<p>
 			<?php $yform->checkbox( 'googleplus', __( 'Add Google+ specific post meta data', 'wordpress-seo' ) ); ?>
 		</p>
@@ -122,7 +122,7 @@ $yform->admin_header( true, 'wpseo_social' );
 
 		<?php $yform->textinput( 'plus-publisher', __( 'Google Publisher Page', 'wordpress-seo' ) ); ?>
 
-		<?php do_action( 'wpseo_admin_googleplus_section' ); ?>
+		<?php do_action( 'ymbeseo_admin_googleplus_section' ); ?>
 	</div>
 
 <?php

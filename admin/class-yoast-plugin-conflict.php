@@ -181,7 +181,7 @@ class Yoast_Plugin_Conflict {
 				$error_message,
 				array(
 					'type'      => 'error yoast-dismissible',
-					'id'        => 'wpseo-dismiss-plugin-conflict',
+					'id'        => 'ymbeseo-dismiss-plugin-conflict',
 					'nonce'     => wp_create_nonce( 'dismiss-plugin-conflict' ),
 					'data_json' => array( 'section' => $plugin_section, 'plugins' => $this->active_plugins[ $plugin_section ] ),
 				)
@@ -224,7 +224,7 @@ class Yoast_Plugin_Conflict {
 	 * @return array
 	 */
 	protected function filter_already_dismissed( $plugin_section, array $plugins ) {
-		$already_dismissed = get_user_option( 'wpseo_dismissed_conflicts', get_current_user_id() );
+		$already_dismissed = get_user_option( 'ymbeseo_dismissed_conflicts', get_current_user_id() );
 
 		if ( ! empty( $already_dismissed[ $plugin_section ] ) ) {
 			foreach ( $plugins as $array_key => $plugin ) {

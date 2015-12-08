@@ -144,7 +144,7 @@ class YMBESEO_Import_External {
 				}
 			}
 		}
-		$this->set_msg( __( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'wordpress-seo' ) );
+		$this->set_msg( __( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'wordpress-seo' ) );
 	}
 
 	/**
@@ -152,19 +152,19 @@ class YMBESEO_Import_External {
 	 */
 	public function import_rss_footer() {
 		$optold = get_option( 'RSSFooterOptions' );
-		$optnew = get_option( 'wpseo_rss' );
+		$optnew = get_option( 'ymbeseo_rss' );
 		if ( $optold['position'] == 'after' ) {
-			if ( $optnew['rssafter'] === '' || $optnew['rssafter'] === YMBESEO_Options::get_default( 'wpseo_rss', 'rssafter' ) ) {
+			if ( $optnew['rssafter'] === '' || $optnew['rssafter'] === YMBESEO_Options::get_default( 'ymbeseo_rss', 'rssafter' ) ) {
 				$optnew['rssafter'] = $optold['footerstring'];
 			}
 		}
 		else {
 			/* @internal Uncomment the second part if a default would be given to the rssbefore value */
-			if ( $optnew['rssbefore'] === '' /*|| $optnew['rssbefore'] === YMBESEO_Options::get_default( 'wpseo_rss', 'rssbefore' )*/ ) {
+			if ( $optnew['rssbefore'] === '' /*|| $optnew['rssbefore'] === YMBESEO_Options::get_default( 'ymbeseo_rss', 'rssbefore' )*/ ) {
 				$optnew['rssbefore'] = $optold['footerstring'];
 			}
 		}
-		update_option( 'wpseo_rss', $optnew );
+		update_option( 'ymbeseo_rss', $optnew );
 		$this->set_msg( __( 'RSS Footer options imported successfully.', 'wordpress-seo' ) );
 	}
 
@@ -173,7 +173,7 @@ class YMBESEO_Import_External {
 	 */
 	public function import_yoast_breadcrumbs() {
 		$optold = get_option( 'yoast_breadcrumbs' );
-		$optnew = get_option( 'wpseo_internallinks' );
+		$optnew = get_option( 'ymbeseo_internallinks' );
 
 		if ( is_array( $optold ) && $optold !== array() ) {
 			foreach ( $optold as $opt => $val ) {
@@ -185,7 +185,7 @@ class YMBESEO_Import_External {
 				}
 			}
 			unset( $opt, $val );
-			update_option( 'wpseo_internallinks', $optnew );
+			update_option( 'ymbeseo_internallinks', $optnew );
 			$this->set_msg( __( 'Yoast Breadcrumbs options imported successfully.', 'wordpress-seo' ) );
 		}
 		else {

@@ -132,8 +132,8 @@ class YMBESEO_Snippet_Preview {
 	 */
 	protected function set_content() {
 		$content = <<<HTML
-<div id="wpseosnippet">
-<a class="title" id="wpseosnippet_title" href="#">$this->title</a>
+<div id="ymbeseosnippet">
+<a class="title" id="ymbeseosnippet_title" href="#">$this->title</a>
 <span class="url">$this->url</span>
 <p class="desc">$this->date<span class="autogen"></span><span class="content">$this->description</span></p>
 </div>
@@ -149,14 +149,14 @@ HTML;
 	protected function set_content_through_filter( $content ) {
 		$properties = get_object_vars( $this );
 
-		// Backward compatibility for functions hooking into the wpseo_snippet filter.
+		// Backward compatibility for functions hooking into the ymbeseo_snippet filter.
 		$properties['desc'] = $properties['description'];
 
 		/**
-		 * Filter: 'wpseo_snippet' - Allow changing the html for the snippet preview.
+		 * Filter: 'ymbeseo_snippet' - Allow changing the html for the snippet preview.
 		 *
 		 * Passing in the post twice because of backwards compatibility.
 		 */
-		$this->content = apply_filters( 'wpseo_snippet', $content, $this->post, $properties );
+		$this->content = apply_filters( 'ymbeseo_snippet', $content, $this->post, $properties );
 	}
 }

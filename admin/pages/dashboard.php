@@ -14,11 +14,11 @@ if ( filter_input( INPUT_GET, 'intro' ) ) {
 	return;
 }
 
-$options = get_option( 'wpseo' );
+$options = get_option( 'ymbeseo' );
 
-if ( isset( $_GET['allow_tracking'] ) && check_admin_referer( 'wpseo_activate_tracking', 'nonce' ) ) {
+if ( isset( $_GET['allow_tracking'] ) && check_admin_referer( 'ymbeseo_activate_tracking', 'nonce' ) ) {
 	$options['yoast_tracking'] = ( $_GET['allow_tracking'] == 'yes' );
-	update_option( 'wpseo', $options );
+	update_option( 'ymbeseo', $options );
 
 	if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
 		wp_safe_redirect( $_SERVER['HTTP_REFERER'], 307 );
@@ -28,7 +28,7 @@ if ( isset( $_GET['allow_tracking'] ) && check_admin_referer( 'wpseo_activate_tr
 
 
 // Fix metadescription if so requested.
-if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc', 'nonce' ) && $options['theme_description_found'] !== '' ) {
+if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'ymbeseo-fix-metadesc', 'nonce' ) && $options['theme_description_found'] !== '' ) {
 	$path = false;
 	if ( file_exists( get_stylesheet_directory() . '/header.php' ) ) {
 		// Theme or child theme.
@@ -42,7 +42,7 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 	if ( is_string( $path ) && $path !== '' ) {
 		$fcontent    = file_get_contents( $path . '/header.php' );
 		$msg         = '';
-		$backup_file = date( 'Ymd-H.i.s-' ) . 'header.php.wpseobak';
+		$backup_file = date( 'Ymd-H.i.s-' ) . 'header.php.ymbeseobak';
 		if ( ! file_exists( $path . '/' . $backup_file ) ) {
 			$backupfile = fopen( $path . '/' . $backup_file, 'w+' );
 			if ( $backupfile ) {
@@ -59,7 +59,7 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 							$msg .= __( 'Removed hardcoded meta description.', 'wordpress-seo' );
 							$options['theme_has_description']   = false;
 							$options['theme_description_found'] = '';
-							update_option( 'wpseo', $options );
+							update_option( 'ymbeseo', $options );
 						}
 						else {
 							$msg .= '<span class="error">' . __( 'Failed to remove hardcoded meta description.', 'wordpress-seo' ) . '</span>';
@@ -68,10 +68,10 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 					}
 				}
 				else {
-					wpseo_description_test();
+					ymbeseo_description_test();
 					$msg .= '<span class="warning">' . __( 'Earlier found meta description was not found in file. Renewed the description test data.', 'wordpress-seo' ) . '</span>';
 				}
-				add_settings_error( 'yoast_wpseo_dashboard_options', 'error', $msg, 'updated' );
+				add_settings_error( 'yoast_ymbeseo_dashboard_options', 'error', $msg, 'updated' );
 			}
 		}
 	}
@@ -82,10 +82,10 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 	}
 }
 
-if ( ( ! isset( $options['theme_has_description'] ) || ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) ) || ( isset( $_GET['checkmetadesc'] ) && check_admin_referer( 'wpseo-check-metadesc', 'nonce' ) ) ) {
-	wpseo_description_test();
+if ( ( ! isset( $options['theme_has_description'] ) || ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) ) || ( isset( $_GET['checkmetadesc'] ) && check_admin_referer( 'ymbeseo-check-metadesc', 'nonce' ) ) ) {
+	ymbeseo_description_test();
 	// Renew the options after the test.
-	$options = get_option( 'wpseo' );
+	$options = get_option( 'ymbeseo' );
 }
 if ( isset( $_GET['checkmetadesc'] ) ) {
 	// Clean up the referrer url for later use.
@@ -95,13 +95,13 @@ if ( isset( $_GET['checkmetadesc'] ) ) {
 }
 $yform = Yoast_Form::get_instance();
 
-$yform->admin_header( true, 'wpseo' );
+$yform->admin_header( true, 'ymbeseo' );
 
-do_action( 'wpseo_all_admin_notices' );
+do_action( 'ymbeseo_all_admin_notices' );
 
 if ( is_array( $options['blocking_files'] ) && count( $options['blocking_files'] ) > 0 ) {
 	echo '<p id="blocking_files" class="wrong">';
-	echo '<a href="javascript:wpseoKillBlockingFiles(\'', esc_js( wp_create_nonce( 'wpseo-blocking-files' ) ), '\')" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
+	echo '<a href="javascript:ymbeseoKillBlockingFiles(\'', esc_js( wp_create_nonce( 'ymbeseo-blocking-files' ) ), '\')" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
 	echo __( 'The following file(s) is/are blocking your XML sitemaps from working properly:', 'wordpress-seo' ), '<br />';
 	foreach ( $options['blocking_files'] as $file ) {
 		echo esc_html( $file ), '<br/>';
@@ -116,8 +116,8 @@ if ( is_array( $options['blocking_files'] ) && count( $options['blocking_files']
 
 if ( $options['theme_description_found'] !== '' ) {
 	echo '<p id="metadesc_found notice" class="wrong settings_error">';
-	echo '<a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo-fix-metadesc' ) ), admin_url( 'admin.php?page=wpseo_dashboard&fixmetadesc' ) ) ), '" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
-	echo ' <a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo-check-metadesc' ) ), admin_url( 'admin.php?page=wpseo_dashboard&checkmetadesc' ) ) ), '" class="button checkit">', __( 'Re-check theme.', 'wordpress-seo' ), '</a>';
+	echo '<a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'ymbeseo-fix-metadesc' ) ), admin_url( 'admin.php?page=ymbeseo_dashboard&fixmetadesc' ) ) ), '" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
+	echo ' <a href="', esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'ymbeseo-check-metadesc' ) ), admin_url( 'admin.php?page=ymbeseo_dashboard&checkmetadesc' ) ) ), '" class="button checkit">', __( 'Re-check theme.', 'wordpress-seo' ), '</a>';
 	/* translators: %1$s expands to Yoast SEO */
 	echo sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly, please delete the following line, or press fix it:', 'wordpress-seo' ), 'Yoast SEO' ) . '<br />';
 	echo '<code>', esc_html( $options['theme_description_found'] ), '</code>';
@@ -128,19 +128,19 @@ if ( $options['theme_description_found'] !== '' ) {
 if ( strpos( get_option( 'permalink_structure' ), '%postname%' ) === false && $options['ignore_permalink'] === false ) {
 	echo '<p id="wrong_permalink" class="wrong">';
 	echo '<a href="', esc_url( admin_url( 'options-permalink.php' ) ), '" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
-	echo '<a href="javascript:wpseoSetIgnore(\'permalink\',\'wrong_permalink\',\'', esc_js( wp_create_nonce( 'wpseo-ignore' ) ), '\');" class="button fixit">', __( 'Ignore.', 'wordpress-seo' ), '</a>';
+	echo '<a href="javascript:ymbeseoSetIgnore(\'permalink\',\'wrong_permalink\',\'', esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ), '\');" class="button fixit">', __( 'Ignore.', 'wordpress-seo' ), '</a>';
 	echo __( 'You do not have your postname in the URL of your posts and pages, it is highly recommended that you do. Consider setting your permalink structure to <strong>/%postname%/</strong>.', 'wordpress-seo' ), '</p>';
 }
 
 if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false ) {
 	echo '<p id="wrong_page_comments" class="wrong">';
-	echo '<a href="javascript:setWPOption(\'page_comments\',\'0\',\'wrong_page_comments\',\'', esc_js( wp_create_nonce( 'wpseo-setoption' ) ), '\');" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
-	echo '<a href="javascript:wpseoSetIgnore(\'page_comments\',\'wrong_page_comments\',\'', esc_js( wp_create_nonce( 'wpseo-ignore' ) ), '\');" class="button fixit">', __( 'Ignore.', 'wordpress-seo' ), '</a>';
+	echo '<a href="javascript:setWPOption(\'page_comments\',\'0\',\'wrong_page_comments\',\'', esc_js( wp_create_nonce( 'ymbeseo-setoption' ) ), '\');" class="button fixit">', __( 'Fix it.', 'wordpress-seo' ), '</a>';
+	echo '<a href="javascript:ymbeseoSetIgnore(\'page_comments\',\'wrong_page_comments\',\'', esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ), '\');" class="button fixit">', __( 'Ignore.', 'wordpress-seo' ), '</a>';
 	echo __( 'Paging comments is enabled, this is not needed in 999 out of 1000 cases, so the suggestion is to disable it, to do that, simply uncheck the box before "Break comments into pages..."', 'wordpress-seo' ), '</p>';
 }
 
 ?>
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab nav-tab-active" id="general-tab"
 		   href="#top#general"><?php _e( 'General', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="knowledge-graph-tab"
@@ -150,15 +150,15 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		<a class="nav-tab" id="security-tab" href="#top#security"><?php _e( 'Security', 'wordpress-seo' ); ?></a>
 	</h2>
 
-	<div id="general" class="wpseotab">
-		<?php if ( get_user_meta( get_current_user_id(), 'wpseo_ignore_tour' ) ) { ?>
+	<div id="general" class="ymbeseotab">
+		<?php if ( get_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' ) ) { ?>
 			<p>
 				<strong><?php _e( 'Introduction Tour', 'wordpress-seo' ); ?></strong><br/>
 				<?php _e( 'Take this tour to quickly learn about the use of this plugin.', 'wordpress-seo' ); ?>
 			</p>
 			<p>
 				<a class="button-secondary"
-				   href="<?php echo esc_url( admin_url( 'admin.php?page=wpseo_dashboard&wpseo_restart_tour=1' ) ); ?>"><?php _e( 'Start Tour', 'wordpress-seo' ); ?></a>
+				   href="<?php echo esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard&ymbeseo_restart_tour=1' ) ); ?>"><?php _e( 'Start Tour', 'wordpress-seo' ); ?></a>
 			</p>
 
 			<br/>
@@ -173,7 +173,7 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		</p>
 		<p>
 			<a class="button-secondary"
-			   href="<?php echo esc_url( admin_url( 'admin.php?page=wpseo_dashboard&intro=1' ) ); ?>"><?php _e( 'View Changes', 'wordpress-seo' ); ?></a>
+			   href="<?php echo esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard&intro=1' ) ); ?>"><?php _e( 'View Changes', 'wordpress-seo' ); ?></a>
 		</p>
 
 		<br/>
@@ -187,10 +187,10 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		</p>
 
 		<p>
-			<a onclick="if( !confirm('<?php _e( 'Are you sure you want to reset your SEO settings?', 'wordpress-seo' ); ?>') ) return false;" class="button" href="<?php echo esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo_reset_defaults' ) ), admin_url( 'admin.php?page=wpseo_dashboard&wpseo_reset_defaults=1' ) ) ); ?>"><?php _e( 'Restore Default Settings', 'wordpress-seo' ); ?></a>
+			<a onclick="if( !confirm('<?php _e( 'Are you sure you want to reset your SEO settings?', 'wordpress-seo' ); ?>') ) return false;" class="button" href="<?php echo esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'ymbeseo_reset_defaults' ) ), admin_url( 'admin.php?page=ymbeseo_dashboard&ymbeseo_reset_defaults=1' ) ) ); ?>"><?php _e( 'Restore Default Settings', 'wordpress-seo' ); ?></a>
 		</p>
 	</div>
-	<div id="knowledge-graph" class="wpseotab">
+	<div id="knowledge-graph" class="ymbeseotab">
 		<h3><?php _e( 'Website name', 'wordpress-seo' ); ?></h3>
 		<p>
 			<?php
@@ -227,7 +227,7 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 			<?php $yform->textinput( 'person_name', __( 'Your name', 'wordpress-seo' ) ); ?>
 		</div>
 	</div>
-	<div id="webmaster-tools" class="wpseotab">
+	<div id="webmaster-tools" class="ymbeseotab">
 		<?php
 		echo '<p>', __( 'You can use the boxes below to verify with the different Webmaster Tools, if your site is already verified, you can just forget about these. Enter the verify meta values for:', 'wordpress-seo' ), '</p>';
 		$yform->textinput( 'alexaverify', '<a target="_blank" href="http://www.alexa.com/siteowners/claim">' . __( 'Alexa Verification ID', 'wordpress-seo' ) . '</a>' );
@@ -236,7 +236,7 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		$yform->textinput( 'yandexverify', '<a target="_blank" href="http://help.yandex.com/webmaster/service/rights.xml#how-to">' . __( 'Yandex Webmaster Tools', 'wordpress-seo' ) . '</a>' );
 		?>
 	</div>
-	<div id="security" class="wpseotab">
+	<div id="security" class="ymbeseotab">
 		<?php
 		echo '<p>', __( 'Unchecking this box allows authors and editors to redirect posts, noindex them and do other things you might not want if you don\'t trust your authors.', 'wordpress-seo' ), '</p>';
 		/* translators: %1$s expands to Yoast SEO */
@@ -244,6 +244,6 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		?>
 	</div>
 <?php
-do_action( 'wpseo_dashboard' );
+do_action( 'ymbeseo_dashboard' );
 
 $yform->admin_footer();

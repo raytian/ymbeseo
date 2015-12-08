@@ -152,11 +152,11 @@ class YMBESEO_GSC_Service {
 				)
 			);
 
-			wp_redirect( admin_url( 'admin.php?page=wpseo_dashboard' ) );
+			wp_redirect( admin_url( 'admin.php?page=ymbeseo_dashboard' ) );
 			exit;
 		}
 
-		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
+		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'ymbeseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
 	}
 
 	/**

@@ -11,12 +11,12 @@ jQuery( function() {
 				h = 500,
 				left = (screen.width / 2) - (w / 2),
 				top = (screen.height / 2) - (h / 2);
-			return window.open(auth_url, 'wpseogscauthcode', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+			return window.open(auth_url, 'ymbeseogscauthcode', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 		}
 	);
 });
 
-function wpseo_gsc_post_redirect() {
+function ymbeseo_gsc_post_redirect() {
 	'use strict';
 
 	var target_form = jQuery( '#TB_ajaxContent' );
@@ -26,8 +26,8 @@ function wpseo_gsc_post_redirect() {
 	jQuery.post(
 		ajaxurl,
 		{
-			action: 'wpseo_gsc_create_redirect_url',
-			ajax_nonce: jQuery('.wpseo-gsc-ajax-security').val(),
+			action: 'ymbeseo_gsc_create_redirect_url',
+			ajax_nonce: jQuery('.ymbeseo-gsc-ajax-security').val(),
 			old_url: old_url,
 			new_url: jQuery( target_form ).find('input[name=new_url]').val(),
 			mark_as_fixed: is_checked,
@@ -49,7 +49,7 @@ function wpseo_gsc_post_redirect() {
 	return false;
 }
 
-function wpseo_update_category_count(category) {
+function ymbeseo_update_category_count(category) {
 	'use strict';
 
 	var count_element = jQuery('#gsc_count_' + category + '');
@@ -61,21 +61,21 @@ function wpseo_update_category_count(category) {
 	count_element.text(new_count);
 }
 
-function wpseo_mark_as_fixed(url) {
+function ymbeseo_mark_as_fixed(url) {
 	'use strict';
 
 	jQuery.post(
 		ajaxurl,
 		{
-			action: 'wpseo_mark_fixed_crawl_issue',
-			ajax_nonce: jQuery('.wpseo-gsc-ajax-security').val(),
+			action: 'ymbeseo_mark_fixed_crawl_issue',
+			ajax_nonce: jQuery('.ymbeseo-gsc-ajax-security').val(),
 			platform: jQuery('#field_platform').val(),
 			category: jQuery('#field_category').val(),
 			url: url
 		},
 		function(response) {
 			if ('true' === response) {
-				wpseo_update_category_count(jQuery('#field_category').val());
+				ymbeseo_update_category_count(jQuery('#field_category').val());
 				jQuery('span:contains(' + url + ')').closest('tr').remove();
 			}
 		}

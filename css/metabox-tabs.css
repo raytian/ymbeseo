@@ -2,49 +2,49 @@
  * Metabox Tabs
  */
 
-ul.wpseo-metabox-tabs {
+ul.ymbeseo-metabox-tabs {
 	display: none;
 	margin-top: 12px;
 	margin-bottom: 3px;
 }
 
-.wpseo-metabox-tabs-div ul {
+.ymbeseo-metabox-tabs-div ul {
 	list-style: none;
 }
 
-.wpseo-metabox-tabs li {
+.ymbeseo-metabox-tabs li {
 	display: inline;
 }
 
-ul.wpseo-metabox-tabs li.active {
+ul.ymbeseo-metabox-tabs li.active {
 	border-width: 1px 1px 0;
 	border-style: solid solid none;
 	background-color: #fdfdfd;
 }
 
-ul.wpseo-metabox-tabs li {
+ul.ymbeseo-metabox-tabs li {
 	padding: 5px;
 }
 
-.wpseo-metabox-tabs a {
+.ymbeseo-metabox-tabs a {
 	text-decoration: none;
 }
 
-.wpseo-metabox-tabs-div div.wpseo-tabs-panel {
+.ymbeseo-metabox-tabs-div div.ymbeseo-tabs-panel {
 	overflow: auto;
 	padding: 0.5em 0.9em;
 	border: 1px solid;
 }
 
-.wpseo-heading {
+.ymbeseo-heading {
 	padding-left: 10px;
 }
 
-.wpseotab {
+.ymbeseotab {
 	display: none;
 }
 
-.wpseotab.active {
+.ymbeseotab.active {
 	display: block;
 	overflow: auto;
 	padding: 0.5em 0.9em;
@@ -52,11 +52,11 @@ ul.wpseo-metabox-tabs li {
 	background-color: #fdfdfd;
 }
 
-#wpseo_meta .postbox .inside .wpseotab {
+#ymbeseo_meta .postbox .inside .ymbeseotab {
 	font-size: 13px !important;
 }
 
-.inside .wpseotab .form-table th {
+.inside .ymbeseotab .form-table th {
 	width: 140px !important;
 	font-size: 13px;
 }
@@ -84,7 +84,7 @@ ul.wpseo-metabox-tabs li {
 	background-color: lightyellow;
 }
 
-#wpseosnippet {
+#ymbeseosnippet {
 	width: auto;
 	max-width: 520px;
 	margin: 0 0 10px;
@@ -93,21 +93,21 @@ ul.wpseo-metabox-tabs li {
 	font-style: normal;
 }
 
-#wpseosnippet td {
+#ymbeseosnippet td {
 	margin: 0;
 	padding: 0;
 }
 
-#wpseosnippet cite.url {
+#ymbeseosnippet cite.url {
 	font-weight: normal;
 	font-style: normal;
 }
 
-#wpseosnippet a {
+#ymbeseosnippet a {
 	text-decoration: none;
 }
 
-#wpseosnippet .title {
+#ymbeseosnippet .title {
 	display: block;
 	overflow: hidden;
 	width: 512px;
@@ -118,46 +118,46 @@ ul.wpseo-metabox-tabs li {
 	text-overflow: ellipsis;
 }
 
-#wpseosnippet .desc {
+#ymbeseosnippet .desc {
 	font-size: small;
 	line-height: 1.4;
 	word-wrap: break-word;
 }
 
-#wpseosnippet .desc .autogen {
+#ymbeseosnippet .desc .autogen {
 	color: #777;
 }
 
-#wpseosnippet .date {
+#ymbeseosnippet .date {
 	color: #808080;
 }
 
-#wpseosnippet .desc p {
+#ymbeseosnippet .desc p {
 	color: #545454;
 	font-size: small;
 	line-height: 1.4;
 	word-wrap: break-word;
 }
 
-#wpseosnippet .url {
+#ymbeseosnippet .url {
 	color: #006621;
 	font-size: 13px;
 	line-height: 16px;
 }
 
-#wpseosnippet .meta {
+#ymbeseosnippet .meta {
 	color: #767676;
 }
 
-#wpseosnippet .util {
+#ymbeseosnippet .util {
 	color: #4272db;
 }
 
-#wpseosnippet p {
+#ymbeseosnippet p {
 	margin: 0 !important;
 }
 
-#wpseosnippet a:hover {
+#ymbeseosnippet a:hover {
 	text-decoration: underline;
 }
 
@@ -175,35 +175,35 @@ ul.wpseo-metabox-tabs li {
 	list-style-type: disc;
 }
 
-.wpseo_hidden {
+.ymbeseo_hidden {
 	display: none;
 }
 
 /* Linkdex analysis block */
 
-table.wpseoanalysis th {
+table.ymbeseoanalysis th {
 	padding: 15px 0 5px 0;
 	font-size: 14px;
 	text-align: left;
 }
 
-table.wpseoanalysis th.first {
+table.ymbeseoanalysis th.first {
 	padding-top: 0;
 }
 
-table.wpseoanalysis td {
+table.ymbeseoanalysis td {
 	margin: 5px 0;
 	font-size: 13px;
 	line-height: 16px;
 }
 
-table.wpseoanalysis td.score {
+table.ymbeseoanalysis td.score {
 	width: 20px;
 	height: 18px;
 	padding-left: 10px;
 }
 
-.wpseo_msg {
+.ymbeseo_msg {
 	margin: 5px 0 10px 0;
 	padding: 0 5px;
 	border: 1px solid #e6db55;
@@ -224,13 +224,13 @@ table.wpseoanalysis td.score {
 /* Component containers
 ----------------------------------*/
 
-#wpseotab .ui-widget-content {
+#ymbeseotab .ui-widget-content {
 	border: 1px solid #ddd;
 	color: #333;
 	background: #f1f1f1;
 }
 
-#wpseotab .ui-widget-content a {
+#ymbeseotab .ui-widget-content a {
 	color: #333;
 }
 
@@ -238,13 +238,13 @@ table.wpseoanalysis td.score {
  * jQuery UI Autocomplete 1.8.12
  * http://docs.jquery.com/UI/Autocomplete#theming
  */
-#wpseotab .ui-autocomplete {
+#ymbeseotab .ui-autocomplete {
 	position: absolute;
 	cursor: default;
 }
 
 /* workarounds */
-* html #wpseotab .ui-autocomplete {
+* html #ymbeseotab .ui-autocomplete {
 	width: 1px;
 }
 
@@ -290,7 +290,7 @@ table.wpseoanalysis td.score {
 	color: #000;
 }
 
-.wpseo-score-icon {
+.ymbeseo-score-icon {
 	display: inline-block;
 	width: 12px;
 	height: 12px;
@@ -300,31 +300,31 @@ table.wpseoanalysis td.score {
 	vertical-align: top;
 }
 
-.wpseo-score-icon.good {
+.ymbeseo-score-icon.good {
 	background-color: #7ad03a;
 }
 
-.wpseo-score-icon.ok {
+.ymbeseo-score-icon.ok {
 	background-color: #ffba00;
 }
 
-.wpseo-score-icon.poor {
+.ymbeseo-score-icon.poor {
 	background-color: #ee7c1b;
 }
 
-.wpseo-score-icon.bad {
+.ymbeseo-score-icon.bad {
 	background-color: #dd3d36;
 }
 
-.wpseo-score-icon.na {
+.ymbeseo-score-icon.na {
 	background-color: #888;
 }
 
-.wpseo-score-icon.noindex {
+.ymbeseo-score-icon.noindex {
 	background-color: #1e8cbe;
 }
 
-.wpseo-score-title {
+.ymbeseo-score-title {
 	font-weight: 600;
 }
 
@@ -337,6 +337,6 @@ img.yoast_help {
 	line-height: 18px !important;
 }
 
-.wpseo_content_wrapper p.search-box {
+.ymbeseo_content_wrapper p.search-box {
 	margin: 10px 0 5px 0;
 }

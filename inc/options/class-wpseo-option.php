@@ -17,7 +17,7 @@
  *    as those will not always be available before the taxonomy/post_type is registered.
  *    (they will be available if a value was set, they won't be if it wasn't as the class won't know
  *    that a default needs to be injected).
- *    Oh and the very few options where the default value is null, i.e. wpseo->'theme_has_description'
+ *    Oh and the very few options where the default value is null, i.e. ymbeseo->'theme_has_description'
  *
  * [Updating/Adding options]
  * - For multisite site_options, please use the YMBESEO_Options::update_site_option() method.
@@ -25,9 +25,9 @@
  *   are instantiated, validation for all options and their subkeys will be automatic.
  * - On (succesfull) update of a couple of options, certain related actions will be run automatically.
  *    Some examples:
- *      - on change of wpseo[yoast_tracking], the cron schedule will be adjusted accordingly
- *      - on change of wpseo_permalinks and wpseo_xml, the rewrite rules will be flushed
- *      - on change of wpseo and wpseo_title, some caches will be cleared
+ *      - on change of ymbeseo[yoast_tracking], the cron schedule will be adjusted accordingly
+ *      - on change of ymbeseo_permalinks and ymbeseo_xml, the rewrite rules will be flushed
+ *      - on change of ymbeseo and ymbeseo_title, some caches will be cleared
  *
  *
  * [Important information about add/updating/changing these classes]
@@ -366,7 +366,7 @@ abstract class YMBESEO_Option {
 			$this->enrich_defaults();
 		}
 
-		return apply_filters( 'wpseo_defaults', $this->defaults, $this->option_name );
+		return apply_filters( 'ymbeseo_defaults', $this->defaults, $this->option_name );
 	}
 
 
@@ -660,7 +660,7 @@ abstract class YMBESEO_Option {
 	 * Make sure that any set option values relating to post_types and/or taxonomies are retained,
 	 * even when that post_type or taxonomy may not yet have been registered.
 	 *
-	 * @internal The wpseo_titles concrete class overrules this method. Make sure that any changes
+	 * @internal The ymbeseo_titles concrete class overrules this method. Make sure that any changes
 	 * applied here, also get ported to that version.
 	 *
 	 * @param  array $dirty Original option as retrieved from the database.

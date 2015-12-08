@@ -7,9 +7,9 @@
  *
  * @param {string} nonce
  */
-function wpseoDismissAbout( nonce ) {
+function ymbeseoDismissAbout( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_dismiss_about',
+			action: 'ymbeseo_dismiss_about',
 			_wpnonce: nonce
 		}
 	);
@@ -20,9 +20,9 @@ function wpseoDismissAbout( nonce ) {
  *
  * @param {string} nonce
  */
-function wpseoDismissTaglineNotice( nonce ) {
+function ymbeseoDismissTaglineNotice( nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_dismiss_tagline_notice',
+			action: 'ymbeseo_dismiss_tagline_notice',
 			_wpnonce: nonce
 		}
 	);
@@ -35,9 +35,9 @@ function wpseoDismissTaglineNotice( nonce ) {
  * @param {string} hide
  * @param {string} nonce
  */
-function wpseoSetIgnore( option, hide, nonce ) {
+function ymbeseoSetIgnore( option, hide, nonce ) {
 	jQuery.post( ajaxurl, {
-			action: 'wpseo_set_ignore',
+			action: 'ymbeseo_set_ignore',
 			option: option,
 			_wpnonce: nonce
 		}, function( data ) {
@@ -52,7 +52,7 @@ function wpseoSetIgnore( option, hide, nonce ) {
 /**
  * Make the notices dismissible (again)
  */
-function wpseoMakeDismissible() {
+function ymbeseoMakeDismissible() {
 	jQuery( '.notice.is-dismissible' ).each( function() {
 		var $notice = jQuery( this );
 		if ( $notice.find( '.notice-dismiss').empty() ) {
@@ -73,12 +73,12 @@ function wpseoMakeDismissible() {
 }
 
 jQuery( document ).ready( function() {
-	jQuery( '#wpseo-dismiss-about > .notice-dismiss' ).click( function() {
-		wpseoDismissAbout( jQuery( '#wpseo-dismiss-about' ).data( 'nonce' ) );
+	jQuery( '#ymbeseo-dismiss-about > .notice-dismiss' ).click( function() {
+		ymbeseoDismissAbout( jQuery( '#ymbeseo-dismiss-about' ).data( 'nonce' ) );
 	});
 
-	jQuery( '#wpseo-dismiss-tagline-notice > .notice-dismiss').click( function() {
-		wpseoDismissTaglineNotice( jQuery( '#wpseo-dismiss-tagline-notice').data( 'nonce' ) );
+	jQuery( '#ymbeseo-dismiss-tagline-notice > .notice-dismiss').click( function() {
+		ymbeseoDismissTaglineNotice( jQuery( '#ymbeseo-dismiss-tagline-notice').data( 'nonce' ) );
 	});
 
 	jQuery( '.yoast-dismissible > .notice-dismiss').click( function() {

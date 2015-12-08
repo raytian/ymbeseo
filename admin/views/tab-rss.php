@@ -10,7 +10,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 }
 
 $yform = Yoast_Form::get_instance();
-$yform->set_option( 'wpseo_rss' );
+$yform->set_option( 'ymbeseo_rss' );
 
 echo '<p>' . __( "This feature is used to automatically add content to your RSS, more specifically, it's meant to add links back to your blog and your blog posts, so dumb scrapers will automatically add these links too, helping search engines identify you as the original source of the content.", 'wordpress-seo' ) . '</p>';
 
@@ -23,7 +23,7 @@ $yform->textarea( 'rssafter', __( 'Content to put after each post in the feed', 
 ?>
 
 <p><?php _e( 'You can use the following variables within the content, they will be replaced by the value on the right.', 'wordpress-seo' ); ?></p>
-<table class="wpseo">
+<table class="ymbeseo">
 	<tr>
 		<th><strong><code>%%AUTHORLINK%%</code></strong></th>
 		<td><?php _e( 'A link to the archive for the post author, with the authors name as anchor text.', 'wordpress-seo' ); ?></td>

@@ -17,7 +17,7 @@ if ( isset( $_POST['create_robots'] ) ) {
 		die( __( 'You cannot create a robots.txt file.', 'wordpress-seo' ) );
 	}
 
-	check_admin_referer( 'wpseo_create_robots' );
+	check_admin_referer( 'ymbeseo_create_robots' );
 
 	ob_start();
 	error_reporting( 0 );
@@ -33,7 +33,7 @@ if ( isset( $_POST['submitrobots'] ) ) {
 		die( __( 'You cannot edit the robots.txt file.', 'wordpress-seo' ) );
 	}
 
-	check_admin_referer( 'wpseo-robotstxt' );
+	check_admin_referer( 'ymbeseo-robotstxt' );
 
 	if ( file_exists( $robots_file ) ) {
 		$robotsnew = stripslashes( $_POST['robotsnew'] );
@@ -51,7 +51,7 @@ if ( isset( $_POST['submithtaccess'] ) ) {
 		die( __( 'You cannot edit the .htaccess file.', 'wordpress-seo' ) );
 	}
 
-	check_admin_referer( 'wpseo-htaccess' );
+	check_admin_referer( 'ymbeseo-htaccess' );
 
 	if ( file_exists( $ht_access_file ) ) {
 		$ht_access_new = stripslashes( $_POST['htaccessnew'] );
@@ -68,10 +68,10 @@ if ( isset( $msg ) && ! empty( $msg ) ) {
 }
 
 if ( is_multisite() ) {
-	$action_url = network_admin_url( 'admin.php?page=wpseo_files' );
+	$action_url = network_admin_url( 'admin.php?page=ymbeseo_files' );
 }
 else {
-	$action_url = admin_url( 'admin.php?page=wpseo_tools&tool=file-editor' );
+	$action_url = admin_url( 'admin.php?page=ymbeseo_tools&tool=file-editor' );
 }
 
 echo '<h2>', __( 'Robots.txt', 'wordpress-seo' ), '</h2>';
@@ -79,7 +79,7 @@ echo '<h2>', __( 'Robots.txt', 'wordpress-seo' ), '</h2>';
 if ( ! file_exists( $robots_file ) ) {
 	if ( is_writable( get_home_path() ) ) {
 		echo '<form action="', esc_url( $action_url ), '" method="post" id="robotstxtcreateform">';
-		wp_nonce_field( 'wpseo_create_robots', '_wpnonce', true, true );
+		wp_nonce_field( 'ymbeseo_create_robots', '_wpnonce', true, true );
 		echo '<p>', __( 'You don\'t have a robots.txt file, create one here:', 'wordpress-seo' ), '</p>';
 		echo '<input type="submit" class="button" name="create_robots" value="', __( 'Create robots.txt file', 'wordpress-seo' ), '">';
 		echo '</form>';
@@ -103,7 +103,7 @@ else {
 	}
 	else {
 		echo '<form action="', esc_url( $action_url ), '" method="post" id="robotstxtform">';
-		wp_nonce_field( 'wpseo-robotstxt', '_wpnonce', true, true );
+		wp_nonce_field( 'ymbeseo-robotstxt', '_wpnonce', true, true );
 		echo '<p>', __( 'Edit the content of your robots.txt:', 'wordpress-seo' ), '</p>';
 		echo '<textarea class="large-text code" rows="15" name="robotsnew">', $robots_txt_content, '</textarea><br/>';
 		echo '<div class="submit"><input class="button" type="submit" name="submitrobots" value="', __( 'Save changes to Robots.txt', 'wordpress-seo' ), '" /></div>';
@@ -127,7 +127,7 @@ if ( ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( $_SERVER['SERVER_SOFTWAR
 	}
 	else {
 		echo '<form action="', esc_url( $action_url ), '" method="post" id="htaccessform">';
-		wp_nonce_field( 'wpseo-htaccess', '_wpnonce', true, true );
+		wp_nonce_field( 'ymbeseo-htaccess', '_wpnonce', true, true );
 		echo '<p>', __( 'Edit the content of your .htaccess:', 'wordpress-seo' ), '</p>';
 		echo '<textarea class="large-text code" rows="15" name="htaccessnew">', $contentht, '</textarea><br/>';
 		echo '<div class="submit"><input class="button" type="submit" name="submithtaccess" value="', __( 'Save changes to .htaccess', 'wordpress-seo' ), '" /></div>';

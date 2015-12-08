@@ -16,15 +16,15 @@ class YMBESEO_Options {
 	 * @static
 	 */
 	public static $options = array(
-		'wpseo'               => 'YMBESEO_Option_Wpseo',
-		'wpseo_permalinks'    => 'YMBESEO_Option_Permalinks',
-		'wpseo_titles'        => 'YMBESEO_Option_Titles',
-		'wpseo_social'        => 'YMBESEO_Option_Social',
-		'wpseo_rss'           => 'YMBESEO_Option_RSS',
-		'wpseo_internallinks' => 'YMBESEO_Option_InternalLinks',
-		'wpseo_xml'           => 'YMBESEO_Option_XML',
-		'wpseo_ms'            => 'YMBESEO_Option_MS',
-		'wpseo_taxonomy_meta' => 'YMBESEO_Taxonomy_Meta',
+		'ymbeseo'               => 'YMBESEO_Option_Wpseo',
+		'ymbeseo_permalinks'    => 'YMBESEO_Option_Permalinks',
+		'ymbeseo_titles'        => 'YMBESEO_Option_Titles',
+		'ymbeseo_social'        => 'YMBESEO_Option_Social',
+		'ymbeseo_rss'           => 'YMBESEO_Option_RSS',
+		'ymbeseo_internallinks' => 'YMBESEO_Option_InternalLinks',
+		'ymbeseo_xml'           => 'YMBESEO_Option_XML',
+		'ymbeseo_ms'            => 'YMBESEO_Option_MS',
+		'ymbeseo_taxonomy_meta' => 'YMBESEO_Taxonomy_Meta',
 	);
 
 	/**
@@ -154,7 +154,7 @@ class YMBESEO_Options {
 					$option_names[] = $option_name;
 				}
 			}
-			$option_names = apply_filters( 'wpseo_options', $option_names );
+			$option_names = apply_filters( 'ymbeseo_options', $option_names );
 		}
 
 		return $option_names;
@@ -225,7 +225,7 @@ class YMBESEO_Options {
 			unset( $instance );
 
 			// If we've done a full clean-up, we can safely remove this really old option.
-			delete_option( 'wpseo_indexation' );
+			delete_option( 'ymbeseo_indexation' );
 		}
 	}
 
@@ -248,8 +248,8 @@ class YMBESEO_Options {
 	 * @since 1.5.2.3
 	 */
 	public static function bring_back_breadcrumb_defaults() {
-		if ( isset( self::$option_instances['wpseo_internallinks'] ) ) {
-			self::$option_instances['wpseo_internallinks']->bring_back_defaults();
+		if ( isset( self::$option_instances['ymbeseo_internallinks'] ) ) {
+			self::$option_instances['ymbeseo_internallinks']->bring_back_defaults();
 		}
 	}
 
@@ -265,10 +265,10 @@ class YMBESEO_Options {
 		Make sure title_test and description_test function are available even when called
 			   from the isolated activation
 		*/
-		require_once( YMBESEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
+		require_once( YMBESEO_PATH . 'inc/ymbeseo-non-ajax-functions.php' );
 
-		// Commented out? wpseo_title_test(); R.
-		wpseo_description_test();
+		// Commented out? ymbeseo_title_test(); R.
+		ymbeseo_description_test();
 
 		/* Force WooThemes to use Yoast SEO data. */
 		if ( function_exists( 'woo_version_init' ) ) {
@@ -313,7 +313,7 @@ class YMBESEO_Options {
 	 * @return void
 	 */
 	public static function maybe_set_multisite_defaults( $force_init = false ) {
-		$option = get_option( 'wpseo' );
+		$option = get_option( 'ymbeseo' );
 
 		if ( is_multisite() ) {
 			if ( $option['ms_defaults_set'] === false ) {
@@ -339,7 +339,7 @@ class YMBESEO_Options {
 	 */
 	public static function reset_ms_blog( $blog_id ) {
 		if ( is_multisite() ) {
-			$options      = get_site_option( 'wpseo_ms' );
+			$options      = get_site_option( 'ymbeseo_ms' );
 			$option_names = self::get_option_names();
 
 			if ( is_array( $option_names ) && $option_names !== array() ) {
@@ -360,7 +360,7 @@ class YMBESEO_Options {
 						}
 					}
 
-					if ( $option_name === 'wpseo' ) {
+					if ( $option_name === 'ymbeseo' ) {
 						$new_option['ms_defaults_set'] = true;
 					}
 

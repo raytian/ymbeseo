@@ -13,7 +13,7 @@ class YMBESEO_Admin_Pages {
 	/**
 	 * @var string $currentoption The option in use for the current admin page.
 	 */
-	public $currentoption = 'wpseo';
+	public $currentoption = 'ymbeseo';
 
 	/**
 	 * Class constructor, which basically only hooks the init function on the init hook
@@ -26,9 +26,9 @@ class YMBESEO_Admin_Pages {
 	 * Make sure the needed scripts are loaded for admin pages
 	 */
 	function init() {
-		if ( filter_input( INPUT_GET, 'wpseo_reset_defaults' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'wpseo_reset_defaults' ) && current_user_can( 'manage_options' ) ) {
+		if ( filter_input( INPUT_GET, 'ymbeseo_reset_defaults' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'ymbeseo_reset_defaults' ) && current_user_can( 'manage_options' ) ) {
 			YMBESEO_Options::reset();
-			wp_redirect( admin_url( 'admin.php?page=wpseo_dashboard' ) );
+			wp_redirect( admin_url( 'admin.php?page=ymbeseo_dashboard' ) );
 		}
 
 		if ( YMBESEO_Utils::grant_access() ) {
@@ -48,7 +48,7 @@ class YMBESEO_Admin_Pages {
 		wp_enqueue_style( 'yoast-admin-css', plugins_url( 'css/yst_plugin_tools' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( 'wpseo-rtl', plugins_url( 'css/wpseo-rtl' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+			wp_enqueue_style( 'ymbeseo-rtl', plugins_url( 'css/ymbeseo-rtl' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 		}
 	}
 
@@ -56,32 +56,32 @@ class YMBESEO_Admin_Pages {
 	 * Loads the required scripts for the config page.
 	 */
 	function config_page_scripts() {
-		wp_enqueue_script( 'wpseo-admin-script', plugins_url( 'js/wp-seo-admin' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+		wp_enqueue_script( 'ymbeseo-admin-script', plugins_url( 'js/wp-seo-admin' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 			'jquery',
 			'jquery-ui-core',
 		), YMBESEO_VERSION, true );
-		wp_localize_script( 'wpseo-admin-script', 'wpseoAdminL10n', $this->localize_admin_script() );
+		wp_localize_script( 'ymbeseo-admin-script', 'ymbeseoAdminL10n', $this->localize_admin_script() );
 		wp_enqueue_script( 'dashboard' );
 		wp_enqueue_script( 'thickbox' );
 
 		$page = filter_input( INPUT_GET, 'page' );
 		$tool = filter_input( INPUT_GET, 'tool' );
 
-		if ( in_array( $page, array( 'wpseo_social', 'wpseo_dashboard' ) ) ) {
+		if ( in_array( $page, array( 'ymbeseo_social', 'ymbeseo_dashboard' ) ) ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'wpseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
+			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/wp-seo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
 				'jquery-ui-core',
 			), YMBESEO_VERSION, true );
-			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
+			wp_localize_script( 'ymbeseo-admin-media', 'ymbeseoMediaL10n', $this->localize_media_script() );
 		}
 
-		if ( 'wpseo_tools' === $page && 'bulk-editor' === $tool ) {
-			wp_enqueue_script( 'wpseo-bulk-editor', plugins_url( 'js/wp-seo-bulk-editor' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+		if ( 'ymbeseo_tools' === $page && 'bulk-editor' === $tool ) {
+			wp_enqueue_script( 'ymbeseo-bulk-editor', plugins_url( 'js/wp-seo-bulk-editor' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 
-		if ( 'wpseo_tools' === $page && 'import-export' === $tool ) {
-			wp_enqueue_script( 'wpseo-export', plugins_url( 'js/wp-seo-export' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+		if ( 'ymbeseo_tools' === $page && 'import-export' === $tool ) {
+			wp_enqueue_script( 'ymbeseo-export', plugins_url( 'js/wp-seo-export' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 
@@ -141,7 +141,7 @@ class YMBESEO_Admin_Pages {
 	 * @param string $option           The short name of the option to use for the current page.
 	 * @param bool   $contains_files   Whether the form should allow for file uploads.
 	 */
-	public function admin_header( $form = true, $option_long_name = false, $option = 'wpseo', $contains_files = false ) {
+	public function admin_header( $form = true, $option_long_name = false, $option = 'ymbeseo', $contains_files = false ) {
 		_deprecated_function( __METHOD__, 'YMBESEO 2.0', 'This method is deprecated, please use the <code>Yoast_Form</code> class.' );
 
 		Yoast_Form::get_instance()->admin_header( $form, $option, $contains_files, $option_long_name );

@@ -20,9 +20,9 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 
 $yform = Yoast_Form::get_instance();
 
-$yform->admin_header( true, 'wpseo_xml' );
+$yform->admin_header( true, 'ymbeseo_xml' );
 
-$options = get_option( 'wpseo_xml' );
+$options = get_option( 'ymbeseo_xml' );
 
 echo '<br/>';
 
@@ -32,7 +32,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 	<div id="sitemapinfo">
 		<br/>
 
-		<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+		<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 			<a class="nav-tab" id="general-tab" href="#top#general"><?php _e( 'General', 'wordpress-seo' ); ?></a>
 			<a class="nav-tab" id="user-sitemap-tab"
 			   href="#top#user-sitemap"><?php _e( 'User sitemap', 'wordpress-seo' ); ?></a>
@@ -43,12 +43,12 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 			   href="#top#taxonomies"><?php _e( 'Taxonomies', 'wordpress-seo' ); ?></a>
 		</h2>
 
-		<div id="general" class="wpseotab">
+		<div id="general" class="ymbeseotab">
 			<?php
 
 			if ( $options['enablexmlsitemap'] === true ) {
 				echo '<p>';
-				printf( esc_html__( 'You can find your XML Sitemap here: %sXML Sitemap%s', 'wordpress-seo' ), '<a target="_blank" class="button-secondary" href="' . esc_url( wpseo_xml_sitemaps_base_url( 'sitemap_index.xml' ) ) . '">', '</a>' );
+				printf( esc_html__( 'You can find your XML Sitemap here: %sXML Sitemap%s', 'wordpress-seo' ), '<a target="_blank" class="button-secondary" href="' . esc_url( ymbeseo_xml_sitemaps_base_url( 'sitemap_index.xml' ) ) . '">', '</a>' );
 				echo '<br/>';
 				echo '<br/>';
 				_e( 'You do <strong>not</strong> need to generate the XML sitemap, nor will it take up time to generate after publishing a post.', 'wordpress-seo' );
@@ -61,7 +61,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 
 			<p>
 				<strong><?php _e( 'Entries per page', 'wordpress-seo' ); ?></strong><br/>
-				<?php printf( __( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), YMBESEO_Options::get_default( 'wpseo_xml', 'entries-per-page' ) ); ?>
+				<?php printf( __( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), YMBESEO_Options::get_default( 'ymbeseo_xml', 'entries-per-page' ) ); ?>
 			</p>
 
 			<?php
@@ -69,7 +69,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 			?>
 		</div>
 
-		<div id="user-sitemap" class="wpseotab">
+		<div id="user-sitemap" class="ymbeseotab">
 			<?php
 			$yform->checkbox( 'disable_author_sitemap', __( 'Disable author/user sitemap', 'wordpress-seo' ), false );
 			?>
@@ -88,10 +88,10 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 			</div>
 		</div>
 
-		<div id="post-types" class="wpseotab">
+		<div id="post-types" class="ymbeseotab">
 
 			<?php
-			$post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
+			$post_types = apply_filters( 'ymbeseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
 			if ( is_array( $post_types ) && $post_types !== array() ) {
 				echo '<p>' . __( 'Please check the appropriate box below if there\'s a post type that you do <strong>NOT</strong> want to include in your sitemap:', 'wordpress-seo' ) . '</p>';
 				foreach ( $post_types as $pt ) {
@@ -103,7 +103,7 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 
 		</div>
 
-		<div id="exclude-post" class="wpseotab">
+		<div id="exclude-post" class="ymbeseotab">
 			<?php
 			/* Translators: %1$s: expands to '<code>1,2,99,100</code>' */
 			echo '<p>' , sprintf( __( 'You can exclude posts from the sitemap by entering a comma separated string with the Post ID\'s. The format will become something like: %1$s.', 'wordpress-seo' ), '<code>1,2,99,100</code>' ) , '</p>';
@@ -111,10 +111,10 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 			?>
 		</div>
 
-		<div id="taxonomies" class="wpseotab">
+		<div id="taxonomies" class="ymbeseotab">
 
 			<?php
-			$taxonomies = apply_filters( 'wpseo_sitemaps_supported_taxonomies', get_taxonomies( array( 'public' => true ), 'objects' ) );
+			$taxonomies = apply_filters( 'ymbeseo_sitemaps_supported_taxonomies', get_taxonomies( array( 'public' => true ), 'objects' ) );
 			if ( is_array( $taxonomies ) && $taxonomies !== array() ) {
 				echo '<p>' . __( 'Please check the appropriate box below if there\'s a taxonomy that you do <strong>NOT</strong> want to include in your sitemap:', 'wordpress-seo' ) . '</p>';
 				foreach ( $taxonomies as $tax ) {
@@ -129,6 +129,6 @@ $yform->checkbox( 'enablexmlsitemap', __( 'Check this box to enable XML sitemap 
 	</div>
 <?php
 
-do_action( 'wpseo_xmlsitemaps_config' );
+do_action( 'ymbeseo_xmlsitemaps_config' );
 
 $yform->admin_footer();

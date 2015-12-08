@@ -28,7 +28,7 @@ class YMBESEO_Admin_Init {
 	public function __construct() {
 		$this->options = YMBESEO_Options::get_all();
 
-		$GLOBALS['wpseo_admin'] = new YMBESEO_Admin;
+		$GLOBALS['ymbeseo_admin'] = new YMBESEO_Admin;
 
 		$this->pagenow = $GLOBALS['pagenow'];
 
@@ -51,8 +51,8 @@ class YMBESEO_Admin_Init {
 	 */
 	public function enqueue_dismissible() {
 		if ( version_compare( $GLOBALS['wp_version'], '4.2', '<' ) ) {
-			wp_enqueue_style( 'wpseo-dismissible', plugins_url( 'css/wpseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
-			wp_enqueue_script( 'wpseo-dismissible', plugins_url( 'js/wp-seo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_style( 'ymbeseo-dismissible', plugins_url( 'css/ymbeseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+			wp_enqueue_script( 'ymbeseo-dismissible', plugins_url( 'js/wp-seo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 	/**
@@ -62,7 +62,7 @@ class YMBESEO_Admin_Init {
 		if ( current_user_can( 'manage_options' ) && ! $this->seen_about() ) {
 
 			if ( filter_input( INPUT_GET, 'intro' ) === '1' ) {
-				update_user_meta( get_current_user_id(), 'wpseo_seen_about_version' , YMBESEO_VERSION );
+				update_user_meta( get_current_user_id(), 'ymbeseo_seen_about_version' , YMBESEO_VERSION );
 
 				return;
 			}
@@ -71,14 +71,14 @@ class YMBESEO_Admin_Init {
 				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'wordpress-seo' ),
 				'Yoast SEO',
 				YMBESEO_VERSION,
-				'<a href="' . admin_url( 'admin.php?page=wpseo_dashboard&intro=1' ) . '">',
+				'<a href="' . admin_url( 'admin.php?page=ymbeseo_dashboard&intro=1' ) . '">',
 				'</a>'
 			);
 
 			$notification_options = array(
 				'type' => 'updated',
-				'id' => 'wpseo-dismiss-about',
-				'nonce' => wp_create_nonce( 'wpseo-dismiss-about' ),
+				'id' => 'ymbeseo-dismiss-about',
+				'nonce' => wp_create_nonce( 'ymbeseo-dismiss-about' ),
 			);
 
 			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( $info_message, $notification_options ) );
@@ -91,7 +91,7 @@ class YMBESEO_Admin_Init {
 	 * @return bool
 	 */
 	private function seen_about() {
-		return get_user_meta( get_current_user_id(), 'wpseo_seen_about_version', true ) === YMBESEO_VERSION;
+		return get_user_meta( get_current_user_id(), 'ymbeseo_seen_about_version', true ) === YMBESEO_VERSION;
 	}
 
 	/**
@@ -119,8 +119,8 @@ class YMBESEO_Admin_Init {
 
 			$notification_options = array(
 				'type'  => 'error',
-				'id'    => 'wpseo-dismiss-tagline-notice',
-				'nonce' => wp_create_nonce( 'wpseo-dismiss-tagline-notice' ),
+				'id'    => 'ymbeseo-dismiss-tagline-notice',
+				'nonce' => wp_create_nonce( 'ymbeseo-dismiss-tagline-notice' ),
 			);
 
 			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( $info_message, $notification_options ) );
@@ -142,7 +142,7 @@ class YMBESEO_Admin_Init {
 	 * @return bool
 	 */
 	public function seen_tagline_notice() {
-		return 'seen' === get_user_meta( get_current_user_id(), 'wpseo_seen_tagline_notice', true );
+		return 'seen' === get_user_meta( get_current_user_id(), 'ymbeseo_seen_tagline_notice', true );
 	}
 
 	/**
@@ -173,8 +173,8 @@ class YMBESEO_Admin_Init {
 	 *
 	 * @return bool
 	 */
-	private function on_wpseo_admin_page() {
-		return 'admin.php' === $this->pagenow && strpos( filter_input( INPUT_GET, 'page' ), 'wpseo' ) === 0;
+	private function on_ymbeseo_admin_page() {
+		return 'admin.php' === $this->pagenow && strpos( filter_input( INPUT_GET, 'page' ), 'ymbeseo' ) === 0;
 	}
 
 	/**
@@ -182,7 +182,7 @@ class YMBESEO_Admin_Init {
 	 */
 	private function load_meta_boxes() {
 		/**
-		 * Filter: 'wpseo_always_register_metaboxes_on_admin' - Allow developers to change whether
+		 * Filter: 'ymbeseo_always_register_metaboxes_on_admin' - Allow developers to change whether
 		 * the YMBESEO metaboxes are only registered on the typical pages (lean loading) or always
 		 * registered when in admin.
 		 *
@@ -192,9 +192,9 @@ class YMBESEO_Admin_Init {
 				'edit.php',
 				'post.php',
 				'post-new.php',
-			) ) || apply_filters( 'wpseo_always_register_metaboxes_on_admin', false )
+			) ) || apply_filters( 'ymbeseo_always_register_metaboxes_on_admin', false )
 		) {
-			$GLOBALS['wpseo_metabox'] = new YMBESEO_Metabox;
+			$GLOBALS['ymbeseo_metabox'] = new YMBESEO_Metabox;
 			if ( $this->options['opengraph'] === true || $this->options['twitter'] === true || $this->options['googleplus'] === true ) {
 				new YMBESEO_Social_Admin;
 			}
@@ -213,7 +213,7 @@ class YMBESEO_Admin_Init {
 	/**
 	 * Determine if we should load our admin pages class and if so, load it.
 	 *
-	 * Loads admin page class for all admin pages starting with `wpseo_`.
+	 * Loads admin page class for all admin pages starting with `ymbeseo_`.
 	 */
 	private function load_admin_user_class() {
 		if ( in_array( $this->pagenow, array( 'user-edit.php', 'profile.php' ) ) && current_user_can( 'edit_users' ) ) {
@@ -224,13 +224,13 @@ class YMBESEO_Admin_Init {
 	/**
 	 * Determine if we should load our admin pages class and if so, load it.
 	 *
-	 * Loads admin page class for all admin pages starting with `wpseo_`.
+	 * Loads admin page class for all admin pages starting with `ymbeseo_`.
 	 */
 	private function load_admin_page_class() {
 
-		if ( $this->on_wpseo_admin_page() ) {
+		if ( $this->on_ymbeseo_admin_page() ) {
 			// For backwards compatabilty, this still needs a global, for now...
-			$GLOBALS['wpseo_admin_pages'] = new YMBESEO_Admin_Pages;
+			$GLOBALS['ymbeseo_admin_pages'] = new YMBESEO_Admin_Pages;
 			$this->register_i18n_promo_class();
 		}
 	}
@@ -246,11 +246,11 @@ class YMBESEO_Admin_Init {
 				'textdomain'     => 'wordpress-seo',
 				'project_slug'   => 'wordpress-seo',
 				'plugin_name'    => 'Yoast SEO',
-				'hook'           => 'wpseo_admin_footer',
+				'hook'           => 'ymbeseo_admin_footer',
 				'glotpress_url'  => 'https://translate.yoast.com/',
 				'glotpress_name' => 'Yoast Translate',
 				'glotpress_logo' => 'https://cdn.yoast.com/wp-content/uploads/i18n-images/Yoast_Translate.svg',
-				'register_url'   => 'https://translate.yoast.com/projects#utm_source=plugin&utm_medium=promo-box&utm_campaign=wpseo-i18n-promo',
+				'register_url'   => 'https://translate.yoast.com/projects#utm_source=plugin&utm_medium=promo-box&utm_campaign=ymbeseo-i18n-promo',
 			)
 		);
 	}
@@ -259,12 +259,12 @@ class YMBESEO_Admin_Init {
 	 * See if we should start our tour.
 	 */
 	private function load_tour() {
-		$restart_tour = filter_input( INPUT_GET, 'wpseo_restart_tour' );
+		$restart_tour = filter_input( INPUT_GET, 'ymbeseo_restart_tour' );
 		if ( $restart_tour ) {
-			delete_user_meta( get_current_user_id(), 'wpseo_ignore_tour' );
+			delete_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' );
 		}
 
-		if ( ! get_user_meta( get_current_user_id(), 'wpseo_ignore_tour' ) ) {
+		if ( ! get_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' ) ) {
 			add_action( 'admin_enqueue_scripts', array( 'YMBESEO_Pointers', 'get_instance' ) );
 		}
 	}
@@ -282,8 +282,8 @@ class YMBESEO_Admin_Init {
 	 * Listener for the ignore tour GET value. If this one is set, just set the user meta to true.
 	 */
 	private function ignore_tour() {
-		if ( filter_input( INPUT_GET, 'wpseo_ignore_tour' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'wpseo-ignore-tour' ) ) {
-			update_user_meta( get_current_user_id(), 'wpseo_ignore_tour', true );
+		if ( filter_input( INPUT_GET, 'ymbeseo_ignore_tour' ) && wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'ymbeseo-ignore-tour' ) ) {
+			update_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour', true );
 		}
 
 	}

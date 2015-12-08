@@ -37,7 +37,7 @@ if ( ! defined( 'YMBESEO_CSSJS_SUFFIX' ) ) {
  *
  * @return void
  */
-function wpseo_auto_load( $class ) {
+function ymbeseo_auto_load( $class ) {
 	static $classes = null;
 
 	if ( $classes === null ) {
@@ -59,12 +59,12 @@ if ( file_exists( YMBESEO_PATH . '/vendor/autoload_52.php' ) ) {
 	require YMBESEO_PATH . '/vendor/autoload_52.php';
 }
 elseif ( ! class_exists( 'YMBESEO_Options' ) ) { // Still checking since might be site-level autoload R.
-	add_action( 'admin_init', 'yoast_wpseo_missing_autoload', 1 );
+	add_action( 'admin_init', 'yoast_ymbeseo_missing_autoload', 1 );
 	return;
 }
 
 if ( function_exists( 'spl_autoload_register' ) ) {
-	spl_autoload_register( 'wpseo_auto_load' );
+	spl_autoload_register( 'ymbeseo_auto_load' );
 }
 
 
@@ -75,13 +75,13 @@ if ( function_exists( 'spl_autoload_register' ) ) {
  *
  * @param bool $networkwide Whether the plugin is being activated network-wide.
  */
-function wpseo_activate( $networkwide = false ) {
+function ymbeseo_activate( $networkwide = false ) {
 	if ( ! is_multisite() || ! $networkwide ) {
-		_wpseo_activate();
+		_ymbeseo_activate();
 	}
 	else {
 		/* Multi-site network activation - activate the plugin for all blogs */
-		wpseo_network_activate_deactivate( true );
+		ymbeseo_network_activate_deactivate( true );
 	}
 }
 
@@ -90,13 +90,13 @@ function wpseo_activate( $networkwide = false ) {
  *
  * @param bool $networkwide Whether the plugin is being de-activated network-wide.
  */
-function wpseo_deactivate( $networkwide = false ) {
+function ymbeseo_deactivate( $networkwide = false ) {
 	if ( ! is_multisite() || ! $networkwide ) {
-		_wpseo_deactivate();
+		_ymbeseo_deactivate();
 	}
 	else {
 		/* Multi-site network activation - de-activate the plugin for all blogs */
-		wpseo_network_activate_deactivate( false );
+		ymbeseo_network_activate_deactivate( false );
 	}
 }
 
@@ -105,7 +105,7 @@ function wpseo_deactivate( $networkwide = false ) {
  *
  * @param bool $activate True for plugin activation, false for de-activation.
  */
-function wpseo_network_activate_deactivate( $activate = true ) {
+function ymbeseo_network_activate_deactivate( $activate = true ) {
 	global $wpdb;
 
 	$original_blog_id = get_current_blog_id(); // Alternatively use: $wpdb->blogid.
@@ -116,10 +116,10 @@ function wpseo_network_activate_deactivate( $activate = true ) {
 			switch_to_blog( $blog_id );
 
 			if ( $activate === true ) {
-				_wpseo_activate();
+				_ymbeseo_activate();
 			}
 			else {
-				_wpseo_deactivate();
+				_ymbeseo_deactivate();
 			}
 		}
 		// Restore back to original blog.
@@ -130,10 +130,10 @@ function wpseo_network_activate_deactivate( $activate = true ) {
 /**
  * Runs on activation of the plugin.
  */
-function _wpseo_activate() {
-	require_once( YMBESEO_PATH . 'inc/wpseo-functions.php' );
+function _ymbeseo_activate() {
+	require_once( YMBESEO_PATH . 'inc/ymbeseo-functions.php' );
 
-	wpseo_load_textdomain(); // Make sure we have our translations available for the defaults.
+	ymbeseo_load_textdomain(); // Make sure we have our translations available for the defaults.
 	YMBESEO_Options::get_instance();
 	if ( ! is_multisite() ) {
 		YMBESEO_Options::initialize();
@@ -145,32 +145,32 @@ function _wpseo_activate() {
 
 	add_action( 'shutdown', 'flush_rewrite_rules' );
 
-	wpseo_add_capabilities();
+	ymbeseo_add_capabilities();
 
 	// Clear cache so the changes are obvious.
 	YMBESEO_Utils::clear_cache();
 
-	do_action( 'wpseo_activate' );
+	do_action( 'ymbeseo_activate' );
 }
 
 /**
  * On deactivation, flush the rewrite rules so XML sitemaps stop working.
  */
-function _wpseo_deactivate() {
-	require_once( YMBESEO_PATH . 'inc/wpseo-functions.php' );
+function _ymbeseo_deactivate() {
+	require_once( YMBESEO_PATH . 'inc/ymbeseo-functions.php' );
 
 	add_action( 'shutdown', 'flush_rewrite_rules' );
 
-	wpseo_remove_capabilities();
+	ymbeseo_remove_capabilities();
 
 	// Clear cache so the changes are obvious.
 	YMBESEO_Utils::clear_cache();
 
-	do_action( 'wpseo_deactivate' );
+	do_action( 'ymbeseo_deactivate' );
 }
 
 /**
- * Run wpseo activation routine on creation / activation of a multisite blog if YMBESEO is activated
+ * Run ymbeseo activation routine on creation / activation of a multisite blog if YMBESEO is activated
  * network-wide.
  *
  * Will only be called by multisite actions.
@@ -180,14 +180,14 @@ function _wpseo_deactivate() {
  *
  * @param int $blog_id
  */
-function wpseo_on_activate_blog( $blog_id ) {
+function ymbeseo_on_activate_blog( $blog_id ) {
 	if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
 		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 	}
 
 	if ( is_plugin_active_for_network( plugin_basename( YMBESEO_FILE ) ) ) {
 		switch_to_blog( $blog_id );
-		wpseo_activate( false );
+		ymbeseo_activate( false );
 		restore_current_blog();
 	}
 }
@@ -198,11 +198,11 @@ function wpseo_on_activate_blog( $blog_id ) {
 /**
  * Load translations
  */
-function wpseo_load_textdomain() {
-	$wpseo_path = str_replace( '\\', '/', YMBESEO_PATH );
+function ymbeseo_load_textdomain() {
+	$ymbeseo_path = str_replace( '\\', '/', YMBESEO_PATH );
 	$mu_path    = str_replace( '\\', '/', WPMU_PLUGIN_DIR );
 
-	if ( false !== stripos( $wpseo_path, $mu_path ) ) {
+	if ( false !== stripos( $ymbeseo_path, $mu_path ) ) {
 		load_muplugin_textdomain( 'wordpress-seo', dirname( YMBESEO_BASENAME ) . '/languages/' );
 	}
 	else {
@@ -210,14 +210,14 @@ function wpseo_load_textdomain() {
 	}
 }
 
-add_action( 'init', 'wpseo_load_textdomain', 1 );
+add_action( 'init', 'ymbeseo_load_textdomain', 1 );
 
 
 /**
  * On plugins_loaded: load the minimum amount of essential files for this plugin
  */
-function wpseo_init() {
-	require_once( YMBESEO_PATH . 'inc/wpseo-functions.php' );
+function ymbeseo_init() {
+	require_once( YMBESEO_PATH . 'inc/ymbeseo-functions.php' );
 
 	// Make sure our option and meta value validation routines and default values are always registered and available.
 	YMBESEO_Options::get_instance();
@@ -231,15 +231,15 @@ function wpseo_init() {
 	}
 
 	if ( $options['stripcategorybase'] === true ) {
-		$GLOBALS['wpseo_rewrite'] = new YMBESEO_Rewrite;
+		$GLOBALS['ymbeseo_rewrite'] = new YMBESEO_Rewrite;
 	}
 
 	if ( $options['enablexmlsitemap'] === true ) {
-		$GLOBALS['wpseo_sitemaps'] = new YMBESEO_Sitemaps;
+		$GLOBALS['ymbeseo_sitemaps'] = new YMBESEO_Sitemaps;
 	}
 
 	if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
-		require_once( YMBESEO_PATH . 'inc/wpseo-non-ajax-functions.php' );
+		require_once( YMBESEO_PATH . 'inc/ymbeseo-non-ajax-functions.php' );
 	}
 
 	// Init it here because the filter must be present on the frontend as well or it won't work in the customizer.
@@ -249,8 +249,8 @@ function wpseo_init() {
 /**
  * Used to load the required files on the plugins_loaded hook, instead of immediately.
  */
-function wpseo_frontend_init() {
-	add_action( 'init', 'initialize_wpseo_front' );
+function ymbeseo_frontend_init() {
+	add_action( 'init', 'initialize_ymbeseo_front' );
 
 	$options = YMBESEO_Options::get_all();
 	if ( $options['breadcrumbs-enable'] === true ) {
@@ -259,36 +259,36 @@ function wpseo_frontend_init() {
 		 * there's no reason to have bbPress breadcrumbs as well.
 		 *
 		 * @internal The class itself is only loaded when the template tag is encountered via
-		 * the template tag function in the wpseo-functions.php file
+		 * the template tag function in the ymbeseo-functions.php file
 		 */
 		add_filter( 'bbp_get_breadcrumb', '__return_false' );
 	}
 
-	add_action( 'template_redirect', 'wpseo_frontend_head_init', 999 );
+	add_action( 'template_redirect', 'ymbeseo_frontend_head_init', 999 );
 }
 
 /**
  * Instantiate the different social classes on the frontend
  */
-function wpseo_frontend_head_init() {
+function ymbeseo_frontend_head_init() {
 	$options = YMBESEO_Options::get_all();
 	if ( $options['twitter'] === true ) {
-		add_action( 'wpseo_head', array( 'YMBESEO_Twitter', 'get_instance' ), 40 );
+		add_action( 'ymbeseo_head', array( 'YMBESEO_Twitter', 'get_instance' ), 40 );
 	}
 
 	if ( $options['opengraph'] === true ) {
-		$GLOBALS['wpseo_og'] = new YMBESEO_OpenGraph;
+		$GLOBALS['ymbeseo_og'] = new YMBESEO_OpenGraph;
 	}
 
 	if ( $options['googleplus'] === true && is_singular() ) {
-		add_action( 'wpseo_head', array( 'YMBESEO_GooglePlus', 'get_instance' ), 35 );
+		add_action( 'ymbeseo_head', array( 'YMBESEO_GooglePlus', 'get_instance' ), 35 );
 	}
 }
 
 /**
  * Used to load the required files on the plugins_loaded hook, instead of immediately.
  */
-function wpseo_admin_init() {
+function ymbeseo_admin_init() {
 	new YMBESEO_Admin_Init();
 }
 
@@ -298,15 +298,15 @@ $spl_autoload_exists = function_exists( 'spl_autoload_register' );
 $filter_exists       = function_exists( 'filter_input' );
 
 if ( ! $spl_autoload_exists ) {
-	add_action( 'admin_init', 'yoast_wpseo_missing_spl', 1 );
+	add_action( 'admin_init', 'yoast_ymbeseo_missing_spl', 1 );
 }
 
 if ( ! $filter_exists ) {
-	add_action( 'admin_init', 'yoast_wpseo_missing_filter', 1 );
+	add_action( 'admin_init', 'yoast_ymbeseo_missing_filter', 1 );
 }
 
 if ( ( ! defined( 'WP_INSTALLING' ) || WP_INSTALLING === false ) && ( $spl_autoload_exists && $filter_exists ) ) {
-	add_action( 'plugins_loaded', 'wpseo_init', 14 );
+	add_action( 'plugins_loaded', 'ymbeseo_init', 14 );
 
 	if ( is_admin() ) {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -320,22 +320,22 @@ if ( ( ! defined( 'WP_INSTALLING' ) || WP_INSTALLING === false ) && ( $spl_autol
 
 		}
 		else {
-			add_action( 'plugins_loaded', 'wpseo_admin_init', 15 );
+			add_action( 'plugins_loaded', 'ymbeseo_admin_init', 15 );
 		}
 	}
 	else {
-		add_action( 'plugins_loaded', 'wpseo_frontend_init', 15 );
+		add_action( 'plugins_loaded', 'ymbeseo_frontend_init', 15 );
 	}
 
 	add_action( 'admin_init', 'load_yoast_notifications' );
 }
 
 // Activation and deactivation hook.
-register_activation_hook( YMBESEO_FILE, 'wpseo_activate' );
+register_activation_hook( YMBESEO_FILE, 'ymbeseo_activate' );
 register_activation_hook( YMBESEO_FILE, array( 'YMBESEO_Plugin_Conflict', 'hook_check_for_plugin_conflicts' ) );
-register_deactivation_hook( YMBESEO_FILE, 'wpseo_deactivate' );
-add_action( 'wpmu_new_blog', 'wpseo_on_activate_blog' );
-add_action( 'activate_blog', 'wpseo_on_activate_blog' );
+register_deactivation_hook( YMBESEO_FILE, 'ymbeseo_deactivate' );
+add_action( 'wpmu_new_blog', 'ymbeseo_on_activate_blog' );
+add_action( 'activate_blog', 'ymbeseo_on_activate_blog' );
 
 /**
  * Wraps for notifications center class.
@@ -353,20 +353,20 @@ function load_yoast_notifications() {
  *
  * @return void
  */
-function yoast_wpseo_missing_spl() {
+function yoast_ymbeseo_missing_spl() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_wpseo_missing_spl_notice' );
+		add_action( 'admin_notices', 'yoast_ymbeseo_missing_spl_notice' );
 
-		yoast_wpseo_self_deactivate();
+		yoast_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing spl extension
  */
-function yoast_wpseo_missing_spl_notice() {
+function yoast_ymbeseo_missing_spl_notice() {
 	$message = esc_html__( 'The Standard PHP Library (SPL) extension seem to be unavailable. Please ask your web host to enable it.', 'wordpress-seo' );
-	yoast_wpseo_activation_failed_notice( $message );
+	yoast_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -374,22 +374,22 @@ function yoast_wpseo_missing_spl_notice() {
  *
  * @return void
  */
-function yoast_wpseo_missing_autoload() {
+function yoast_ymbeseo_missing_autoload() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_wpseo_missing_autoload_notice' );
+		add_action( 'admin_notices', 'yoast_ymbeseo_missing_autoload_notice' );
 
-		yoast_wpseo_self_deactivate();
+		yoast_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing Composer autoload
  */
-function yoast_wpseo_missing_autoload_notice() {
+function yoast_ymbeseo_missing_autoload_notice() {
 	/* translators: %1$s expands to Yoast SEO, %2$s / %3$s: links to the installation manual in the Readme for the Yoast SEO code repository on GitHub */
 	$message = esc_html__( 'The %1$s plugin installation is incomplete. Please refer to %2$sinstallation instructions%3$s.', 'wordpress-seo' );
 	$message = sprintf( $message, 'Yoast SEO', '<a href="https://github.com/Yoast/wordpress-seo#installation">', '</a>' );
-	yoast_wpseo_activation_failed_notice( $message );
+	yoast_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -399,20 +399,20 @@ function yoast_wpseo_missing_autoload_notice() {
  *
  * @return void
  */
-function yoast_wpseo_missing_filter() {
+function yoast_ymbeseo_missing_filter() {
 	if ( is_admin() ) {
-		add_action( 'admin_notices', 'yoast_wpseo_missing_filter_notice' );
+		add_action( 'admin_notices', 'yoast_ymbeseo_missing_filter_notice' );
 
-		yoast_wpseo_self_deactivate();
+		yoast_ymbeseo_self_deactivate();
 	}
 }
 
 /**
  * Returns the notice in case of missing filter extension
  */
-function yoast_wpseo_missing_filter_notice() {
+function yoast_ymbeseo_missing_filter_notice() {
 	$message = esc_html__( 'The filter extension seem to be unavailable. Please ask your web host to enable it.', 'wordpress-seo' );
-	yoast_wpseo_activation_failed_notice( $message );
+	yoast_ymbeseo_activation_failed_notice( $message );
 }
 
 /**
@@ -420,14 +420,14 @@ function yoast_wpseo_missing_filter_notice() {
  *
  * @param string $message
  */
-function yoast_wpseo_activation_failed_notice( $message ) {
+function yoast_ymbeseo_activation_failed_notice( $message ) {
 	echo '<div class="error"><p>' . __( 'Activation failed:', 'wordpress-seo' ) . ' ' . $message . '</p></div>';
 }
 
 /**
  * The method will deactivate the plugin, but only once, done by the static $is_deactivated
  */
-function yoast_wpseo_self_deactivate() {
+function yoast_ymbeseo_self_deactivate() {
 	static $is_deactivated;
 
 	if ( $is_deactivated === null ) {

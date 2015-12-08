@@ -11,7 +11,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 
 $yform = Yoast_Form::get_instance();
 
-$yform->currentoption = 'wpseo_internallinks';
+$yform->currentoption = 'ymbeseo_internallinks';
 
 if ( ! current_theme_supports( 'yoast-seo-breadcrumbs' ) ) {
 	$yform->checkbox( 'breadcrumbs-enable', __( 'Enable Breadcrumbs', 'wordpress-seo' ) );

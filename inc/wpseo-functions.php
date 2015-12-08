@@ -9,11 +9,11 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	exit();
 }
 
-if ( ! function_exists( 'initialize_wpseo_front' ) ) {
+if ( ! function_exists( 'initialize_ymbeseo_front' ) ) {
 	/**
 	 * Wraps frontend class.
 	 */
-	function initialize_wpseo_front() {
+	function initialize_ymbeseo_front() {
 		YMBESEO_Frontend::get_instance();
 	}
 }
@@ -32,7 +32,7 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 	function yoast_breadcrumb( $before = '', $after = '', $display = true ) {
 		$breadcrumbs_enabled = current_theme_supports( 'yoast-seo-breadcrumbs' );
 		if ( ! $breadcrumbs_enabled ) {
-			$options             = get_option( 'wpseo_internallinks' );
+			$options             = get_option( 'ymbeseo_internallinks' );
 			$breadcrumbs_enabled = ( $options['breadcrumbs-enable'] === true );
 		}
 
@@ -45,18 +45,18 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 /**
  * Add the bulk edit capability to the proper default roles.
  */
-function wpseo_add_capabilities() {
+function ymbeseo_add_capabilities() {
 	$roles = array(
 		'administrator',
 		'editor',
 	);
 
-	$roles = apply_filters( 'wpseo_bulk_edit_roles', $roles );
+	$roles = apply_filters( 'ymbeseo_bulk_edit_roles', $roles );
 
 	foreach ( $roles as $role ) {
 		$r = get_role( $role );
 		if ( $r ) {
-			$r->add_cap( 'wpseo_bulk_edit' );
+			$r->add_cap( 'ymbeseo_bulk_edit' );
 		}
 	}
 }
@@ -67,7 +67,7 @@ function wpseo_add_capabilities() {
  *
  * Contributor is still removed for legacy reasons.
  */
-function wpseo_remove_capabilities() {
+function ymbeseo_remove_capabilities() {
 	$roles = array(
 		'administrator',
 		'editor',
@@ -75,12 +75,12 @@ function wpseo_remove_capabilities() {
 		'contributor',
 	);
 
-	$roles = apply_filters( 'wpseo_bulk_edit_roles', $roles );
+	$roles = apply_filters( 'ymbeseo_bulk_edit_roles', $roles );
 
 	foreach ( $roles as $role ) {
 		$r = get_role( $role );
 		if ( $r ) {
-			$r->remove_cap( 'wpseo_bulk_edit' );
+			$r->remove_cap( 'ymbeseo_bulk_edit' );
 		}
 	}
 }
@@ -95,7 +95,7 @@ function wpseo_remove_capabilities() {
  *
  * @return string
  */
-function wpseo_replace_vars( $string, $args, $omit = array() ) {
+function ymbeseo_replace_vars( $string, $args, $omit = array() ) {
 	$replacer = new YMBESEO_Replace_Vars;
 
 	return $replacer->replace( $string, $args, $omit );
@@ -105,9 +105,9 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  * Register a new variable replacement
  *
  * This function is for use by other plugins/themes to easily add their own additional variables to replace.
- * This function should be called from a function on the 'wpseo_register_extra_replacements' action hook.
- * The use of this function is preferred over the older 'wpseo_replacements' filter as a way to add new replacements.
- * The 'wpseo_replacements' filter should still be used to adjust standard YMBESEO replacement values.
+ * This function should be called from a function on the 'ymbeseo_register_extra_replacements' action hook.
+ * The use of this function is preferred over the older 'ymbeseo_replacements' filter as a way to add new replacements.
+ * The 'ymbeseo_replacements' filter should still be used to adjust standard YMBESEO replacement values.
  * The function can not be used to replace standard YMBESEO replacement value functions and will thrown a warning
  * if you accidently try.
  * To avoid conflicts with variables registered by YMBESEO and other themes/plugins, try and make the
@@ -125,10 +125,10 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  * }
  *
  * function register_my_plugin_extra_replacements() {
- *        wpseo_register_var_replacement( '%%myvar1%%', 'retrieve_var1_replacement', 'advanced', 'this is a help text for myvar1' );
- *        wpseo_register_var_replacement( 'myvar2', array( 'class', 'method_name' ), 'basic', 'this is a help text for myvar2' );
+ *        ymbeseo_register_var_replacement( '%%myvar1%%', 'retrieve_var1_replacement', 'advanced', 'this is a help text for myvar1' );
+ *        ymbeseo_register_var_replacement( 'myvar2', array( 'class', 'method_name' ), 'basic', 'this is a help text for myvar2' );
  * }
- * add_action( 'wpseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
+ * add_action( 'ymbeseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
  * ?>
  * </code>
  *
@@ -144,14 +144,14 @@ function wpseo_replace_vars( $string, $args, $omit = array() ) {
  *
  * @return bool  Whether the replacement function was succesfully registered
  */
-function wpseo_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
+function ymbeseo_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
 	return YMBESEO_Replace_Vars::register_replacement( $var, $replace_function, $type, $help_text );
 }
 
 /**
  * Redirect /sitemap.xml to /sitemap_index.xml
  */
-function wpseo_xml_redirect_sitemap() {
+function ymbeseo_xml_redirect_sitemap() {
 	$current_url = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) ? 'https://' : 'http://';
 	$current_url .= sanitize_text_field( $_SERVER['SERVER_NAME'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 
@@ -171,15 +171,15 @@ function wpseo_xml_redirect_sitemap() {
  *
  * @return string base URL (incl page) for the sitemaps
  */
-function wpseo_xml_sitemaps_base_url( $page ) {
+function ymbeseo_xml_sitemaps_base_url( $page ) {
 	$base = $GLOBALS['wp_rewrite']->using_index_permalinks() ? 'index.php/' : '/';
 
 	/**
-	 * Filter: 'wpseo_sitemaps_base_url' - Allow developer to change the base URL of the sitemaps
+	 * Filter: 'ymbeseo_sitemaps_base_url' - Allow developer to change the base URL of the sitemaps
 	 *
 	 * @api string $base The string that should be added to home_url() to make the full base URL.
 	 */
-	$base = apply_filters( 'wpseo_sitemaps_base_url', $base );
+	$base = apply_filters( 'ymbeseo_sitemaps_base_url', $base );
 
 	return home_url( $base . $page );
 }
@@ -187,14 +187,14 @@ function wpseo_xml_sitemaps_base_url( $page ) {
 /**
  * Initialize sitemaps. Add sitemap & XSL rewrite rules and query vars
  */
-function wpseo_xml_sitemaps_init() {
-	$options = get_option( 'wpseo_xml' );
+function ymbeseo_xml_sitemaps_init() {
+	$options = get_option( 'ymbeseo_xml' );
 	if ( $options['enablexmlsitemap'] !== true ) {
 		return;
 	}
 
 	// Redirects sitemap.xml to sitemap_index.xml.
-	add_action( 'template_redirect', 'wpseo_xml_redirect_sitemap', 0 );
+	add_action( 'template_redirect', 'ymbeseo_xml_redirect_sitemap', 0 );
 
 	if ( ! is_object( $GLOBALS['wp'] ) ) {
 		return;
@@ -208,21 +208,21 @@ function wpseo_xml_sitemaps_init() {
 	add_rewrite_rule( '([a-z]+)?-?sitemap\.xsl$', 'index.php?xsl=$matches[1]', 'top' );
 }
 
-add_action( 'init', 'wpseo_xml_sitemaps_init', 1 );
+add_action( 'init', 'ymbeseo_xml_sitemaps_init', 1 );
 
 /**
  * Notify search engines of the updated sitemap.
  *
  * @param string|null $sitemapurl
  */
-function wpseo_ping_search_engines( $sitemapurl = null ) {
+function ymbeseo_ping_search_engines( $sitemapurl = null ) {
 	// Don't ping if blog is not public.
 	if ( '0' == get_option( 'blog_public' ) ) {
 		return;
 	}
 
 	if ( $sitemapurl == null ) {
-		$sitemapurl = urlencode( wpseo_xml_sitemaps_base_url( 'sitemap_index.xml' ) );
+		$sitemapurl = urlencode( ymbeseo_xml_sitemaps_base_url( 'sitemap_index.xml' ) );
 	}
 
 	// Ping Google and Bing.
@@ -230,7 +230,7 @@ function wpseo_ping_search_engines( $sitemapurl = null ) {
 	wp_remote_get( 'http://www.bing.com/ping?sitemap=' . $sitemapurl, array( 'blocking' => false ) );
 }
 
-add_action( 'wpseo_ping_search_engines', 'wpseo_ping_search_engines' );
+add_action( 'ymbeseo_ping_search_engines', 'ymbeseo_ping_search_engines' );
 
 /**
  * WPML plugin support: Set titles for custom types / taxonomies as translatable.
@@ -243,13 +243,13 @@ add_action( 'wpseo_ping_search_engines', 'wpseo_ping_search_engines' );
  *
  * @return array
  */
-function wpseo_wpml_config( $config ) {
+function ymbeseo_wpml_config( $config ) {
 	global $sitepress;
 
 	if ( ( is_array( $config ) && isset( $config['wpml-config']['admin-texts']['key'] ) ) && ( is_array( $config['wpml-config']['admin-texts']['key'] ) && $config['wpml-config']['admin-texts']['key'] !== array() ) ) {
 		$admin_texts = $config['wpml-config']['admin-texts']['key'];
 		foreach ( $admin_texts as $k => $val ) {
-			if ( $val['attr']['name'] === 'wpseo_titles' ) {
+			if ( $val['attr']['name'] === 'ymbeseo_titles' ) {
 				$translate_cp = array_keys( $sitepress->get_translatable_documents() );
 				if ( is_array( $translate_cp ) && $translate_cp !== array() ) {
 					foreach ( $translate_cp as $post_type ) {
@@ -279,19 +279,19 @@ function wpseo_wpml_config( $config ) {
 	return $config;
 }
 
-add_filter( 'icl_wpml_config_array', 'wpseo_wpml_config' );
+add_filter( 'icl_wpml_config_array', 'ymbeseo_wpml_config' );
 
 /**
  * Yoast SEO breadcrumb shortcode
- * [wpseo_breadcrumb]
+ * [ymbeseo_breadcrumb]
  *
  * @return string
  */
-function wpseo_shortcode_yoast_breadcrumb() {
+function ymbeseo_shortcode_yoast_breadcrumb() {
 	return yoast_breadcrumb( '', '', false );
 }
 
-add_shortcode( 'wpseo_breadcrumb', 'wpseo_shortcode_yoast_breadcrumb' );
+add_shortcode( 'ymbeseo_breadcrumb', 'ymbeseo_shortcode_yoast_breadcrumb' );
 
 
 /**
@@ -299,15 +299,15 @@ add_shortcode( 'wpseo_breadcrumb', 'wpseo_shortcode_yoast_breadcrumb' );
  *
  * @param string $type
  */
-function wpseo_invalidate_sitemap_cache( $type ) {
+function ymbeseo_invalidate_sitemap_cache( $type ) {
 	// Always delete the main index sitemaps cache, as that's always invalidated by any other change.
-	delete_transient( 'wpseo_sitemap_cache_1' );
-	delete_transient( 'wpseo_sitemap_cache_' . $type );
+	delete_transient( 'ymbeseo_sitemap_cache_1' );
+	delete_transient( 'ymbeseo_sitemap_cache_' . $type );
 
 	YMBESEO_Utils::clear_sitemap_cache( array( $type ) );
 }
 
-add_action( 'deleted_term_relationships', 'wpseo_invalidate_sitemap_cache' );
+add_action( 'deleted_term_relationships', 'ymbeseo_invalidate_sitemap_cache' );
 
 /**
  * Invalidate XML sitemap cache for taxonomy / term actions
@@ -315,30 +315,30 @@ add_action( 'deleted_term_relationships', 'wpseo_invalidate_sitemap_cache' );
  * @param unsigned $unused
  * @param string   $type
  */
-function wpseo_invalidate_sitemap_cache_terms( $unused, $type ) {
-	wpseo_invalidate_sitemap_cache( $type );
+function ymbeseo_invalidate_sitemap_cache_terms( $unused, $type ) {
+	ymbeseo_invalidate_sitemap_cache( $type );
 }
 
-add_action( 'edited_terms', 'wpseo_invalidate_sitemap_cache_terms', 10, 2 );
-add_action( 'clean_term_cache', 'wpseo_invalidate_sitemap_cache_terms', 10, 2 );
-add_action( 'clean_object_term_cache', 'wpseo_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'edited_terms', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'clean_term_cache', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'clean_object_term_cache', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
 
 /**
  * Invalidate the XML sitemap cache for a post type when publishing or updating a post
  *
  * @param int $post_id
  */
-function wpseo_invalidate_sitemap_cache_on_save_post( $post_id ) {
+function ymbeseo_invalidate_sitemap_cache_on_save_post( $post_id ) {
 
 	// If this is just a revision, don't invalidate the sitemap cache yet.
 	if ( wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 
-	wpseo_invalidate_sitemap_cache( get_post_type( $post_id ) );
+	ymbeseo_invalidate_sitemap_cache( get_post_type( $post_id ) );
 }
 
-add_action( 'save_post', 'wpseo_invalidate_sitemap_cache_on_save_post' );
+add_action( 'save_post', 'ymbeseo_invalidate_sitemap_cache_on_save_post' );
 
 /**
  * Emulate PHP native ctype_digit() function for when the ctype extension would be disabled *sigh*
@@ -381,7 +381,7 @@ if ( ! extension_loaded( 'ctype' ) || ! function_exists( 'ctype_digit' ) ) {
  *
  * @return    string
  */
-function wpseo_get_value( $val, $postid = 0 ) {
+function ymbeseo_get_value( $val, $postid = 0 ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_value()' );
 
 	return YMBESEO_Meta::get_value( $val, $postid );
@@ -401,7 +401,7 @@ function wpseo_get_value( $val, $postid = 0 ) {
  *
  * @return    bool    whether the value was changed
  */
-function wpseo_set_value( $meta_key, $meta_value, $post_id ) {
+function ymbeseo_set_value( $meta_key, $meta_value, $post_id ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::set_value()' );
 
 	return YMBESEO_Meta::set_value( $meta_key, $meta_value, $post_id );
@@ -417,7 +417,7 @@ function wpseo_set_value( $meta_key, $meta_value, $post_id ) {
  *
  * @return array of options.
  */
-function get_wpseo_options_arr() {
+function get_ymbeseo_options_arr() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_option_names()' );
 
 	return YMBESEO_Options::get_option_names();
@@ -433,7 +433,7 @@ function get_wpseo_options_arr() {
  *
  * @return array of options
  */
-function get_wpseo_options() {
+function get_ymbeseo_options() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_all()' );
 
 	return YMBESEO_Options::get_all();
@@ -470,7 +470,7 @@ function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
  *
  * @return bool|mixed value when the meta exists, false when it does not
  */
-function wpseo_get_term_meta( $term, $taxonomy, $meta ) {
+function ymbeseo_get_term_meta( $term, $taxonomy, $meta ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Taxonomy_Meta::get_term_meta()' );
 	return YMBESEO_Taxonomy_Meta::get_term_meta( $term, $taxonomy, $meta );
 }
@@ -481,7 +481,7 @@ function wpseo_get_term_meta( $term, $taxonomy, $meta ) {
  * @since      1.4.14
  * @deprecated 1.5.4 (removed)
  */
-function wpseo_invalid_custom_taxonomy() {
+function ymbeseo_invalid_custom_taxonomy() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4' );
 }
 
@@ -498,7 +498,7 @@ function wpseo_invalid_custom_taxonomy() {
  *
  * @return string either a single term or a comma delimited string of terms.
  */
-function wpseo_get_terms( $id, $taxonomy, $return_single = false ) {
+function ymbeseo_get_terms( $id, $taxonomy, $return_single = false ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4', 'YMBESEO_Replace_Vars::get_terms()' );
 	$replacer = new YMBESEO_Replace_Vars;
 
@@ -516,13 +516,13 @@ function wpseo_get_terms( $id, $taxonomy, $return_single = false ) {
  *
  * @return string
  */
-function wpseo_sitemap_handler( $atts ) {
+function ymbeseo_sitemap_handler( $atts ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast SEO Premium plugin soon.' );
 
 	return '';
 }
 
-add_shortcode( 'wpseo_sitemap', 'wpseo_sitemap_handler' );
+add_shortcode( 'ymbeseo_sitemap', 'ymbeseo_sitemap_handler' );
 
 /**
  * Strip out the shortcodes with a filthy regex, because people don't properly register their shortcodes.
@@ -535,7 +535,7 @@ add_shortcode( 'wpseo_sitemap', 'wpseo_sitemap_handler' );
  *
  * @return string $text string without shortcodes
  */
-function wpseo_strip_shortcode( $text ) {
+function ymbeseo_strip_shortcode( $text ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::strip_shortcode()' );
 
 	return YMBESEO_Utils::strip_shortcode( $text );
@@ -565,7 +565,7 @@ function wpseo_strip_shortcode( $text ) {
  * @return    mixed                Calculation Result or false if either or the numbers isn't scalar or
  *                                an invalid operation was passed
  */
-function wpseo_calc( $number1, $action, $number2, $round = false, $decimals = 0, $precision = 10 ) {
+function ymbeseo_calc( $number1, $action, $number2, $round = false, $decimals = 0, $precision = 10 ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::calc()' );
 
 	return YMBESEO_Utils::calc( $number1, $action, $number2, $round, $decimals, $precision );
@@ -580,7 +580,7 @@ function wpseo_calc( $number1, $action, $number2, $round = false, $decimals = 0,
  *
  * @return bool
  */
-function wpseo_is_apache() {
+function ymbeseo_is_apache() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_apache()' );
 
 	return YMBESEO_Utils::is_apache();
@@ -595,7 +595,7 @@ function wpseo_is_apache() {
  *
  * @return bool
  */
-function wpseo_is_nginx() {
+function ymbeseo_is_nginx() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_nginx()' );
 
 	return YMBESEO_Utils::is_nginx();
@@ -610,7 +610,7 @@ function wpseo_is_nginx() {
  *
  * @return array $roles
  */
-function wpseo_get_roles() {
+function ymbeseo_get_roles() {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::get_roles()' );
 
 	return YMBESEO_Utils::get_roles();
@@ -627,7 +627,7 @@ function wpseo_get_roles() {
  *
  * @return bool
  */
-function wpseo_is_url_relative( $url ) {
+function ymbeseo_is_url_relative( $url ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_url_relative()' );
 
 	return YMBESEO_Utils::is_url_relative( $url );
@@ -646,7 +646,7 @@ function wpseo_is_url_relative( $url ) {
  *
  * @return string
  */
-function wpseo_standardize_whitespace( $string ) {
+function ymbeseo_standardize_whitespace( $string ) {
 	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::standardize_whitespace()' );
 
 	return YMBESEO_Utils::standardize_whitespace( $string );

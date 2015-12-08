@@ -161,7 +161,7 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="wpseo_crawl_issues[]" value="%s" />', $item['url']
+			'<input type="checkbox" name="ymbeseo_crawl_issues[]" value="%s" />', $item['url']
 		);
 	}
 
@@ -207,7 +207,7 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 		}
 
 		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
-		$actions['markasfixed'] = '<a href="javascript:wpseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
+		$actions['markasfixed'] = '<a href="javascript:ymbeseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
 
 		return sprintf(
 			'<span class="value">%1$s</span> %2$s',
@@ -377,7 +377,7 @@ class YMBESEO_GSC_Table extends WP_List_Table {
 	 * @param string $platform
 	 */
 	private function show_fields( $platform ) {
-		echo "<input type='hidden' name='wpseo_gsc_nonce' value='" . wp_create_nonce( 'wpseo_gsc_nonce' ) . "' />";
+		echo "<input type='hidden' name='ymbeseo_gsc_nonce' value='" . wp_create_nonce( 'ymbeseo_gsc_nonce' ) . "' />";
 		echo "<input id='field_platform' type='hidden' name='platform' value='{$platform}' />";
 		echo "<input id='field_category' type='hidden' name='category' value='{$this->current_view}' />";
 	}

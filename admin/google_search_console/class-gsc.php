@@ -11,7 +11,7 @@ class YMBESEO_GSC {
 	/**
 	 * The option where data will be stored
 	 */
-	const OPTION_YMBESEO_GSC = 'wpseo-gsc';
+	const OPTION_YMBESEO_GSC = 'ymbeseo-gsc';
 
 	/**
 	 * @var YMBESEO_GSC_Service
@@ -46,7 +46,7 @@ class YMBESEO_GSC {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 
 		// Setting the screen option.
-		if ( filter_input( INPUT_GET, 'page' ) === 'wpseo_search_console' ) {
+		if ( filter_input( INPUT_GET, 'page' ) === 'ymbeseo_search_console' ) {
 
 			if ( filter_input( INPUT_GET, 'tab' ) !== 'settings' && YMBESEO_GSC_Settings::get_profile() === '' ) {
 				wp_redirect( add_query_arg( 'tab', 'settings' ) );
@@ -57,7 +57,7 @@ class YMBESEO_GSC {
 			$this->set_dependencies();
 			$this->request_handler();
 		}
-		elseif ( current_user_can( 'manage_options' ) && YMBESEO_GSC_Settings::get_profile() === '' && get_user_option( 'wpseo_dismissed_gsc_notice', get_current_user_id() ) !== '1' ) {
+		elseif ( current_user_can( 'manage_options' ) && YMBESEO_GSC_Settings::get_profile() === '' && get_user_option( 'ymbeseo_dismissed_gsc_notice', get_current_user_id() ) !== '1' ) {
 			add_action( 'admin_init', array( $this, 'register_gsc_notification' ) );
 		}
 	}
@@ -70,12 +70,12 @@ class YMBESEO_GSC {
 			new Yoast_Notification(
 				sprintf(
 					__( 'Don\'t miss your crawl errors: %1$sconnect with Google Search Console here%2$s.', 'wordpress-seo' ),
-					'<a href="' . admin_url( 'admin.php?page=wpseo_search_console&tab=settings' ) . '">',
+					'<a href="' . admin_url( 'admin.php?page=ymbeseo_search_console&tab=settings' ) . '">',
 					'</a>'
 				),
 				array(
 					'type'      => 'updated yoast-dismissible',
-					'id'        => 'wpseo-dismiss-gsc',
+					'id'        => 'ymbeseo-dismiss-gsc',
 					'nonce'     => wp_create_nonce( 'dismiss-gsc-notice' ),
 				)
 			)
@@ -86,7 +86,7 @@ class YMBESEO_GSC {
 	 * Be sure the settings will be registered, so data can be stored
 	 */
 	public function register_settings() {
-		register_setting( 'yoast_wpseo_gsc_options', self::OPTION_YMBESEO_GSC );
+		register_setting( 'yoast_ymbeseo_gsc_options', self::OPTION_YMBESEO_GSC );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class YMBESEO_GSC {
 
 		// Preparing and displaying the table.
 		$list_table->prepare_items();
-		$list_table->search_box( __( 'Search', 'wordpress-seo' ), 'wpseo-crawl-issues-search' );
+		$list_table->search_box( __( 'Search', 'wordpress-seo' ), 'ymbeseo-crawl-issues-search' );
 		$list_table->display();
 	}
 
@@ -211,7 +211,7 @@ class YMBESEO_GSC {
 	private function catch_authentication_post() {
 		$gsc_values = filter_input( INPUT_POST, 'gsc', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		// Catch the authorization code POST.
-		if ( ! empty( $gsc_values['authorization_code'] ) && wp_verify_nonce( $gsc_values['gsc_nonce'], 'wpseo-gsc_nonce' ) ) {
+		if ( ! empty( $gsc_values['authorization_code'] ) && wp_verify_nonce( $gsc_values['gsc_nonce'], 'ymbeseo-gsc_nonce' ) ) {
 			if ( ! YMBESEO_GSC_Settings::validate_authorization( trim( $gsc_values['authorization_code'] ), $this->service->get_client() ) ) {
 				$this->add_notification( __( 'Incorrect Google Authorization Code.', 'wordpress-seo' ), 'error' );
 			}

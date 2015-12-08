@@ -14,30 +14,30 @@
 ?>
 <div id='redirect-<?php echo md5( $url ); ?>' style='display: none;'>
 	<form>
-		<div class='form-wrap wpseo_content_wrapper'>
+		<div class='form-wrap ymbeseo_content_wrapper'>
 		<?php
 		switch ( $view_type ) {
 			case 'create' :
 				echo '<h3>', __( 'Redirect this broken URL and fix the error', 'wordpress-seo' ), '</h3>';
 				?>
 				<div class='form-field form-required'>
-					<label for='wpseo-current-url'><?php _e( 'Current URL:', 'wordpress-seo' ); ?></label>
-					<input type='text' id='wpseo-current-url' name='current_url' value='<?php echo $url; ?>' disabled='disabled'>
+					<label for='ymbeseo-current-url'><?php _e( 'Current URL:', 'wordpress-seo' ); ?></label>
+					<input type='text' id='ymbeseo-current-url' name='current_url' value='<?php echo $url; ?>' disabled='disabled'>
 				</div>
 				<div class='form-field form-required'>
-					<label for='wpseo-new-url'><?php _e( 'New URL:', 'wordpress-seo' ); ?></label>
-					<input type='text' id='wpseo-new-url' name='new_url' autofocus value=''>
+					<label for='ymbeseo-new-url'><?php _e( 'New URL:', 'wordpress-seo' ); ?></label>
+					<input type='text' id='ymbeseo-new-url' name='new_url' autofocus value=''>
 				</div>
 				<div class='form-field form-required'>
-					<label for='wpseo-mark-as-fixed' class='clear'><?php _e( 'Mark as fixed:', 'wordpress-seo' ); ?></label>
-					<input type='checkbox' checked value='1' id='wpseo-mark-as-fixed' name='mark_as_fixed' class='clear' >
+					<label for='ymbeseo-mark-as-fixed' class='clear'><?php _e( 'Mark as fixed:', 'wordpress-seo' ); ?></label>
+					<input type='checkbox' checked value='1' id='ymbeseo-mark-as-fixed' name='mark_as_fixed' class='clear' >
 					<p><?php
 						/* Translators: %1$s: expands to 'Google Search Console'. */
 						echo sprintf( __( 'Mark this issue as fixed in %1$s.', 'wordpress-seo' ), 'Google Search Console' );
 						?></p>
 				</div>
 				<p class='submit'>
-					<input type='button' name='submit' id='submit' class='button button-primary' value='<?php _e( 'Create redirect', 'wordpress-seo' ); ?>' onclick='wpseo_gsc_post_redirect( jQuery( this ) );' />
+					<input type='button' name='submit' id='submit' class='button button-primary' value='<?php _e( 'Create redirect', 'wordpress-seo' ); ?>' onclick='ymbeseo_gsc_post_redirect( jQuery( this ) );' />
 				</p>
 				<?php
 				break;

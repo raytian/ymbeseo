@@ -4,14 +4,14 @@
  */
 
 /**
- * Option: wpseo_taxonomy_meta
+ * Option: ymbeseo_taxonomy_meta
  */
 class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 
 	/**
 	 * @var  string  option name
 	 */
-	public $option_name = 'wpseo_taxonomy_meta';
+	public $option_name = 'ymbeseo_taxonomy_meta';
 
 	/**
 	 * @var  bool  whether to include the option in the return for YMBESEO_Options::get_all()
@@ -40,13 +40,13 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 	 * @static
 	 */
 	public static $defaults_per_term = array(
-		'wpseo_title'           => '',
-		'wpseo_desc'            => '',
-		'wpseo_metakey'         => '',
-		'wpseo_canonical'       => '',
-		'wpseo_bctitle'         => '',
-		'wpseo_noindex'         => 'default',
-		'wpseo_sitemap_include' => '-',
+		'ymbeseo_title'           => '',
+		'ymbeseo_desc'            => '',
+		'ymbeseo_metakey'         => '',
+		'ymbeseo_canonical'       => '',
+		'ymbeseo_bctitle'         => '',
+		'ymbeseo_noindex'         => 'default',
+		'ymbeseo_sitemap_include' => '-',
 	);
 
 	/**
@@ -115,7 +115,7 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 	 * Add extra default options received from a filter
 	 */
 	public function enrich_defaults() {
-		$extra_defaults_per_term = apply_filters( 'wpseo_add_extra_taxmeta_term_defaults', array() );
+		$extra_defaults_per_term = apply_filters( 'ymbeseo_add_extra_taxmeta_term_defaults', array() );
 		if ( is_array( $extra_defaults_per_term ) ) {
 			self::$defaults_per_term = array_merge( $extra_defaults_per_term, self::$defaults_per_term );
 		}
@@ -192,8 +192,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 		Prevent complete validation (which can be expensive when there are lots of terms)
 			   if only one item has changed and has already been validated
 		*/
-		if ( isset( $dirty['wpseo_already_validated'] ) && $dirty['wpseo_already_validated'] === true ) {
-			unset( $dirty['wpseo_already_validated'] );
+		if ( isset( $dirty['ymbeseo_already_validated'] ) && $dirty['ymbeseo_already_validated'] === true ) {
+			unset( $dirty['ymbeseo_already_validated'] );
 
 			return $dirty;
 		}
@@ -206,8 +206,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					/* Only validate term if the taxonomy exists */
 					if ( taxonomy_exists( $taxonomy ) && get_term_by( 'id', $term_id, $taxonomy ) === false ) {
 						/* Is this term id a special case ? */
-						if ( has_filter( 'wpseo_tax_meta_special_term_id_validation_' . $term_id ) !== false ) {
-							$clean[ $taxonomy ][ $term_id ] = apply_filters( 'wpseo_tax_meta_special_term_id_validation_' . $term_id, $meta_data, $taxonomy, $term_id );
+						if ( has_filter( 'ymbeseo_tax_meta_special_term_id_validation_' . $term_id ) !== false ) {
+							$clean[ $taxonomy ][ $term_id ] = apply_filters( 'ymbeseo_tax_meta_special_term_id_validation_' . $term_id, $meta_data, $taxonomy, $term_id );
 						}
 						continue;
 					}
@@ -222,8 +222,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					}
 
 					// Deal with special cases (for when taxonomy doesn't exist yet).
-					if ( ! isset( $clean[ $taxonomy ][ $term_id ] ) && has_filter( 'wpseo_tax_meta_special_term_id_validation_' . $term_id ) !== false ) {
-						$clean[ $taxonomy ][ $term_id ] = apply_filters( 'wpseo_tax_meta_special_term_id_validation_' . $term_id, $meta_data, $taxonomy, $term_id );
+					if ( ! isset( $clean[ $taxonomy ][ $term_id ] ) && has_filter( 'ymbeseo_tax_meta_special_term_id_validation_' . $term_id ) !== false ) {
+						$clean[ $taxonomy ][ $term_id ] = apply_filters( 'ymbeseo_tax_meta_special_term_id_validation_' . $term_id, $meta_data, $taxonomy, $term_id );
 					}
 				}
 			}
@@ -255,7 +255,7 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 		foreach ( $clean as $key => $value ) {
 			switch ( $key ) {
 
-				case 'wpseo_noindex':
+				case 'ymbeseo_noindex':
 					if ( isset( $meta_data[ $key ] ) ) {
 						if ( isset( self::$no_index_options[ $meta_data[ $key ] ] ) ) {
 							$clean[ $key ] = $meta_data[ $key ];
@@ -267,13 +267,13 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					}
 					break;
 
-				case 'wpseo_sitemap_include':
+				case 'ymbeseo_sitemap_include':
 					if ( isset( $meta_data[ $key ], self::$sitemap_include_options[ $meta_data[ $key ] ] ) ) {
 						$clean[ $key ] = $meta_data[ $key ];
 					}
 					break;
 
-				case 'wpseo_canonical':
+				case 'ymbeseo_canonical':
 					if ( isset( $meta_data[ $key ] ) && $meta_data[ $key ] !== '' ) {
 						$url = YMBESEO_Utils::sanitize_url( $meta_data[ $key ] );
 						if ( $url !== '' ) {
@@ -283,8 +283,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					}
 					break;
 
-				case 'wpseo_metakey':
-				case 'wpseo_bctitle':
+				case 'ymbeseo_metakey':
+				case 'ymbeseo_bctitle':
 					if ( isset( $meta_data[ $key ] ) ) {
 						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
 					}
@@ -294,8 +294,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					}
 					break;
 
-				case 'wpseo_title':
-				case 'wpseo_desc':
+				case 'ymbeseo_title':
+				case 'ymbeseo_desc':
 				default:
 					if ( isset( $meta_data[ $key ] ) && is_string( $meta_data[ $key ] ) ) {
 						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
@@ -303,7 +303,7 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					break;
 			}
 
-			$clean[ $key ] = apply_filters( 'wpseo_sanitize_tax_meta_' . $key, $clean[ $key ], ( isset( $meta_data[ $key ] ) ? $meta_data[ $key ] : null ), ( isset( $old_meta[ $key ] ) ? $old_meta[ $key ] : null ) );
+			$clean[ $key ] = apply_filters( 'ymbeseo_sanitize_tax_meta_' . $key, $clean[ $key ], ( isset( $meta_data[ $key ] ) ? $meta_data[ $key ] : null ), ( isset( $old_meta[ $key ] ) ? $old_meta[ $key ] : null ) );
 		}
 
 		// Only save the non-default values.
@@ -351,10 +351,10 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 										break;
 
 									case 'canonical':
-									case 'wpseo_metakey':
-									case 'wpseo_bctitle':
-									case 'wpseo_title':
-									case 'wpseo_desc':
+									case 'ymbeseo_metakey':
+									case 'ymbeseo_bctitle':
+									case 'ymbeseo_title':
+									case 'ymbeseo_desc':
 										// @todo [JRF => whomever] needs checking, I don't have example data [JRF].
 										if ( $value !== '' ) {
 											// Fix incorrectly saved (encoded) canonical urls and texts.
@@ -434,8 +434,8 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 			return $tax_meta;
 		}
 		else {
-			if ( isset( $tax_meta[ 'wpseo_' . $meta ] ) ) {
-				return $tax_meta[ 'wpseo_' . $meta ];
+			if ( isset( $tax_meta[ 'ymbeseo_' . $meta ] ) ) {
+				return $tax_meta[ 'ymbeseo_' . $meta ];
 			}
 			else {
 				return false;

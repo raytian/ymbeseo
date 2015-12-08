@@ -14,7 +14,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
  *
  * @param array $contributors
  */
-function wpseo_display_contributors( $contributors ) {
+function ymbeseo_display_contributors( $contributors ) {
 	foreach ( $contributors as $username => $dev ) {
 		echo '<li class="wp-person" id="wp-person-', $username, '">';
 		echo '<a href="https://github.com/', $username, '"><img	src="https://secure.gravatar.com/avatar/', $dev->gravatar, '?s=60" class="gravatar" alt="', $dev->name, '"></a>';
@@ -36,7 +36,7 @@ function wpseo_display_contributors( $contributors ) {
 		Yoast SEO 2.3 helps you optimize your site showing you errors straight from Google Search Console, and pointing you at posts that need work.
 	</p>
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" href="#top#new" id="new-tab">
 			<?php
 			/* translators: %s: '2.3' version number */
@@ -46,7 +46,7 @@ function wpseo_display_contributors( $contributors ) {
 		<a class="nav-tab" href="#top#credits" id="credits-tab"><?php _e( 'Credits', 'wordpress-seo' ); ?></a>
 	</h2>
 
-	<div id="new" class="wpseotab">
+	<div id="new" class="ymbeseotab">
 		<div class="headline-feature">
 			<h2 style="margin:30px 0 0 0;">Some of the changes we're most proud of:</h2>
 
@@ -169,18 +169,18 @@ function wpseo_display_contributors( $contributors ) {
 		</div>
 
 		<div class="return-to-dashboard">
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ); ?>"><?php _e( 'Go to The General settings page →', 'wordpress-seo' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ); ?>"><?php _e( 'Go to The General settings page →', 'wordpress-seo' ); ?></a>
 		</div>
 
 	</div>
 
-	<div id="credits" class="wpseotab">
+	<div id="credits" class="ymbeseotab">
 		<p class="about-description">
 			<?php
 			/* translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast SEO */
 			printf( __( 'While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team.', 'wordpress-seo' ), '<a target="_blank" href="https://yoast.com/">', '</a>', 'Yoast SEO' );
 			echo ' ';
-			printf( __( 'Want to help us develop? Read our %1$scontribution guidelines%2$s!', 'wordpress-seo' ), '<a target="_blank" href="http://yoa.st/wpseocontributionguidelines">', '</a>' );
+			printf( __( 'Want to help us develop? Read our %1$scontribution guidelines%2$s!', 'wordpress-seo' ), '<a target="_blank" href="http://yoa.st/ymbeseocontributionguidelines">', '</a>' );
 			?>
 		</p>
 
@@ -210,7 +210,7 @@ function wpseo_display_contributors( $contributors ) {
 				),
 			);
 
-			wpseo_display_contributors( $leaders );
+			ymbeseo_display_contributors( $leaders );
 			?>
 		</ul>
 		<h4 class="wp-people-group"><?php _e( 'Recent Rockstars', 'wordpress-seo' ); ?></h4>
@@ -239,7 +239,7 @@ function wpseo_display_contributors( $contributors ) {
 				),
 			);
 
-			wpseo_display_contributors( $contributors );
+			ymbeseo_display_contributors( $contributors );
 			?>
 		</ul>
 		<h4 class="wp-people-group"><?php _e( 'Contributing Developers', 'wordpress-seo' ); ?></h4>
@@ -263,7 +263,7 @@ function wpseo_display_contributors( $contributors ) {
 				),
 			);
 
-			wpseo_display_contributors( $contributors );
+			ymbeseo_display_contributors( $contributors );
 			?>
 		</ul>
 		<h4 class="wp-people-group"><?php _e( 'Contributors to this release', 'wordpress-seo' ); ?></h4>
