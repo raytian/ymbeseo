@@ -38,7 +38,7 @@ class YMBESEO_Pointers {
 	private function __construct() {
 		if ( current_user_can( 'manage_options' ) ) {
 
-			if ( ! get_user_meta( get_current_user_id(), 'YMBESEO_ignore_tour' ) ) {
+			if ( ! get_user_meta( get_current_user_id(), 'ymbeseo_ignore_tour' ) ) {
 				wp_enqueue_style( 'wp-pointer' );
 				wp_enqueue_script( 'jquery-ui' );
 				wp_enqueue_script( 'wp-pointer' );
@@ -66,7 +66,7 @@ class YMBESEO_Pointers {
 	public function intro_tour() {
 		global $pagenow;
 
-		$page = preg_replace( '/^(YMBESEO_)/', '', filter_input( INPUT_GET, 'page' ) );
+		$page = preg_replace( '/^(ymbeseo_)/', '', filter_input( INPUT_GET, 'page' ) );
 
 		if ( 'admin.php' === $pagenow && array_key_exists( $page, $this->admin_pages ) ) {
 			$this->do_page_pointer( $page );
@@ -114,9 +114,9 @@ class YMBESEO_Pointers {
 					return;
 				}
 
-				var YMBESEO_pointer_options = <?php echo $json_options; ?>, setup;
+				var ymbeseo_pointer_options = <?php echo $json_options; ?>, setup;
 
-				YMBESEO_pointer_options = $.extend(YMBESEO_pointer_options, {
+				ymbeseo_pointer_options = $.extend(ymbeseo_pointer_options, {
 					buttons: function (event, t) {
 						var button = jQuery('<a href="<?php echo $this->get_ignore_url(); ?>" id="pointer-close" style="margin:0 5px;" class="button-secondary">' + '<?php _e( 'Close', 'ymbeseo' ) ?>' + '</a>');
 						button.bind('click.pointer', function () {
@@ -129,14 +129,14 @@ class YMBESEO_Pointers {
 				});
 
 				setup = function () {
-					$('<?php echo $selector; ?>').pointer(YMBESEO_pointer_options).pointer('open');
+					$('<?php echo $selector; ?>').pointer(ymbeseo_pointer_options).pointer('open');
 					<?php
 					$this->button2();
 					$this->button3();
 					?>
 				};
 
-				if (YMBESEO_pointer_options.position && YMBESEO_pointer_options.position.defer_loading)
+				if (ymbeseo_pointer_options.position && ymbeseo_pointer_options.position.defer_loading)
 					$(window).bind('load.wp-pointers', setup);
 				else
 					$(document).ready(setup);
@@ -176,20 +176,20 @@ class YMBESEO_Pointers {
 	}
 
 	/**
-	 * Show a pointer that starts the tour for Yoast SEO
+	 * Show a pointer that starts the tour for Yoast Minus Bloat Equals SEO
 	 */
 	private function start_tour_pointer() {
-		$selector = 'li.toplevel_page_YMBESEO_dashboard';
+		$selector = 'li.toplevel_page_ymbeseo_dashboard';
 		$content  = '<h3>' . __( 'Congratulations!', 'ymbeseo' ) . '</h3>'
-					/* translators: %1$s expands to Yoast SEO */
-		            .'<p>' . sprintf( __( 'You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a quick introduction of this plugin&#8217;s core functionality.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>';
+					/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		            .'<p>' . sprintf( __( 'You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a quick introduction of this plugin&#8217;s core functionality.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>';
 		$opt_arr  = array(
 			'content'  => $content,
 			'position' => array( 'edge' => 'bottom', 'align' => 'center' ),
 		);
 
 		$this->button_array['button2']['text']     = __( 'Start Tour', 'ymbeseo' );
-		$this->button_array['button2']['function'] = sprintf( 'document.location="%s";', admin_url( 'admin.php?page=YMBESEO_dashboard' ) );
+		$this->button_array['button2']['function'] = sprintf( 'document.location="%s";', admin_url( 'admin.php?page=ymbeseo_dashboard' ) );
 
 		$this->print_scripts( $selector, $opt_arr );
 	}
@@ -200,7 +200,7 @@ class YMBESEO_Pointers {
 	 * @param string $page
 	 */
 	private function do_page_pointer( $page ) {
-		$selector = '#wpseo-title';
+		$selector = '#ymbeseo-title';
 
 		$pointer = call_user_func( array( $this, $this->admin_pages[ $page ] ) );
 
@@ -215,13 +215,13 @@ class YMBESEO_Pointers {
 		if ( isset( $pointer['next_page'] ) ) {
 			$this->button_array['button2'] = array(
 				'text'     => __( 'Next', 'ymbeseo' ),
-				'function' => 'window.location="' . admin_url( 'admin.php?page=YMBESEO_' . $pointer['next_page'] ) . '";',
+				'function' => 'window.location="' . admin_url( 'admin.php?page=ymbeseo_' . $pointer['next_page'] ) . '";',
 			);
 		}
 		if ( isset( $pointer['prev_page'] ) ) {
 			$this->button_array['button3'] = array(
 				'text'     => __( 'Previous', 'ymbeseo' ),
-				'function' => 'window.location="' . admin_url( 'admin.php?page=YMBESEO_' . $pointer['prev_page'] ) . '";',
+				'function' => 'window.location="' . admin_url( 'admin.php?page=ymbeseo_' . $pointer['prev_page'] ) . '";',
 			);
 		}
 		$this->print_scripts( $selector, $opt_arr );
@@ -237,21 +237,21 @@ class YMBESEO_Pointers {
 
 		return array(
 			'content'   => '<h3>' . __( 'General settings', 'ymbeseo' ) . '</h3>'
-				/* translators: %1$s expands to Yoast SEO */
-			               . '<p>' . sprintf( __( 'These are the General settings for %1$s, here you can restart this tour or revert the %1$s settings to default.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>'
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+			               . '<p>' . sprintf( __( 'These are the General settings for %1$s, here you can restart this tour or revert the %1$s settings to default.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>'
 			               . '<p><strong>' . __( 'Tab: Your Info / Company Info', 'ymbeseo' ) . '</strong><br/>' . __( 'Add some info here needed for Google\'s Knowledge Graph.', 'ymbeseo' ) . '</p>'
 			               . '<p><strong>' . __( 'Tab: Webmaster Tools', 'ymbeseo' ) . '</strong><br/>' . __( 'You can add the verification codes for the different Webmaster Tools programs here. We highly encourage you to check out both Google and Bing&#8217;s Webmaster Tools.', 'ymbeseo' ) . '</p>'
 			               . '<p><strong>' . __( 'Tab: Security', 'ymbeseo' ) . '</strong><br/>' . __( 'Determine who has access to the plugins advanced settings on the post edit screen.', 'ymbeseo' ) . '</p>'
 
-				/* translators: %1$s expands to Yoast SEO */
-			               . '<p><strong>' . sprintf( __( 'More %1$s', 'ymbeseo' ), 'Yoast SEO' ) . '</strong><br/>'
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+			               . '<p><strong>' . sprintf( __( 'More %1$s', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</strong><br/>'
 
 				/* @todo What about this translation */
-	   					   . sprintf( __( 'There&#8217;s more to learn about WordPress &amp; SEO than just using this plugin. A great start is our article %1$sthe definitive guide to WordPress SEO%2$s.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/articles/wordpress-seo/#utm_source=YMBESEO_dashboard&utm_medium=YMBESEO_tour&utm_campaign=tour' ) . '">', '</a>' )
+	   					   . sprintf( __( 'There&#8217;s more to learn about WordPress &amp; SEO than just using this plugin. A great start is our article %1$sthe definitive guide to WordPress SEO%2$s.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/articles/ymbeseo/#utm_source=ymbeseo_dashboard&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
 						   . '</p>'
 			               . '<p><strong style="font-size:150%;">' . __( 'Subscribe to our Newsletter', 'ymbeseo' ) . '</strong><br/>'
-				/* translators: %1$s expands to Yoast SEO */
-			               . sprintf( __( 'If you would like us to keep you up-to-date regarding %1$s and other plugins by Yoast, subscribe to our newsletter:', 'ymbeseo' ), 'Yoast SEO' ) . '</p>'
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+			               . sprintf( __( 'If you would like us to keep you up-to-date regarding %1$s and other plugins by Yoast, subscribe to our newsletter:', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>'
 			               . '<form target="_blank" action="http://yoast.us1.list-manage1.com/subscribe/post?u=ffa93edfe21752c921f860358&amp;id=972f1c9122" method="post" selector="newsletter-form" accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">'
 			               . '<p>'
 			               . '<input style="margin: 5px; color:#666" name="EMAIL" value="' . esc_attr( $current_user->user_email ) . '" selector="newsletter-email" placeholder="' . __( 'Email', 'ymbeseo' ) . '"/>'
@@ -273,7 +273,7 @@ class YMBESEO_Pointers {
 			'content'   => '<h3>' . __( 'Title &amp; Metas settings', 'ymbeseo' ) . '</h3>'
 			               . '<p>' . __( 'This is where you	set the titles and meta-information for all your post types, taxonomies, archives, special pages and for your homepage. The page is divided into different tabs. Make sure you check &#8217;em all out!', 'ymbeseo' ) . '</p>'
 			               . '<p><strong>' . __( 'Sitewide settings', 'ymbeseo' ) . '</strong><br/>' . __( 'The first tab will show you site-wide settings for titles, normally you\'ll only need to change the Title Separator.', 'ymbeseo' ) . '</p>'
-			               . '<p><strong>' . __( 'Templates and settings', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'Now click on the &#8216;%1$sPost Types%2$s&#8217;-tab, as this will be our example.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_titles#top#post_types' ) ) . '">', 				       '</a>' ) . '<br/>' . __( 'The templates are built using variables. You can find all these variables in the help tab (in the top-right corner of the page). The settings allow you to set specific behavior for the post types.', 'ymbeseo' ) . '</p>'
+			               . '<p><strong>' . __( 'Templates and settings', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'Now click on the &#8216;%1$sPost Types%2$s&#8217;-tab, as this will be our example.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', 				       '</a>' ) . '<br/>' . __( 'The templates are built using variables. You can find all these variables in the help tab (in the top-right corner of the page). The settings allow you to set specific behavior for the post types.', 'ymbeseo' ) . '</p>'
 			               . '<p><strong>' . __( 'Archives', 'ymbeseo' ) . '</strong><br/>' . __( 'On the archives tab you can set templates for specific pages like author archives, search results and more.', 'ymbeseo' )
 			               . '<p><strong>' . __( 'Other', 'ymbeseo' ) . '</strong><br/>' . __( 'On the Other tab you can change sitewide meta settings, like enable meta keywords.', 'ymbeseo' ),
 			'next_page' => 'social',
@@ -289,9 +289,9 @@ class YMBESEO_Pointers {
 	private function social_pointer() {
 		return array(
 			'content'   => '<h3>' . __( 'Social settings', 'ymbeseo' ) . '</h3>'
-			               . '<p><strong>' . __( 'Facebook', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'On this tab you can enable the %1$sFacebook Open Graph%2$s functionality from this plugin, as well as assign a Facebook user or Application to be the admin of your site, so you can view the Facebook insights.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/facebook-open-graph-protocol/#utm_source=YMBESEO_social&utm_medium=YMBESEO_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
+			               . '<p><strong>' . __( 'Facebook', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'On this tab you can enable the %1$sFacebook Open Graph%2$s functionality from this plugin, as well as assign a Facebook user or Application to be the admin of your site, so you can view the Facebook insights.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/facebook-open-graph-protocol/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
 			               . '<p>' . __( 'The frontpage settings allow you to set meta-data for your homepage, whereas the default settings allow you to set a fallback for all posts/pages without images. ', 'ymbeseo' ) . '</p>'
-			               . '<p><strong>' . __( 'Twitter', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'With %1$sTwitter Cards%2$s, you can attach rich photos, videos and media experience to tweets that drive traffic to your website. Simply check the box, sign up for the service, and users who Tweet links to your content will have a &#8220;Card&#8221; added to the tweet that&#8217;s visible to all of their followers.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/twitter-cards/#utm_source=YMBESEO_social&utm_medium=YMBESEO_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
+			               . '<p><strong>' . __( 'Twitter', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'With %1$sTwitter Cards%2$s, you can attach rich photos, videos and media experience to tweets that drive traffic to your website. Simply check the box, sign up for the service, and users who Tweet links to your content will have a &#8220;Card&#8221; added to the tweet that&#8217;s visible to all of their followers.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/twitter-cards/#utm_source=ymbeseo_social&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>'
 			               . '<p><strong>' . __( 'Pinterest', 'ymbeseo' ) . '</strong><br/>' . __( 'On this tab you can verify your site with Pinterest and enter your Pinterest account.', 'ymbeseo' ) . '</p>'
 			               . '<p><strong>' . __( 'Google+', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'This tab allows you to add specific post meta data for Google+. And if you have a Google+ page for your business, add that URL here and link it on your %1$sGoogle+%2$s page&#8217;s about page.', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://plus.google.com/' ) . '">', '</a>' ) . '</p>'
 			               . '<p><strong>' . __( 'Other', 'ymbeseo' ) . '</strong><br/>' . __( 'On this tab you can enter some more of your social accounts, mostly used for Google\'s Knowledge Graph.', 'ymbeseo' ) . '</p>',
@@ -339,15 +339,15 @@ class YMBESEO_Pointers {
 		return array(
 			'content'   => '<h3>' . __( 'Extensions and Licenses', 'ymbeseo' ) . '</h3>'
 			               . '<p><strong>' . __( 'Extensions', 'ymbeseo' ) . '</strong><br/>'
-				/* translators: %1$s expands to Yoast SEO, %2$s to Yoast SEO Premium, %3$s and %4$s to an anchor with link about our premium plugins */
-						   . sprintf( __( 'The powerful functions of %1$s can be extended with %3$sYoast premium plugins%4$s. These premium plugins require the installation of %1$s or %2$s and add specific functionality. You can read all about the Yoast Premium Plugins %3$shere%4$s.', 'ymbeseo' ), 'Yoast SEO', 'Yoast SEO Premium', '<a target="_blank" href="' . esc_url( 'https://yoast.com/wordpress/plugins/#utm_source=YMBESEO_licenses&utm_medium=YMBESEO_tour&utm_campaign=tour' ) . '">', '</a>' )
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to Yoast Minus Bloat Equals SEO Premium, %3$s and %4$s to an anchor with link about our premium plugins */
+						   . sprintf( __( 'The powerful functions of %1$s can be extended with %3$sYoast premium plugins%4$s. These premium plugins require the installation of %1$s or %2$s and add specific functionality. You can read all about the Yoast Premium Plugins %3$shere%4$s.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO', 'Yoast Minus Bloat Equals SEO Premium', '<a target="_blank" href="' . esc_url( 'https://yoast.com/wordpress/plugins/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' )
 						   . '</p>'
 			               . '<p><strong>' . __( 'Licenses', 'ymbeseo' ) . '</strong><br/>'
-				/* translators: %1$s expands to Yoast SEO Premium */
-				           . sprintf( __( 'Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, you&#8217;ll have to enter a license key. You can do so on the Licenses-tab. Once you&#8217;ve activated your premium plugin, you can use all its powerful features.', 'ymbeseo' ), 'Yoast SEO Premium' )
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium */
+				           . sprintf( __( 'Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, you&#8217;ll have to enter a license key. You can do so on the Licenses-tab. Once you&#8217;ve activated your premium plugin, you can use all its powerful features.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO Premium' )
 				           . '</p>'
-			               . '<p><strong>' . __( 'Like this plugin?', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'So, we&#8217;ve come to the end of the tour. If you like the plugin, please %srate it 5 stars on WordPress.org%s!', 'ymbeseo' ), '<a target="_blank" href="https://wordpress.org/plugins/wordpress-seo/">', '</a>' ) . '</p>'
-			               . '<p>' . sprintf( __( 'Thank you for using our plugin and good luck with your SEO!<br/><br/>Best,<br/>Team Yoast - %1$sYoast.com%2$s', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/#utm_source=YMBESEO_licenses&utm_medium=YMBESEO_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>',
+			               . '<p><strong>' . __( 'Like this plugin?', 'ymbeseo' ) . '</strong><br/>' . sprintf( __( 'So, we&#8217;ve come to the end of the tour. If you like the plugin, please %srate it 5 stars on WordPress.org%s!', 'ymbeseo' ), '<a target="_blank" href="https://wordpress.org/plugins/ymbeseo/">', '</a>' ) . '</p>'
+			               . '<p>' . sprintf( __( 'Thank you for using our plugin and good luck with your SEO!<br/><br/>Best,<br/>Team Yoast - %1$sYoast.com%2$s', 'ymbeseo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/#utm_source=ymbeseo_licenses&utm_medium=ymbeseo_tour&utm_campaign=tour' ) . '">', '</a>' ) . '</p>',
 			'prev_page' => 'advanced',
 		);
 	}
@@ -359,9 +359,9 @@ class YMBESEO_Pointers {
 	 */
 	private function get_ignore_url() {
 		$arr_params = array(
-			'YMBESEO_restart_tour' => false,
-			'YMBESEO_ignore_tour'  => '1',
-			'nonce'              => wp_create_nonce( 'wpseo-ignore-tour' ),
+			'ymbeseo_restart_tour' => false,
+			'ymbeseo_ignore_tour'  => '1',
+			'nonce'              => wp_create_nonce( 'ymbeseo-ignore-tour' ),
 		);
 
 		return esc_url( add_query_arg( $arr_params ) );

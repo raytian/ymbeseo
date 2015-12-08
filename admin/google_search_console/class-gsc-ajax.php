@@ -12,9 +12,9 @@ class YMBESEO_GSC_Ajax {
 	 * Setting the AJAX hooks for GSC
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_YMBESEO_mark_fixed_crawl_issue',  array( $this, 'ajax_mark_as_fixed' ) );
-		add_action( 'wp_ajax_YMBESEO_gsc_create_redirect_url', array( $this, 'ajax_create_redirect' ) );
-		add_action( 'wp_ajax_YMBESEO_dismiss_gsc', array( $this, 'dismiss_notice' ) );
+		add_action( 'wp_ajax_ymbeseo_mark_fixed_crawl_issue',  array( $this, 'ajax_mark_as_fixed' ) );
+		add_action( 'wp_ajax_ymbeseo_gsc_create_redirect_url', array( $this, 'ajax_create_redirect' ) );
+		add_action( 'wp_ajax_ymbeseo_dismiss_gsc', array( $this, 'dismiss_notice' ) );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class YMBESEO_GSC_Ajax {
 	public function dismiss_notice() {
 		check_ajax_referer( 'dismiss-gsc-notice' );
 
-		update_user_meta( get_current_user_id(), 'YMBESEO_dismissed_gsc_notice', true );
+		update_user_meta( get_current_user_id(), 'ymbeseo_dismissed_gsc_notice', true );
 
 		wp_die( 'true' );
 	}
@@ -71,7 +71,7 @@ class YMBESEO_GSC_Ajax {
 	 * @return mixed
 	 */
 	private function valid_nonce() {
-		return wp_verify_nonce( filter_input( INPUT_POST, 'ajax_nonce' ), 'wpseo-gsc-ajax-security' );
+		return wp_verify_nonce( filter_input( INPUT_POST, 'ajax_nonce' ), 'ymbeseo-gsc-ajax-security' );
 	}
 
 }

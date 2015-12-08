@@ -1,4 +1,4 @@
 <?php
 /**
- * Let's go dancing, shall we?
+ * Nothing to see here.
  */

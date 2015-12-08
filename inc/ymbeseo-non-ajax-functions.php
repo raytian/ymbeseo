@@ -13,12 +13,12 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 /**
  * Test whether force rewrite should be enabled or not.
  */
-function YMBESEO_title_test() {
-	$options = get_option( 'YMBESEO_titles' );
+function ymbeseo_title_test() {
+	$options = get_option( 'ymbeseo_titles' );
 
 	$options['forcerewritetitle'] = false;
 	$options['title_test']        = 1;
-	update_option( 'YMBESEO_titles', $options );
+	update_option( 'ymbeseo_titles', $options );
 
 	// Setting title_test to > 0 forces the plugin to output the title below through a filter in class-frontend.php.
 	$expected_title = 'This is a Yoast Test Title';
@@ -54,10 +54,10 @@ function YMBESEO_title_test() {
 	}
 
 	$options['title_test'] = 0;
-	update_option( 'YMBESEO_titles', $options );
+	update_option( 'ymbeseo_titles', $options );
 }
 
-// Commented out? add_filter( 'switch_theme', 'YMBESEO_title_test', 0 ); R.
+// Commented out? add_filter( 'switch_theme', 'ymbeseo_title_test', 0 ); R.
 /**
  * Test whether the active theme contains a <meta> description tag.
  *
@@ -65,8 +65,8 @@ function YMBESEO_title_test() {
  *
  * @return void
  */
-function YMBESEO_description_test() {
-	$options = get_option( 'wpseo' );
+function ymbeseo_description_test() {
+	$options = get_option( 'ymbeseo' );
 
 	// Reset any related options - dirty way of getting the default to make sure it works on activation.
 	$options['theme_has_description']   = YMBESEO_Option_Wpseo::$desc_defaults['theme_has_description'];
@@ -110,23 +110,23 @@ function YMBESEO_description_test() {
 			}
 		}
 	}
-	update_option( 'wpseo', $options );
+	update_option( 'ymbeseo', $options );
 }
 
-add_filter( 'after_switch_theme', 'YMBESEO_description_test', 0 );
+add_filter( 'after_switch_theme', 'ymbeseo_description_test', 0 );
 
 if ( version_compare( $GLOBALS['wp_version'], '3.6.99', '>' ) ) {
 	// Use the new and *sigh* adjusted action hook WP 3.7+.
-	add_action( 'upgrader_process_complete', 'YMBESEO_upgrader_process_complete', 10, 2 );
+	add_action( 'upgrader_process_complete', 'ymbeseo_upgrader_process_complete', 10, 2 );
 }
 elseif ( version_compare( $GLOBALS['wp_version'], '3.5.99', '>' ) ) {
 	// Use the new action hook WP 3.6+.
-	add_action( 'upgrader_process_complete', 'YMBESEO_upgrader_process_complete', 10, 3 );
+	add_action( 'upgrader_process_complete', 'ymbeseo_upgrader_process_complete', 10, 3 );
 }
 else {
 	// Abuse filters to do our action.
-	add_filter( 'update_theme_complete_actions', 'YMBESEO_update_theme_complete_actions', 10, 2 );
-	add_filter( 'update_bulk_theme_complete_actions', 'YMBESEO_update_theme_complete_actions', 10, 2 );
+	add_filter( 'update_theme_complete_actions', 'ymbeseo_update_theme_complete_actions', 10, 2 );
+	add_filter( 'update_bulk_theme_complete_actions', 'ymbeseo_update_theme_complete_actions', 10, 2 );
 }
 
 
@@ -142,8 +142,8 @@ else {
  *
  * @return  void
  */
-function YMBESEO_upgrader_process_complete( $upgrader_object, $context_array, $themes = null ) {
-	$options = get_option( 'wpseo' );
+function ymbeseo_upgrader_process_complete( $upgrader_object, $context_array, $themes = null ) {
+	$options = get_option( 'ymbeseo' );
 
 	// Break if admin_notice already in place.
 	if ( ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) && $options['ignore_meta_description_warning'] !== true ) {
@@ -169,13 +169,13 @@ function YMBESEO_upgrader_process_complete( $upgrader_object, $context_array, $t
 	if ( ( isset( $context_array['bulk'] ) && $context_array['bulk'] === true ) && ( is_array( $themes ) && count( $themes ) > 0 ) ) {
 
 		if ( in_array( $theme, $themes ) ) {
-			// Commented out? YMBESEO_title_test(); R.
-			YMBESEO_description_test();
+			// Commented out? ymbeseo_title_test(); R.
+			ymbeseo_description_test();
 		}
 	}
 	elseif ( is_string( $themes ) && $themes === $theme ) {
-		// Commented out? YMBESEO_title_test(); R.
-		YMBESEO_description_test();
+		// Commented out? ymbeseo_title_test(); R.
+		ymbeseo_description_test();
 	}
 
 	return;
@@ -192,8 +192,8 @@ function YMBESEO_upgrader_process_complete( $upgrader_object, $context_array, $t
  *
  * @return  array  $update_actions    Unchanged array
  */
-function YMBESEO_update_theme_complete_actions( $update_actions, $updated_theme ) {
-	$options = get_option( 'wpseo' );
+function ymbeseo_update_theme_complete_actions( $update_actions, $updated_theme ) {
+	$options = get_option( 'ymbeseo' );
 
 	// Break if admin_notice already in place.
 	if ( ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) && $options['ignore_meta_description_warning'] !== true ) {
@@ -207,16 +207,16 @@ function YMBESEO_update_theme_complete_actions( $update_actions, $updated_theme 
 		   of updated themes, so go & test
 		*/
 
-		// Commented out? YMBESEO_title_test(); R.
-		YMBESEO_description_test();
+		// Commented out? ymbeseo_title_test(); R.
+		ymbeseo_description_test();
 	}
 	elseif ( $updated_theme === $theme ) {
 		/*
 		Single theme update for the active theme
 		*/
 
-		// Commented out? YMBESEO_title_test(); R.
-		YMBESEO_description_test();
+		// Commented out? ymbeseo_title_test(); R.
+		ymbeseo_description_test();
 	}
 
 	return $update_actions;
@@ -226,7 +226,7 @@ function YMBESEO_update_theme_complete_actions( $update_actions, $updated_theme 
 /**
  * Adds an SEO admin bar menu with several options. If the current user is an admin he can also go straight to several settings menu's from here.
  */
-function YMBESEO_admin_bar_menu() {
+function ymbeseo_admin_bar_menu() {
 	// If the current user can't write posts, this is all of no use, so let's not output an admin menu.
 	if ( ! current_user_can( 'edit_posts' ) ) {
 		return;
@@ -236,54 +236,54 @@ function YMBESEO_admin_bar_menu() {
 
 	$focuskw = '';
 	$score   = '';
-	$seo_url = get_admin_url( null, 'admin.php?page=YMBESEO_dashboard' );
+	$seo_url = get_admin_url( null, 'admin.php?page=ymbeseo_dashboard' );
 
 	if ( ( is_singular() || ( is_admin() && in_array( $GLOBALS['pagenow'], array(
 					'post.php',
 					'post-new.php',
-				), true ) ) ) && isset( $post ) && is_object( $post ) && apply_filters( 'YMBESEO_use_page_analysis', true ) === true
+				), true ) ) ) && isset( $post ) && is_object( $post ) && apply_filters( 'ymbeseo_use_page_analysis', true ) === true
 	) {
 		$focuskw    = YMBESEO_Meta::get_value( 'focuskw', $post->ID );
 		$perc_score = YMBESEO_Meta::get_value( 'linkdex', $post->ID );
 		$calc_score = YMBESEO_Utils::calc( $perc_score, '/', 10, true );
 		$txtscore   = YMBESEO_Utils::translate_score( $calc_score );
 		$title      = YMBESEO_Utils::translate_score( $calc_score, false );
-		$score      = '<div title="' . esc_attr( $title ) . '" class="' . esc_attr( 'wpseo-score-icon ' . $txtscore . ' ' . $perc_score ) . '"></div>';
+		$score      = '<div title="' . esc_attr( $title ) . '" class="' . esc_attr( 'ymbeseo-score-icon ' . $txtscore . ' ' . $perc_score ) . '"></div>';
 
 		$seo_url = get_edit_post_link( $post->ID );
 		if ( $txtscore !== 'na' ) {
-			$seo_url .= '#YMBESEO_linkdex';
+			$seo_url .= '#ymbeseo_linkdex';
 		}
 	}
 
 	$wp_admin_bar->add_menu( array(
-		'id'    => 'wpseo-menu',
+		'id'    => 'ymbeseo-menu',
 		'title' => __( 'SEO', 'ymbeseo' ) . $score,
 		'href'  => $seo_url,
 	) );
 	$wp_admin_bar->add_menu( array(
-		'parent' => 'wpseo-menu',
-		'id'     => 'wpseo-kwresearch',
+		'parent' => 'ymbeseo-menu',
+		'id'     => 'ymbeseo-kwresearch',
 		'title'  => __( 'Keyword Research', 'ymbeseo' ),
 		'#',
 	) );
 	$wp_admin_bar->add_menu( array(
-		'parent' => 'wpseo-kwresearch',
-		'id'     => 'wpseo-adwordsexternal',
+		'parent' => 'ymbeseo-kwresearch',
+		'id'     => 'ymbeseo-adwordsexternal',
 		'title'  => __( 'AdWords External', 'ymbeseo' ),
 		'href'   => 'http://adwords.google.com/keywordplanner',
 		'meta'   => array( 'target' => '_blank' ),
 	) );
 	$wp_admin_bar->add_menu( array(
-		'parent' => 'wpseo-kwresearch',
-		'id'     => 'wpseo-googleinsights',
+		'parent' => 'ymbeseo-kwresearch',
+		'id'     => 'ymbeseo-googleinsights',
 		'title'  => __( 'Google Insights', 'ymbeseo' ),
 		'href'   => 'http://www.google.com/insights/search/#q=' . urlencode( $focuskw ) . '&cmpt=q',
 		'meta'   => array( 'target' => '_blank' ),
 	) );
 	$wp_admin_bar->add_menu( array(
-		'parent' => 'wpseo-kwresearch',
-		'id'     => 'wpseo-wordtracker',
+		'parent' => 'ymbeseo-kwresearch',
+		'id'     => 'ymbeseo-wordtracker',
 		'title'  => __( 'SEO Book', 'ymbeseo' ),
 		'href'   => 'http://tools.seobook.com/keyword-tools/seobook/?keyword=' . urlencode( $focuskw ),
 		'meta'   => array( 'target' => '_blank' ),
@@ -294,91 +294,91 @@ function YMBESEO_admin_bar_menu() {
 
 		if ( is_string( $url ) ) {
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-menu',
-				'id'     => 'wpseo-analysis',
+				'parent' => 'ymbeseo-menu',
+				'id'     => 'ymbeseo-analysis',
 				'title'  => __( 'Analyze this page', 'ymbeseo' ),
 				'#',
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-inlinks-ose',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-inlinks-ose',
 				'title'  => __( 'Check Inlinks (OSE)', 'ymbeseo' ),
 				'href'   => '//moz.com/researchtools/ose/links?site=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-kwdensity',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-kwdensity',
 				'title'  => __( 'Check Keyword Density', 'ymbeseo' ),
 				'href'   => '//www.zippy.co.uk/keyworddensity/index.php?url=' . urlencode( $url ) . '&keyword=' . urlencode( $focuskw ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-cache',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-cache',
 				'title'  => __( 'Check Google Cache', 'ymbeseo' ),
 				'href'   => '//webcache.googleusercontent.com/search?strip=1&q=cache:' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-header',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-header',
 				'title'  => __( 'Check Headers', 'ymbeseo' ),
 				'href'   => '//quixapp.com/headers/?r=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-richsnippets',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-richsnippets',
 				'title'  => __( 'Check Rich Snippets', 'ymbeseo' ),
 				'href'   => '//www.google.com/webmasters/tools/richsnippets?q=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-facebookdebug',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-facebookdebug',
 				'title'  => __( 'Facebook Debugger', 'ymbeseo' ),
 				'href'   => '//developers.facebook.com/tools/debug/og/object?q=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-pinterestvalidator',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-pinterestvalidator',
 				'title'  => __( 'Pinterest Rich Pins Validator', 'ymbeseo' ),
 				'href'   => '//developers.pinterest.com/rich_pins/validator/?link=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-htmlvalidation',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-htmlvalidation',
 				'title'  => __( 'HTML Validator', 'ymbeseo' ),
 				'href'   => '//validator.w3.org/check?uri=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-cssvalidation',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-cssvalidation',
 				'title'  => __( 'CSS Validator', 'ymbeseo' ),
 				'href'   => '//jigsaw.w3.org/css-validator/validator?uri=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-pagespeed',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-pagespeed',
 				'title'  => __( 'Google Page Speed Test', 'ymbeseo' ),
 				'href'   => '//developers.google.com/speed/pagespeed/insights/?url=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-modernie',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-modernie',
 				'title'  => __( 'Modern IE Site Scan', 'ymbeseo' ),
 				'href'   => '//www.modern.ie/en-us/report#' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
 			) );
 			$wp_admin_bar->add_menu( array(
-				'parent' => 'wpseo-analysis',
-				'id'     => 'wpseo-google-mobile-friendly',
+				'parent' => 'ymbeseo-analysis',
+				'id'     => 'ymbeseo-google-mobile-friendly',
 				'title'  => __( 'Mobile-Friendly Test', 'ymbeseo' ),
 				'href'   => 'https://www.google.com/webmasters/tools/mobile-friendly/?url=' . urlencode( $url ),
 				'meta'   => array( 'target' => '_blank' ),
@@ -389,68 +389,68 @@ function YMBESEO_admin_bar_menu() {
 	$admin_menu = current_user_can( 'manage_options' );
 
 	if ( ! $admin_menu && is_multisite() ) {
-		$options = get_site_option( 'YMBESEO_ms' );
+		$options = get_site_option( 'ymbeseo_ms' );
 		$admin_menu = ( $options['access'] === 'superadmin' && is_super_admin() );
 	}
 
 	// @todo: add links to bulk title and bulk description edit pages.
 	if ( $admin_menu ) {
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-menu',
-			'id'     => 'wpseo-settings',
+			'parent' => 'ymbeseo-menu',
+			'id'     => 'ymbeseo-settings',
 			'title'  => __( 'SEO Settings', 'ymbeseo' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-general',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-general',
 			'title'  => __( 'General', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_dashboard' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_dashboard' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-titles',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-titles',
 			'title'  => __( 'Titles &amp; Metas', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_titles' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_titles' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-social',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-social',
 			'title'  => __( 'Social', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_social' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_social' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-xml',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-xml',
 			'title'  => __( 'XML Sitemaps', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_xml' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_xml' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-YMBESEO_advanced',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-ymbeseo_advanced',
 			'title'  => __( 'Advanced', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_advanced' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_advanced' ),
 		) );
 		$wp_admin_bar->add_menu( array(
-			'parent' => 'wpseo-settings',
-			'id'     => 'wpseo-licenses',
+			'parent' => 'ymbeseo-settings',
+			'id'     => 'ymbeseo-licenses',
 			'title'  => __( 'Extensions', 'ymbeseo' ),
-			'href'   => admin_url( 'admin.php?page=YMBESEO_licenses' ),
+			'href'   => admin_url( 'admin.php?page=ymbeseo_licenses' ),
 		) );
 	}
 }
 
-add_action( 'admin_bar_menu', 'YMBESEO_admin_bar_menu', 95 );
+add_action( 'admin_bar_menu', 'ymbeseo_admin_bar_menu', 95 );
 
 /**
  * Enqueue a tiny bit of CSS to show so the adminbar shows right.
  */
-function YMBESEO_admin_bar_css() {
+function ymbeseo_admin_bar_css() {
 	if ( is_admin_bar_showing() && is_singular() ) {
 		wp_enqueue_style( 'boxes', plugins_url( 'css/adminbar' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 	}
 }
 
-add_action( 'wp_enqueue_scripts', 'YMBESEO_admin_bar_css' );
+add_action( 'wp_enqueue_scripts', 'ymbeseo_admin_bar_css' );
 
 /**
  * Allows editing of the meta fields through weblog editors like Marsedit.
@@ -469,7 +469,7 @@ function allow_custom_field_edits( $allcaps, $cap, $args ) {
 	// but this is safer to check).
 	if ( in_array( $args[0], array( 'edit_post_meta', 'add_post_meta' ) ) ) {
 		// Only allow editing rights for users who have the rights to edit this post and make sure
-		// the meta value starts with _yoast_wpseo (YMBESEO_Meta::$meta_prefix).
+		// the meta value starts with _yoast_ymbeseo (YMBESEO_Meta::$meta_prefix).
 		if ( ( isset( $args[2] ) && current_user_can( 'edit_post', $args[2] ) ) && ( ( isset( $args[3] ) && $args[3] !== '' ) && strpos( $args[3], YMBESEO_Meta::$meta_prefix ) === 0 ) ) {
 			$allcaps[ $args[0] ] = true;
 		}
@@ -485,27 +485,27 @@ add_filter( 'user_has_cap', 'allow_custom_field_edits', 0, 3 );
  *
  * @since 1.5.0
  */
-function YMBESEO_robots_meta_message() {
+function ymbeseo_robots_meta_message() {
 	// Check if robots meta is running.
-	if ( ( ! isset( $_GET['page'] ) || 'YMBESEO_import' !== $_GET['page'] ) && is_plugin_active( 'robots-meta/robots-meta.php' ) ) {
-		add_action( 'admin_notices', 'YMBESEO_import_robots_meta_notice' );
+	if ( ( ! isset( $_GET['page'] ) || 'ymbeseo_import' !== $_GET['page'] ) && is_plugin_active( 'robots-meta/robots-meta.php' ) ) {
+		add_action( 'admin_notices', 'ymbeseo_import_robots_meta_notice' );
 	}
 }
 
-add_action( 'admin_init', 'YMBESEO_robots_meta_message' );
+add_action( 'admin_init', 'ymbeseo_robots_meta_message' );
 
 /**
  * Handle deactivation Robots Meta
  *
  * @since 1.5.0
  */
-function YMBESEO_disable_robots_meta() {
+function ymbeseo_disable_robots_meta() {
 	if ( isset( $_GET['deactivate_robots_meta'] ) && $_GET['deactivate_robots_meta'] === '1' && is_plugin_active( 'robots-meta/robots-meta.php' ) ) {
 		// Deactivate the plugin.
 		deactivate_plugins( 'robots-meta/robots-meta.php' );
 
 		// Show notice that robots meta has been deactivated.
-		add_action( 'admin_notices', 'YMBESEO_deactivate_robots_meta_notice' );
+		add_action( 'admin_notices', 'ymbeseo_deactivate_robots_meta_notice' );
 
 		// Clean up the referrer url for later use.
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -514,34 +514,34 @@ function YMBESEO_disable_robots_meta() {
 	}
 }
 
-add_action( 'admin_init', 'YMBESEO_disable_robots_meta' );
+add_action( 'admin_init', 'ymbeseo_disable_robots_meta' );
 
 /**
  * Handle deactivation & import of AIOSEO data
  *
  * @since 1.5.0
  */
-function YMBESEO_aioseo_message() {
+function ymbeseo_aioseo_message() {
 	// Check if aioseo is running.
-	if ( ( ! isset( $_GET['page'] ) || 'YMBESEO_import' != $_GET['page'] ) && is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
-		add_action( 'admin_notices', 'YMBESEO_import_aioseo_setting_notice' );
+	if ( ( ! isset( $_GET['page'] ) || 'ymbeseo_import' != $_GET['page'] ) && is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
+		add_action( 'admin_notices', 'ymbeseo_import_aioseo_setting_notice' );
 	}
 }
 
-add_action( 'admin_init', 'YMBESEO_aioseo_message' );
+add_action( 'admin_init', 'ymbeseo_aioseo_message' );
 
 /**
  * Handle deactivation AIOSEO
  *
  * @since 1.5.0
  */
-function YMBESEO_disable_aioseo() {
+function ymbeseo_disable_aioseo() {
 	if ( isset( $_GET['deactivate_aioseo'] ) && $_GET['deactivate_aioseo'] === '1' && is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
 		// Deactivate AIO.
 		deactivate_plugins( 'all-in-one-seo-pack/all_in_one_seo_pack.php' );
 
 		// Show notice that aioseo has been deactivated.
-		add_action( 'admin_notices', 'YMBESEO_deactivate_aioseo_notice' );
+		add_action( 'admin_notices', 'ymbeseo_deactivate_aioseo_notice' );
 
 		// Clean up the referrer url for later use.
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -550,15 +550,15 @@ function YMBESEO_disable_aioseo() {
 	}
 }
 
-add_action( 'admin_init', 'YMBESEO_disable_aioseo' );
+add_action( 'admin_init', 'ymbeseo_disable_aioseo' );
 
 /**
  * Throw a notice to import AIOSEO.
  *
  * @since 1.4.8
  */
-function YMBESEO_import_aioseo_setting_notice() {
-	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'wpseo-import' ) ), admin_url( 'admin.php?page=YMBESEO_tools&tool=import-export&import=1&importaioseo=1#top#import-seo' ) );
+function ymbeseo_import_aioseo_setting_notice() {
+	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'ymbeseo-import' ) ), admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&import=1&importaioseo=1#top#import-seo' ) );
 	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s?', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
 }
 
@@ -567,7 +567,7 @@ function YMBESEO_import_aioseo_setting_notice() {
  *
  * @since 1.4.8
  */
-function YMBESEO_deactivate_aioseo_notice() {
+function ymbeseo_deactivate_aioseo_notice() {
 	echo '<div class="updated"><p>', esc_html__( 'All-In-One-SEO has been deactivated', 'ymbeseo' ), '</p></div>';
 }
 
@@ -576,8 +576,8 @@ function YMBESEO_deactivate_aioseo_notice() {
  *
  * @since 1.4.8
  */
-function YMBESEO_import_robots_meta_notice() {
-	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'wpseo-import' ) ), admin_url( 'admin.php?page=YMBESEO_tools&tool=import-export&import=1&importrobotsmeta=1#top#import-other' ) );
+function ymbeseo_import_robots_meta_notice() {
+	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'ymbeseo-import' ) ), admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&import=1&importrobotsmeta=1#top#import-other' ) );
 	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin Robots-Meta has been detected. Do you want to %simport its settings%s.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
 }
 
@@ -586,6 +586,56 @@ function YMBESEO_import_robots_meta_notice() {
  *
  * @since 1.4.8
  */
-function YMBESEO_deactivate_robots_meta_notice() {
+function ymbeseo_deactivate_robots_meta_notice() {
 	echo '<div class="updated"><p>', esc_html__( 'Robots-Meta has been deactivated', 'ymbeseo' ), '</p></div>';
+}
+
+/********************** DEPRECATED FUNCTIONS **********************/
+
+/**
+ * Set the default settings.
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Options::initialize()
+ * @see        YMBESEO_Options::initialize()
+ */
+function ymbeseo_defaults() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::initialize()' );
+	YMBESEO_Options::initialize();
+}
+
+/**
+ * Translates a decimal analysis score into a textual one.
+ *
+ * @deprecated 1.5.6.1
+ * @deprecated use YMBESEO_Utils::translate_score()
+ * @see        YMBESEO_Utils::translate_score()
+ *
+ * @param int  $val       The decimal score to translate.
+ * @param bool $css_value Whether to return the i18n translated score or the CSS class value.
+ *
+ * @return string
+ */
+function ymbeseo_translate_score( $val, $css_value = true ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.6.1', 'YMBESEO_Utils::translate_score()' );
+
+	return YMBESEO_Utils::translate_score();
+}
+
+
+/**
+ * Check whether file editing is allowed for the .htaccess and robots.txt files
+ *
+ * @deprecated 1.5.6.1
+ * @deprecated use YMBESEO_Utils::allow_system_file_edit()
+ * @see        YMBESEO_Utils::allow_system_file_edit()
+ *
+ * @internal   current_user_can() checks internally whether a user is on wp-ms and adjusts accordingly.
+ *
+ * @return bool
+ */
+function ymbeseo_allow_system_file_edit() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.6.1', 'YMBESEO_Utils::allow_system_file_edit()' );
+
+	return YMBESEO_Utils::allow_system_file_edit();
 }

@@ -9,11 +9,11 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	exit();
 }
 
-if ( ! function_exists( 'initialize_YMBESEO_front' ) ) {
+if ( ! function_exists( 'initialize_ymbeseo_front' ) ) {
 	/**
 	 * Wraps frontend class.
 	 */
-	function initialize_YMBESEO_front() {
+	function initialize_ymbeseo_front() {
 		YMBESEO_Frontend::get_instance();
 	}
 }
@@ -32,7 +32,7 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 	function yoast_breadcrumb( $before = '', $after = '', $display = true ) {
 		$breadcrumbs_enabled = current_theme_supports( 'yoast-seo-breadcrumbs' );
 		if ( ! $breadcrumbs_enabled ) {
-			$options             = get_option( 'YMBESEO_internallinks' );
+			$options             = get_option( 'ymbeseo_internallinks' );
 			$breadcrumbs_enabled = ( $options['breadcrumbs-enable'] === true );
 		}
 
@@ -45,18 +45,18 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 /**
  * Add the bulk edit capability to the proper default roles.
  */
-function YMBESEO_add_capabilities() {
+function ymbeseo_add_capabilities() {
 	$roles = array(
 		'administrator',
 		'editor',
 	);
 
-	$roles = apply_filters( 'YMBESEO_bulk_edit_roles', $roles );
+	$roles = apply_filters( 'ymbeseo_bulk_edit_roles', $roles );
 
 	foreach ( $roles as $role ) {
 		$r = get_role( $role );
 		if ( $r ) {
-			$r->add_cap( 'YMBESEO_bulk_edit' );
+			$r->add_cap( 'ymbeseo_bulk_edit' );
 		}
 	}
 }
@@ -67,7 +67,7 @@ function YMBESEO_add_capabilities() {
  *
  * Contributor is still removed for legacy reasons.
  */
-function YMBESEO_remove_capabilities() {
+function ymbeseo_remove_capabilities() {
 	$roles = array(
 		'administrator',
 		'editor',
@@ -75,12 +75,12 @@ function YMBESEO_remove_capabilities() {
 		'contributor',
 	);
 
-	$roles = apply_filters( 'YMBESEO_bulk_edit_roles', $roles );
+	$roles = apply_filters( 'ymbeseo_bulk_edit_roles', $roles );
 
 	foreach ( $roles as $role ) {
 		$r = get_role( $role );
 		if ( $r ) {
-			$r->remove_cap( 'YMBESEO_bulk_edit' );
+			$r->remove_cap( 'ymbeseo_bulk_edit' );
 		}
 	}
 }
@@ -95,7 +95,7 @@ function YMBESEO_remove_capabilities() {
  *
  * @return string
  */
-function YMBESEO_replace_vars( $string, $args, $omit = array() ) {
+function ymbeseo_replace_vars( $string, $args, $omit = array() ) {
 	$replacer = new YMBESEO_Replace_Vars;
 
 	return $replacer->replace( $string, $args, $omit );
@@ -105,14 +105,14 @@ function YMBESEO_replace_vars( $string, $args, $omit = array() ) {
  * Register a new variable replacement
  *
  * This function is for use by other plugins/themes to easily add their own additional variables to replace.
- * This function should be called from a function on the 'YMBESEO_register_extra_replacements' action hook.
- * The use of this function is preferred over the older 'YMBESEO_replacements' filter as a way to add new replacements.
- * The 'YMBESEO_replacements' filter should still be used to adjust standard WPSEO replacement values.
- * The function can not be used to replace standard WPSEO replacement value functions and will thrown a warning
+ * This function should be called from a function on the 'ymbeseo_register_extra_replacements' action hook.
+ * The use of this function is preferred over the older 'ymbeseo_replacements' filter as a way to add new replacements.
+ * The 'ymbeseo_replacements' filter should still be used to adjust standard YMBESEO replacement values.
+ * The function can not be used to replace standard YMBESEO replacement value functions and will thrown a warning
  * if you accidently try.
- * To avoid conflicts with variables registered by WPSEO and other themes/plugins, try and make the
+ * To avoid conflicts with variables registered by YMBESEO and other themes/plugins, try and make the
  * name of your variable unique. Variable names also can not start with "%%cf_" or "%%ct_" as these are reserved
- * for the standard WPSEO variable variables 'cf_<custom-field-name>', 'ct_<custom-tax-name>' and
+ * for the standard YMBESEO variable variables 'cf_<custom-field-name>', 'ct_<custom-tax-name>' and
  * 'ct_desc_<custom-tax-name>'.
  * The replacement function will be passed the undelimited name (i.e. stripped of the %%) of the variable
  * to replace in case you need it.
@@ -125,10 +125,10 @@ function YMBESEO_replace_vars( $string, $args, $omit = array() ) {
  * }
  *
  * function register_my_plugin_extra_replacements() {
- *        YMBESEO_register_var_replacement( '%%myvar1%%', 'retrieve_var1_replacement', 'advanced', 'this is a help text for myvar1' );
- *        YMBESEO_register_var_replacement( 'myvar2', array( 'class', 'method_name' ), 'basic', 'this is a help text for myvar2' );
+ *        ymbeseo_register_var_replacement( '%%myvar1%%', 'retrieve_var1_replacement', 'advanced', 'this is a help text for myvar1' );
+ *        ymbeseo_register_var_replacement( 'myvar2', array( 'class', 'method_name' ), 'basic', 'this is a help text for myvar2' );
  * }
- * add_action( 'YMBESEO_register_extra_replacements', 'register_my_plugin_extra_replacements' );
+ * add_action( 'ymbeseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
  * ?>
  * </code>
  *
@@ -144,14 +144,14 @@ function YMBESEO_replace_vars( $string, $args, $omit = array() ) {
  *
  * @return bool  Whether the replacement function was succesfully registered
  */
-function YMBESEO_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
+function ymbeseo_register_var_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
 	return YMBESEO_Replace_Vars::register_replacement( $var, $replace_function, $type, $help_text );
 }
 
 /**
  * Redirect /sitemap.xml to /sitemap_index.xml
  */
-function YMBESEO_xml_redirect_sitemap() {
+function ymbeseo_xml_redirect_sitemap() {
 	$current_url = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) ? 'https://' : 'http://';
 	$current_url .= sanitize_text_field( $_SERVER['SERVER_NAME'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 
@@ -171,15 +171,15 @@ function YMBESEO_xml_redirect_sitemap() {
  *
  * @return string base URL (incl page) for the sitemaps
  */
-function YMBESEO_xml_sitemaps_base_url( $page ) {
+function ymbeseo_xml_sitemaps_base_url( $page ) {
 	$base = $GLOBALS['wp_rewrite']->using_index_permalinks() ? 'index.php/' : '/';
 
 	/**
-	 * Filter: 'YMBESEO_sitemaps_base_url' - Allow developer to change the base URL of the sitemaps
+	 * Filter: 'ymbeseo_sitemaps_base_url' - Allow developer to change the base URL of the sitemaps
 	 *
 	 * @api string $base The string that should be added to home_url() to make the full base URL.
 	 */
-	$base = apply_filters( 'YMBESEO_sitemaps_base_url', $base );
+	$base = apply_filters( 'ymbeseo_sitemaps_base_url', $base );
 
 	return home_url( $base . $page );
 }
@@ -187,14 +187,14 @@ function YMBESEO_xml_sitemaps_base_url( $page ) {
 /**
  * Initialize sitemaps. Add sitemap & XSL rewrite rules and query vars
  */
-function YMBESEO_xml_sitemaps_init() {
-	$options = get_option( 'YMBESEO_xml' );
+function ymbeseo_xml_sitemaps_init() {
+	$options = get_option( 'ymbeseo_xml' );
 	if ( $options['enablexmlsitemap'] !== true ) {
 		return;
 	}
 
 	// Redirects sitemap.xml to sitemap_index.xml.
-	add_action( 'template_redirect', 'YMBESEO_xml_redirect_sitemap', 0 );
+	add_action( 'template_redirect', 'ymbeseo_xml_redirect_sitemap', 0 );
 
 	if ( ! is_object( $GLOBALS['wp'] ) ) {
 		return;
@@ -208,21 +208,21 @@ function YMBESEO_xml_sitemaps_init() {
 	add_rewrite_rule( '([a-z]+)?-?sitemap\.xsl$', 'index.php?xsl=$matches[1]', 'top' );
 }
 
-add_action( 'init', 'YMBESEO_xml_sitemaps_init', 1 );
+add_action( 'init', 'ymbeseo_xml_sitemaps_init', 1 );
 
 /**
  * Notify search engines of the updated sitemap.
  *
  * @param string|null $sitemapurl
  */
-function YMBESEO_ping_search_engines( $sitemapurl = null ) {
+function ymbeseo_ping_search_engines( $sitemapurl = null ) {
 	// Don't ping if blog is not public.
 	if ( '0' == get_option( 'blog_public' ) ) {
 		return;
 	}
 
 	if ( $sitemapurl == null ) {
-		$sitemapurl = urlencode( YMBESEO_xml_sitemaps_base_url( 'sitemap_index.xml' ) );
+		$sitemapurl = urlencode( ymbeseo_xml_sitemaps_base_url( 'sitemap_index.xml' ) );
 	}
 
 	// Ping Google and Bing.
@@ -230,7 +230,7 @@ function YMBESEO_ping_search_engines( $sitemapurl = null ) {
 	wp_remote_get( 'http://www.bing.com/ping?sitemap=' . $sitemapurl, array( 'blocking' => false ) );
 }
 
-add_action( 'YMBESEO_ping_search_engines', 'YMBESEO_ping_search_engines' );
+add_action( 'ymbeseo_ping_search_engines', 'ymbeseo_ping_search_engines' );
 
 /**
  * WPML plugin support: Set titles for custom types / taxonomies as translatable.
@@ -243,13 +243,13 @@ add_action( 'YMBESEO_ping_search_engines', 'YMBESEO_ping_search_engines' );
  *
  * @return array
  */
-function YMBESEO_wpml_config( $config ) {
+function ymbeseo_wpml_config( $config ) {
 	global $sitepress;
 
 	if ( ( is_array( $config ) && isset( $config['wpml-config']['admin-texts']['key'] ) ) && ( is_array( $config['wpml-config']['admin-texts']['key'] ) && $config['wpml-config']['admin-texts']['key'] !== array() ) ) {
 		$admin_texts = $config['wpml-config']['admin-texts']['key'];
 		foreach ( $admin_texts as $k => $val ) {
-			if ( $val['attr']['name'] === 'YMBESEO_titles' ) {
+			if ( $val['attr']['name'] === 'ymbeseo_titles' ) {
 				$translate_cp = array_keys( $sitepress->get_translatable_documents() );
 				if ( is_array( $translate_cp ) && $translate_cp !== array() ) {
 					foreach ( $translate_cp as $post_type ) {
@@ -279,19 +279,19 @@ function YMBESEO_wpml_config( $config ) {
 	return $config;
 }
 
-add_filter( 'icl_wpml_config_array', 'YMBESEO_wpml_config' );
+add_filter( 'icl_wpml_config_array', 'ymbeseo_wpml_config' );
 
 /**
- * Yoast SEO breadcrumb shortcode
- * [YMBESEO_breadcrumb]
+ * Yoast Minus Bloat Equals SEO breadcrumb shortcode
+ * [ymbeseo_breadcrumb]
  *
  * @return string
  */
-function YMBESEO_shortcode_yoast_breadcrumb() {
+function ymbeseo_shortcode_yoast_breadcrumb() {
 	return yoast_breadcrumb( '', '', false );
 }
 
-add_shortcode( 'YMBESEO_breadcrumb', 'YMBESEO_shortcode_yoast_breadcrumb' );
+add_shortcode( 'ymbeseo_breadcrumb', 'ymbeseo_shortcode_yoast_breadcrumb' );
 
 
 /**
@@ -299,15 +299,15 @@ add_shortcode( 'YMBESEO_breadcrumb', 'YMBESEO_shortcode_yoast_breadcrumb' );
  *
  * @param string $type
  */
-function YMBESEO_invalidate_sitemap_cache( $type ) {
+function ymbeseo_invalidate_sitemap_cache( $type ) {
 	// Always delete the main index sitemaps cache, as that's always invalidated by any other change.
-	delete_transient( 'YMBESEO_sitemap_cache_1' );
-	delete_transient( 'YMBESEO_sitemap_cache_' . $type );
+	delete_transient( 'ymbeseo_sitemap_cache_1' );
+	delete_transient( 'ymbeseo_sitemap_cache_' . $type );
 
 	YMBESEO_Utils::clear_sitemap_cache( array( $type ) );
 }
 
-add_action( 'deleted_term_relationships', 'YMBESEO_invalidate_sitemap_cache' );
+add_action( 'deleted_term_relationships', 'ymbeseo_invalidate_sitemap_cache' );
 
 /**
  * Invalidate XML sitemap cache for taxonomy / term actions
@@ -315,30 +315,30 @@ add_action( 'deleted_term_relationships', 'YMBESEO_invalidate_sitemap_cache' );
  * @param unsigned $unused
  * @param string   $type
  */
-function YMBESEO_invalidate_sitemap_cache_terms( $unused, $type ) {
-	YMBESEO_invalidate_sitemap_cache( $type );
+function ymbeseo_invalidate_sitemap_cache_terms( $unused, $type ) {
+	ymbeseo_invalidate_sitemap_cache( $type );
 }
 
-add_action( 'edited_terms', 'YMBESEO_invalidate_sitemap_cache_terms', 10, 2 );
-add_action( 'clean_term_cache', 'YMBESEO_invalidate_sitemap_cache_terms', 10, 2 );
-add_action( 'clean_object_term_cache', 'YMBESEO_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'edited_terms', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'clean_term_cache', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
+add_action( 'clean_object_term_cache', 'ymbeseo_invalidate_sitemap_cache_terms', 10, 2 );
 
 /**
  * Invalidate the XML sitemap cache for a post type when publishing or updating a post
  *
  * @param int $post_id
  */
-function YMBESEO_invalidate_sitemap_cache_on_save_post( $post_id ) {
+function ymbeseo_invalidate_sitemap_cache_on_save_post( $post_id ) {
 
 	// If this is just a revision, don't invalidate the sitemap cache yet.
 	if ( wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 
-	YMBESEO_invalidate_sitemap_cache( get_post_type( $post_id ) );
+	ymbeseo_invalidate_sitemap_cache( get_post_type( $post_id ) );
 }
 
-add_action( 'save_post', 'YMBESEO_invalidate_sitemap_cache_on_save_post' );
+add_action( 'save_post', 'ymbeseo_invalidate_sitemap_cache_on_save_post' );
 
 /**
  * Emulate PHP native ctype_digit() function for when the ctype extension would be disabled *sigh*
@@ -363,4 +363,291 @@ if ( ! extension_loaded( 'ctype' ) || ! function_exists( 'ctype_digit' ) ) {
 
 		return $return;
 	}
+}
+
+
+/********************** DEPRECATED FUNCTIONS **********************/
+
+
+/**
+ * Get the value from the post custom values
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Meta::get_value()
+ * @see        YMBESEO_Meta::get_value()
+ *
+ * @param    string $val    Internal name of the value to get.
+ * @param    int    $postid Post ID of the post to get the value for.
+ *
+ * @return    string
+ */
+function ymbeseo_get_value( $val, $postid = 0 ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_value()' );
+
+	return YMBESEO_Meta::get_value( $val, $postid );
+}
+
+
+/**
+ * Save a custom meta value
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Meta::set_value() or just use update_post_meta()
+ * @see        YMBESEO_Meta::set_value()
+ *
+ * @param    string $meta_key   The meta to change.
+ * @param    mixed  $meta_value The value to set the meta to.
+ * @param    int    $post_id    The ID of the post to change the meta for.
+ *
+ * @return    bool    whether the value was changed
+ */
+function ymbeseo_set_value( $meta_key, $meta_value, $post_id ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::set_value()' );
+
+	return YMBESEO_Meta::set_value( $meta_key, $meta_value, $post_id );
+}
+
+
+/**
+ * Retrieve an array of all the options the plugin uses. It can't use only one due to limitations of the options API.
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Options::get_option_names()
+ * @see        YMBESEO_Options::get_option_names()
+ *
+ * @return array of options.
+ */
+function get_ymbeseo_options_arr() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_option_names()' );
+
+	return YMBESEO_Options::get_option_names();
+}
+
+
+/**
+ * Retrieve all the options for the SEO plugin in one go.
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Options::get_all()
+ * @see        YMBESEO_Options::get_all()
+ *
+ * @return array of options
+ */
+function get_ymbeseo_options() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Options::get_all()' );
+
+	return YMBESEO_Options::get_all();
+}
+
+/**
+ * Used for imports, both in dashboard and import settings pages, this functions either copies
+ * $old_metakey into $new_metakey or just plain replaces $old_metakey with $new_metakey
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Meta::replace_meta()
+ * @see        YMBESEO_Meta::replace_meta()
+ *
+ * @param string $old_metakey The old name of the meta value.
+ * @param string $new_metakey The new name of the meta value, usually the Yoast Minus Bloat Equals SEO name.
+ * @param bool   $replace     Whether to replace or to copy the values.
+ */
+function replace_meta( $old_metakey, $new_metakey, $replace = false ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::replace_meta()' );
+	YMBESEO_Meta::replace_meta( $old_metakey, $new_metakey, $replace );
+}
+
+
+/**
+ * Retrieve a taxonomy term's meta value.
+ *
+ * @deprecated 1.5.0
+ * @deprecated use YMBESEO_Taxonomy_Meta::get_term_meta()
+ * @see        YMBESEO_Taxonomy_Meta::get_term_meta()
+ *
+ * @param string|object $term     Term to get the meta value for.
+ * @param string        $taxonomy Name of the taxonomy to which the term is attached.
+ * @param string        $meta     Meta value to get.
+ *
+ * @return bool|mixed value when the meta exists, false when it does not
+ */
+function ymbeseo_get_term_meta( $term, $taxonomy, $meta ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.0', 'YMBESEO_Taxonomy_Meta::get_term_meta()' );
+	return YMBESEO_Taxonomy_Meta::get_term_meta( $term, $taxonomy, $meta );
+}
+
+/**
+ * Throw a notice about an invalid custom taxonomy used
+ *
+ * @since      1.4.14
+ * @deprecated 1.5.4 (removed)
+ */
+function ymbeseo_invalid_custom_taxonomy() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4' );
+}
+
+/**
+ * Retrieve a post's terms, comma delimited.
+ *
+ * @deprecated 1.5.4
+ * @deprecated use YMBESEO_Replace_Vars::get_terms()
+ * @see        YMBESEO_Replace_Vars::get_terms()
+ *
+ * @param int    $id            ID of the post to get the terms for.
+ * @param string $taxonomy      The taxonomy to get the terms for this post from.
+ * @param bool   $return_single If true, return the first term.
+ *
+ * @return string either a single term or a comma delimited string of terms.
+ */
+function ymbeseo_get_terms( $id, $taxonomy, $return_single = false ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.4', 'YMBESEO_Replace_Vars::get_terms()' );
+	$replacer = new YMBESEO_Replace_Vars;
+
+	return $replacer->get_terms( $id, $taxonomy, $return_single );
+}
+
+/**
+ * Generate an HTML sitemap
+ *
+ * @deprecated 1.5.5.4
+ * @deprecated use plugin Yoast Minus Bloat Equals SEO Premium
+ * @see        Yoast Minus Bloat Equals SEO Premium
+ *
+ * @param array $atts The attributes passed to the shortcode.
+ *
+ * @return string
+ */
+function ymbeseo_sitemap_handler( $atts ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.5.5.4', 'Functionality has been discontinued after being in beta, it\'ll be available in the Yoast Minus Bloat Equals SEO Premium plugin soon.' );
+
+	return '';
+}
+
+add_shortcode( 'ymbeseo_sitemap', 'ymbeseo_sitemap_handler' );
+
+/**
+ * Strip out the shortcodes with a filthy regex, because people don't properly register their shortcodes.
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::strip_shortcode()
+ * @see        YMBESEO_Utils::strip_shortcode()
+ *
+ * @param string $text Input string that might contain shortcodes.
+ *
+ * @return string $text string without shortcodes
+ */
+function ymbeseo_strip_shortcode( $text ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::strip_shortcode()' );
+
+	return YMBESEO_Utils::strip_shortcode( $text );
+}
+
+/**
+ * Do simple reliable math calculations without the risk of wrong results
+ *
+ * @see        http://floating-point-gui.de/
+ * @see        the big red warning on http://php.net/language.types.float.php
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::calc()
+ * @see        YMBESEO_Utils::calc()
+ *
+ * In the rare case that the bcmath extension would not be loaded, it will return the normal calculation results
+ *
+ * @since      1.5.0
+ *
+ * @param    mixed  $number1   Scalar (string/int/float/bool).
+ * @param    string $action    Calculation action to execute.
+ * @param    mixed  $number2   Scalar (string/int/float/bool).
+ * @param    bool   $round     Whether or not to round the result. Defaults to false.
+ * @param    int    $decimals  Decimals for rounding operation. Defaults to 0.
+ * @param    int    $precision Calculation precision. Defaults to 10.
+ *
+ * @return    mixed                Calculation Result or false if either or the numbers isn't scalar or
+ *                                an invalid operation was passed
+ */
+function ymbeseo_calc( $number1, $action, $number2, $round = false, $decimals = 0, $precision = 10 ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::calc()' );
+
+	return YMBESEO_Utils::calc( $number1, $action, $number2, $round, $decimals, $precision );
+}
+
+/**
+ * Check if the web server is running on Apache
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::is_apache()
+ * @see        YMBESEO_Utils::is_apache()
+ *
+ * @return bool
+ */
+function ymbeseo_is_apache() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_apache()' );
+
+	return YMBESEO_Utils::is_apache();
+}
+
+/**
+ * Check if the web service is running on Nginx
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::is_nginx()
+ * @see        YMBESEO_Utils::is_nginx()
+ *
+ * @return bool
+ */
+function ymbeseo_is_nginx() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_nginx()' );
+
+	return YMBESEO_Utils::is_nginx();
+}
+
+/**
+ * List all the available user roles
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::get_roles()
+ * @see        YMBESEO_Utils::get_roles()
+ *
+ * @return array $roles
+ */
+function ymbeseo_get_roles() {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::get_roles()' );
+
+	return YMBESEO_Utils::get_roles();
+}
+
+/**
+ * Check whether a url is relative
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::is_url_relative()
+ * @see        YMBESEO_Utils::is_url_relative()
+ *
+ * @param string $url
+ *
+ * @return bool
+ */
+function ymbeseo_is_url_relative( $url ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::is_url_relative()' );
+
+	return YMBESEO_Utils::is_url_relative( $url );
+}
+
+/**
+ * Standardize whitespace in a string
+ *
+ * @deprecated 1.6.1
+ * @deprecated use YMBESEO_Utils::standardize_whitespace()
+ * @see        YMBESEO_Utils::standardize_whitespace()
+ *
+ * @since      1.6.0
+ *
+ * @param string $string
+ *
+ * @return string
+ */
+function ymbeseo_standardize_whitespace( $string ) {
+	_deprecated_function( __FUNCTION__, 'YMBESEO 1.6.1', 'YMBESEO_Utils::standardize_whitespace()' );
+
+	return YMBESEO_Utils::standardize_whitespace( $string );
 }

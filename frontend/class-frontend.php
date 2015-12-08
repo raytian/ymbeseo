@@ -4,7 +4,7 @@
  */
 
 /**
- * Main frontend class for Yoast SEO, responsible for the SEO output as well as removing
+ * Main frontend class for Yoast Minus Bloat Equals SEO, responsible for the SEO output as well as removing
  * default WordPress output.
  */
 class YMBESEO_Frontend {
@@ -71,16 +71,16 @@ class YMBESEO_Frontend {
 		add_action( 'wp_head', array( $this, 'front_page_specific_init' ), 0 );
 		add_action( 'wp_head', array( $this, 'head' ), 1 );
 
-		// The head function here calls action YMBESEO_head, to which we hook all our functionality.
-		add_action( 'YMBESEO_head', array( $this, 'debug_marker' ), 2 );
-		add_action( 'YMBESEO_head', array( $this, 'robots' ), 6 );
-		add_action( 'YMBESEO_head', array( $this, 'metadesc' ), 10 );
-		add_action( 'YMBESEO_head', array( $this, 'metakeywords' ), 11 );
-		add_action( 'YMBESEO_head', array( $this, 'canonical' ), 20 );
-		add_action( 'YMBESEO_head', array( $this, 'adjacent_rel_links' ), 21 );
-		add_action( 'YMBESEO_head', array( $this, 'publisher' ), 22 );
+		// The head function here calls action ymbeseo_head, to which we hook all our functionality.
+		add_action( 'ymbeseo_head', array( $this, 'debug_marker' ), 2 );
+		add_action( 'ymbeseo_head', array( $this, 'robots' ), 6 );
+		add_action( 'ymbeseo_head', array( $this, 'metadesc' ), 10 );
+		add_action( 'ymbeseo_head', array( $this, 'metakeywords' ), 11 );
+		add_action( 'ymbeseo_head', array( $this, 'canonical' ), 20 );
+		add_action( 'ymbeseo_head', array( $this, 'adjacent_rel_links' ), 21 );
+		add_action( 'ymbeseo_head', array( $this, 'publisher' ), 22 );
 
-		// Remove actions that we will handle through our YMBESEO_head call, and probably change the output of.
+		// Remove actions that we will handle through our ymbeseo_head call, and probably change the output of.
 		remove_action( 'wp_head', 'rel_canonical' );
 		remove_action( 'wp_head', 'index_rel_link' );
 		remove_action( 'wp_head', 'start_post_rel_link' );
@@ -144,7 +144,7 @@ class YMBESEO_Frontend {
 		}
 
 		if ( $this->options['title_test'] > 0 ) {
-			add_filter( 'YMBESEO_title', array( $this, 'title_test_helper' ) );
+			add_filter( 'ymbeseo_title', array( $this, 'title_test_helper' ) );
 		}
 	}
 
@@ -157,7 +157,7 @@ class YMBESEO_Frontend {
 		}
 
 		new YMBESEO_JSON_LD;
-		add_action( 'YMBESEO_head', array( $this, 'webmaster_tools_authentication' ), 90 );
+		add_action( 'ymbeseo_head', array( $this, 'webmaster_tools_authentication' ), 90 );
 	}
 
 	/**
@@ -241,7 +241,7 @@ class YMBESEO_Frontend {
 		$title = YMBESEO_Meta::get_value( 'title', $object->ID );
 
 		if ( $title !== '' ) {
-			return YMBESEO_replace_vars( $title, $object );
+			return ymbeseo_replace_vars( $title, $object );
 		}
 
 		$post_type = ( isset( $object->post_type ) ? $object->post_type : $object->query_var );
@@ -260,7 +260,7 @@ class YMBESEO_Frontend {
 		$title = YMBESEO_Taxonomy_Meta::get_term_meta( $object, $object->taxonomy, 'title' );
 
 		if ( is_string( $title ) && $title !== '' ) {
-			return YMBESEO_replace_vars( $title, $object );
+			return ymbeseo_replace_vars( $title, $object );
 		}
 		else {
 			return $this->get_title_from_options( 'title-tax-' . $object->taxonomy, $object );
@@ -274,19 +274,19 @@ class YMBESEO_Frontend {
 	 */
 	public function get_author_title() {
 		$author_id = get_query_var( 'author' );
-		$title     = trim( get_the_author_meta( 'YMBESEO_title', $author_id ) );
+		$title     = trim( get_the_author_meta( 'ymbeseo_title', $author_id ) );
 
 		if ( $title !== '' ) {
-			return YMBESEO_replace_vars( $title, array() );
+			return ymbeseo_replace_vars( $title, array() );
 		}
 
-		return $this->get_title_from_options( 'title-author-wpseo' );
+		return $this->get_title_from_options( 'title-author-ymbeseo' );
 	}
 
 	/**
 	 * Simple function to use to pull data from $options.
 	 *
-	 * All titles pulled from options will be run through the YMBESEO_replace_vars function.
+	 * All titles pulled from options will be run through the ymbeseo_replace_vars function.
 	 *
 	 * @param string       $index      name of the page to get the title from the settings for.
 	 * @param object|array $var_source possible object to pull variables from.
@@ -296,14 +296,14 @@ class YMBESEO_Frontend {
 	public function get_title_from_options( $index, $var_source = array() ) {
 		if ( ! isset( $this->options[ $index ] ) || $this->options[ $index ] === '' ) {
 			if ( is_singular() ) {
-				return YMBESEO_replace_vars( '%%title%% %%sep%% %%sitename%%', $var_source );
+				return ymbeseo_replace_vars( '%%title%% %%sep%% %%sitename%%', $var_source );
 			}
 			else {
 				return '';
 			}
 		}
 		else {
-			return YMBESEO_replace_vars( $this->options[ $index ], $var_source );
+			return ymbeseo_replace_vars( $this->options[ $index ], $var_source );
 		}
 	}
 
@@ -412,7 +412,7 @@ class YMBESEO_Frontend {
 			return $title;
 		}
 
-		$separator = YMBESEO_replace_vars( '%%sep%%', array() );
+		$separator = ymbeseo_replace_vars( '%%sep%%', array() );
 		$separator = ' ' . trim( $separator ) . ' ';
 
 		if ( '' === trim( $separator_location ) ) {
@@ -436,7 +436,7 @@ class YMBESEO_Frontend {
 			$title = $this->get_content_title();
 		}
 		elseif ( $this->is_home_posts_page() ) {
-			$title = $this->get_title_from_options( 'title-home-wpseo' );
+			$title = $this->get_title_from_options( 'title-home-ymbeseo' );
 		}
 		elseif ( $this->is_posts_page() ) {
 			$title = $this->get_content_title( get_post( get_option( 'page_for_posts' ) ) );
@@ -449,7 +449,7 @@ class YMBESEO_Frontend {
 			}
 		}
 		elseif ( is_search() ) {
-			$title = $this->get_title_from_options( 'title-search-wpseo' );
+			$title = $this->get_title_from_options( 'title-search-ymbeseo' );
 
 			if ( ! is_string( $title ) || '' === $title ) {
 				$title_part = sprintf( __( 'Search for "%s"', 'ymbeseo' ), esc_html( get_search_query() ) );
@@ -504,10 +504,10 @@ class YMBESEO_Frontend {
 			}
 		}
 		elseif ( is_archive() ) {
-			$title = $this->get_title_from_options( 'title-archive-wpseo' );
+			$title = $this->get_title_from_options( 'title-archive-ymbeseo' );
 
 			// @todo [JRF => Yoast] Should these not use the archive default if no title found ?
-			// YMBESEO_Options::get_default( 'YMBESEO_titles', 'title-archive-wpseo' )
+			// YMBESEO_Options::get_default( 'ymbeseo_titles', 'title-archive-ymbeseo' )
 			// Replacement would be needed!
 			if ( empty( $title ) ) {
 				if ( is_month() ) {
@@ -545,10 +545,10 @@ class YMBESEO_Frontend {
 				}
 			}
 			else {
-				$title = $this->get_title_from_options( 'title-404-wpseo' );
+				$title = $this->get_title_from_options( 'title-404-ymbeseo' );
 
 				// @todo [JRF => Yoast] Should these not use the 404 default if no title found ?
-				// YMBESEO_Options::get_default( 'YMBESEO_titles', 'title-404-wpseo' )
+				// YMBESEO_Options::get_default( 'ymbeseo_titles', 'title-404-ymbeseo' )
 				// Replacement would be needed!
 				if ( empty( $title ) ) {
 					$title_part = __( 'Page not found', 'ymbeseo' );
@@ -574,12 +574,12 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_title' - Allow changing the Yoast SEO <title> output
+		 * Filter: 'ymbeseo_title' - Allow changing the Yoast Minus Bloat Equals SEO <title> output
 		 *
 		 * @api string $title The page title being put out.
 		 */
 
-		return esc_html( strip_tags( stripslashes( apply_filters( 'YMBESEO_title', $title ) ) ) );
+		return esc_html( strip_tags( stripslashes( apply_filters( 'ymbeseo_title', $title ) ) ) );
 	}
 
 	/**
@@ -617,11 +617,11 @@ class YMBESEO_Frontend {
 		$marker = sprintf(
 			'<!-- This site is optimized with the ' . $this->head_product_name() . '%1$s - https://yoast.com/wordpress/plugins/seo/ -->',
 			/**
-			 * Filter: 'YMBESEO_hide_version' - can be used to hide the Yoast SEO version in the debug marker (only available in Yoast SEO Premium)
+			 * Filter: 'ymbeseo_hide_version' - can be used to hide the Yoast Minus Bloat Equals SEO version in the debug marker (only available in Yoast Minus Bloat Equals SEO Premium)
 			 *
 			 * @api bool
 			 */
-			( ( apply_filters( 'YMBESEO_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . YMBESEO_VERSION  )
+			( ( apply_filters( 'ymbeseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . YMBESEO_VERSION  )
 		);
 
 		if ( $echo === false ) {
@@ -663,7 +663,7 @@ class YMBESEO_Frontend {
 	}
 
 	/**
-	 * Main wrapper function attached to wp_head. This combines all the output on the frontend of the Yoast SEO plugin.
+	 * Main wrapper function attached to wp_head. This combines all the output on the frontend of the Yoast Minus Bloat Equals SEO plugin.
 	 */
 	public function head() {
 		global $wp_query;
@@ -676,9 +676,9 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Action: 'YMBESEO_head' - Allow other plugins to output inside the Yoast SEO section of the head section.
+		 * Action: 'ymbeseo_head' - Allow other plugins to output inside the Yoast Minus Bloat Equals SEO section of the head section.
 		 */
-		do_action( 'YMBESEO_head' );
+		do_action( 'ymbeseo_head' );
 
 		echo '<!-- / ', $this->head_product_name(), ". -->\n\n";
 
@@ -735,13 +735,13 @@ class YMBESEO_Frontend {
 				}
 			}
 			elseif (
-				( is_author() && $this->options['noindex-author-wpseo'] === true ) ||
-				( is_date() && $this->options['noindex-archive-wpseo'] === true )
+				( is_author() && $this->options['noindex-author-ymbeseo'] === true ) ||
+				( is_date() && $this->options['noindex-archive-ymbeseo'] === true )
 			) {
 				$robots['index'] = 'noindex';
 			}
 			elseif ( is_home() ) {
-				if ( get_query_var( 'paged' ) > 1 && $this->options['noindex-subpages-wpseo'] === true ) {
+				if ( get_query_var( 'paged' ) > 1 && $this->options['noindex-subpages-ymbeseo'] === true ) {
 					$robots['index'] = 'noindex';
 				}
 
@@ -764,7 +764,7 @@ class YMBESEO_Frontend {
 				}
 			}
 
-			if ( isset( $wp_query->query_vars['paged'] ) && ( $wp_query->query_vars['paged'] && $wp_query->query_vars['paged'] > 1 ) && ( $this->options['noindex-subpages-wpseo'] === true ) ) {
+			if ( isset( $wp_query->query_vars['paged'] ) && ( $wp_query->query_vars['paged'] && $wp_query->query_vars['paged'] > 1 ) && ( $this->options['noindex-subpages-ymbeseo'] === true ) ) {
 				$robots['index']  = 'noindex';
 				$robots['follow'] = 'follow';
 			}
@@ -793,11 +793,11 @@ class YMBESEO_Frontend {
 		$robotsstr = preg_replace( '`^index,follow,?`', '', $robotsstr );
 
 		/**
-		 * Filter: 'YMBESEO_robots' - Allows filtering of the meta robots output of Yoast SEO
+		 * Filter: 'ymbeseo_robots' - Allows filtering of the meta robots output of Yoast Minus Bloat Equals SEO
 		 *
 		 * @api string $robotsstr The meta robots directives to be echoed.
 		 */
-		$robotsstr = apply_filters( 'YMBESEO_robots', $robotsstr );
+		$robotsstr = apply_filters( 'ymbeseo_robots', $robotsstr );
 
 		if ( is_string( $robotsstr ) && $robotsstr !== '' ) {
 			echo '<meta name="robots" content="', esc_attr( $robotsstr ), '"/>', "\n";
@@ -967,7 +967,7 @@ class YMBESEO_Frontend {
 				}
 				else {
 					if ( is_front_page() ) {
-						$canonical = YMBESEO_xml_sitemaps_base_url( '' );
+						$canonical = ymbeseo_xml_sitemaps_base_url( '' );
 					}
 					$canonical = user_trailingslashit( trailingslashit( $canonical ) . trailingslashit( $wp_rewrite->pagination_base ) . get_query_var( 'paged' ) );
 				}
@@ -984,11 +984,11 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_canonical' - Allow filtering of the canonical URL put out by Yoast SEO
+		 * Filter: 'ymbeseo_canonical' - Allow filtering of the canonical URL put out by Yoast Minus Bloat Equals SEO
 		 *
 		 * @api string $canonical The canonical URL
 		 */
-		$canonical = apply_filters( 'YMBESEO_canonical', $canonical );
+		$canonical = apply_filters( 'ymbeseo_canonical', $canonical );
 
 		if ( is_string( $canonical_override ) && $canonical_override !== '' ) {
 			$this->canonical = $canonical_override;
@@ -1028,11 +1028,11 @@ class YMBESEO_Frontend {
 	public function adjacent_rel_links() {
 		// Don't do this for Genesis, as the way Genesis handles homepage functionality is different and causes issues sometimes.
 		/**
-		 * Filter 'YMBESEO_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by Yoast SEO on Genesis installs
+		 * Filter 'ymbeseo_genesis_force_adjacent_rel_home' - Allows devs to allow echoing rel="next" / rel="prev" by Yoast Minus Bloat Equals SEO on Genesis installs
 		 *
 		 * @api bool $unsigned Whether or not to rel=next / rel=prev
 		 */
-		if ( is_home() && function_exists( 'genesis' ) && apply_filters( 'YMBESEO_genesis_force_adjacent_rel_home', false ) === false ) {
+		if ( is_home() && function_exists( 'genesis' ) && apply_filters( 'ymbeseo_genesis_force_adjacent_rel_home', false ) === false ) {
 			return;
 		}
 
@@ -1054,7 +1054,7 @@ class YMBESEO_Frontend {
 
 				// Make sure to use index.php when needed, done after paged == 2 check so the prev links to homepage will not have index.php erroneously.
 				if ( is_front_page() ) {
-					$url = YMBESEO_xml_sitemaps_base_url( '' );
+					$url = ymbeseo_xml_sitemaps_base_url( '' );
 				}
 
 				if ( $paged > 2 ) {
@@ -1126,11 +1126,11 @@ class YMBESEO_Frontend {
 			}
 		}
 		/**
-		 * Filter: 'YMBESEO_' . $rel . '_rel_link' - Allow changing link rel output by Yoast SEO
+		 * Filter: 'ymbeseo_' . $rel . '_rel_link' - Allow changing link rel output by Yoast Minus Bloat Equals SEO
 		 *
 		 * @api string $unsigned The full `<link` element.
 		 */
-		$link = apply_filters( 'YMBESEO_' . $rel . '_rel_link', '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
+		$link = apply_filters( 'ymbeseo_' . $rel . '_rel_link', '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
 
 		if ( is_string( $link ) && $link !== '' ) {
 			echo $link;
@@ -1170,17 +1170,17 @@ class YMBESEO_Frontend {
 		if ( is_singular() ) {
 			$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
 			if ( $keywords === '' && ( is_object( $post ) && ( ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) ) {
-				$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
+				$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 			}
 		}
 		else {
-			if ( $this->is_home_posts_page() && $this->options['metakey-home-wpseo'] !== '' ) {
-				$keywords = YMBESEO_replace_vars( $this->options['metakey-home-wpseo'], array() );
+			if ( $this->is_home_posts_page() && $this->options['metakey-home-ymbeseo'] !== '' ) {
+				$keywords = ymbeseo_replace_vars( $this->options['metakey-home-ymbeseo'], array() );
 			}
 			elseif ( $this->is_home_static_page() ) {
 				$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
 				if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) {
-					$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
+					$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 				}
 			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
@@ -1189,15 +1189,15 @@ class YMBESEO_Frontend {
 				if ( is_object( $term ) ) {
 					$keywords = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
 					if ( ( ! is_string( $keywords ) || $keywords === '' ) && ( isset( $this->options[ 'metakey-tax-' . $term->taxonomy ] ) && $this->options[ 'metakey-tax-' . $term->taxonomy ] !== '' ) ) {
-						$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
+						$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
 					}
 				}
 			}
 			elseif ( is_author() ) {
 				$author_id = get_query_var( 'author' );
 				$keywords  = get_the_author_meta( 'metakey', $author_id );
-				if ( ! $keywords && $this->options['metakey-author-wpseo'] !== '' ) {
-					$keywords = YMBESEO_replace_vars( $this->options['metakey-author-wpseo'], $wp_query->get_queried_object() );
+				if ( ! $keywords && $this->options['metakey-author-ymbeseo'] !== '' ) {
+					$keywords = ymbeseo_replace_vars( $this->options['metakey-author-ymbeseo'], $wp_query->get_queried_object() );
 				}
 			}
 			elseif ( is_post_type_archive() ) {
@@ -1206,19 +1206,19 @@ class YMBESEO_Frontend {
 					$post_type = reset( $post_type );
 				}
 				if ( isset( $this->options[ 'metakey-ptarchive-' . $post_type ] ) && $this->options[ 'metakey-ptarchive-' . $post_type ] !== '' ) {
-					$keywords = YMBESEO_replace_vars( $this->options[ 'metakey-ptarchive-' . $post_type ], $wp_query->get_queried_object() );
+					$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-ptarchive-' . $post_type ], $wp_query->get_queried_object() );
 				}
 			}
 		}
 
-		$keywords = apply_filters( 'YMBESEO_metakey', trim( $keywords ) ); // TODO Make deprecated.
+		$keywords = apply_filters( 'ymbeseo_metakey', trim( $keywords ) ); // TODO Make deprecated.
 
 		/**
-		 * Filter: 'YMBESEO_metakeywords' - Allow changing the Yoast SEO meta keywords
+		 * Filter: 'ymbeseo_metakeywords' - Allow changing the Yoast Minus Bloat Equals SEO meta keywords
 		 *
 		 * @api string $keywords The meta keywords to be echoed.
 		 */
-		$keywords = apply_filters( 'YMBESEO_metakeywords', trim( $keywords ) ); // More appropriately named.
+		$keywords = apply_filters( 'ymbeseo_metakeywords', trim( $keywords ) ); // More appropriately named.
 
 		if ( is_string( $keywords ) && $keywords !== '' ) {
 			echo '<meta name="keywords" content="', esc_attr( strip_tags( stripslashes( $keywords ) ) ), '"/>', "\n";
@@ -1277,7 +1277,7 @@ class YMBESEO_Frontend {
 				$metadesc = '';
 			}
 			elseif ( $this->is_home_posts_page() ) {
-				$template = $this->options['metadesc-home-wpseo'];
+				$template = $this->options['metadesc-home-ymbeseo'];
 				$term     = array();
 
 				if ( empty( $template ) ) {
@@ -1307,9 +1307,9 @@ class YMBESEO_Frontend {
 			}
 			elseif ( is_author() ) {
 				$author_id = get_query_var( 'author' );
-				$metadesc  = get_the_author_meta( 'YMBESEO_metadesc', $author_id );
-				if ( ( ! is_string( $metadesc ) || $metadesc === '' ) && '' !== $this->options['metadesc-author-wpseo'] ) {
-					$template = $this->options['metadesc-author-wpseo'];
+				$metadesc  = get_the_author_meta( 'ymbeseo_metadesc', $author_id );
+				if ( ( ! is_string( $metadesc ) || $metadesc === '' ) && '' !== $this->options['metadesc-author-ymbeseo'] ) {
+					$template = $this->options['metadesc-author-ymbeseo'];
 				}
 			}
 			elseif ( is_post_type_archive() ) {
@@ -1322,7 +1322,7 @@ class YMBESEO_Frontend {
 				}
 			}
 			elseif ( is_archive() ) {
-				$template = $this->options['metadesc-archive-wpseo'];
+				$template = $this->options['metadesc-archive-ymbeseo'];
 			}
 
 			// If we're on a paginated page, and the template doesn't change for paginated pages, bail.
@@ -1350,14 +1350,14 @@ class YMBESEO_Frontend {
 			$post_data = $term;
 		}
 
-		$metadesc = YMBESEO_replace_vars( $metadesc, $post_data );
+		$metadesc = ymbeseo_replace_vars( $metadesc, $post_data );
 
 		/**
-		 * Filter: 'YMBESEO_metadesc' - Allow changing the Yoast SEO meta description sentence.
+		 * Filter: 'ymbeseo_metadesc' - Allow changing the Yoast Minus Bloat Equals SEO meta description sentence.
 		 *
 		 * @api string $metadesc The description sentence.
 		 */
-		$this->metadesc = apply_filters( 'YMBESEO_metadesc', trim( $metadesc ) );
+		$this->metadesc = apply_filters( 'ymbeseo_metadesc', trim( $metadesc ) );
 	}
 
 	/**
@@ -1615,11 +1615,11 @@ class YMBESEO_Frontend {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_whitelist_permalink_vars' - Allow plugins to register their own variables not to clean
+		 * Filter: 'ymbeseo_whitelist_permalink_vars' - Allow plugins to register their own variables not to clean
 		 *
 		 * @api array $unsigned Array of permalink variables _not_ to clean. Empty by default.
 		 */
-		$whitelisted_extravars = apply_filters( 'YMBESEO_whitelist_permalink_vars', array() );
+		$whitelisted_extravars = apply_filters( 'ymbeseo_whitelist_permalink_vars', array() );
 
 		if ( $this->options['cleanpermalink-googlesitesearch'] === true ) {
 			// Prevent cleaning out Google Site searches.
@@ -1677,7 +1677,7 @@ class YMBESEO_Frontend {
 		global $post;
 
 		/**
-		 * Allow the developer to determine whether or not to follow the links in the bits Yoast SEO adds to the RSS feed, defaults to true.
+		 * Allow the developer to determine whether or not to follow the links in the bits Yoast Minus Bloat Equals SEO adds to the RSS feed, defaults to true.
 		 *
 		 * @api   bool $unsigned Whether or not to follow the links in RSS feed, defaults to true.
 		 *
@@ -1742,12 +1742,12 @@ class YMBESEO_Frontend {
 	function embed_rss( $content, $context = 'full' ) {
 
 		/**
-		 * Filter: 'YMBESEO_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
+		 * Filter: 'ymbeseo_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
 		 *
 		 * @api boolean $show_embed Indicates if the RSS footer should be shown or not
 		 * @param string $context The context of the RSS content - 'full' or 'excerpt'.
 		 */
-		if ( ! apply_filters( 'YMBESEO_include_rss_footer', true, $context ) ) {
+		if ( ! apply_filters( 'ymbeseo_include_rss_footer', true, $context ) ) {
 			return $content;
 		}
 
@@ -1821,17 +1821,17 @@ class YMBESEO_Frontend {
 	 * @return string
 	 */
 	function title_test_helper( $title ) {
-		$YMBESEO_titles = get_option( 'YMBESEO_titles' );
+		$ymbeseo_titles = get_option( 'ymbeseo_titles' );
 
-		$YMBESEO_titles['title_test'] ++;
-		update_option( 'YMBESEO_titles', $YMBESEO_titles );
+		$ymbeseo_titles['title_test'] ++;
+		update_option( 'ymbeseo_titles', $ymbeseo_titles );
 
 		// Prevent this setting from being on forever when something breaks, as it breaks caching.
-		if ( $YMBESEO_titles['title_test'] > 5 ) {
-			$YMBESEO_titles['title_test'] = 0;
-			update_option( 'YMBESEO_titles', $YMBESEO_titles );
+		if ( $ymbeseo_titles['title_test'] > 5 ) {
+			$ymbeseo_titles['title_test'] = 0;
+			update_option( 'ymbeseo_titles', $ymbeseo_titles );
 
-			remove_filter( 'YMBESEO_title', array( $this, 'title_test_helper' ) );
+			remove_filter( 'ymbeseo_title', array( $this, 'title_test_helper' ) );
 
 			return $title;
 		}
@@ -1860,15 +1860,15 @@ class YMBESEO_Frontend {
 	 */
 	private function head_product_name() {
 		if ( $this->is_premium() ) {
-			return 'Yoast SEO Premium plugin';
+			return 'Yoast Minus Bloat Equals SEO Premium plugin';
 		}
 		else {
-			return 'Yoast SEO plugin';
+			return 'Yoast Minus Bloat Equals SEO plugin';
 		}
 	}
 
 	/**
-	 * Check if this plugin is the premium version of WPSEO
+	 * Check if this plugin is the premium version of YMBESEO
 	 *
 	 * @return bool
 	 */

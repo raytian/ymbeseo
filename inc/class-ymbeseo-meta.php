@@ -5,7 +5,7 @@
  */
 
 /**
- * This class implements defaults and value validation for all WPSEO Post Meta values.
+ * This class implements defaults and value validation for all YMBESEO Post Meta values.
  *
  * Some guidelines:
  * - To update a meta value, you can just use update_post_meta() with the full (prefixed) meta key
@@ -13,35 +13,35 @@
  *        All updates will be automatically validated.
  *        Meta values will only be saved to the database if they are *not* the same as the default to
  *        keep database load low.
- * - To retrieve a WPSEO meta value, you **must** use YMBESEO_Meta::get_value() which will always return a
+ * - To retrieve a YMBESEO meta value, you **must** use YMBESEO_Meta::get_value() which will always return a
  *        string value, either the saved value or the default.
- *        This method can also retrieve a complete set of WPSEO meta values for one specific post, see
+ *        This method can also retrieve a complete set of YMBESEO meta values for one specific post, see
  *        the method documentation for the parameters.
  *
  * @internal   Unfortunately there isn't a filter available to hook into before returning the results
  * for get_post_meta(), get_post_custom() and the likes. That would have been the preferred solution.
  *
  * @internal   all WP native get_meta() results get cached internally, so no need to cache locally.
- * @internal   use $key when the key is the WPSEO internal name (without prefix), $meta_key when it
+ * @internal   use $key when the key is the YMBESEO internal name (without prefix), $meta_key when it
  *             includes the prefix
  */
 class YMBESEO_Meta {
 
 	/**
-	 * @var    string    Prefix for all WPSEO meta values in the database
+	 * @var    string    Prefix for all YMBESEO meta values in the database
 	 * @static
 	 *
 	 * @internal if at any point this would change, quite apart from an upgrade routine, this also will need to
 	 * be changed in the wpml-config.xml file.
 	 */
-	public static $meta_prefix = '_so_YMBESEO_';
+	public static $meta_prefix = '_yoast_ymbeseo_';
 
 
 	/**
-	 * @var    string   Prefix for all WPSEO meta value form field names and ids
+	 * @var    string   Prefix for all YMBESEO meta value form field names and ids
 	 * @static
 	 */
-	public static $form_prefix = 'so_YMBESEO_';
+	public static $form_prefix = 'yoast_ymbeseo_';
 
 
 	/**
@@ -266,7 +266,7 @@ class YMBESEO_Meta {
 		 * Allow add-on plugins to register their meta fields for management by this class
 		 * add_filter() calls must be made before plugins_loaded prio 14
 		 */
-		$extra_fields = apply_filters( 'add_extra_YMBESEO_meta_fields', array() );
+		$extra_fields = apply_filters( 'add_extra_ymbeseo_meta_fields', array() );
 		if ( is_array( $extra_fields ) ) {
 			self::$meta_fields = self::array_merge_recursive_distinct( $extra_fields, self::$meta_fields );
 		}
@@ -337,15 +337,27 @@ class YMBESEO_Meta {
 
 
 			case 'general':
-				$options = get_option( 'YMBESEO_titles' );
+				$options = get_option( 'ymbeseo_titles' );
 				if ( $options['usemetakeywords'] === true ) {
 					/* Adjust the link in the keywords description text string based on the post type */
-					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_titles#top#post_types' ) ) . '">', '</a>' );
+					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', '</a>' );
 				}
 				else {
 					/* Don't show the keywords field if keywords aren't enabled */
 					unset( $field_defs['metakeywords'] );
 				}
+				/**
+				 * Filter the YMBESEO metabox form field definitions for the general tab, backward compatibility
+				 *
+				 * @deprecated 1.5.0
+				 * @deprecated use the 'ymbeseo_metabox_entries_general' filter instead
+				 * @see        YMBESEO_Meta::get_meta_field_defs()
+				 *
+				 * @param      array $field_defs Metabox orm definitions.
+				 *
+				 * @return     array
+				 */
+				$field_defs = apply_filters( 'ymbeseo_metabox_entries', $field_defs );
 				break;
 
 
@@ -402,7 +414,7 @@ class YMBESEO_Meta {
 		}
 
 		/**
-		 * Filter the WPSEO metabox form field definitions for a tab
+		 * Filter the YMBESEO metabox form field definitions for a tab
 		 * {tab} can be 'general', 'advanced' or 'social'
 		 *
 		 * @param  array  $field_defs Metabox form definitions.
@@ -411,7 +423,7 @@ class YMBESEO_Meta {
 		 * @return array
 		 */
 
-		return apply_filters( 'YMBESEO_metabox_entries_' . $tab, $field_defs, $post_type );
+		return apply_filters( 'ymbeseo_metabox_entries_' . $tab, $field_defs, $post_type );
 	}
 
 
@@ -500,7 +512,7 @@ class YMBESEO_Meta {
 				break;
 		}
 
-		$clean = apply_filters( 'YMBESEO_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
+		$clean = apply_filters( 'ymbeseo_sanitize_post_meta_' . $meta_key, $clean, $meta_value, $field_def, $meta_key );
 
 		return $clean;
 	}
@@ -704,13 +716,13 @@ class YMBESEO_Meta {
 
 	/**
 	 * Used for imports, this functions imports the value of $old_metakey into $new_metakey for those post
-	 * where no WPSEO meta data has been set.
+	 * where no YMBESEO meta data has been set.
 	 * Optionally deletes the $old_metakey values.
 	 *
 	 * @static
 	 *
 	 * @param  string $old_metakey The old key of the meta value.
-	 * @param  string $new_metakey The new key, usually the WPSEO meta key (including prefix).
+	 * @param  string $new_metakey The new key, usually the YMBESEO meta key (including prefix).
 	 * @param  bool   $delete_old  Whether to delete the old meta key/value-sets.
 	 *
 	 * @return void
@@ -719,7 +731,7 @@ class YMBESEO_Meta {
 		global $wpdb;
 
 		/*
-		Get only those rows where no wpseo meta values exist for the same post
+		Get only those rows where no ymbeseo meta values exist for the same post
 		   (with the exception of linkdex as that will be set independently of whether the post has been edited)
 		   @internal Query is pretty well optimized this way
 		*/
@@ -768,13 +780,13 @@ class YMBESEO_Meta {
 		global $wpdb;
 
 		/**
-		 * Clean up '_so_YMBESEO_meta-robots'
+		 * Clean up '_yoast_ymbeseo_meta-robots'
 		 *
-		 * Retrieve all '_so_YMBESEO_meta-robots' meta values and convert if no new values found
+		 * Retrieve all '_yoast_ymbeseo_meta-robots' meta values and convert if no new values found
 		 *
 		 * @internal Query is pretty well optimized this way
 		 *
-		 * @todo [JRF => Yoast] find out all possible values which the old '_so_YMBESEO_meta-robots' could contain
+		 * @todo [JRF => Yoast] find out all possible values which the old '_yoast_ymbeseo_meta-robots' could contain
 		 * to convert the data correctly
 		 */
 		$query  = $wpdb->prepare(
@@ -924,7 +936,7 @@ class YMBESEO_Meta {
 		}
 		unset( $query, $oldies, $old, $clean );
 
-		do_action( 'YMBESEO_meta_clean_up' );
+		do_action( 'ymbeseo_meta_clean_up' );
 	}
 
 

@@ -208,7 +208,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 			<?php if ( 'top' === $which ) { ?>
 			<form id="posts-filter" action="" method="get">
 				<input type="hidden" name="nonce" value="<?php echo $this->nonce; ?>"/>
-				<input type="hidden" name="page" value="YMBESEO_tools"/>
+				<input type="hidden" name="page" value="ymbeseo_tools"/>
 				<input type="hidden" name="tool" value="bulk-editor"/>
 				<input type="hidden" name="type" value="<?php echo esc_attr( $this->page_type ); ?>"/>
 				<input type="hidden" name="orderby"
@@ -291,7 +291,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 
 		$post_status         = filter_input( INPUT_GET, 'post_status' );
 		$class               = empty( $post_status ) ? ' class="current"' : '';
-		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts', 'ymbeseo' ), number_format_i18n( $total_posts ) ) . '</a>';
+		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts', 'ymbeseo' ), number_format_i18n( $total_posts ) ) . '</a>';
 
 		$post_stati = get_post_stati( array( 'show_in_admin_all_list' => true ), 'objects' );
 		if ( is_array( $post_stati ) && $post_stati !== array() ) {
@@ -318,7 +318,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 					$class = ' class="current"';
 				}
 
-				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
+				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=ymbeseo_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
 			}
 		}
 		unset( $post_stati, $status, $status_name, $total, $class );
@@ -334,7 +334,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 		if ( 'trash' === $post_status ) {
 			$class = 'class="current"';
 		}
-		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'Trash <span class="count">(%s)</span>', 'Trash <span class="count">(%s)</span>', $trashed_posts, 'posts', 'ymbeseo' ), number_format_i18n( $trashed_posts ) ) . '</a>';
+		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $class . '>' . sprintf( _nx( 'Trash <span class="count">(%s)</span>', 'Trash <span class="count">(%s)</span>', $trashed_posts, 'posts', 'ymbeseo' ), number_format_i18n( $trashed_posts ) ) . '</a>';
 
 		return $status_links;
 	}
@@ -537,7 +537,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 	protected function set_pagination( $total_items ) {
 
 		// Calculate items per page.
-		$per_page = $this->get_items_per_page( 'YMBESEO_posts_per_page', 10 );
+		$per_page = $this->get_items_per_page( 'ymbeseo_posts_per_page', 10 );
 		$paged    = esc_sql( sanitize_text_field( filter_input( INPUT_GET, 'paged' ) ) );
 
 		if ( empty( $paged ) || ! is_numeric( $paged ) || $paged <= 0 ) {
@@ -807,7 +807,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 				break;
 
 			case 'col_row_action':
-				$column_value = sprintf( '<a href="#" class="wpseo-save" data-id="%1$s">Save</a> | <a href="#" class="wpseo-save-all">Save All</a>', $rec->ID );
+				$column_value = sprintf( '<a href="#" class="ymbeseo-save" data-id="%1$s">Save</a> | <a href="#" class="ymbeseo-save-all">Save All</a>', $rec->ID );
 				break;
 		}
 
@@ -836,7 +836,7 @@ class YMBESEO_Bulk_List_Table extends WP_List_Table {
 			$meta_value = $values[ $meta_value ];
 		}
 
-		return sprintf( '<td %2$s id="wpseo-existing-%4$s-%3$s">%1$s</td>', $meta_value, $attributes, $record_id, $this->target_db_field );
+		return sprintf( '<td %2$s id="ymbeseo-existing-%4$s-%3$s">%1$s</td>', $meta_value, $attributes, $record_id, $this->target_db_field );
 	}
 
 	/**

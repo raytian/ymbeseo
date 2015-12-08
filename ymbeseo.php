@@ -1,14 +1,18 @@
 <?php
 /**
+ * @package YMBESEO\Main
+ */
+
+/**
  * Plugin Name: Yoast Minus Bloat Equals SEO
- * Version: 0.1 (fork from Yoast SEO 2.3.5)
- * Plugin URI: https://so-wp.com/plugins/ymbeseo
- * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5
- * Author: SO WP
- * Author URI: https://so-wp.com/
+ * Version:     0.1.0
+ * Plugin URI:  https://so-wp.com/plugins/ymbeseo
+ * Description: Yoast Minus Bloat Equals SEO is a fork from Yoast SEO 2.3.5.
+ * Author:      SO WP
+ * Author URI:  https://so-wp.com/
  * Text Domain: ymbeseo
  * Domain Path: /languages/
- * License: GPL v3
+ * License:     GPL v3
  */
 
 /**
@@ -39,5 +43,5 @@ if ( ! defined( 'YMBESEO_FILE' ) ) {
 	define( 'YMBESEO_FILE', __FILE__ );
 }
 
-// Load the Yoast SEO plugin.
+// Load the Yoast Minus Bloat Equals SEO plugin.
 require_once( dirname( __FILE__ ) . '/ymbeseo-main.php' );

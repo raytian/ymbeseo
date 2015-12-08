@@ -11,31 +11,31 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 
 $yform = Yoast_Form::get_instance();
 
-$options = get_site_option( 'YMBESEO_ms' );
+$options = get_site_option( 'ymbeseo_ms' );
 
-if ( isset( $_POST['YMBESEO_submit'] ) ) {
-	check_admin_referer( 'wpseo-network-settings' );
+if ( isset( $_POST['ymbeseo_submit'] ) ) {
+	check_admin_referer( 'ymbeseo-network-settings' );
 
 	foreach ( array( 'access', 'defaultblog' ) as $opt ) {
-		$options[ $opt ] = $_POST['YMBESEO_ms'][ $opt ];
+		$options[ $opt ] = $_POST['ymbeseo_ms'][ $opt ];
 	}
 	unset( $opt );
-	YMBESEO_Options::update_site_option( 'YMBESEO_ms', $options );
-	add_settings_error( 'YMBESEO_ms', 'settings_updated', __( 'Settings Updated.', 'ymbeseo' ), 'updated' );
+	YMBESEO_Options::update_site_option( 'ymbeseo_ms', $options );
+	add_settings_error( 'ymbeseo_ms', 'settings_updated', __( 'Settings Updated.', 'ymbeseo' ), 'updated' );
 }
 
-if ( isset( $_POST['YMBESEO_restore_blog'] ) ) {
-	check_admin_referer( 'wpseo-network-restore' );
-	if ( isset( $_POST['YMBESEO_ms']['restoreblog'] ) && is_numeric( $_POST['YMBESEO_ms']['restoreblog'] ) ) {
-		$restoreblog = (int) YMBESEO_Utils::validate_int( $_POST['YMBESEO_ms']['restoreblog'] );
+if ( isset( $_POST['ymbeseo_restore_blog'] ) ) {
+	check_admin_referer( 'ymbeseo-network-restore' );
+	if ( isset( $_POST['ymbeseo_ms']['restoreblog'] ) && is_numeric( $_POST['ymbeseo_ms']['restoreblog'] ) ) {
+		$restoreblog = (int) YMBESEO_Utils::validate_int( $_POST['ymbeseo_ms']['restoreblog'] );
 		$blog        = get_blog_details( $restoreblog );
 
 		if ( $blog ) {
 			YMBESEO_Options::reset_ms_blog( $restoreblog );
-			add_settings_error( 'YMBESEO_ms', 'settings_updated', sprintf( __( '%s restored to default SEO settings.', 'ymbeseo' ), esc_html( $blog->blogname ) ), 'updated' );
+			add_settings_error( 'ymbeseo_ms', 'settings_updated', sprintf( __( '%s restored to default SEO settings.', 'ymbeseo' ), esc_html( $blog->blogname ) ), 'updated' );
 		}
 		else {
-			add_settings_error( 'YMBESEO_ms', 'settings_updated', sprintf( __( 'Blog %s not found.', 'ymbeseo' ), esc_html( $restoreblog ) ), 'error' );
+			add_settings_error( 'ymbeseo_ms', 'settings_updated', sprintf( __( 'Blog %s not found.', 'ymbeseo' ), esc_html( $restoreblog ) ), 'error' );
 		}
 		unset( $restoreblog, $blog );
 	}
@@ -81,22 +81,22 @@ else {
 	unset( $sites );
 }
 
-$yform->admin_header( false, 'YMBESEO_ms' );
+$yform->admin_header( false, 'ymbeseo_ms' );
 
 echo '<h2>', __( 'MultiSite Settings', 'ymbeseo' ), '</h2>';
 echo '<form method="post" accept-charset="', esc_attr( get_bloginfo( 'charset' ) ), '">';
-wp_nonce_field( 'wpseo-network-settings', '_wpnonce', true, true );
+wp_nonce_field( 'ymbeseo-network-settings', '_wpnonce', true, true );
 
 /* @internal Important: Make sure the options added to the array here are in line with the options set in the YMBESEO_Option_MS::$allowed_access_options property */
 $yform->select(
 	'access',
-	/* translators: %1$s expands to Yoast SEO */
-	sprintf( __( 'Who should have access to the %1$s settings', 'ymbeseo' ), 'Yoast SEO' ),
+	/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+	sprintf( __( 'Who should have access to the %1$s settings', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 	array(
 		'admin'      => __( 'Site Admins (default)', 'ymbeseo' ),
 		'superadmin' => __( 'Super Admins only', 'ymbeseo' ),
 	),
-	'YMBESEO_ms'
+	'ymbeseo_ms'
 );
 
 if ( $use_dropdown === true ) {
@@ -104,23 +104,23 @@ if ( $use_dropdown === true ) {
 		'defaultblog',
 		__( 'New sites in the network inherit their SEO settings from this site', 'ymbeseo' ),
 		$dropdown_input,
-		'YMBESEO_ms'
+		'ymbeseo_ms'
 	);
 	echo '<p>' . __( 'Choose the site whose settings you want to use as default for all sites that are added to your network. If you choose \'None\', the normal plugin defaults will be used.', 'ymbeseo' ) . '</p>';
 }
 else {
-	$yform->textinput( 'defaultblog', __( 'New sites in the network inherit their SEO settings from this site', 'ymbeseo' ), 'YMBESEO_ms' );
+	$yform->textinput( 'defaultblog', __( 'New sites in the network inherit their SEO settings from this site', 'ymbeseo' ), 'ymbeseo_ms' );
 	echo '<p>' . sprintf( __( 'Enter the %sSite ID%s for the site whose settings you want to use as default for all sites that are added to your network. Leave empty for none (i.e. the normal plugin defaults will be used).', 'ymbeseo' ), '<a href="' . esc_url( network_admin_url( 'sites.php' ) ) . '">', '</a>' ) . '</p>';
 }
 	echo '<p><strong>' . __( 'Take note:', 'ymbeseo' ) . '</strong> ' . __( 'Privacy sensitive (FB admins and such), theme specific (title rewrite) and a few very site specific settings will not be imported to new blogs.', 'ymbeseo' ) . '</p>';
 
 
-echo '<input type="submit" name="YMBESEO_submit" class="button-primary" value="' . __( 'Save MultiSite Settings', 'ymbeseo' ) . '"/>';
+echo '<input type="submit" name="ymbeseo_submit" class="button-primary" value="' . __( 'Save MultiSite Settings', 'ymbeseo' ) . '"/>';
 echo '</form>';
 
 echo '<h2>' . __( 'Restore site to default settings', 'ymbeseo' ) . '</h2>';
 echo '<form method="post" accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
-wp_nonce_field( 'wpseo-network-restore', '_wpnonce', true, true );
+wp_nonce_field( 'ymbeseo-network-restore', '_wpnonce', true, true );
 echo '<p>' . __( 'Using this form you can reset a site to the default SEO settings.', 'ymbeseo' ) . '</p>';
 
 if ( $use_dropdown === true ) {
@@ -129,14 +129,14 @@ if ( $use_dropdown === true ) {
 		'restoreblog',
 		__( 'Site ID', 'ymbeseo' ),
 		$dropdown_input,
-		'YMBESEO_ms'
+		'ymbeseo_ms'
 	);
 }
 else {
-	$yform->textinput( 'restoreblog', __( 'Blog ID', 'ymbeseo' ), 'YMBESEO_ms' );
+	$yform->textinput( 'restoreblog', __( 'Blog ID', 'ymbeseo' ), 'ymbeseo_ms' );
 }
 
-echo '<input type="submit" name="YMBESEO_restore_blog" value="' . __( 'Restore site to defaults', 'ymbeseo' ) . '" class="button"/>';
+echo '<input type="submit" name="ymbeseo_restore_blog" value="' . __( 'Restore site to defaults', 'ymbeseo' ) . '" class="button"/>';
 echo '</form>';
 
 

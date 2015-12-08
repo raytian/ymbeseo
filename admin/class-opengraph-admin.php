@@ -4,7 +4,7 @@
  */
 
 /**
- * This class adds the Social tab to the Yoast SEO metabox and makes sure the settings are saved.
+ * This class adds the Social tab to the Yoast Minus Bloat Equals SEO metabox and makes sure the settings are saved.
  */
 class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 
@@ -12,11 +12,11 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 * Class constructor
 	 */
 	public function __construct() {
-		add_action( 'YMBESEO_tab_translate', array( $this, 'translate_meta_boxes' ) );
-		add_action( 'YMBESEO_tab_header', array( $this, 'tab_header' ), 60 );
-		add_action( 'YMBESEO_tab_content', array( $this, 'tab_content' ) );
-		add_filter( 'YMBESEO_save_metaboxes', array( $this, 'save_meta_boxes' ), 10, 1 );
-		add_action( 'YMBESEO_save_compare_data', array( $this, 'og_data_compare' ), 10, 1 );
+		add_action( 'ymbeseo_tab_translate', array( $this, 'translate_meta_boxes' ) );
+		add_action( 'ymbeseo_tab_header', array( $this, 'tab_header' ), 60 );
+		add_action( 'ymbeseo_tab_content', array( $this, 'tab_content' ) );
+		add_filter( 'ymbeseo_save_metaboxes', array( $this, 'save_meta_boxes' ), 10, 1 );
+		add_action( 'ymbeseo_save_compare_data', array( $this, 'og_data_compare' ), 10, 1 );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 	 * Output the tab header for the Social tab
 	 */
 	public function tab_header() {
-		echo '<li class="social"><a class="YMBESEO_tablink" href="#YMBESEO_social">', __( 'Social', 'ymbeseo' ), '</a></li>';
+		echo '<li class="social"><a class="ymbeseo_tablink" href="#ymbeseo_social">', __( 'Social', 'ymbeseo' ), '</a></li>';
 	}
 
 	/**
@@ -139,4 +139,25 @@ class YMBESEO_Social_Admin extends YMBESEO_Metabox {
 			}
 		}
 	}
+
+
+	/********************** DEPRECATED METHODS **********************/
+
+	/**
+	 * Define the meta boxes for the Social tab
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use YMBESEO_Meta::get_meta_field_defs()
+	 * @see        YMBESEO_Meta::get_meta_field_defs()
+	 *
+	 * @param    string $post_type
+	 *
+	 * @return    array    Array containing the meta boxes
+	 */
+	public function get_meta_boxes( $post_type = 'post' ) {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Meta::get_meta_field_defs()' );
+
+		return $this->get_meta_field_defs( 'social' );
+	}
+
 } /* End of class */

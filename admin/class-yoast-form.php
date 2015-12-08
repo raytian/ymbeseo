@@ -44,12 +44,12 @@ class Yoast_Form {
 	 * @param bool   $contains_files   Whether the form should allow for file uploads.
 	 * @param bool   $option_long_name
 	 */
-	public function admin_header( $form = true, $option = 'wpseo', $contains_files = false, $option_long_name = false ) {
+	public function admin_header( $form = true, $option = 'ymbeseo', $contains_files = false, $option_long_name = false ) {
 		if ( ! $option_long_name ) {
 			$option_long_name = YMBESEO_Options::get_group_name( $option );
 		}
 		?>
-		<div class="wrap wpseo-admin-page page-<?php echo $option; ?>">
+		<div class="wrap ymbeseo-admin-page page-<?php echo $option; ?>">
 		<?php
 		/**
 		 * Display the updated/error messages
@@ -58,13 +58,13 @@ class Yoast_Form {
 		 */
 		require_once( ABSPATH . 'wp-admin/options-head.php' );
 		?>
-		<h2 id="wpseo-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
-		<div class="YMBESEO_content_wrapper">
-		<div class="YMBESEO_content_cell" id="YMBESEO_content_top">
+		<h2 id="ymbeseo-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
+		<div class="ymbeseo_content_wrapper">
+		<div class="ymbeseo_content_cell" id="ymbeseo_content_top">
 		<?php
 		if ( $form === true ) {
 			$enctype = ( $contains_files ) ? ' enctype="multipart/form-data"' : '';
-			echo '<form action="' . esc_url( admin_url( 'options.php' ) ) . '" method="post" id="wpseo-conf"' . $enctype . ' accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
+			echo '<form action="' . esc_url( admin_url( 'options.php' ) ) . '" method="post" id="ymbeseo-conf"' . $enctype . ' accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
 			settings_fields( $option_long_name );
 		}
 		$this->set_option( $option );
@@ -109,27 +109,27 @@ class Yoast_Form {
 			</form>';
 		}
 
-		do_action( 'YMBESEO_admin_footer' );
+		do_action( 'ymbeseo_admin_footer' );
 
 		echo '
-			</div><!-- end of div YMBESEO_content_top -->';
+			</div><!-- end of div ymbeseo_content_top -->';
 
 		if ( $show_sidebar ) {
 			$this->admin_sidebar();
 		}
 
-		echo '</div><!-- end of div YMBESEO_content_wrapper -->';
+		echo '</div><!-- end of div ymbeseo_content_wrapper -->';
 
 
 		if ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ) {
 			$xdebug = ( extension_loaded( 'xdebug' ) ? true : false );
 			echo '
 			<div id="poststuff">
-			<div id="wpseo-debug-info" class="postbox">
+			<div id="ymbeseo-debug-info" class="postbox">
 
 				<h3 class="hndle"><span>' . __( 'Debug Information', 'ymbeseo' ) . '</span></h3>
 				<div class="inside">
-					<h4>' . esc_html( __( 'Current option:', 'ymbeseo' ) ) . ' <span class="wpseo-debug">' . esc_html( $this->option_name ) . '</span></h4>
+					<h4>' . esc_html( __( 'Current option:', 'ymbeseo' ) ) . ' <span class="ymbeseo-debug">' . esc_html( $this->option_name ) . '</span></h4>
 					' . ( ( $xdebug ) ? '' : '<pre>' );
 			var_dump( $this->get_option() );
 			echo '
@@ -158,7 +158,7 @@ class Yoast_Form {
 
 		$service_banners = array(
 			array(
-				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=website-review-banner',
+				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=website-review-banner',
 				'img' => 'banner-website-review.png',
 				'alt' => 'Website Review banner',
 			),
@@ -166,15 +166,15 @@ class Yoast_Form {
 
 		$plugin_banners = array(
 			array(
-				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
 				'img' => 'banner-premium-seo.png',
-				'alt' => 'Banner Yoast SEO Premium',
+				'alt' => 'Banner Yoast Minus Bloat Equals SEO Premium',
 			),
 		);
 
-		if ( ! class_exists( 'YMBESEO_Video_Sitemap' ) ) {
+		if ( ! class_exists( 'ymbeseo_Video_Sitemap' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=video-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=video-seo-banner',
 				'img' => 'banner-video-seo.png',
 				'alt' => 'Banner Yoast Video SEO plugin',
 			);
@@ -182,7 +182,7 @@ class Yoast_Form {
 
 		if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
 				'img' => 'banner-woocommerce-seo.png',
 				'alt' => 'Banner Yoast WooCommerce SEO plugin',
 			);
@@ -190,7 +190,7 @@ class Yoast_Form {
 
 		if ( ! defined( 'YMBESEO_LOCAL_VERSION' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=local-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=local-seo-banner',
 				'img' => 'banner-local-seo.png',
 				'alt' => 'Banner Yoast Local SEO plugin',
 			);
@@ -198,7 +198,7 @@ class Yoast_Form {
 
 		if ( ! class_exists( 'YMBESEO_News' ) ) {
 			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=news-seo-banner',
+				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=news-seo-banner',
 				'img' => 'banner-news-seo.png',
 				'alt' => 'Banner Yoast News SEO plugin',
 			);
@@ -207,7 +207,7 @@ class Yoast_Form {
 		shuffle( $service_banners );
 		shuffle( $plugin_banners );
 		?>
-		<div class="YMBESEO_content_cell" id="sidebar-container">
+		<div class="ymbeseo_content_cell" id="sidebar-container">
 			<div id="sidebar">
 		<?php
 
@@ -225,9 +225,9 @@ class Yoast_Form {
 		}
 		?>
 				<strong><?php _e( 'Remove these ads?', 'ymbeseo' ); ?></strong><br/>
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
-				 /* translators: %1$s expands to Yoast SEO Premium */
-				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
+				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
+				 /* translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium */
+				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO Premium' ); ?></a><br/><br/>
 			</div>
 		</div>
 	<?php
@@ -419,9 +419,9 @@ class Yoast_Form {
 
 		$var_esc = esc_attr( $var );
 
-		$this->label( $label . ':', array( 'for' => 'YMBESEO_' . $var, 'class' => 'select' ) );
-		echo '<input class="textinput" id="YMBESEO_', $var_esc, '" type="text" size="36" name="', esc_attr( $this->option_name ), '[', $var_esc, ']" value="', esc_attr( $val ), '" />';
-		echo '<input id="YMBESEO_', $var_esc, '_button" class="YMBESEO_image_upload_button button" type="button" value="', __( 'Upload Image', 'ymbeseo' ), '" />';
+		$this->label( $label . ':', array( 'for' => 'ymbeseo_' . $var, 'class' => 'select' ) );
+		echo '<input class="textinput" id="ymbeseo_', $var_esc, '" type="text" size="36" name="', esc_attr( $this->option_name ), '[', $var_esc, ']" value="', esc_attr( $val ), '" />';
+		echo '<input id="ymbeseo_', $var_esc, '_button" class="ymbeseo_image_upload_button button" type="button" value="', __( 'Upload Image', 'ymbeseo' ), '" />';
 		echo '<br class="clear"/>';
 	}
 
@@ -442,7 +442,7 @@ class Yoast_Form {
 
 		$var_esc = esc_attr( $var );
 
-		echo '<br/><div class="YMBESEO_radio_block" id="' . $var_esc . '">';
+		echo '<br/><div class="ymbeseo_radio_block" id="' . $var_esc . '">';
 		if ( is_string( $label ) && $label !== '' ) {
 			$this->label( $label . ':', array( 'class' => 'select' ) );
 		}

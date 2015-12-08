@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    WPSEO
+ * @package    YMBESEO
  * @subpackage Admin
  */
 
@@ -23,7 +23,7 @@ class Yoast_Social_Facebook {
 	 * Setting the options and define the listener to fetch $_GET values
 	 */
 	public function __construct() {
-		$this->options = get_option( 'YMBESEO_social' );
+		$this->options = get_option( 'ymbeseo_social' );
 
 		$this->get_listener();
 
@@ -172,7 +172,7 @@ class Yoast_Social_Facebook {
 		$this->verify_nonce( 'fbclearall' );
 
 		// Reset to defaults, don't unset as otherwise the old values will be retained.
-		$this->options['fb_admins'] = YMBESEO_Options::get_default( 'YMBESEO_social', 'fb_admins' );
+		$this->options['fb_admins'] = YMBESEO_Options::get_default( 'ymbeseo_social', 'fb_admins' );
 
 		$this->save_options();
 		$this->success_notice( __( 'Successfully cleared all Facebook Data', 'ymbeseo' ) );
@@ -201,7 +201,7 @@ class Yoast_Social_Facebook {
 	 * @param string $notice_text
 	 */
 	private function success_notice( $notice_text ) {
-		add_settings_error( 'so_YMBESEO_social_options', 'success', $notice_text, 'updated' );
+		add_settings_error( 'yoast_ymbeseo_social_options', 'success', $notice_text, 'updated' );
 	}
 
 	/**
@@ -219,7 +219,7 @@ class Yoast_Social_Facebook {
 	 * Saving the options
 	 */
 	private function save_options() {
-		update_option( 'YMBESEO_social', $this->options );
+		update_option( 'ymbeseo_social', $this->options );
 	}
 
 }
@@ -242,13 +242,13 @@ class Yoast_Social_Facebook_Form {
 	/**
 	 * @var string    - The URL to link to
 	 */
-	private $admin_url = 'admin.php?page=YMBESEO_social';
+	private $admin_url = 'admin.php?page=ymbeseo_social';
 
 	/**
 	 * Setting the options and call the methods to display everything
 	 */
 	public function __construct() {
-		$this->options = get_option( 'YMBESEO_social' );
+		$this->options = get_option( 'ymbeseo_social' );
 	}
 
 	/**
@@ -313,7 +313,7 @@ class Yoast_Social_Facebook_Form {
 		add_thickbox();
 
 		echo '<div id="add_facebook_admin" style="display:none;">';
-		echo "<div class='form-wrap YMBESEO_content_wrapper'>";
+		echo "<div class='form-wrap ymbeseo_content_wrapper'>";
 		echo '<p>';
 		/* translators: %1$s and %2$s expand to a link to Facebook Insights */
 		printf( __( 'To be able to access %1$sFacebook Insights%2$s, you need to add a user here. The name is used for reference only, the ID is used for verification.', 'ymbeseo' ), '<a target="_blank" href="https://www.facebook.com/insights">', '</a>' );
@@ -331,8 +331,8 @@ class Yoast_Social_Facebook_Form {
 		echo '<input type="text" id="fb_admin_id" name="fb_admin_id" value="" maxlength="255"  />';
 		echo '</div>';
 		echo "<p class='submit'>";
-		echo '<input type="hidden" name="fb_admin_nonce" value="' . wp_create_nonce( 'YMBESEO_fb_admin_nonce' ) . '" />';
-		echo '<input type="submit" value="' . __( 'Add Facebook admin', 'ymbeseo' ) . '" class="button-primary" onclick="javascript:YMBESEO_add_fb_admin();" />';
+		echo '<input type="hidden" name="fb_admin_nonce" value="' . wp_create_nonce( 'ymbeseo_fb_admin_nonce' ) . '" />';
+		echo '<input type="submit" value="' . __( 'Add Facebook admin', 'ymbeseo' ) . '" class="button-primary" onclick="javascript:ymbeseo_add_fb_admin();" />';
 		echo '</p>';
 		echo '</div>';
 		echo '</div>';

@@ -90,7 +90,7 @@ class YMBESEO_GSC_Settings {
 		global $wpdb;
 
 		// Remove local crawl issues by running a delete query.
-		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'wpseo-gsc-issues-%'" );
+		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'ymbeseo-gsc-issues-%'" );
 	}
 
 	/**

@@ -13,10 +13,10 @@ $options = YMBESEO_Options::get_all();
 
 $yform = Yoast_Form::get_instance();
 
-$yform->admin_header( true, 'YMBESEO_titles' );
+$yform->admin_header( true, 'ymbeseo_titles' );
 ?>
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" id="general-tab" href="#top#general"><?php _e( 'General', 'ymbeseo' ); ?></a>
 		<a class="nav-tab" id="home-tab" href="#top#home"><?php _e( 'Homepage', 'ymbeseo' ); ?></a>
 		<a class="nav-tab" id="post_types-tab" href="#top#post_types"><?php _e( 'Post Types', 'ymbeseo' ); ?></a>
@@ -26,7 +26,7 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 	</h2>
 
 	<div class="tabwrapper">
-		<div id="general" class="wpseotab">
+		<div id="general" class="ymbeseotab">
 			<table class="form-table">
 				<tr>
 					<th>
@@ -35,8 +35,8 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 					<td>
 						<?php
 						$yform->checkbox( 'forcerewritetitle', __( 'Enable force rewrite titles', 'ymbeseo' ) );
-						/* translators: %1$s expands to Yoast SEO */
-						echo '<p class="description">', sprintf( __( '%1$s has auto-detected whether it needs to force rewrite the titles for your pages, if you think it\'s wrong and you know what you\'re doing, you can change the setting here.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>';
+						/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+						echo '<p class="description">', sprintf( __( '%1$s has auto-detected whether it needs to force rewrite the titles for your pages, if you think it\'s wrong and you know what you\'re doing, you can change the setting here.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>';
 						?>
 					</td>
 				</tr>
@@ -53,14 +53,14 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 				</tr>
 			</table>
 		</div>
-		<div id="home" class="wpseotab">
+		<div id="home" class="ymbeseotab">
 			<?php
 			if ( 'posts' == get_option( 'show_on_front' ) ) {
 				echo '<p><strong>', __( 'Homepage', 'ymbeseo' ), '</strong><br/>';
-				$yform->textinput( 'title-home-wpseo', __( 'Title template', 'ymbeseo' ), 'template homepage-template' );
-				$yform->textarea( 'metadesc-home-wpseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template homepage-template' ) );
+				$yform->textinput( 'title-home-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template homepage-template' );
+				$yform->textarea( 'metadesc-home-ymbeseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template homepage-template' ) );
 				if ( $options['usemetakeywords'] === true ) {
-					$yform->textinput( 'metakey-home-wpseo', __( 'Meta keywords template', 'ymbeseo' ) );
+					$yform->textinput( 'metakey-home-ymbeseo', __( 'Meta keywords template', 'ymbeseo' ) );
 				}
 				echo '</p>';
 			}
@@ -74,14 +74,14 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 			}
 			?>
 		</div>
-		<div id="post_types" class="wpseotab">
+		<div id="post_types" class="ymbeseotab">
 			<?php
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
 			if ( is_array( $post_types ) && $post_types !== array() ) {
 				foreach ( $post_types as $pt ) {
 					$warn = false;
 					if ( $options['redirectattachment'] === true && $pt->name == 'attachment' ) {
-						echo '<div class="wpseo-warning">';
+						echo '<div class="ymbeseo-warning">';
 						$warn = true;
 					}
 
@@ -91,7 +91,7 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 						echo '<h4 class="error-message">' . __( 'Take note:', 'ymbeseo' ) . '</h4>';
 
 						echo '<p class="error-message">' . __( 'As you are redirecting attachment URLs to parent post URLs, these settings will currently only have an effect on <strong>unattached</strong> media items!', 'ymbeseo' ) . '</p>';
-						echo '<p class="error-message">' . sprintf( __( 'So remember: If you change the %sattachment redirection setting%s in the future, the below settings will take effect for *all* media items.', 'ymbeseo' ), '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_advanced&tab=permalinks' ) ) . '">', '</a>' ) . '</p>';
+						echo '<p class="error-message">' . sprintf( __( 'So remember: If you change the %sattachment redirection setting%s in the future, the below settings will take effect for *all* media items.', 'ymbeseo' ), '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_advanced&tab=permalinks' ) ) . '">', '</a>' ) . '</p>';
 					}
 
 					$yform->textinput( 'title-' . $name, __( 'Title template', 'ymbeseo' ), 'template posttype-template' );
@@ -101,15 +101,15 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 					}
 					$yform->checkbox( 'noindex-' . $name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
 					$yform->checkbox( 'showdate-' . $name, __( 'Show date in snippet preview?', 'ymbeseo' ), __( 'Date in Snippet Preview', 'ymbeseo' ) );
-					/* translators: %1$s expands to Yoast SEO */
-					$yform->checkbox( 'hideeditbox-' . $name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast SEO' ) );
+					/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+					$yform->checkbox( 'hideeditbox-' . $name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) );
 
 					/**
 					 * Allow adding a custom checkboxes to the admin meta page - Post Types tab
 					 * @api  YMBESEO_Admin_Pages  $yform  The YMBESEO_Admin_Pages object
 					 * @api  String  $name  The post type name
 					 */
-					do_action( 'YMBESEO_admin_page_meta_post_types', $yform, $name );
+					do_action( 'ymbeseo_admin_page_meta_post_types', $yform, $name );
 
 					echo '<br/><br/>';
 					if ( $warn === true ) {
@@ -149,7 +149,7 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 
 			?>
 		</div>
-		<div id="taxonomies" class="wpseotab">
+		<div id="taxonomies" class="ymbeseotab">
 			<?php
 			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
 			if ( is_array( $taxonomies ) && $taxonomies !== array() ) {
@@ -161,8 +161,8 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 						$yform->textinput( 'metakey-tax-' . $tax->name, __( 'Meta keywords template', 'ymbeseo' ) );
 					}
 					$yform->checkbox( 'noindex-tax-' . $tax->name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
-					/* translators: %1$s expands to Yoast SEO */
-					$yform->checkbox( 'hideeditbox-tax-' . $tax->name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast SEO' ) );
+					/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+					$yform->checkbox( 'hideeditbox-tax-' . $tax->name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) );
 					echo '<br/><br/>';
 				}
 				unset( $tax );
@@ -171,18 +171,18 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 
 			?>
 		</div>
-		<div id="archives" class="wpseotab">
+		<div id="archives" class="ymbeseotab">
 			<?php
 			echo '<h3>' . __( 'Author Archives', 'ymbeseo' ) . '</h3>';
-			$yform->textinput( 'title-author-wpseo', __( 'Title template', 'ymbeseo' ), 'template author-template' );
-			$yform->textarea( 'metadesc-author-wpseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template author-template' ) );
+			$yform->textinput( 'title-author-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template author-template' );
+			$yform->textarea( 'metadesc-author-ymbeseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template author-template' ) );
 			if ( $options['usemetakeywords'] === true ) {
-				$yform->textinput( 'metakey-author-wpseo', __( 'Meta keywords template', 'ymbeseo' ) );
+				$yform->textinput( 'metakey-author-ymbeseo', __( 'Meta keywords template', 'ymbeseo' ) );
 			}
 
 			echo '<h3>' . __( 'Date Archives', 'ymbeseo' ) . '</h3>';
-			$yform->textinput( 'title-archive-wpseo', __( 'Title template', 'ymbeseo' ), 'template date-template' );
-			$yform->textarea( 'metadesc-archive-wpseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template date-template' ) );
+			$yform->textinput( 'title-archive-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template date-template' );
+			$yform->textarea( 'metadesc-archive-ymbeseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template date-template' ) );
 			echo '<br/>';
 
 			echo '<h3>' . __( 'Duplicate content prevention', 'ymbeseo' ) . '</h3>';
@@ -194,13 +194,13 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 			echo sprintf( __( 'If this is the case on your site, you can choose to either disable it (which makes it redirect to the homepage), or to add %s to it so it doesn\'t show up in the search results.', 'ymbeseo' ), '<code>noindex,follow</code>' );
 			echo '</p>';
 			/* translators: %s expands to <code>noindex, follow</code> */
-			$yform->checkbox( 'noindex-author-wpseo', sprintf( __( 'Add %s to the author archives', 'ymbeseo' ), '<code>noindex, follow</code>' ) );
+			$yform->checkbox( 'noindex-author-ymbeseo', sprintf( __( 'Add %s to the author archives', 'ymbeseo' ), '<code>noindex, follow</code>' ) );
 			$yform->checkbox( 'disable-author', __( 'Disable the author archives', 'ymbeseo' ) );
 			echo '<p>';
 			_e( 'Date-based archives could in some cases also be seen as duplicate content.', 'ymbeseo' );
 			echo '</p>';
 			/* translators: %s expands to <code>noindex, follow</code> */
-			$yform->checkbox( 'noindex-archive-wpseo', sprintf( __( 'Add %s to the date-based archives', 'ymbeseo' ), '<code>noindex, follow</code>' ) );
+			$yform->checkbox( 'noindex-archive-ymbeseo', sprintf( __( 'Add %s to the date-based archives', 'ymbeseo' ), '<code>noindex, follow</code>' ) );
 			$yform->checkbox( 'disable-date', __( 'Disable the date-based archives', 'ymbeseo' ) );
 
 			echo '<br/>';
@@ -209,20 +209,20 @@ $yform->admin_header( true, 'YMBESEO_titles' );
 			/* translators: %s expands to <code>noindex, follow</code> */
 			echo '<p>' . sprintf( __( 'These pages will be %s by default, so they will never show up in search results.', 'ymbeseo' ), '<code>noindex, follow</code>' ) . '</p>';
 			echo '<p><strong>' . __( 'Search pages', 'ymbeseo' ) . '</strong><br/>';
-			$yform->textinput( 'title-search-wpseo', __( 'Title template', 'ymbeseo' ), 'template search-template' );
+			$yform->textinput( 'title-search-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template search-template' );
 			echo '</p>';
 			echo '<p><strong>' . __( '404 pages', 'ymbeseo' ) . '</strong><br/>';
-			$yform->textinput( 'title-404-wpseo', __( 'Title template', 'ymbeseo' ), 'template error404-template' );
+			$yform->textinput( 'title-404-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template error404-template' );
 			echo '</p>';
 			echo '<br class="clear"/>';
 			?>
 		</div>
-		<div id="other" class="wpseotab">
+		<div id="other" class="ymbeseotab">
 			<strong><?php _e( 'Sitewide meta settings', 'ymbeseo' ); ?></strong><br/>
 			<br/>
 			<?php
 			echo '<p>', __( 'If you want to prevent /page/2/ and further of any archive to show up in the search results, enable this.', 'ymbeseo' ), '</p>';
-			$yform->checkbox( 'noindex-subpages-wpseo', __( 'Noindex subpages of archives', 'ymbeseo' ) );
+			$yform->checkbox( 'noindex-subpages-ymbeseo', __( 'Noindex subpages of archives', 'ymbeseo' ) );
 
 			echo '<p>', __( 'I don\'t know why you\'d want to use meta keywords, but if you want to, check this box.', 'ymbeseo' ), '</p>';
 			$yform->checkbox( 'usemetakeywords', __( 'Use meta keywords tag?', 'ymbeseo' ) );

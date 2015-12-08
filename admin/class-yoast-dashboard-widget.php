@@ -8,7 +8,7 @@
  */
 class Yoast_Dashboard_Widget {
 
-	const CACHE_TRANSIENT_KEY = 'wpseo-dashboard-totals';
+	const CACHE_TRANSIENT_KEY = 'ymbeseo-dashboard-totals';
 
 	/**
 	 * @var YMBESEO_Statistics
@@ -36,9 +36,9 @@ class Yoast_Dashboard_Widget {
 	 */
 	public function add_dashboard_widget() {
 		wp_add_dashboard_widget(
-			'wpseo-dashboard-overview',
+			'ymbeseo-dashboard-overview',
 			/* translators: %s is the plugin name */
-			sprintf( __( '%s Posts Overview', 'ymbeseo' ), 'Yoast SEO' ),
+			sprintf( __( '%s Posts Overview', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 			array( $this, 'display_dashboard_widget' )
 		);
 	}
@@ -57,7 +57,7 @@ class Yoast_Dashboard_Widget {
 	 */
 	public function enqueue_dashboard_stylesheet() {
 		if ( 'dashboard' === get_current_screen()->id ) {
-			wp_enqueue_style( 'wpseo-wp-dashboard', plugins_url( 'css/dashboard' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
+			wp_enqueue_style( 'ymbeseo-wp-dashboard', plugins_url( 'css/dashboard' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 		}
 	}
 
@@ -114,38 +114,38 @@ class Yoast_Dashboard_Widget {
 			array(
 				'seo_rank' => 'good',
 				'title'    => __( 'Posts with good SEO score', 'ymbeseo' ),
-				'class'    => 'wpseo-glance-good',
+				'class'    => 'ymbeseo-glance-good',
 				'count'    => $this->statistics->get_good_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'ok',
 				'title'    => __( 'Posts with OK SEO score', 'ymbeseo' ),
-				'class'    => 'wpseo-glance-ok',
+				'class'    => 'ymbeseo-glance-ok',
 				'count'    => $this->statistics->get_ok_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'poor',
 				'title'    => __( 'Posts with poor SEO score', 'ymbeseo' ),
-				'class'    => 'wpseo-glance-poor',
+				'class'    => 'ymbeseo-glance-poor',
 				'count'    => $this->statistics->get_poor_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'bad',
 				'title'    => __( 'Posts with bad SEO score', 'ymbeseo' ),
-				'class'    => 'wpseo-glance-bad',
+				'class'    => 'ymbeseo-glance-bad',
 				'count'    => $this->statistics->get_bad_seo_post_count(),
 			),
 			array(
 				'seo_rank' => 'na',
 				'title'    => __( 'Posts without focus keyword', 'ymbeseo' ),
-				'class'    => 'wpseo-glance-na',
+				'class'    => 'ymbeseo-glance-na',
 				'count'    => $this->statistics->get_no_focus_post_count(),
 			),
 			array(
 				'seo_rank' => 'noindex',
 				/* translators: %s expands to <code>noindex</code> */
 				'title'    => sprintf( __( 'Posts that are set to %s', 'ymbeseo' ), '<code>noindex</code>' ),
-				'class'    => 'wpseo-glance-noindex',
+				'class'    => 'ymbeseo-glance-noindex',
 				'count'    => $this->statistics->get_no_index_post_count(),
 			),
 		);

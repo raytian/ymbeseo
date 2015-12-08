@@ -141,22 +141,22 @@ class YMBESEO_GSC_Service {
 
 		if ( class_exists( 'Yoast_Api_Google_Client' ) === false ) {
 			$this->incompatible_api_libs(
-				/* translators: %1$s expands to Yoast SEO, %2$s expands to Google Analytics by Yoast */
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to Google Analytics by Yoast */
 				sprintf(
 					__(
 						'%1$s detected you’re using a version of %2$s which is not compatible with %1$s. Please update %2$s to the latest version to use this feature.',
 						'ymbeseo'
 					),
-					'Yoast SEO',
+					'Yoast Minus Bloat Equals SEO',
 					'Google Analytics by Yoast'
 				)
 			);
 
-			wp_redirect( admin_url( 'admin.php?page=YMBESEO_dashboard' ) );
+			wp_redirect( admin_url( 'admin.php?page=ymbeseo_dashboard' ) );
 			exit;
 		}
 
-		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'wpseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
+		$this->client = new Yoast_Api_Google_Client( YMBESEO_GSC_Config::$gsc, 'ymbeseo-gsc', 'https://www.googleapis.com/webmasters/v3/' );
 	}
 
 	/**

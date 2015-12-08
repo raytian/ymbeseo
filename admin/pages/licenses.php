@@ -13,9 +13,9 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 $extensions = array(
 	'seo-premium'     => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/seo-premium/',
-		'title'     => 'Yoast SEO Premium',
-		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'The premium version of %1$s with more features & support.', 'ymbeseo' ), 'Yoast SEO' ),
+		'title'     => 'Yoast Minus Bloat Equals SEO Premium',
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		'desc'      => sprintf( __( 'The premium version of %1$s with more features & support.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 		'installed' => false,
 	),
 	'video-seo'       => (object) array(
@@ -39,8 +39,8 @@ $extensions = array(
 	'woocommerce-seo' => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/',
 		'title'     => 'Yoast WooCommerce SEO',
-		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'ymbeseo' ), 'Yoast SEO' ),
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		'desc'      => sprintf( __( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ),
 		'installed' => false,
 	),
 );
@@ -48,7 +48,7 @@ $extensions = array(
 if ( class_exists( 'YMBESEO_Premium' ) ) {
 	$extensions['seo-premium']->installed = true;
 }
-if ( class_exists( 'YMBESEO_Video_Sitemap' ) ) {
+if ( class_exists( 'ymbeseo_Video_Sitemap' ) ) {
 	$extensions['video-seo']->installed = true;
 }
 if ( class_exists( 'YMBESEO_News' ) ) {
@@ -66,23 +66,23 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 
 ?>
 
-<div class="wrap YMBESEO_table_page">
+<div class="wrap ymbeseo_table_page">
 
-	<h2 id="wpseo-title"><?php
-		/* translators: %1$s expands to Yoast SEO */
-		printf( __( '%1$s Extensions', 'ymbeseo' ), 'Yoast SEO' );
+	<h2 id="ymbeseo-title"><?php
+		/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+		printf( __( '%1$s Extensions', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' );
 		?></h2>
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" id="extensions-tab" href="#top#extensions"><?php _e( 'Extensions', 'ymbeseo' ); ?></a>
 		<a class="nav-tab" id="licenses-tab" href="#top#licenses"><?php _e( 'Licenses', 'ymbeseo' ); ?></a>
 	</h2>
 
 	<div class="tabwrapper">
-		<div id="extensions" class="wpseotab">
+		<div id="extensions" class="ymbeseotab">
 			<?php
 			foreach ( $extensions as $id => $extension ) {
-				$utm = '#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners';
+				$utm = '#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=extension-page-banners';
 				?>
 				<div class="extension <?php echo esc_attr( $id ); ?>">
 					<a target="_blank" href="<?php echo esc_url( $extension->url . $utm ); ?>">
@@ -106,18 +106,18 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 			unset( $extensions, $id, $extension, $utm );
 			?>
 		</div>
-		<div id="licenses" class="wpseotab">
+		<div id="licenses" class="ymbeseotab">
 			<?php
 
 			/**
 			 * Display license page
 			 */
 			settings_errors();
-			if ( ! has_action( 'YMBESEO_licenses_forms' ) ) {
+			if ( ! has_action( 'ymbeseo_licenses_forms' ) ) {
 				echo '<div class="msg"><p>', __( 'This is where you would enter the license keys for one of our premium plugins, should you activate one.', 'ymbeseo' ), '</p></div>';
 			}
 			else {
-				do_action( 'YMBESEO_licenses_forms' );
+				do_action( 'ymbeseo_licenses_forms' );
 			}
 			?>
 		</div>

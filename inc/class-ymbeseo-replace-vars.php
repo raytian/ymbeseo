@@ -42,7 +42,7 @@ class YMBESEO_Replace_Vars {
 	protected $args;
 
 	/**
-	 * @var    array    Help texts for use in WPSEO -> Titles and Meta's help tabs
+	 * @var    array    Help texts for use in YMBESEO -> Titles and Meta's help tabs
 	 */
 	protected static $help_texts = array();
 
@@ -72,10 +72,10 @@ class YMBESEO_Replace_Vars {
 
 		if ( self::$external_replacements === array() ) {
 			/**
-			 * Action: 'YMBESEO_register_extra_replacements' - Allows for registration of additional
+			 * Action: 'ymbeseo_register_extra_replacements' - Allows for registration of additional
 			 * variables to replace
 			 */
-			do_action( 'YMBESEO_register_extra_replacements' );
+			do_action( 'ymbeseo_register_extra_replacements' );
 		}
 	}
 
@@ -84,7 +84,7 @@ class YMBESEO_Replace_Vars {
 	 * Register new replacement %%variables%%
 	 * For use by other plugins/themes to register extra variables
 	 *
-	 * @see YMBESEO_register_var_replacement() for a usage example
+	 * @see ymbeseo_register_var_replacement() for a usage example
 	 *
 	 * @param  string $var              The name of the variable to replace, i.e. '%%var%%'
 	 *                                  - the surrounding %% are optional.
@@ -106,7 +106,7 @@ class YMBESEO_Replace_Vars {
 				trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'ymbeseo' ), E_USER_WARNING );
 			}
 			elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
-				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'ymbeseo' ), E_USER_WARNING );
+				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the YMBESEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'ymbeseo' ), E_USER_WARNING );
 			}
 			elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
 				if ( ! isset( self::$external_replacements[ $var ] ) ) {
@@ -119,7 +119,7 @@ class YMBESEO_Replace_Vars {
 				}
 			}
 			else {
-				trigger_error( __( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "YMBESEO_replacements" filter instead to adjust the replacement value.', 'ymbeseo' ), E_USER_WARNING );
+				trigger_error( __( 'You cannot overrule a YMBESEO standard variable replacement by registering a variable with the same name. Use the "ymbeseo_replacements" filter instead to adjust the replacement value.', 'ymbeseo' ), E_USER_WARNING );
 			}
 		}
 
@@ -166,11 +166,11 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements' - Allow customization of the replacements before they are applied
+		 * Filter: 'ymbeseo_replacements' - Allow customization of the replacements before they are applied
 		 *
 		 * @api array $replacements The replacements
 		 */
-		$replacements = apply_filters( 'YMBESEO_replacements', $replacements );
+		$replacements = apply_filters( 'ymbeseo_replacements', $replacements );
 
 		// Do the actual replacements.
 		if ( is_array( $replacements ) && $replacements !== array() ) {
@@ -178,14 +178,14 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements_final' - Allow overruling of whether or not to remove placeholders
+		 * Filter: 'ymbeseo_replacements_final' - Allow overruling of whether or not to remove placeholders
 		 * which didn't yield a replacement
 		 *
-		 * @example <code>add_filter( 'YMBESEO_replacements_final', '__return_false' );</code>
+		 * @example <code>add_filter( 'ymbeseo_replacements_final', '__return_false' );</code>
 		 *
 		 * @api     bool $final
 		 */
-		if ( apply_filters( 'YMBESEO_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
+		if ( apply_filters( 'ymbeseo_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
 			// Remove non-replaced variables.
 			$remove = array_diff( $matches[1], $omit ); // Make sure the $omit variables do not get removed.
 			$remove = array_map( array( __CLASS__, 'add_var_delimiter' ), $remove );
@@ -399,10 +399,10 @@ class YMBESEO_Replace_Vars {
 	 * @return string
 	 */
 	private function retrieve_sep() {
-		$replacement = YMBESEO_Options::get_default( 'YMBESEO_titles', 'separator' );
+		$replacement = YMBESEO_Options::get_default( 'ymbeseo_titles', 'separator' );
 
 		// Get the titles option and the separator options.
-		$titles_options    = get_option( 'YMBESEO_titles' );
+		$titles_options    = get_option( 'ymbeseo_titles' );
 		$seperator_options = YMBESEO_Option_Titles::get_instance()->get_separator_options();
 
 		// This should always be set, but just to be sure.
@@ -412,12 +412,12 @@ class YMBESEO_Replace_Vars {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_replacements_filter_sep' - Allow customization of the separator character(s)
+		 * Filter: 'ymbeseo_replacements_filter_sep' - Allow customization of the separator character(s)
 		 *
 		 * @api string $replacement The current separator
 		 */
 
-		return apply_filters( 'YMBESEO_replacements_filter_sep', $replacement );
+		return apply_filters( 'ymbeseo_replacements_filter_sep', $replacement );
 	}
 
 	/**
@@ -1078,7 +1078,7 @@ class YMBESEO_Replace_Vars {
 
 
 	/**
-	 * Set/translate the help texts for the WPSEO standard basic variables.
+	 * Set/translate the help texts for the YMBESEO standard basic variables.
 	 */
 	private static function set_basic_help_texts() {
 		self::$help_texts['basic'] = array(
@@ -1101,7 +1101,7 @@ class YMBESEO_Replace_Vars {
 	}
 
 	/**
-	 * Set/translate the help texts for the WPSEO standard advanced variables.
+	 * Set/translate the help texts for the YMBESEO standard advanced variables.
 	 */
 	private static function set_advanced_help_texts() {
 		self::$help_texts['advanced'] = array(
@@ -1196,7 +1196,7 @@ class YMBESEO_Replace_Vars {
 		 * @api    string    $output    Comma-delimited string containing the terms
 		 */
 
-		return apply_filters( 'YMBESEO_terms', $output );
+		return apply_filters( 'ymbeseo_terms', $output );
 	}
 
 } /* End of class YMBESEO_Replace_Vars */

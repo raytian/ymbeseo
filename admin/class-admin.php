@@ -4,7 +4,7 @@
  */
 
 /**
- * Class that holds most of the admin functionality for Yoast SEO.
+ * Class that holds most of the admin functionality for Yoast Minus Bloat Equals SEO.
  */
 class YMBESEO_Admin {
 
@@ -73,7 +73,7 @@ class YMBESEO_Admin {
 
 		add_action( 'admin_init', array( 'YMBESEO_Plugin_Conflict', 'hook_check_for_plugin_conflicts' ), 10, 1 );
 
-		YMBESEO_Utils::register_cache_clear_option( 'wpseo',  '' );
+		YMBESEO_Utils::register_cache_clear_option( 'ymbeseo',  '' );
 	}
 
 	/**
@@ -97,71 +97,71 @@ class YMBESEO_Admin {
 		$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCIgWw0KCTwhRU5USVRZIG5zX2Zsb3dzICJodHRwOi8vbnMuYWRvYmUuY29tL0Zsb3dzLzEuMC8iPg0KCTwhRU5USVRZIG5zX2V4dGVuZCAiaHR0cDovL25zLmFkb2JlLmNvbS9FeHRlbnNpYmlsaXR5LzEuMC8iPg0KCTwhRU5USVRZIG5zX2FpICJodHRwOi8vbnMuYWRvYmUuY29tL0Fkb2JlSWxsdXN0cmF0b3IvMTAuMC8iPg0KCTwhRU5USVRZIG5zX2dyYXBocyAiaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyI+DQpdPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzEiIHhtbG5zOng9IiZuc19leHRlbmQ7IiB4bWxuczppPSImbnNfYWk7IiB4bWxuczpncmFwaD0iJm5zX2dyYXBoczsiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOmE9Imh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVTVkdWaWV3ZXJFeHRlbnNpb25zLzMuMC8iDQoJIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDAgMzEuODkiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDMxLjg5IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQwLDEyLjUyNEM0MCw1LjYwOCwzMS40NjksMCwyMCwwQzguNTMsMCwwLDUuNjA4LDAsMTIuNTI0YzAsNS41Niw1LjI0MywxMC4yNzIsMTMuNTU3LDExLjkwN3YtNC4wNjUNCgljMCwwLDAuMDQtMS0wLjI4LTEuOTJjLTAuMzItMC45MjEtMS43Ni0zLjAwMS0xLjc2LTUuMTIxYzAtMi4xMjEsMi41NjEtOS41NjMsNS4xMjItMTAuNDQ0Yy0wLjQsMS4yMDEtMC4zMiw3LjY4My0wLjMyLDcuNjgzDQoJczEuNCwyLjcyLDQuNjQxLDIuNzJjMy4yNDIsMCw0LjUxMS0xLjc2LDQuNzE1LTIuMmMwLjIwNi0wLjQ0LDAuODQ2LTguNzIzLDAuODQ2LTguNzIzczQuMDgyLDQuNDAyLDMuNjgyLDkuMzYzDQoJYy0wLjQwMSw0Ljk2Mi00LjQ4Miw3LjIwMy02LjEyMiw5LjEyM2MtMS4yODYsMS41MDUtMi4yMjQsMy4xMy0yLjYyOSw0LjE2OGMwLjgwMS0wLjAzNCwxLjU4Ny0wLjA5OCwyLjM2MS0wLjE4NGw5LjE1MSw3LjA1OQ0KCWwtNC44ODQtNy44M0MzNS41MzUsMjIuMTYxLDQwLDE3LjcxMyw0MCwxMi41MjR6Ii8+DQo8L2c+DQo8L3N2Zz4=';
 
 		// Add main page.
-		$admin_page = add_menu_page( 'Yoast SEO: ' . __( 'General Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'manage_options', 'YMBESEO_dashboard', array(
+		$admin_page = add_menu_page( 'Yoast Minus Bloat Equals SEO: ' . __( 'General Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'manage_options', 'ymbeseo_dashboard', array(
 			$this,
 			'load_page',
 		), $icon_svg, '99.31337' );
 
 		/**
-		 * Filter: 'YMBESEO_manage_options_capability' - Allow changing the capability users need to view the settings pages
+		 * Filter: 'ymbeseo_manage_options_capability' - Allow changing the capability users need to view the settings pages
 		 *
 		 * @api string unsigned The capability
 		 */
-		$manage_options_cap = apply_filters( 'YMBESEO_manage_options_capability', 'manage_options' );
+		$manage_options_cap = apply_filters( 'ymbeseo_manage_options_capability', 'manage_options' );
 
 		// Sub menu pages.
 		$submenu_pages = array(
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'Titles &amp; Metas', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_titles',
+				'ymbeseo_titles',
 				array( $this, 'load_page' ),
 				array( array( $this, 'title_metas_help_tab' ) ),
 			),
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'Social', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_social',
+				'ymbeseo_social',
 				array( $this, 'load_page' ),
 				null,
 			),
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'XML Sitemaps', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_xml',
+				'ymbeseo_xml',
 				array( $this, 'load_page' ),
 				null,
 			),
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'Advanced', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_advanced',
+				'ymbeseo_advanced',
 				array( $this, 'load_page' ),
 				null,
 			),
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'Tools', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_tools',
+				'ymbeseo_tools',
 				array( $this, 'load_page' ),
 				null,
 			),
 			array(
-				'YMBESEO_dashboard',
+				'ymbeseo_dashboard',
 				'',
 				__( 'Search Console', 'ymbeseo' ),
 				$manage_options_cap,
-				'YMBESEO_search_console',
+				'ymbeseo_search_console',
 				array( $this->page_gsc, 'display' ),
 				array( array( $this->page_gsc, 'set_help' ) ),
 			),
@@ -169,24 +169,24 @@ class YMBESEO_Admin {
 
 		// Add Extension submenu page.
 		$submenu_pages[] = array(
-			'YMBESEO_dashboard',
+			'ymbeseo_dashboard',
 			'',
 			'<span style="color:#f18500">' . __( 'Extensions', 'ymbeseo' ) . '</span>',
 			$manage_options_cap,
-			'YMBESEO_licenses',
+			'ymbeseo_licenses',
 			array( $this, 'load_page' ),
 			null,
 		);
 
 		// Allow submenu pages manipulation.
-		$submenu_pages = apply_filters( 'YMBESEO_submenu_pages', $submenu_pages );
+		$submenu_pages = apply_filters( 'ymbeseo_submenu_pages', $submenu_pages );
 
 		// Loop through submenu pages and add them.
 		if ( count( $submenu_pages ) ) {
 			foreach ( $submenu_pages as $submenu_page ) {
 
 				// Add submenu page.
-				$admin_page = add_submenu_page( $submenu_page[0], $submenu_page[2] . ' - Yoast SEO', $submenu_page[2], $submenu_page[3], $submenu_page[4], $submenu_page[5] );
+				$admin_page = add_submenu_page( $submenu_page[0], $submenu_page[2] . ' - Yoast Minus Bloat Equals SEO', $submenu_page[2], $submenu_page[3], $submenu_page[4], $submenu_page[5] );
 
 				// Check if we need to hook.
 				if ( isset( $submenu_page[6] ) && ( is_array( $submenu_page[6] ) && $submenu_page[6] !== array() ) ) {
@@ -198,8 +198,8 @@ class YMBESEO_Admin {
 		}
 
 		global $submenu;
-		if ( isset( $submenu['YMBESEO_dashboard'] ) && current_user_can( $manage_options_cap ) ) {
-			$submenu['YMBESEO_dashboard'][0][0] = __( 'General', 'ymbeseo' );
+		if ( isset( $submenu['ymbeseo_dashboard'] ) && current_user_can( $manage_options_cap ) ) {
+			$submenu['ymbeseo_dashboard'][0][0] = __( 'General', 'ymbeseo' );
 		}
 	}
 
@@ -211,7 +211,7 @@ class YMBESEO_Admin {
 
 		$screen->set_help_sidebar( '
 			<p><strong>' . __( 'For more information:', 'ymbeseo' ) . '</strong></p>
-			<p><a target="_blank" href="https://yoast.com/articles/wordpress-seo/#titles">' . __( 'Title optimization', 'ymbeseo' ) . '</a></p>
+			<p><a target="_blank" href="https://yoast.com/articles/ymbeseo/#titles">' . __( 'Title optimization', 'ymbeseo' ) . '</a></p>
 			<p><a target="_blank" href="https://yoast.com/google-page-title/">' . __( 'Why Google won\'t display the right page title', 'ymbeseo' ) . '</a></p>'
 		);
 
@@ -219,8 +219,8 @@ class YMBESEO_Admin {
 			array(
 				'id'      => 'basic-help',
 				'title'   => __( 'Template explanation', 'ymbeseo' ),
-				/* translators: %1$s expands to Yoast SEO */
-				'content' => '<p>' . sprintf( __( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'ymbeseo' ), 'Yoast SEO' ) . '</p>' . '<p>' . __( 'Note that not all variables can be used in every template.', 'ymbeseo' ) . '</p>',
+				/* translators: %1$s expands to Yoast Minus Bloat Equals SEO */
+				'content' => '<p>' . sprintf( __( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO' ) . '</p>' . '<p>' . __( 'Note that not all variables can be used in every template.', 'ymbeseo' ) . '</p>',
 			)
 		);
 
@@ -248,20 +248,20 @@ class YMBESEO_Admin {
 		if ( YMBESEO_Utils::grant_access() ) {
 			// Base 64 encoded SVG image.
 			$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCIgWw0KCTwhRU5USVRZIG5zX2Zsb3dzICJodHRwOi8vbnMuYWRvYmUuY29tL0Zsb3dzLzEuMC8iPg0KCTwhRU5USVRZIG5zX2V4dGVuZCAiaHR0cDovL25zLmFkb2JlLmNvbS9FeHRlbnNpYmlsaXR5LzEuMC8iPg0KCTwhRU5USVRZIG5zX2FpICJodHRwOi8vbnMuYWRvYmUuY29tL0Fkb2JlSWxsdXN0cmF0b3IvMTAuMC8iPg0KCTwhRU5USVRZIG5zX2dyYXBocyAiaHR0cDovL25zLmFkb2JlLmNvbS9HcmFwaHMvMS4wLyI+DQpdPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzEiIHhtbG5zOng9IiZuc19leHRlbmQ7IiB4bWxuczppPSImbnNfYWk7IiB4bWxuczpncmFwaD0iJm5zX2dyYXBoczsiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOmE9Imh0dHA6Ly9ucy5hZG9iZS5jb20vQWRvYmVTVkdWaWV3ZXJFeHRlbnNpb25zLzMuMC8iDQoJIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDAgMzEuODkiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDMxLjg5IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQwLDEyLjUyNEM0MCw1LjYwOCwzMS40NjksMCwyMCwwQzguNTMsMCwwLDUuNjA4LDAsMTIuNTI0YzAsNS41Niw1LjI0MywxMC4yNzIsMTMuNTU3LDExLjkwN3YtNC4wNjUNCgljMCwwLDAuMDQtMS0wLjI4LTEuOTJjLTAuMzItMC45MjEtMS43Ni0zLjAwMS0xLjc2LTUuMTIxYzAtMi4xMjEsMi41NjEtOS41NjMsNS4xMjItMTAuNDQ0Yy0wLjQsMS4yMDEtMC4zMiw3LjY4My0wLjMyLDcuNjgzDQoJczEuNCwyLjcyLDQuNjQxLDIuNzJjMy4yNDIsMCw0LjUxMS0xLjc2LDQuNzE1LTIuMmMwLjIwNi0wLjQ0LDAuODQ2LTguNzIzLDAuODQ2LTguNzIzczQuMDgyLDQuNDAyLDMuNjgyLDkuMzYzDQoJYy0wLjQwMSw0Ljk2Mi00LjQ4Miw3LjIwMy02LjEyMiw5LjEyM2MtMS4yODYsMS41MDUtMi4yMjQsMy4xMy0yLjYyOSw0LjE2OGMwLjgwMS0wLjAzNCwxLjU4Ny0wLjA5OCwyLjM2MS0wLjE4NGw5LjE1MSw3LjA1OQ0KCWwtNC44ODQtNy44M0MzNS41MzUsMjIuMTYxLDQwLDE3LjcxMyw0MCwxMi41MjR6Ii8+DQo8L2c+DQo8L3N2Zz4=';
-			add_menu_page( 'Yoast SEO: ' . __( 'MultiSite Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'delete_users', 'YMBESEO_dashboard', array(
+			add_menu_page( 'Yoast Minus Bloat Equals SEO: ' . __( 'MultiSite Settings', 'ymbeseo' ), __( 'SEO', 'ymbeseo' ), 'delete_users', 'ymbeseo_dashboard', array(
 				$this,
 				'network_config_page',
 			), $icon_svg );
 
 			if ( YMBESEO_Utils::allow_system_file_edit() === true ) {
-				add_submenu_page( 'YMBESEO_dashboard', 'Yoast SEO: ' . __( 'Edit Files', 'ymbeseo' ), __( 'Edit Files', 'ymbeseo' ), 'delete_users', 'YMBESEO_files', array(
+				add_submenu_page( 'ymbeseo_dashboard', 'Yoast Minus Bloat Equals SEO: ' . __( 'Edit Files', 'ymbeseo' ), __( 'Edit Files', 'ymbeseo' ), 'delete_users', 'ymbeseo_files', array(
 					$this,
 					'load_page',
 				) );
 			}
 
 			// Add Extension submenu page.
-			add_submenu_page( 'YMBESEO_dashboard', 'Yoast SEO: ' . __( 'Extensions', 'ymbeseo' ), __( 'Extensions', 'ymbeseo' ), 'delete_users', 'YMBESEO_licenses', array(
+			add_submenu_page( 'ymbeseo_dashboard', 'Yoast Minus Bloat Equals SEO: ' . __( 'Extensions', 'ymbeseo' ), __( 'Extensions', 'ymbeseo' ), 'delete_users', 'ymbeseo_licenses', array(
 				$this,
 				'load_page',
 			) );
@@ -270,41 +270,41 @@ class YMBESEO_Admin {
 
 
 	/**
-	 * Load the form for a WPSEO admin page
+	 * Load the form for a YMBESEO admin page
 	 */
 	function load_page() {
 		$page = filter_input( INPUT_GET, 'page' );
 
 		switch ( $page ) {
-			case 'YMBESEO_advanced':
+			case 'ymbeseo_advanced':
 				require_once( YMBESEO_PATH . 'admin/pages/advanced.php' );
 				break;
 
-			case 'YMBESEO_tools':
+			case 'ymbeseo_tools':
 				require_once( YMBESEO_PATH . 'admin/pages/tools.php' );
 				break;
 
-			case 'YMBESEO_titles':
+			case 'ymbeseo_titles':
 				require_once( YMBESEO_PATH . 'admin/pages/metas.php' );
 				break;
 
-			case 'YMBESEO_social':
+			case 'ymbeseo_social':
 				require_once( YMBESEO_PATH . 'admin/pages/social.php' );
 				break;
 
-			case 'YMBESEO_xml':
+			case 'ymbeseo_xml':
 				require_once( YMBESEO_PATH . 'admin/pages/xml-sitemaps.php' );
 				break;
 
-			case 'YMBESEO_licenses':
+			case 'ymbeseo_licenses':
 				require_once( YMBESEO_PATH . 'admin/pages/licenses.php' );
 				break;
 
-			case 'YMBESEO_files':
+			case 'ymbeseo_files':
 				require_once( YMBESEO_PATH . 'admin/views/tool-file-editor.php' );
 				break;
 
-			case 'YMBESEO_dashboard':
+			case 'ymbeseo_dashboard':
 			default:
 				require_once( YMBESEO_PATH . 'admin/pages/dashboard.php' );
 				break;
@@ -329,7 +329,7 @@ class YMBESEO_Admin {
 		$args   = array(
 			'label'   => __( 'Posts', 'ymbeseo' ),
 			'default' => 10,
-			'option'  => 'YMBESEO_posts_per_page',
+			'option'  => 'ymbeseo_posts_per_page',
 		);
 		add_screen_option( $option, $args );
 	}
@@ -344,7 +344,7 @@ class YMBESEO_Admin {
 	 * @return int
 	 */
 	function save_bulk_edit_options( $status, $option, $value ) {
-		if ( 'YMBESEO_posts_per_page' === $option && ( $value > 0 && $value < 1000 ) ) {
+		if ( 'ymbeseo_posts_per_page' === $option && ( $value > 0 && $value < 1000 ) ) {
 			return $value;
 		}
 
@@ -367,12 +367,12 @@ class YMBESEO_Admin {
 				<p>
 					<strong>%1$s</strong>
 					%2$s
-					<a href="javascript:wpseoSetIgnore(\'blog_public_warning\',\'robotsmessage\',\'%3$s\');" class="button">%4$s</a>
+					<a href="javascript:ymbeseoSetIgnore(\'blog_public_warning\',\'robotsmessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
 			__( 'Huge SEO Issue: You\'re blocking access to robots.', 'ymbeseo' ),
 			sprintf( __( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
-			esc_js( wp_create_nonce( 'wpseo-ignore' ) ),
+			esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ),
 			__( 'I know, don\'t bug me.', 'ymbeseo' )
 		);
 	}
@@ -388,7 +388,7 @@ class YMBESEO_Admin {
 		}
 
 		// No need to double display it on the dashboard.
-		if ( 'YMBESEO_dashboard' === filter_input( INPUT_GET, 'page' ) ) {
+		if ( 'ymbeseo_dashboard' === filter_input( INPUT_GET, 'page' ) ) {
 			return;
 		}
 
@@ -401,13 +401,13 @@ class YMBESEO_Admin {
 				<p>
 					<strong>%1$s</strong>
 					%2$s
-					<a href="javascript:wpseoSetIgnore(\'meta_description_warning\',\'metamessage\',\'%3$s\');" class="button">%4$s</a>
+					<a href="javascript:ymbeseoSetIgnore(\'meta_description_warning\',\'metamessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
 			__( 'SEO Issue:', 'ymbeseo' ),
-			/* translators: %1$s expands to Yoast SEO, %2$s to opening anchor and %3$s the anchor closing tag */
-			sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'ymbeseo' ), 'Yoast SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=YMBESEO_dashboard' ) ) ), '</a>' ),
-			esc_js( wp_create_nonce( 'wpseo-ignore' ) ),
+			/* translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to opening anchor and %3$s the anchor closing tag */
+			sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'ymbeseo' ), 'Yoast Minus Bloat Equals SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) ), '</a>' ),
+			esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ),
 			__( 'I know, don\'t bug me.', 'ymbeseo' )
 		);
 	}
@@ -424,7 +424,7 @@ class YMBESEO_Admin {
 	 */
 	function add_action_link( $links, $file ) {
 		if ( YMBESEO_BASENAME === $file && YMBESEO_Utils::grant_access() ) {
-			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=YMBESEO_dashboard' ) ) . '">' . __( 'Settings', 'ymbeseo' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_dashboard' ) ) . '">' . __( 'Settings', 'ymbeseo' ) . '</a>';
 			array_unshift( $links, $settings_link );
 		}
 
@@ -436,7 +436,7 @@ class YMBESEO_Admin {
 		}
 
 		// Add link to premium support landing page.
-		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=wordpress-seo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . __( 'Premium Support', 'ymbeseo' ) . '</a>';
+		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=ymbeseo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . __( 'Premium Support', 'ymbeseo' ) . '</a>';
 		array_unshift( $links, $premium_link );
 
 		// Add link to docs.
@@ -451,7 +451,7 @@ class YMBESEO_Admin {
 	 */
 	function config_page_scripts() {
 		if ( YMBESEO_Utils::grant_access() ) {
-			wp_enqueue_script( 'wpseo-admin-global-script', plugins_url( 'js/wp-seo-admin-global' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
+			wp_enqueue_script( 'ymbeseo-admin-global-script', plugins_url( 'js/ymbeseo-admin-global' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
 		}
 	}
 
@@ -529,11 +529,11 @@ class YMBESEO_Admin {
 
 		/**
 		 * Allows filtering of the stop words list
-		 * Especially useful for users on a language in which WPSEO is not available yet
+		 * Especially useful for users on a language in which YMBESEO is not available yet
 		 * and/or users who want to turn off stop word filtering
 		 * @api  array  $stopwords  Array of all lowercase stopwords to check and/or remove from slug
 		 */
-		$stopwords = apply_filters( 'YMBESEO_stopwords', $stopwords );
+		$stopwords = apply_filters( 'ymbeseo_stopwords', $stopwords );
 
 		return $stopwords;
 	}
@@ -576,8 +576,75 @@ class YMBESEO_Admin {
 		$users = get_users( array( 'who' => 'authors' ) );
 		if ( is_array( $users ) && $users !== array() ) {
 			foreach ( $users as $user ) {
-				update_user_meta( $user->ID, '_so_YMBESEO_profile_updated', time() );
+				update_user_meta( $user->ID, '_yoast_ymbeseo_profile_updated', time() );
 			}
 		}
 	}
+
+	/********************** DEPRECATED METHODS **********************/
+
+	/**
+	 * Check whether the current user is allowed to access the configuration.
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use YMBESEO_Utils::grant_access()
+	 * @see        YMBESEO_Utils::grant_access()
+	 *
+	 * @return boolean
+	 */
+	function grant_access() {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Utils::grant_access()' );
+
+		return YMBESEO_Utils::grant_access();
+	}
+
+	/**
+	 * Check whether the current user is allowed to access the configuration.
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use ymbeseo_do_upgrade()
+	 * @see        YMBESEO_Upgrade
+	 */
+	function maybe_upgrade() {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'ymbeseo_do_upgrade' );
+		new YMBESEO_Upgrade();
+	}
+
+	/**
+	 * Clears the cache
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use YMBESEO_Utils::clear_cache()
+	 * @see        YMBESEO_Utils::clear_cache()
+	 */
+	function clear_cache() {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Utils::clear_cache()' );
+		YMBESEO_Utils::clear_cache();
+	}
+
+	/**
+	 * Clear rewrites
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use YMBESEO_Utils::clear_rewrites()
+	 * @see        YMBESEO_Utils::clear_rewrites()
+	 */
+	function clear_rewrites() {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Utils::clear_rewrites()' );
+		YMBESEO_Utils::clear_rewrites();
+	}
+
+	/**
+	 * Register all the options needed for the configuration pages.
+	 *
+	 * @deprecated 1.5.0
+	 * @deprecated use YMBESEO_Option::register_setting() on each individual option
+	 * @see        YMBESEO_Option::register_setting()
+	 */
+	function options_init() {
+		_deprecated_function( __METHOD__, 'YMBESEO 1.5.0', 'YMBESEO_Option::register_setting()' );
+	}
+
+
+
 } /* End of class */

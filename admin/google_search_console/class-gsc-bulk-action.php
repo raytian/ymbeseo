@@ -12,7 +12,7 @@ class YMBESEO_GSC_Bulk_Action {
 	 * Setting the listener on the bulk action post
 	 */
 	public function __construct() {
-		if ( wp_verify_nonce( filter_input( INPUT_POST, 'YMBESEO_gsc_nonce' ), 'YMBESEO_gsc_nonce' ) ) {
+		if ( wp_verify_nonce( filter_input( INPUT_POST, 'ymbeseo_gsc_nonce' ), 'ymbeseo_gsc_nonce' ) ) {
 			$this->handle_bulk_action();
 		}
 	}
@@ -54,7 +54,7 @@ class YMBESEO_GSC_Bulk_Action {
 	 * @return array
 	 */
 	private function posted_issues() {
-		if ( $issues = filter_input( INPUT_POST, 'YMBESEO_crawl_issues', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) {
+		if ( $issues = filter_input( INPUT_POST, 'ymbeseo_crawl_issues', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) {
 			return $issues;
 		}
 

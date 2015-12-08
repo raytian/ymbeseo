@@ -5,7 +5,7 @@
  */
 
 /**
- * Group of utility methods for use by WPSEO
+ * Group of utility methods for use by YMBESEO
  * All methods are static, this is just a sort of namespacing class wrapper.
  */
 class YMBESEO_Utils {
@@ -35,7 +35,7 @@ class YMBESEO_Utils {
 			return true;
 		}
 
-		$options = get_site_option( 'YMBESEO_ms' );
+		$options = get_site_option( 'ymbeseo_ms' );
 		if ( $options['access'] === 'admin' && current_user_can( 'manage_options' ) ) {
 			return true;
 		}
@@ -64,13 +64,13 @@ class YMBESEO_Utils {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_allow_system_file_edit' - Allow developers to change whether the editing of
+		 * Filter: 'ymbeseo_allow_system_file_edit' - Allow developers to change whether the editing of
 		 * .htaccess and robots.txt is allowed
 		 *
 		 * @api bool $allowed Whether file editing is allowed
 		 */
 
-		return apply_filters( 'YMBESEO_allow_system_file_edit', $allowed );
+		return apply_filters( 'ymbeseo_allow_system_file_edit', $allowed );
 	}
 
 	/**
@@ -510,7 +510,7 @@ class YMBESEO_Utils {
 	public static function clear_transient_cache( $option ) {
 		if ( isset( self::$cache_clear[ $option ] ) ) {
 			if ( '' !== self::$cache_clear[ $option ] ) {
-				YMBESEO_invalidate_sitemap_cache( self::$cache_clear[ $option ] );
+				ymbeseo_invalidate_sitemap_cache( self::$cache_clear[ $option ] );
 			}
 			else {
 				self::clear_sitemap_cache();
@@ -530,7 +530,7 @@ class YMBESEO_Utils {
 			return;
 		}
 
-		if ( ! apply_filters( 'YMBESEO_enable_xml_sitemap_transient_caching', true ) ) {
+		if ( ! apply_filters( 'ymbeseo_enable_xml_sitemap_transient_caching', true ) ) {
 			return;
 		}
 
@@ -551,13 +551,13 @@ class YMBESEO_Utils {
 					$query .= ' OR ';
 				}
 
-				$query .= " option_name LIKE '_transient_YMBESEO_sitemap_cache_" . $sitemap_type . "_%' OR option_name LIKE '_transient_timeout_YMBESEO_sitemap_cache_" . $sitemap_type . "_%'";
+				$query .= " option_name LIKE '_transient_ymbeseo_sitemap_cache_" . $sitemap_type . "_%' OR option_name LIKE '_transient_timeout_ymbeseo_sitemap_cache_" . $sitemap_type . "_%'";
 
 				$first = false;
 			}
 		}
 		else {
-			$query .= " option_name LIKE '_transient_YMBESEO_sitemap_%' OR option_name LIKE '_transient_timeout_YMBESEO_sitemap_%'";
+			$query .= " option_name LIKE '_transient_ymbeseo_sitemap_%' OR option_name LIKE '_transient_timeout_ymbeseo_sitemap_%'";
 		}
 
 		$wpdb->query( $query );
@@ -775,7 +775,7 @@ class YMBESEO_Utils {
 			$formatted_url .= '?' . $parsed_url['query'];
 		}
 
-		return apply_filters( 'YMBESEO_format_admin_url', $formatted_url );
+		return apply_filters( 'ymbeseo_format_admin_url', $formatted_url );
 	}
 
 

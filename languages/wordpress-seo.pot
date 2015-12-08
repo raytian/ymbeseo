@@ -2,8 +2,8 @@
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Yoast SEO 2.3.4\n"
-"Report-Msgid-Bugs-To: https://github.com/yoast/wordpress-seo/issues\n"
+"Project-Id-Version: Yoast Minus Bloat Equals SEO 2.3.4\n"
+"Report-Msgid-Bugs-To: https://github.com/yoast/ymbeseo/issues\n"
 "POT-Creation-Date: 2015-09-16 10:00:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -49,7 +49,7 @@ msgid "You have used HTML in your value which is not allowed."
 msgstr ""
 
 #: admin/class-admin-init.php:71
-#. translators: %1$s expands to Yoast SEO, $2%s to the version number, %3$s and
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, $2%s to the version number, %3$s and
 #. %4$s to anchor tags with link to intro page
 msgid ""
 "%1$s has been updated to version %2$s. %3$sClick here%4$s to find out "
@@ -67,7 +67,7 @@ msgid "Just another WordPress site"
 msgstr ""
 
 #: admin/class-admin-init.php:157
-#. translators: %1$s expands to Yoast SEO, %2$s expands to 5.4.3, %3$s expands
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to 5.4.3, %3$s expands
 #. to Google Analytics by Yoast
 msgid ""
 "%1$s detected you are using version %2$s of %3$s, please update to the "
@@ -79,26 +79,26 @@ msgid "General Settings"
 msgstr ""
 
 #: admin/class-admin.php:100 admin/class-admin.php:251
-#: admin/class-metabox.php:982 inc/wpseo-non-ajax-functions.php:261
+#: admin/class-metabox.php:982 inc/ymbeseo-non-ajax-functions.php:261
 msgid "SEO"
 msgstr ""
 
-#: admin/class-admin.php:117 inc/wpseo-non-ajax-functions.php:412
+#: admin/class-admin.php:117 inc/ymbeseo-non-ajax-functions.php:412
 msgid "Titles &amp; Metas"
 msgstr ""
 
 #: admin/class-admin.php:126 admin/class-opengraph-admin.php:75
-#: admin/class-opengraph-admin.php:86 inc/wpseo-non-ajax-functions.php:418
+#: admin/class-opengraph-admin.php:86 inc/ymbeseo-non-ajax-functions.php:418
 msgid "Social"
 msgstr ""
 
 #: admin/class-admin.php:135 admin/class-pointers.php:310
-#: inc/wpseo-non-ajax-functions.php:424
+#: inc/ymbeseo-non-ajax-functions.php:424
 msgid "XML Sitemaps"
 msgstr ""
 
 #: admin/class-admin.php:144 admin/class-metabox.php:594
-#: admin/class-metabox.php:617 inc/wpseo-non-ajax-functions.php:430
+#: admin/class-metabox.php:617 inc/ymbeseo-non-ajax-functions.php:430
 msgid "Advanced"
 msgstr ""
 
@@ -112,14 +112,14 @@ msgstr ""
 
 #: admin/class-admin.php:174 admin/class-admin.php:264
 #: admin/class-pointers.php:341 admin/pages/licenses.php:77
-#: inc/wpseo-non-ajax-functions.php:436
+#: inc/ymbeseo-non-ajax-functions.php:436
 msgid "Extensions"
 msgstr ""
 
 #: admin/class-admin.php:202 admin/class-metabox.php:588
 #: admin/class-metabox.php:607 admin/pages/dashboard.php:145
 #: admin/pages/metas.php:20 admin/pages/xml-sitemaps.php:36
-#: inc/wpseo-non-ajax-functions.php:406
+#: inc/ymbeseo-non-ajax-functions.php:406
 msgid "General"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgid "Template explanation"
 msgstr ""
 
 #: admin/class-admin.php:223
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "The title &amp; metas settings for %1$s are made up of variables that are "
 "replaced by specific values from the page when the page is displayed. The "
@@ -190,7 +190,7 @@ msgid "SEO Issue:"
 msgstr ""
 
 #: admin/class-admin.php:409
-#. translators: %1$s expands to Yoast SEO, %2$s to opening anchor and %3$s the
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to opening anchor and %3$s the
 #. anchor closing tag
 msgid ""
 "Your theme contains a meta description, which blocks %1$s from working "
@@ -306,11 +306,11 @@ msgid "Action"
 msgstr ""
 
 #: admin/class-bulk-title-editor-list-table.php:45
-msgid "Existing Yoast SEO Title"
+msgid "Existing Yoast Minus Bloat Equals SEO Title"
 msgstr ""
 
 #: admin/class-bulk-title-editor-list-table.php:46
-msgid "New Yoast SEO Title"
+msgid "New Yoast Minus Bloat Equals SEO Title"
 msgstr ""
 
 #: admin/class-config.php:95 admin/class-metabox.php:547
@@ -366,7 +366,7 @@ msgid "Export created: %1$sdownload your export file here%2$s."
 msgstr ""
 
 #: admin/class-export.php:71
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Error creating %1$s export: "
 msgstr ""
 
@@ -379,7 +379,7 @@ msgid "Could not write settings to file."
 msgstr ""
 
 #: admin/class-export.php:112
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "This is a settings export file for the %1$s plugin by Yoast.com"
 msgstr ""
 
@@ -561,7 +561,7 @@ msgstr ""
 
 #: admin/class-metabox.php:69 admin/pages/network.php:53
 #: admin/views/tab-breadcrumbs.php:40 admin/views/tab-breadcrumbs.php:57
-#: inc/class-wpseo-meta.php:397
+#: inc/class-ymbeseo-meta.php:397
 msgid "None"
 msgstr ""
 
@@ -1000,7 +1000,7 @@ msgstr ""
 msgid "fairly easy"
 msgstr ""
 
-#: admin/class-metabox.php:2175 inc/class-wpseo-utils.php:213
+#: admin/class-metabox.php:2175 inc/class-ymbeseo-utils.php:213
 msgid "OK"
 msgstr ""
 
@@ -1076,7 +1076,7 @@ msgid "%s Image"
 msgstr ""
 
 #: admin/class-plugin-conflict.php:128
-#. translators: %1$s expands to Yoast SEO, %2%s: 'Facebook' plugin name of
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2%s: 'Facebook' plugin name of
 #. possibly conflicting plugin with regard to creating OpenGraph output
 msgid ""
 "Both %1$s and %2$s create OpenGraph output, which might make Facebook, "
@@ -1085,12 +1085,12 @@ msgid ""
 msgstr ""
 
 #: admin/class-plugin-conflict.php:132
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Configure %1$s's OpenGraph settings"
 msgstr ""
 
 #: admin/class-plugin-conflict.php:135
-#. translators: %1$s expands to Yoast SEO, %2$s: 'Google XML Sitemaps' plugin
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s: 'Google XML Sitemaps' plugin
 #. name of possibly conflicting plugin with regard to the creation of sitemaps
 msgid ""
 "Both %1$s and %2$s can create XML sitemaps. Having two XML sitemaps is not "
@@ -1098,7 +1098,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-plugin-conflict.php:139
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Configure %1$s's XML Sitemap settings"
 msgstr ""
 
@@ -1111,7 +1111,7 @@ msgid "Congratulations!"
 msgstr ""
 
 #: admin/class-pointers.php:185
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "You&#8217;ve just installed %1$s! Click &#8220;Start Tour&#8221; to view a "
 "quick introduction of this plugin&#8217;s core functionality."
@@ -1134,7 +1134,7 @@ msgid "General settings"
 msgstr ""
 
 #: admin/class-pointers.php:241
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "These are the General settings for %1$s, here you can restart this tour or "
 "revert the %1$s settings to default."
@@ -1170,7 +1170,7 @@ msgid ""
 msgstr ""
 
 #: admin/class-pointers.php:247
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "More %1$s"
 msgstr ""
 
@@ -1186,7 +1186,7 @@ msgid "Subscribe to our Newsletter"
 msgstr ""
 
 #: admin/class-pointers.php:254
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "If you would like us to keep you up-to-date regarding %1$s and other "
 "plugins by Yoast, subscribe to our newsletter:"
@@ -1362,7 +1362,7 @@ msgid "Extensions and Licenses"
 msgstr ""
 
 #: admin/class-pointers.php:343
-#. translators: %1$s expands to Yoast SEO, %2$s to Yoast SEO Premium, %3$s and
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s to Yoast Minus Bloat Equals SEO Premium, %3$s and
 #. %4$s to an anchor with link about our premium plugins
 msgid ""
 "The powerful functions of %1$s can be extended with %3$sYoast premium "
@@ -1376,7 +1376,7 @@ msgid "Licenses"
 msgstr ""
 
 #: admin/class-pointers.php:347
-#. translators: %1$s expands to Yoast SEO Premium
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium
 msgid ""
 "Once you&#8217;ve purchased %1$s or any other premium Yoast plugin, "
 "you&#8217;ll have to enter a license key. You can do so on the "
@@ -1505,7 +1505,7 @@ msgid "Never include"
 msgstr ""
 
 #: admin/class-taxonomy.php:185
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "%1$s Settings"
 msgstr ""
 
@@ -1600,7 +1600,7 @@ msgid "Remove these ads?"
 msgstr ""
 
 #: admin/class-yoast-form.php:230
-#. translators: %1$s expands to Yoast SEO Premium
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO Premium
 msgid "Upgrade to %1$s &raquo;"
 msgstr ""
 
@@ -1614,7 +1614,7 @@ msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:163
 #. translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly
-#. conflicting plugin(s), %2$s to Yoast SEO
+#. conflicting plugin(s), %2$s to Yoast Minus Bloat Equals SEO
 msgid "The %1$s plugin(s) might cause issues when used in conjunction with %2$s."
 msgstr ""
 
@@ -1624,7 +1624,7 @@ msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:168
 #. translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly
-#. conflicting plugin(s). %2$s to Yoast SEO
+#. conflicting plugin(s). %2$s to Yoast Minus Bloat Equals SEO
 msgid ""
 "We recommend you deactivate %1$s and have another look at your %2$s "
 "configuration using the button above."
@@ -1636,7 +1636,7 @@ msgid "Deactivate %s"
 msgstr ""
 
 #: admin/class-yoast-plugin-conflict.php:176
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "This warning is generated by %1$s."
 msgstr ""
 
@@ -1724,7 +1724,7 @@ msgid ""
 msgstr ""
 
 #: admin/google_search_console/class-gsc-service.php:146
-#. translators: %1$s expands to Yoast SEO, %2$s expands to Google Analytics by
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s expands to Google Analytics by
 #. Yoast
 msgid ""
 "%1$s detected you’re using a version of %2$s which is not compatible with "
@@ -1846,12 +1846,12 @@ msgid ""
 msgstr ""
 
 #: admin/google_search_console/views/gsc-create-redirect.php:60
-#. Translators: %s: expands to Yoast SEO Premium
+#. Translators: %s: expands to Yoast Minus Bloat Equals SEO Premium
 msgid "Creating redirects is a %s feature"
 msgstr ""
 
 #: admin/google_search_console/views/gsc-create-redirect.php:64
-#. Translators: %1$s: expands to 'Yoast SEO Premium', %2$s: links to Yoast SEO
+#. Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO Premium', %2$s: links to Yoast Minus Bloat Equals SEO
 #. Premium plugin page.
 msgid ""
 "To be able to create a redirect and fix this issue, you need %1$s. You can "
@@ -1863,7 +1863,7 @@ msgid "Reload crawl issues"
 msgstr ""
 
 #: admin/google_search_console/views/gsc-display.php:31
-#. Translators: %1$s: expands to 'Yoast SEO', %2$s expands to Google Search
+#. Translators: %1$s: expands to 'Yoast Minus Bloat Equals SEO', %2$s expands to Google Search
 #. Console.
 msgid ""
 "To allow %1$s to fetch your %2$s information, please enter your Google "
@@ -1948,7 +1948,7 @@ msgid ""
 msgstr ""
 
 #: admin/pages/dashboard.php:112
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "Either delete them (this can be done with the \"Fix it\" button) or disable "
 "%1$s XML sitemaps."
@@ -1959,7 +1959,7 @@ msgid "Re-check theme."
 msgstr ""
 
 #: admin/pages/dashboard.php:122
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "Your theme contains a meta description, which blocks %1$s from working "
 "properly, please delete the following line, or press fix it:"
@@ -2012,7 +2012,7 @@ msgid "Latest Changes"
 msgstr ""
 
 #: admin/pages/dashboard.php:171
-#. translators: %s expands to Yoast SEO
+#. translators: %s expands to Yoast Minus Bloat Equals SEO
 msgid "We've summarized the most recent changes in %s."
 msgstr ""
 
@@ -2025,7 +2025,7 @@ msgid "Restore Default Settings"
 msgstr ""
 
 #: admin/pages/dashboard.php:185
-#. translators: %s expands to Yoast SEO
+#. translators: %s expands to Yoast Minus Bloat Equals SEO
 msgid "If you want to restore a site to the default %s settings, press this button."
 msgstr ""
 
@@ -2109,12 +2109,12 @@ msgid ""
 msgstr ""
 
 #: admin/pages/dashboard.php:243
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Disable the Advanced part of the %1$s meta box"
 msgstr ""
 
 #: admin/pages/licenses.php:18
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "The premium version of %1$s with more features & support."
 msgstr ""
 
@@ -2133,12 +2133,12 @@ msgid "Rank better locally and in Google Maps, without breaking a sweat!"
 msgstr ""
 
 #: admin/pages/licenses.php:43
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Seamlessly integrate WooCommerce with %1$s and get extra features!"
 msgstr ""
 
 #: admin/pages/licenses.php:73
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "%1$s Extensions"
 msgstr ""
 
@@ -2173,7 +2173,7 @@ msgid "Enable force rewrite titles"
 msgstr ""
 
 #: admin/pages/metas.php:39
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "%1$s has auto-detected whether it needs to force rewrite the titles for "
 "your pages, if you think it's wrong and you know what you're doing, you can "
@@ -2257,7 +2257,7 @@ msgid "Date in Snippet Preview"
 msgstr ""
 
 #: admin/pages/metas.php:105 admin/pages/metas.php:165
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Hide"
 msgstr ""
 
@@ -2421,7 +2421,7 @@ msgid "spam"
 msgstr ""
 
 #: admin/pages/network.php:94
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Who should have access to the %1$s settings"
 msgstr ""
 
@@ -2644,7 +2644,7 @@ msgid ""
 msgstr ""
 
 #: admin/pages/tools.php:37
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "%1$s comes with some very powerful built-in tools:"
 msgstr ""
 
@@ -2738,7 +2738,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/about.php:32
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Thank you for updating %1$s!"
 msgstr ""
 
@@ -2756,7 +2756,7 @@ msgid "More Translations"
 msgstr ""
 
 #: admin/views/about.php:164
-#. translators: %1$s expands to Yoast SEO, %2$s and %3$s to the anchor tags to
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s and %3$s to the anchor tags to
 #. the translate.yoast.com link, %4$d to the number of translations, %5$d to
 #. the number of translations,
 msgid ""
@@ -2770,7 +2770,7 @@ msgid "Go to The General settings page →"
 msgstr ""
 
 #: admin/views/about.php:181
-#. translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast SEO
+#. translators: %1$s and %2$s expands to anchor tags, %3$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "While most of the development team is at %1$sYoast%2$s in the Netherlands, "
 "%3$s is created by a worldwide team."
@@ -3141,7 +3141,7 @@ msgid "Import settings"
 msgstr ""
 
 #: admin/views/tool-import-export.php:124
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid ""
 "Export your %1$s settings here, to import them again later or to import "
 "them on another site."
@@ -3152,7 +3152,7 @@ msgid "Include Taxonomy Metadata"
 msgstr ""
 
 #: admin/views/tool-import-export.php:129
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "Export your %1$s settings"
 msgstr ""
 
@@ -3205,7 +3205,7 @@ msgid "Import from Yoast Breadcrumbs?"
 msgstr ""
 
 #: admin/views/user-profile.php:10
-#. translators: %1$s expands to Yoast SEO
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO
 msgid "%1$s settings"
 msgstr ""
 
@@ -3232,12 +3232,12 @@ msgstr ""
 #: frontend/class-frontend.php:514 frontend/class-frontend.php:517
 #: frontend/class-frontend.php:520 frontend/class-frontend.php:535
 #: frontend/class-frontend.php:538 frontend/class-frontend.php:541
-#: inc/options/class-wpseo-option-titles.php:228
+#: inc/options/class-ymbeseo-option-titles.php:228
 msgid "%s Archives"
 msgstr ""
 
 #: frontend/class-frontend.php:554
-#: inc/options/class-wpseo-option-titles.php:180
+#: inc/options/class-ymbeseo-option-titles.php:180
 msgid "Page not found"
 msgstr ""
 
@@ -3248,375 +3248,375 @@ msgid ""
 "SEO -> Titles menu and set up a template."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:106
+#: inc/class-ymbeseo-replace-vars.php:106
 msgid ""
 "A replacement variable can only contain alphanumeric characters, an "
 "underscore or a dash. Try renaming your variable."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:109
+#: inc/class-ymbeseo-replace-vars.php:109
 msgid ""
 "A replacement variable can not start with \"%%cf_\" or \"%%ct_\" as these "
-"are reserved for the WPSEO standard variable variables for custom fields "
+"are reserved for the YMBESEO standard variable variables for custom fields "
 "and custom taxonomies. Try making your variable name unique."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:118
+#: inc/class-ymbeseo-replace-vars.php:118
 msgid ""
 "A replacement variable with the same name has already been registered. Try "
 "making your variable name more unique."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:122
+#: inc/class-ymbeseo-replace-vars.php:122
 msgid ""
-"You cannot overrule a WPSEO standard variable replacement by registering a "
-"variable with the same name. Use the \"wpseo_replacements\" filter instead "
+"You cannot overrule a YMBESEO standard variable replacement by registering a "
+"variable with the same name. Use the \"ymbeseo_replacements\" filter instead "
 "to adjust the replacement value."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:897
+#: inc/class-ymbeseo-replace-vars.php:897
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1085
+#: inc/class-ymbeseo-replace-vars.php:1085
 msgid "Replaced with the date of the post/page"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1086
+#: inc/class-ymbeseo-replace-vars.php:1086
 msgid "Replaced with the title of the post/page"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1087
+#: inc/class-ymbeseo-replace-vars.php:1087
 msgid "Replaced with the title of the parent page of the current page"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1088
+#: inc/class-ymbeseo-replace-vars.php:1088
 msgid "The site's name"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1089
+#: inc/class-ymbeseo-replace-vars.php:1089
 msgid "The site's tag line / description"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1090
+#: inc/class-ymbeseo-replace-vars.php:1090
 msgid "Replaced with the post/page excerpt (or auto-generated if it does not exist)"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1091
+#: inc/class-ymbeseo-replace-vars.php:1091
 msgid "Replaced with the post/page excerpt (without auto-generation)"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1092
+#: inc/class-ymbeseo-replace-vars.php:1092
 msgid "Replaced with the current tag/tags"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1093
+#: inc/class-ymbeseo-replace-vars.php:1093
 msgid "Replaced with the post categories (comma separated)"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1094
+#: inc/class-ymbeseo-replace-vars.php:1094
 msgid "Replaced with the category description"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1095
+#: inc/class-ymbeseo-replace-vars.php:1095
 msgid "Replaced with the tag description"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1096
+#: inc/class-ymbeseo-replace-vars.php:1096
 msgid "Replaced with the term description"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1097
+#: inc/class-ymbeseo-replace-vars.php:1097
 msgid "Replaced with the term name"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1098
+#: inc/class-ymbeseo-replace-vars.php:1098
 msgid "Replaced with the current search phrase"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1099
+#: inc/class-ymbeseo-replace-vars.php:1099
 msgid "The separator defined in your theme's <code>wp_title()</code> tag."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1108
+#: inc/class-ymbeseo-replace-vars.php:1108
 msgid "Replaced with the post type single label"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1109
+#: inc/class-ymbeseo-replace-vars.php:1109
 msgid "Replaced with the post type plural label"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1110
+#: inc/class-ymbeseo-replace-vars.php:1110
 msgid "Replaced with the post/page modified time"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1111
+#: inc/class-ymbeseo-replace-vars.php:1111
 msgid "Replaced with the post/page ID"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1112
+#: inc/class-ymbeseo-replace-vars.php:1112
 msgid "Replaced with the post/page author's 'nicename'"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1113
+#: inc/class-ymbeseo-replace-vars.php:1113
 msgid "Replaced with the post/page author's 'Biographical Info'"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1114
+#: inc/class-ymbeseo-replace-vars.php:1114
 msgid "Replaced with the post/page author's userid"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1115
+#: inc/class-ymbeseo-replace-vars.php:1115
 msgid "Replaced with the current time"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1116
+#: inc/class-ymbeseo-replace-vars.php:1116
 msgid "Replaced with the current date"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1117
+#: inc/class-ymbeseo-replace-vars.php:1117
 msgid "Replaced with the current day"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1118
+#: inc/class-ymbeseo-replace-vars.php:1118
 msgid "Replaced with the current month"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1119
+#: inc/class-ymbeseo-replace-vars.php:1119
 msgid "Replaced with the current year"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1120
+#: inc/class-ymbeseo-replace-vars.php:1120
 msgid "Replaced with the current page number with context (i.e. page 2 of 4)"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1121
+#: inc/class-ymbeseo-replace-vars.php:1121
 msgid "Replaced with the current page total"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1122
+#: inc/class-ymbeseo-replace-vars.php:1122
 msgid "Replaced with the current page number"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1123
+#: inc/class-ymbeseo-replace-vars.php:1123
 msgid "Attachment caption"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1124
+#: inc/class-ymbeseo-replace-vars.php:1124
 msgid "Replaced with the posts focus keyword"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1125
+#: inc/class-ymbeseo-replace-vars.php:1125
 msgid "Replaced with the slug which caused the 404"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1126
+#: inc/class-ymbeseo-replace-vars.php:1126
 msgid "Replaced with a posts custom field value"
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1127
+#: inc/class-ymbeseo-replace-vars.php:1127
 msgid "Replaced with a posts custom taxonomies, comma separated."
 msgstr ""
 
-#: inc/class-wpseo-replace-vars.php:1128
+#: inc/class-ymbeseo-replace-vars.php:1128
 msgid "Replaced with a custom taxonomies description"
 msgstr ""
 
-#: inc/class-wpseo-utils.php:203
+#: inc/class-ymbeseo-utils.php:203
 msgid "N/A"
 msgstr ""
 
-#: inc/class-wpseo-utils.php:208
+#: inc/class-ymbeseo-utils.php:208
 msgid "Poor"
 msgstr ""
 
-#: inc/class-wpseo-utils.php:219
+#: inc/class-ymbeseo-utils.php:219
 msgid "Good"
 msgstr ""
 
-#: inc/class-wpseo-utils.php:223
+#: inc/class-ymbeseo-utils.php:223
 msgid "Bad"
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:68
+#: inc/options/class-ymbeseo-option-internallinks.php:68
 msgid "Error 404: Page not found"
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:69
+#: inc/options/class-ymbeseo-option-internallinks.php:69
 msgid "Archives for"
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:70
+#: inc/options/class-ymbeseo-option-internallinks.php:70
 msgid "Home"
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:71
+#: inc/options/class-ymbeseo-option-internallinks.php:71
 msgid "You searched for"
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:165
+#: inc/options/class-ymbeseo-option-internallinks.php:165
 msgid "Please select a valid taxonomy for post type \"%s\""
 msgstr ""
 
-#: inc/options/class-wpseo-option-internallinks.php:204
+#: inc/options/class-ymbeseo-option-internallinks.php:204
 msgid "Please select a valid post type for taxonomy \"%s\""
 msgstr ""
 
-#: inc/options/class-wpseo-option-ms.php:153
-#. translators: %1$s expands to the option name and %2$sexpands to Yoast SEO
+#: inc/options/class-ymbeseo-option-ms.php:153
+#. translators: %1$s expands to the option name and %2$sexpands to Yoast Minus Bloat Equals SEO
 msgid ""
 "%1$s is not a valid choice for who should be allowed access to the %2$s "
 "settings. Value reset to the default."
 msgstr ""
 
-#: inc/options/class-wpseo-option-ms.php:173
-#: inc/options/class-wpseo-option-ms.php:183
+#: inc/options/class-ymbeseo-option-ms.php:173
+#: inc/options/class-ymbeseo-option-ms.php:183
 msgid ""
 "The default blog setting must be the numeric blog id of the blog you want "
 "to use as default."
 msgstr ""
 
-#: inc/options/class-wpseo-option-ms.php:173
+#: inc/options/class-ymbeseo-option-ms.php:173
 msgid ""
 "This must be an existing blog. Blog %s does not exist or has been marked as "
 "deleted."
 msgstr ""
 
-#: inc/options/class-wpseo-option-ms.php:183
+#: inc/options/class-ymbeseo-option-ms.php:183
 msgid "No numeric value was received."
 msgstr ""
 
-#: inc/options/class-wpseo-option-rss.php:47
+#: inc/options/class-ymbeseo-option-rss.php:47
 msgid "The post %s appeared first on %s."
 msgstr ""
 
-#: inc/options/class-wpseo-option-social.php:103
+#: inc/options/class-ymbeseo-option-social.php:103
 msgid "Summary"
 msgstr ""
 
-#: inc/options/class-wpseo-option-social.php:104
+#: inc/options/class-ymbeseo-option-social.php:104
 msgid "Summary with large image"
 msgstr ""
 
-#: inc/options/class-wpseo-option-social.php:240
+#: inc/options/class-ymbeseo-option-social.php:240
 msgid "%s does not seem to be a valid Twitter user-id. Please correct."
 msgstr ""
 
-#: inc/options/class-wpseo-option-titles.php:178
+#: inc/options/class-ymbeseo-option-titles.php:178
 msgid "%s, Author at %s"
 msgstr ""
 
-#: inc/options/class-wpseo-option-titles.php:179
+#: inc/options/class-ymbeseo-option-titles.php:179
 msgid "You searched for %s"
 msgstr ""
 
-#: inc/options/class-wpseo-option-titles.php:212
+#: inc/options/class-ymbeseo-option-titles.php:212
 msgid "%s Archive"
 msgstr ""
 
-#: inc/options/class-wpseo-option-xml.php:166
+#: inc/options/class-ymbeseo-option-xml.php:166
 msgid ""
 "\"Max entries per sitemap page\" should be a positive number, which %s is "
 "not. Please correct."
 msgstr ""
 
-#: inc/options/class-wpseo-option.php:296
+#: inc/options/class-ymbeseo-option.php:296
 msgid "%s does not seem to be a valid %s verification string. Please correct."
 msgstr ""
 
-#: inc/options/class-wpseo-option.php:331
+#: inc/options/class-ymbeseo-option.php:331
 msgid "%s does not seem to be a valid url. Please correct."
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:267
+#: inc/ymbeseo-non-ajax-functions.php:267
 msgid "Keyword Research"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:273
+#: inc/ymbeseo-non-ajax-functions.php:273
 msgid "AdWords External"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:280
+#: inc/ymbeseo-non-ajax-functions.php:280
 msgid "Google Insights"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:287
+#: inc/ymbeseo-non-ajax-functions.php:287
 msgid "SEO Book"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:299
+#: inc/ymbeseo-non-ajax-functions.php:299
 msgid "Analyze this page"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:305
+#: inc/ymbeseo-non-ajax-functions.php:305
 msgid "Check Inlinks (OSE)"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:312
+#: inc/ymbeseo-non-ajax-functions.php:312
 msgid "Check Keyword Density"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:319
+#: inc/ymbeseo-non-ajax-functions.php:319
 msgid "Check Google Cache"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:326
+#: inc/ymbeseo-non-ajax-functions.php:326
 msgid "Check Headers"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:333
+#: inc/ymbeseo-non-ajax-functions.php:333
 msgid "Check Rich Snippets"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:340
+#: inc/ymbeseo-non-ajax-functions.php:340
 msgid "Facebook Debugger"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:347
+#: inc/ymbeseo-non-ajax-functions.php:347
 msgid "Pinterest Rich Pins Validator"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:354
+#: inc/ymbeseo-non-ajax-functions.php:354
 msgid "HTML Validator"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:361
+#: inc/ymbeseo-non-ajax-functions.php:361
 msgid "CSS Validator"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:368
+#: inc/ymbeseo-non-ajax-functions.php:368
 msgid "Google Page Speed Test"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:375
+#: inc/ymbeseo-non-ajax-functions.php:375
 msgid "Modern IE Site Scan"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:382
+#: inc/ymbeseo-non-ajax-functions.php:382
 msgid "Mobile-Friendly Test"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:401
+#: inc/ymbeseo-non-ajax-functions.php:401
 msgid "SEO Settings"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:562
+#: inc/ymbeseo-non-ajax-functions.php:562
 msgid ""
 "The plugin All-In-One-SEO has been detected. Do you want to %simport its "
 "settings%s?"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:571
+#: inc/ymbeseo-non-ajax-functions.php:571
 msgid "All-In-One-SEO has been deactivated"
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:581
+#: inc/ymbeseo-non-ajax-functions.php:581
 msgid ""
 "The plugin Robots-Meta has been detected. Do you want to %simport its "
 "settings%s."
 msgstr ""
 
-#: inc/wpseo-non-ajax-functions.php:590
+#: inc/ymbeseo-non-ajax-functions.php:590
 msgid "Robots-Meta has been deactivated"
 msgstr ""
 
@@ -3813,39 +3813,39 @@ msgstr ""
 msgid "%sRenew your license now%s."
 msgstr ""
 
-#: wp-seo-main.php:368
+#: ymbeseo-main.php:368
 msgid ""
 "The Standard PHP Library (SPL) extension seem to be unavailable. Please ask "
 "your web host to enable it."
 msgstr ""
 
-#: wp-seo-main.php:390
-#. translators: %1$s expands to Yoast SEO, %2$s / %3$s: links to the
-#. installation manual in the Readme for the Yoast SEO code repository on
+#: ymbeseo-main.php:390
+#. translators: %1$s expands to Yoast Minus Bloat Equals SEO, %2$s / %3$s: links to the
+#. installation manual in the Readme for the Yoast Minus Bloat Equals SEO code repository on
 #. GitHub
 msgid ""
 "The %1$s plugin installation is incomplete. Please refer to "
 "%2$sinstallation instructions%3$s."
 msgstr ""
 
-#: wp-seo-main.php:414
+#: ymbeseo-main.php:414
 msgid ""
 "The filter extension seem to be unavailable. Please ask your web host to "
 "enable it."
 msgstr ""
 
-#: wp-seo-main.php:424
+#: ymbeseo-main.php:424
 msgid "Activation failed:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Yoast SEO"
+msgid "Yoast Minus Bloat Equals SEO"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid ""
 "https://yoast.com/wordpress/plugins/seo/#utm_source=wpadmin&utm_medium="
-"plugin&utm_campaign=wpseoplugin"
+"plugin&utm_campaign=ymbeseoplugin"
 msgstr ""
 
 #. Description of the plugin/theme

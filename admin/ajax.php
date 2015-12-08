@@ -18,7 +18,7 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
  *
  * @param array $results
  */
-function YMBESEO_ajax_json_echo_die( $results ) {
+function ymbeseo_ajax_json_echo_die( $results ) {
 	echo json_encode( $results );
 	die();
 }
@@ -26,12 +26,12 @@ function YMBESEO_ajax_json_echo_die( $results ) {
 /**
  * Function used from AJAX calls, takes it variables from $_POST, dies on exit.
  */
-function YMBESEO_set_option() {
+function ymbeseo_set_option() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
 	}
 
-	check_ajax_referer( 'wpseo-setoption' );
+	check_ajax_referer( 'ymbeseo-setoption' );
 
 	$option = sanitize_text_field( filter_input( INPUT_POST, 'option' ) );
 	if ( $option !== 'page_comments' ) {
@@ -42,75 +42,75 @@ function YMBESEO_set_option() {
 	die( '1' );
 }
 
-add_action( 'wp_ajax_YMBESEO_set_option', 'YMBESEO_set_option' );
+add_action( 'wp_ajax_ymbeseo_set_option', 'ymbeseo_set_option' );
 
 /**
  * Function used to remove the admin notices for several purposes, dies on exit.
  */
-function YMBESEO_set_ignore() {
+function ymbeseo_set_ignore() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
 	}
 
-	check_ajax_referer( 'wpseo-ignore' );
+	check_ajax_referer( 'ymbeseo-ignore' );
 
 	$ignore_key = sanitize_text_field( filter_input( INPUT_POST, 'option' ) );
 
-	$options                          = get_option( 'wpseo' );
+	$options                          = get_option( 'ymbeseo' );
 	$options[ 'ignore_' . $ignore_key ] = true;
-	update_option( 'wpseo', $options );
+	update_option( 'ymbeseo', $options );
 
 	die( '1' );
 }
 
-add_action( 'wp_ajax_YMBESEO_set_ignore', 'YMBESEO_set_ignore' );
+add_action( 'wp_ajax_ymbeseo_set_ignore', 'ymbeseo_set_ignore' );
 
 /**
  * Hides the after-update notification until the next update for a specific user.
  */
-function YMBESEO_dismiss_about() {
+function ymbeseo_dismiss_about() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
 	}
 
-	check_ajax_referer( 'wpseo-dismiss-about' );
+	check_ajax_referer( 'ymbeseo-dismiss-about' );
 
-	update_user_meta( get_current_user_id(), 'YMBESEO_seen_about_version' , YMBESEO_VERSION );
+	update_user_meta( get_current_user_id(), 'ymbeseo_seen_about_version' , YMBESEO_VERSION );
 
 	die( '1' );
 }
 
-add_action( 'wp_ajax_YMBESEO_dismiss_about', 'YMBESEO_dismiss_about' );
+add_action( 'wp_ajax_ymbeseo_dismiss_about', 'ymbeseo_dismiss_about' );
 
 /**
  * Hides the default tagline notice for a specific user.
  */
-function YMBESEO_dismiss_tagline_notice() {
+function ymbeseo_dismiss_tagline_notice() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
 	}
 
-	check_ajax_referer( 'wpseo-dismiss-tagline-notice' );
+	check_ajax_referer( 'ymbeseo-dismiss-tagline-notice' );
 
-	update_user_meta( get_current_user_id(), 'YMBESEO_seen_tagline_notice', 'seen' );
+	update_user_meta( get_current_user_id(), 'ymbeseo_seen_tagline_notice', 'seen' );
 
 	die( '1' );
 }
 
-add_action( 'wp_ajax_YMBESEO_dismiss_tagline_notice', 'YMBESEO_dismiss_tagline_notice' );
+add_action( 'wp_ajax_ymbeseo_dismiss_tagline_notice', 'ymbeseo_dismiss_tagline_notice' );
 
 /**
  * Function used to delete blocking files, dies on exit.
  */
-function YMBESEO_kill_blocking_files() {
+function ymbeseo_kill_blocking_files() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
 	}
 
-	check_ajax_referer( 'wpseo-blocking-files' );
+	check_ajax_referer( 'ymbeseo-blocking-files' );
 
 	$message = 'There were no files to delete.';
-	$options = get_option( 'wpseo' );
+	$options = get_option( 'ymbeseo' );
 	if ( is_array( $options['blocking_files'] ) && $options['blocking_files'] !== array() ) {
 		$message       = 'success';
 		$files_removed = 0;
@@ -124,63 +124,63 @@ function YMBESEO_kill_blocking_files() {
 			}
 		}
 		if ( $files_removed > 0 ) {
-			update_option( 'wpseo', $options );
+			update_option( 'ymbeseo', $options );
 		}
 	}
 
 	die( $message );
 }
 
-add_action( 'wp_ajax_YMBESEO_kill_blocking_files', 'YMBESEO_kill_blocking_files' );
+add_action( 'wp_ajax_ymbeseo_kill_blocking_files', 'ymbeseo_kill_blocking_files' );
 
 /**
  * Used in the editor to replace vars for the snippet preview
  */
-function YMBESEO_ajax_replace_vars() {
+function ymbeseo_ajax_replace_vars() {
 	global $post;
-	check_ajax_referer( 'wpseo-replace-vars' );
+	check_ajax_referer( 'ymbeseo-replace-vars' );
 
 	$post = get_post( intval( filter_input( INPUT_POST, 'post_id' ) ) );
 	$omit = array( 'excerpt', 'excerpt_only', 'title' );
-	echo YMBESEO_replace_vars( stripslashes( filter_input( INPUT_POST, 'string' ) ), $post, $omit );
+	echo ymbeseo_replace_vars( stripslashes( filter_input( INPUT_POST, 'string' ) ), $post, $omit );
 	die;
 }
 
-add_action( 'wp_ajax_YMBESEO_replace_vars', 'YMBESEO_ajax_replace_vars' );
+add_action( 'wp_ajax_ymbeseo_replace_vars', 'ymbeseo_ajax_replace_vars' );
 
 /**
  * Save an individual SEO title from the Bulk Editor.
  */
-function YMBESEO_save_title() {
-	YMBESEO_save_what( 'title' );
+function ymbeseo_save_title() {
+	ymbeseo_save_what( 'title' );
 }
 
-add_action( 'wp_ajax_YMBESEO_save_title', 'YMBESEO_save_title' );
+add_action( 'wp_ajax_ymbeseo_save_title', 'ymbeseo_save_title' );
 
 /**
  * Save an individual meta description from the Bulk Editor.
  */
-function YMBESEO_save_description() {
-	YMBESEO_save_what( 'metadesc' );
+function ymbeseo_save_description() {
+	ymbeseo_save_what( 'metadesc' );
 }
 
-add_action( 'wp_ajax_YMBESEO_save_metadesc', 'YMBESEO_save_description' );
+add_action( 'wp_ajax_ymbeseo_save_metadesc', 'ymbeseo_save_description' );
 
 /**
  * Save titles & descriptions
  *
  * @param string $what
  */
-function YMBESEO_save_what( $what ) {
-	check_ajax_referer( 'wpseo-bulk-editor' );
+function ymbeseo_save_what( $what ) {
+	check_ajax_referer( 'ymbeseo-bulk-editor' );
 
 	$new      = filter_input( INPUT_POST, 'new_value' );
-	$post_id  = intval( filter_input( INPUT_POST, 'YMBESEO_post_id' ) );
+	$post_id  = intval( filter_input( INPUT_POST, 'ymbeseo_post_id' ) );
 	$original = filter_input( INPUT_POST, 'existing_value' );
 
-	$results = YMBESEO_upsert_new( $what, $post_id, $new, $original );
+	$results = ymbeseo_upsert_new( $what, $post_id, $new, $original );
 
-	YMBESEO_ajax_json_echo_die( $results );
+	ymbeseo_ajax_json_echo_die( $results );
 }
 
 /**
@@ -195,7 +195,7 @@ function YMBESEO_save_what( $what ) {
  *
  * @return string
  */
-function YMBESEO_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_key, $return_key ) {
+function ymbeseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_key, $return_key ) {
 
 	$post_id                  = intval( $post_id );
 	$sanitized_new_meta_value = wp_strip_all_tags( $new_meta_value );
@@ -261,30 +261,30 @@ function YMBESEO_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta
 /**
  * Save all titles sent from the Bulk Editor.
  */
-function YMBESEO_save_all_titles() {
-	YMBESEO_save_all( 'title' );
+function ymbeseo_save_all_titles() {
+	ymbeseo_save_all( 'title' );
 }
 
-add_action( 'wp_ajax_YMBESEO_save_all_titles', 'YMBESEO_save_all_titles' );
+add_action( 'wp_ajax_ymbeseo_save_all_titles', 'ymbeseo_save_all_titles' );
 
 /**
  * Save all description sent from the Bulk Editor.
  */
-function YMBESEO_save_all_descriptions() {
-	YMBESEO_save_all( 'metadesc' );
+function ymbeseo_save_all_descriptions() {
+	ymbeseo_save_all( 'metadesc' );
 }
 
-add_action( 'wp_ajax_YMBESEO_save_all_descriptions', 'YMBESEO_save_all_descriptions' );
+add_action( 'wp_ajax_ymbeseo_save_all_descriptions', 'ymbeseo_save_all_descriptions' );
 
 /**
  * Utility function to save values
  *
  * @param string $what
  */
-function YMBESEO_save_all( $what ) {
-	check_ajax_referer( 'wpseo-bulk-editor' );
+function ymbeseo_save_all( $what ) {
+	check_ajax_referer( 'ymbeseo-bulk-editor' );
 
-	// @todo the WPSEO Utils class can't filter arrays in POST yet.
+	// @todo the YMBESEO Utils class can't filter arrays in POST yet.
 	$new_values      = $_POST['items'];
 	$original_values = $_POST['existing_items'];
 
@@ -293,10 +293,10 @@ function YMBESEO_save_all( $what ) {
 	if ( is_array( $new_values ) && $new_values !== array() ) {
 		foreach ( $new_values as $post_id => $new_value ) {
 			$original_value = $original_values[ $post_id ];
-			$results[]      = YMBESEO_upsert_new( $what, $post_id, $new_value, $original_value );
+			$results[]      = ymbeseo_upsert_new( $what, $post_id, $new_value, $original_value );
 		}
 	}
-	YMBESEO_ajax_json_echo_die( $results );
+	ymbeseo_ajax_json_echo_die( $results );
 }
 
 /**
@@ -309,30 +309,30 @@ function YMBESEO_save_all( $what ) {
  *
  * @return string
  */
-function YMBESEO_upsert_new( $what, $post_id, $new, $original ) {
+function ymbeseo_upsert_new( $what, $post_id, $new, $original ) {
 	$meta_key = YMBESEO_Meta::$meta_prefix . $what;
 
-	return YMBESEO_upsert_meta( $post_id, $new, $original, $meta_key, $what );
+	return ymbeseo_upsert_meta( $post_id, $new, $original, $meta_key, $what );
 }
 
 /**
  * Create an export and return the URL
  */
-function YMBESEO_get_export() {
+function ymbeseo_get_export() {
 
 	$include_taxonomy = ( filter_input( INPUT_POST, 'include_taxonomy' ) === 'true' );
 	$export           = new YMBESEO_Export( $include_taxonomy );
 
-	YMBESEO_ajax_json_echo_die( $export->get_results() );
+	ymbeseo_ajax_json_echo_die( $export->get_results() );
 }
 
-add_action( 'wp_ajax_YMBESEO_export', 'YMBESEO_get_export' );
+add_action( 'wp_ajax_ymbeseo_export', 'ymbeseo_get_export' );
 
 /**
  * Handles the posting of a new FB admin.
  */
-function YMBESEO_add_fb_admin() {
-	check_ajax_referer( 'YMBESEO_fb_admin_nonce' );
+function ymbeseo_add_fb_admin() {
+	check_ajax_referer( 'ymbeseo_fb_admin_nonce' );
 
 	if ( ! current_user_can( 'manage_options' ) ) {
 		die( '-1' );
@@ -343,6 +343,6 @@ function YMBESEO_add_fb_admin() {
 	wp_die( $facebook_social->add_admin( filter_input( INPUT_POST, 'admin_name' ), filter_input( INPUT_POST, 'admin_id' ) ) );
 }
 
-add_action( 'wp_ajax_YMBESEO_add_fb_admin', 'YMBESEO_add_fb_admin' );
+add_action( 'wp_ajax_ymbeseo_add_fb_admin', 'ymbeseo_add_fb_admin' );
 
 new Yoast_Dashboard_Widget();

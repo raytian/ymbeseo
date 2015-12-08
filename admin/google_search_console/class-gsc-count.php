@@ -9,10 +9,10 @@
 class YMBESEO_GSC_Count {
 
 	// The last checked timestamp.
-	const OPTION_CI_LAST_FETCH = 'YMBESEO_gsc_last_fetch';
+	const OPTION_CI_LAST_FETCH = 'ymbeseo_gsc_last_fetch';
 
 	// The option name where the issues counts are saved.
-	const OPTION_CI_COUNTS     = 'YMBESEO_gsc_issues_counts';
+	const OPTION_CI_COUNTS     = 'ymbeseo_gsc_issues_counts';
 
 	/**
 	 * @var YMBESEO_GSC_Service

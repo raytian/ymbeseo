@@ -53,7 +53,7 @@ class YMBESEO_Sitemaps {
 	private $post_type_dates;
 
 	/**
-	 * Holds the Yoast SEO options
+	 * Holds the Yoast Minus Bloat Equals SEO options
 	 *
 	 * @var array $options
 	 */
@@ -97,8 +97,8 @@ class YMBESEO_Sitemaps {
 
 		add_action( 'pre_get_posts', array( $this, 'redirect' ), 1 );
 		add_filter( 'redirect_canonical', array( $this, 'canonical' ) );
-		add_action( 'YMBESEO_hit_sitemap_index', array( $this, 'hit_sitemap_index' ) );
-		add_filter( 'YMBESEO_sitemap_exclude_author', array( $this, 'user_sitemap_remove_excluded_authors' ), 8 );
+		add_action( 'ymbeseo_hit_sitemap_index', array( $this, 'hit_sitemap_index' ) );
+		add_filter( 'ymbeseo_sitemap_exclude_author', array( $this, 'user_sitemap_remove_excluded_authors' ), 8 );
 
 		// Default stylesheet.
 		$this->stylesheet = '<?xml-stylesheet type="text/xsl" href="' . preg_replace( '/(^http[s]?:)/', '', esc_url( home_url( 'main-sitemap.xsl' ) ) ) . '"?>';
@@ -130,6 +130,21 @@ class YMBESEO_Sitemaps {
 	}
 
 	/**
+	 * This query invalidates the main query on purpose so it returns nice and quickly
+	 *
+	 * @param string $where
+	 *
+	 * @deprecated The relevant sitemap code now hijacks main query before this filter can act on it.
+	 *
+	 * @return string
+	 */
+	function invalidate_main_query( $where ) {
+
+		return $where;
+	}
+
+
+	/**
 	 * Returns the server HTTP protocol to use for output, if it's set.
 	 *
 	 * @return string
@@ -146,7 +161,7 @@ class YMBESEO_Sitemaps {
 	 * @param string   $rewrite  Optional. Regular expression to match your sitemap with.
 	 */
 	function register_sitemap( $name, $function, $rewrite = '' ) {
-		add_action( 'YMBESEO_do_sitemap_' . $name, $function );
+		add_action( 'ymbeseo_do_sitemap_' . $name, $function );
 		if ( ! empty( $rewrite ) ) {
 			add_rewrite_rule( $rewrite, 'index.php?sitemap=' . $name, 'top' );
 		}
@@ -160,7 +175,7 @@ class YMBESEO_Sitemaps {
 	 * @param string   $rewrite  Optional. Regular expression to match your sitemap with.
 	 */
 	function register_xsl( $name, $function, $rewrite = '' ) {
-		add_action( 'YMBESEO_xsl_' . $name, $function );
+		add_action( 'ymbeseo_xsl_' . $name, $function );
 		if ( ! empty( $rewrite ) ) {
 			add_rewrite_rule( $rewrite, 'index.php?xsl=' . $name, 'top' );
 		}
@@ -242,15 +257,15 @@ class YMBESEO_Sitemaps {
 		$this->set_n( get_query_var( 'sitemap_n' ) );
 
 		/**
-		 * Filter: 'YMBESEO_enable_xml_sitemap_transient_caching' - Allow disabling the transient cache
+		 * Filter: 'ymbeseo_enable_xml_sitemap_transient_caching' - Allow disabling the transient cache
 		 *
 		 * @api bool $unsigned Enable cache or not, defaults to true
 		 */
-		$caching = apply_filters( 'YMBESEO_enable_xml_sitemap_transient_caching', true );
+		$caching = apply_filters( 'ymbeseo_enable_xml_sitemap_transient_caching', true );
 
 		if ( $caching ) {
-			do_action( 'YMBESEO_sitemap_stylesheet_cache_' . $type, $this );
-			$this->sitemap = get_transient( 'YMBESEO_sitemap_cache_' . $type . '_' . $this->n );
+			do_action( 'ymbeseo_sitemap_stylesheet_cache_' . $type, $this );
+			$this->sitemap = get_transient( 'ymbeseo_sitemap_cache_' . $type . '_' . $this->n );
 		}
 
 		if ( ! $this->sitemap || '' == $this->sitemap ) {
@@ -265,7 +280,7 @@ class YMBESEO_Sitemaps {
 			}
 
 			if ( $caching ) {
-				set_transient( 'YMBESEO_sitemap_cache_' . $type . '_' . $this->n, $this->sitemap, DAY_IN_SECONDS );
+				set_transient( 'ymbeseo_sitemap_cache_' . $type . '_' . $this->n, $this->sitemap, DAY_IN_SECONDS );
 			}
 		}
 		else {
@@ -284,7 +299,7 @@ class YMBESEO_Sitemaps {
 	 */
 	function build_sitemap( $type ) {
 
-		$type = apply_filters( 'YMBESEO_build_sitemap_post_type', $type );
+		$type = apply_filters( 'ymbeseo_build_sitemap_post_type', $type );
 
 		if ( $type == 1 ) {
 			$this->build_root_map();
@@ -298,8 +313,8 @@ class YMBESEO_Sitemaps {
 		elseif ( $type == 'author' ) {
 			$this->build_user_map();
 		}
-		elseif ( has_action( 'YMBESEO_do_sitemap_' . $type ) ) {
-			do_action( 'YMBESEO_do_sitemap_' . $type );
+		elseif ( has_action( 'ymbeseo_do_sitemap_' . $type ) ) {
+			do_action( 'ymbeseo_do_sitemap_' . $type );
 		}
 		else {
 			$this->bad_sitemap = true;
@@ -325,14 +340,14 @@ class YMBESEO_Sitemaps {
 					continue;
 				}
 				else {
-					if ( apply_filters( 'YMBESEO_sitemap_exclude_post_type', false, $post_type ) ) {
+					if ( apply_filters( 'ymbeseo_sitemap_exclude_post_type', false, $post_type ) ) {
 						continue;
 					}
 				}
 
 				// Using same filters for filtering join and where parts of the query.
-				$join_filter  = apply_filters( 'YMBESEO_typecount_join', '', $post_type );
-				$where_filter = apply_filters( 'YMBESEO_typecount_where', '', $post_type );
+				$join_filter  = apply_filters( 'ymbeseo_typecount_join', '', $post_type );
+				$where_filter = apply_filters( 'ymbeseo_typecount_where', '', $post_type );
 
 				// Using the same query with build_post_type_map($post_type) function to count number of posts.
 				$query = $wpdb->prepare( "SELECT COUNT(ID) FROM $wpdb->posts {$join_filter} WHERE post_status IN ('publish','inherit') AND post_password = '' AND post_date != '0000-00-00 00:00:00' AND post_type = %s " . $where_filter, $post_type );
@@ -358,7 +373,7 @@ class YMBESEO_Sitemaps {
 					}
 
 					$this->sitemap .= '<sitemap>' . "\n";
-					$this->sitemap .= '<loc>' . YMBESEO_xml_sitemaps_base_url( $post_type . '-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
+					$this->sitemap .= '<loc>' . ymbeseo_xml_sitemaps_base_url( $post_type . '-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
 					$this->sitemap .= '<lastmod>' . htmlspecialchars( $date ) . '</lastmod>' . "\n";
 					$this->sitemap .= '</sitemap>' . "\n";
 				}
@@ -378,7 +393,7 @@ class YMBESEO_Sitemaps {
 					continue;
 				}
 
-				if ( apply_filters( 'YMBESEO_sitemap_exclude_taxonomy', false, $tax ) ) {
+				if ( apply_filters( 'ymbeseo_sitemap_exclude_taxonomy', false, $tax ) ) {
 					unset( $taxonomy_names[ $tax ], $taxonomies[ $tax ] );
 					continue;
 				}
@@ -391,7 +406,7 @@ class YMBESEO_Sitemaps {
 			unset( $tax );
 
 			// Retrieve all the taxonomies and their terms so we can do a proper count on them.
-			$hide_empty         = ( apply_filters( 'YMBESEO_sitemap_exclude_empty_terms', true, $taxonomy_names ) ) ? 'count != 0 AND' : '';
+			$hide_empty         = ( apply_filters( 'ymbeseo_sitemap_exclude_empty_terms', true, $taxonomy_names ) ) ? 'count != 0 AND' : '';
 			$query              = "SELECT taxonomy, term_id FROM $wpdb->term_taxonomy WHERE $hide_empty taxonomy IN ('" . implode( "','", $taxonomy_names ) . "');";
 			$all_taxonomy_terms = $wpdb->get_results( $query );
 			$all_taxonomies     = array();
@@ -450,7 +465,7 @@ class YMBESEO_Sitemaps {
 					}
 
 					$this->sitemap .= '<sitemap>' . "\n";
-					$this->sitemap .= '<loc>' . YMBESEO_xml_sitemaps_base_url( $tax_name . '-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
+					$this->sitemap .= '<loc>' . ymbeseo_xml_sitemaps_base_url( $tax_name . '-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
 					$this->sitemap .= '<lastmod>' . htmlspecialchars( $date ) . '</lastmod>' . "\n";
 					$this->sitemap .= '</sitemap>' . "\n";
 				}
@@ -463,7 +478,7 @@ class YMBESEO_Sitemaps {
 
 			// Reference user profile specific sitemaps.
 			$users = get_users( array( 'who' => 'authors' ) );
-			$users = apply_filters( 'YMBESEO_sitemap_exclude_author', $users );
+			$users = apply_filters( 'ymbeseo_sitemap_exclude_author', $users );
 			$users = wp_list_pluck( $users, 'ID' );
 
 			$count = count( $users );
@@ -484,7 +499,7 @@ class YMBESEO_Sitemaps {
 						INNER JOIN $wpdb->usermeta ON ($wpdb->users.ID = $wpdb->usermeta.user_id)
 						INNER JOIN $wpdb->usermeta AS mt1 ON ($wpdb->users.ID = mt1.user_id) WHERE 1=1
 						AND ( ($wpdb->usermeta.meta_key = %s AND CAST($wpdb->usermeta.meta_value AS CHAR) != '0')
-						AND mt1.meta_key = '_so_YMBESEO_profile_updated' ) ORDER BY mt1.meta_value
+						AND mt1.meta_key = '_yoast_ymbeseo_profile_updated' ) ORDER BY mt1.meta_value
 					";
 
 				if ( empty( $count ) || $count == $n ) {
@@ -509,7 +524,7 @@ class YMBESEO_Sitemaps {
 				$date = $this->timezone->get_datetime_with_timezone( '@' . $date );
 
 				$this->sitemap .= '<sitemap>' . "\n";
-				$this->sitemap .= '<loc>' . YMBESEO_xml_sitemaps_base_url( 'author-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
+				$this->sitemap .= '<loc>' . ymbeseo_xml_sitemaps_base_url( 'author-sitemap' . $count . '.xml' ) . '</loc>' . "\n";
 				$this->sitemap .= '<lastmod>' . htmlspecialchars( $date ) . '</lastmod>' . "\n";
 				$this->sitemap .= '</sitemap>' . "\n";
 			}
@@ -517,14 +532,14 @@ class YMBESEO_Sitemaps {
 		}
 
 		// Allow other plugins to add their sitemaps to the index.
-		$this->sitemap .= apply_filters( 'YMBESEO_sitemap_index', '' );
+		$this->sitemap .= apply_filters( 'ymbeseo_sitemap_index', '' );
 		$this->sitemap .= '</sitemapindex>';
 	}
 
 	/**
 	 * Function to dynamically filter the change frequency
 	 *
-	 * @param string $filter  Expands to YMBESEO_sitemap_$filter_change_freq, allowing for a change of the frequency for numerous specific URLs.
+	 * @param string $filter  Expands to ymbeseo_sitemap_$filter_change_freq, allowing for a change of the frequency for numerous specific URLs.
 	 * @param string $default The default value for the frequency.
 	 * @param string $url     The URL of the current entry.
 	 *
@@ -532,11 +547,11 @@ class YMBESEO_Sitemaps {
 	 */
 	private function filter_frequency( $filter, $default, $url ) {
 		/**
-		 * Filter: 'YMBESEO_sitemap_' . $filter . '_change_freq' - Allow filtering of the specific change frequency
+		 * Filter: 'ymbeseo_sitemap_' . $filter . '_change_freq' - Allow filtering of the specific change frequency
 		 *
 		 * @api string $default The default change frequency
 		 */
-		$change_freq = apply_filters( 'YMBESEO_sitemap_' . $filter . '_change_freq', $default, $url );
+		$change_freq = apply_filters( 'ymbeseo_sitemap_' . $filter . '_change_freq', $default, $url );
 
 		if ( ! in_array( $change_freq, array(
 			'always',
@@ -565,7 +580,7 @@ class YMBESEO_Sitemaps {
 		if (
 			( isset( $this->options[ 'post_types-' . $post_type . '-not_in_sitemap' ] ) && $this->options[ 'post_types-' . $post_type . '-not_in_sitemap' ] === true )
 			|| in_array( $post_type, array( 'revision', 'nav_menu_item' ) )
-			|| apply_filters( 'YMBESEO_sitemap_exclude_post_type', false, $post_type )
+			|| apply_filters( 'ymbeseo_sitemap_exclude_post_type', false, $post_type )
 		) {
 			$this->bad_sitemap = true;
 
@@ -579,8 +594,8 @@ class YMBESEO_Sitemaps {
 		$offset = ( $n > 1 ) ? ( ( $n - 1 ) * $this->max_entries ) : 0;
 		$total  = ( $offset + $this->max_entries );
 
-		$join_filter  = apply_filters( 'YMBESEO_typecount_join', '', $post_type );
-		$where_filter = apply_filters( 'YMBESEO_typecount_where', '', $post_type );
+		$join_filter  = apply_filters( 'ymbeseo_typecount_join', '', $post_type );
+		$where_filter = apply_filters( 'ymbeseo_typecount_where', '', $post_type );
 
 		$query = $wpdb->prepare( "SELECT COUNT(ID) FROM $wpdb->posts {$join_filter} WHERE post_status IN ('publish','inherit') AND post_password = '' AND post_date != '0000-00-00 00:00:00' AND post_type = %s " . $where_filter, $post_type );
 
@@ -618,16 +633,16 @@ class YMBESEO_Sitemaps {
 
 			$archive_url = get_post_type_archive_link( $post_type );
 			/**
-			 * Filter: 'YMBESEO_sitemap_post_type_archive_link' - Allow changing the URL Yoast SEO uses in the XML sitemap for this post type archive.
+			 * Filter: 'ymbeseo_sitemap_post_type_archive_link' - Allow changing the URL Yoast Minus Bloat Equals SEO uses in the XML sitemap for this post type archive.
 			 *
 			 * @api float $archive_url The URL of this archive
 			 *
 			 * @param string $post_type The post type this archive is for.
 			 */
-			$archive_url = apply_filters( 'YMBESEO_sitemap_post_type_archive_link', $archive_url, $post_type );
+			$archive_url = apply_filters( 'ymbeseo_sitemap_post_type_archive_link', $archive_url, $post_type );
 			if ( $archive_url ) {
 				/**
-				 * Filter: 'YMBESEO_xml_post_type_archive_priority' - Allow changing the priority of the URL Yoast SEO uses in the XML sitemap.
+				 * Filter: 'ymbeseo_xml_post_type_archive_priority' - Allow changing the priority of the URL Yoast Minus Bloat Equals SEO uses in the XML sitemap.
 				 *
 				 * @api float $priority The priority for this URL, ranging from 0 to 1
 				 *
@@ -636,7 +651,7 @@ class YMBESEO_Sitemaps {
 				$output .= $this->sitemap_url(
 					array(
 						'loc' => $archive_url,
-						'pri' => apply_filters( 'YMBESEO_xml_post_type_archive_priority', 0.8, $post_type ),
+						'pri' => apply_filters( 'ymbeseo_xml_post_type_archive_priority', 0.8, $post_type ),
 						'chf' => $this->filter_frequency( $post_type . '_archive', 'weekly', $archive_url ),
 						'mod' => $this->get_last_modified( $post_type ),
 						// Function get_lastpostmodified( 'gmt', $post_type ) #17455.
@@ -654,8 +669,8 @@ class YMBESEO_Sitemaps {
 		$stackedurls = array();
 
 		// Make sure you're wpdb->preparing everything you throw into this!!
-		$join_filter  = apply_filters( 'YMBESEO_posts_join', false, $post_type );
-		$where_filter = apply_filters( 'YMBESEO_posts_where', false, $post_type );
+		$join_filter  = apply_filters( 'ymbeseo_posts_join', false, $post_type );
+		$where_filter = apply_filters( 'ymbeseo_posts_where', false, $post_type );
 
 		$status = ( $post_type == 'attachment' ) ? 'inherit' : 'publish';
 
@@ -676,7 +691,7 @@ class YMBESEO_Sitemaps {
 		 */
 		while ( $total > $offset ) {
 
-			// Optimized query per this thread: http://wordpress.org/support/topic/plugin-wordpress-seo-by-yoast-performance-suggestion.
+			// Optimized query per this thread: http://wordpress.org/support/topic/plugin-ymbeseo-by-yoast-performance-suggestion.
 			// Also see http://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/.
 			$query = $wpdb->prepare( "SELECT l.ID, post_title, post_content, post_name, post_parent, post_modified_gmt, post_date, post_date_gmt FROM ( SELECT ID FROM $wpdb->posts {$join_filter} WHERE post_status = '%s' AND post_password = '' AND post_type = '%s' AND post_date != '0000-00-00 00:00:00' {$where_filter} ORDER BY post_modified ASC LIMIT %d OFFSET %d ) o JOIN $wpdb->posts l ON l.ID = o.ID ORDER BY l.ID",
 				$status, $post_type, $steps, $offset
@@ -738,7 +753,7 @@ class YMBESEO_Sitemaps {
 					$url['loc'] = get_permalink( $p );
 
 					/**
-					 * Filter: 'YMBESEO_xml_sitemap_post_url' - Allow changing the URL Yoast SEO uses in the XML sitemap.
+					 * Filter: 'ymbeseo_xml_sitemap_post_url' - Allow changing the URL Yoast Minus Bloat Equals SEO uses in the XML sitemap.
 					 *
 					 * Note that only absolute local URLs are allowed as the check after this removes external URLs.
 					 *
@@ -746,7 +761,7 @@ class YMBESEO_Sitemaps {
 					 *
 					 * @param object $p Post object for the URL.
 					 */
-					$url['loc'] = apply_filters( 'YMBESEO_xml_sitemap_post_url', $url['loc'], $p );
+					$url['loc'] = apply_filters( 'ymbeseo_xml_sitemap_post_url', $url['loc'], $p );
 
 					$url['chf'] = $this->filter_frequency( $post_type . '_single', 'weekly', $url['loc'] );
 
@@ -793,11 +808,11 @@ class YMBESEO_Sitemaps {
 						unset( $attachment, $src, $image, $alt );
 					}
 
-					$url['images'] = apply_filters( 'YMBESEO_sitemap_urlimages', $url['images'], $p->ID );
+					$url['images'] = apply_filters( 'ymbeseo_sitemap_urlimages', $url['images'], $p->ID );
 
 					if ( ! in_array( $url['loc'], $stackedurls ) ) {
 						// Use this filter to adjust the entry before it gets added to the sitemap.
-						$url = apply_filters( 'YMBESEO_sitemap_entry', $url, 'post', $p );
+						$url = apply_filters( 'ymbeseo_sitemap_entry', $url, 'post', $p );
 						if ( is_array( $url ) && $url !== array() ) {
 							$output       .= $this->sitemap_url( $url );
 							$stackedurls[] = $url['loc'];
@@ -826,7 +841,7 @@ class YMBESEO_Sitemaps {
 
 		// Filter to allow adding extra URLs, only do this on the first XML sitemap, not on all.
 		if ( $n === 1 ) {
-			$this->sitemap .= apply_filters( 'YMBESEO_sitemap_' . $post_type . '_content', '' );
+			$this->sitemap .= apply_filters( 'ymbeseo_sitemap_' . $post_type . '_content', '' );
 		}
 
 		$this->sitemap .= '</urlset>';
@@ -877,7 +892,7 @@ class YMBESEO_Sitemaps {
 				}
 
 				$image = array(
-					'src' => apply_filters( 'YMBESEO_xml_sitemap_img_src', $src, $p ),
+					'src' => apply_filters( 'ymbeseo_xml_sitemap_img_src', $src, $p ),
 				);
 
 				if ( preg_match( '`title=["\']([^"\']+)["\']`', $img, $title_match ) ) {
@@ -890,7 +905,7 @@ class YMBESEO_Sitemaps {
 				}
 				unset( $alt_match );
 
-				$image    = apply_filters( 'YMBESEO_xml_sitemap_img', $image, $p );
+				$image    = apply_filters( 'ymbeseo_xml_sitemap_img', $image, $p );
 				$return[] = $image;
 			}
 			unset( $match, $src );
@@ -908,7 +923,7 @@ class YMBESEO_Sitemaps {
 		if (
 			( isset( $this->options[ 'taxonomies-' . $taxonomy->name . '-not_in_sitemap' ] ) && $this->options[ 'taxonomies-' . $taxonomy->name . '-not_in_sitemap' ] === true )
 			|| in_array( $taxonomy, array( 'link_category', 'nav_menu', 'post_format' ) )
-			|| apply_filters( 'YMBESEO_sitemap_exclude_taxonomy', false, $taxonomy->name )
+			|| apply_filters( 'ymbeseo_sitemap_exclude_taxonomy', false, $taxonomy->name )
 		) {
 			$this->bad_sitemap = true;
 
@@ -924,13 +939,13 @@ class YMBESEO_Sitemaps {
 		$offset = ( $n > 1 ) ? ( ( $n - 1 ) * $this->max_entries ) : 0;
 
 		/**
-		 * Filter: 'YMBESEO_sitemap_exclude_empty_terms' - Allow people to include empty terms in sitemap
+		 * Filter: 'ymbeseo_sitemap_exclude_empty_terms' - Allow people to include empty terms in sitemap
 		 *
 		 * @api bool $hide_empty Whether or not to hide empty terms, defaults to true.
 		 *
 		 * @param object $taxonomy The taxonomy we're getting terms for.
 		 */
-		$hide_empty = apply_filters( 'YMBESEO_sitemap_exclude_empty_terms', true, $taxonomy );
+		$hide_empty = apply_filters( 'ymbeseo_sitemap_exclude_empty_terms', true, $taxonomy );
 		$terms      = get_terms( $taxonomy->name, array( 'hide_empty' => $hide_empty ) );
 		$terms      = array_splice( $terms, $offset, $steps );
 
@@ -988,7 +1003,7 @@ class YMBESEO_Sitemaps {
 				$url['chf'] = $this->filter_frequency( $c->taxonomy . '_term', 'weekly', $url['loc'] );
 
 				// Use this filter to adjust the entry before it gets added to the sitemap.
-				$url = apply_filters( 'YMBESEO_sitemap_entry', $url, 'term', $c );
+				$url = apply_filters( 'ymbeseo_sitemap_entry', $url, 'term', $c );
 
 				if ( is_array( $url ) && $url !== array() ) {
 					$output .= $this->sitemap_url( $url );
@@ -1041,7 +1056,7 @@ class YMBESEO_Sitemaps {
 				'who'        => 'authors',
 				'meta_query' => array(
 					array(
-						'key'     => '_so_YMBESEO_profile_updated',
+						'key'     => '_yoast_ymbeseo_profile_updated',
 						'value'   => 'needs-a-value-anyway', // This is ignored, but is necessary...
 						'compare' => 'NOT EXISTS',
 					),
@@ -1051,7 +1066,7 @@ class YMBESEO_Sitemaps {
 
 		if ( is_array( $users ) && $users !== array() ) {
 			foreach ( $users as $user ) {
-				update_user_meta( $user->ID, '_so_YMBESEO_profile_updated', time() );
+				update_user_meta( $user->ID, '_yoast_ymbeseo_profile_updated', time() );
 			}
 		}
 		unset( $users, $user );
@@ -1062,13 +1077,13 @@ class YMBESEO_Sitemaps {
 				'who'      => 'authors',
 				'offset'   => $offset,
 				'number'   => $steps,
-				'meta_key' => '_so_YMBESEO_profile_updated',
+				'meta_key' => '_yoast_ymbeseo_profile_updated',
 				'orderby'  => 'meta_value_num',
 				'order'    => 'ASC',
 			)
 		);
 
-		$users = apply_filters( 'YMBESEO_sitemap_exclude_author', $users );
+		$users = apply_filters( 'ymbeseo_sitemap_exclude_author', $users );
 
 		// Ascending sort.
 		usort( $users, array( $this, 'user_map_sorter' ) );
@@ -1081,10 +1096,10 @@ class YMBESEO_Sitemaps {
 						'loc' => $author_link,
 						'pri' => 0.8,
 						'chf' => $this->filter_frequency( 'author_archive', 'daily', $author_link ),
-						'mod' => date( 'c', isset( $user->_so_YMBESEO_profile_updated ) ? $user->_so_YMBESEO_profile_updated : time() ),
+						'mod' => date( 'c', isset( $user->_yoast_ymbeseo_profile_updated ) ? $user->_yoast_ymbeseo_profile_updated : time() ),
 					);
 					// Use this filter to adjust the entry before it gets added to the sitemap.
-					$url = apply_filters( 'YMBESEO_sitemap_entry', $url, 'user', $user );
+					$url = apply_filters( 'ymbeseo_sitemap_entry', $url, 'user', $user );
 
 					if ( is_array( $url ) && $url !== array() ) {
 						$output .= $this->sitemap_url( $url );
@@ -1107,7 +1122,7 @@ class YMBESEO_Sitemaps {
 
 		// Filter to allow adding extra URLs, only do this on the first XML sitemap, not on all.
 		if ( $n === 1 ) {
-			$this->sitemap .= apply_filters( 'YMBESEO_sitemap_author_content', '' );
+			$this->sitemap .= apply_filters( 'ymbeseo_sitemap_author_content', '' );
 		}
 
 		$this->sitemap .= '</urlset>';
@@ -1136,7 +1151,7 @@ class YMBESEO_Sitemaps {
 			require_once( YMBESEO_PATH . 'css/xml-sitemap-xsl.php' );
 		}
 		else {
-			do_action( 'YMBESEO_xsl_' . $type );
+			do_action( 'ymbeseo_xsl_' . $type );
 		}
 	}
 
@@ -1152,16 +1167,16 @@ class YMBESEO_Sitemaps {
 		}
 		echo '<?xml version="1.0" encoding="', esc_attr( $this->charset ), '"?>';
 		if ( $this->stylesheet ) {
-			echo apply_filters( 'YMBESEO_stylesheet_url', $this->stylesheet ), "\n";
+			echo apply_filters( 'ymbeseo_stylesheet_url', $this->stylesheet ), "\n";
 		}
 		echo $this->sitemap;
-		echo "\n", '<!-- XML Sitemap generated by Yoast SEO -->';
+		echo "\n", '<!-- XML Sitemap generated by Yoast Minus Bloat Equals SEO -->';
 
 		$debug_display = defined( 'WP_DEBUG_DISPLAY' ) && true === WP_DEBUG_DISPLAY;
 		$debug         = defined( 'WP_DEBUG' ) && true === WP_DEBUG;
-		$YMBESEO_debug   = defined( 'YMBESEO_DEBUG' ) && true === YMBESEO_DEBUG;
+		$ymbeseo_debug   = defined( 'YMBESEO_DEBUG' ) && true === YMBESEO_DEBUG;
 
-		if ( $debug_display && ( $debug || $YMBESEO_debug ) ) {
+		if ( $debug_display && ( $debug || $ymbeseo_debug ) ) {
 			if ( $this->transient ) {
 				echo "\n", '<!-- ', number_format( ( memory_get_peak_usage() / 1024 / 1024 ), 2 ), 'MB | Served from transient cache -->';
 			}
@@ -1224,7 +1239,7 @@ class YMBESEO_Sitemaps {
 	 * Make a request for the sitemap index so as to cache it before the arrival of the search engines.
 	 */
 	function hit_sitemap_index() {
-		$url = YMBESEO_xml_sitemaps_base_url( 'sitemap_index.xml' );
+		$url = ymbeseo_xml_sitemaps_base_url( 'sitemap_index.xml' );
 		wp_remote_get( $url );
 	}
 
@@ -1292,7 +1307,7 @@ class YMBESEO_Sitemaps {
 
 
 	/**
-	 * Sorts an array of WP_User by the _so_YMBESEO_profile_updated meta field
+	 * Sorts an array of WP_User by the _yoast_ymbeseo_profile_updated meta field
 	 *
 	 * @since 1.6
 	 *
@@ -1302,22 +1317,22 @@ class YMBESEO_Sitemaps {
 	 * @return int 0 if equal, 1 if $a is larger else or -1;
 	 */
 	private function user_map_sorter( $a, $b ) {
-		if ( ! isset( $a->_so_YMBESEO_profile_updated ) ) {
-			$a->_so_YMBESEO_profile_updated = time();
+		if ( ! isset( $a->_yoast_ymbeseo_profile_updated ) ) {
+			$a->_yoast_ymbeseo_profile_updated = time();
 		}
-		if ( ! isset( $b->_so_YMBESEO_profile_updated ) ) {
-			$b->_so_YMBESEO_profile_updated = time();
+		if ( ! isset( $b->_yoast_ymbeseo_profile_updated ) ) {
+			$b->_yoast_ymbeseo_profile_updated = time();
 		}
 
-		if ( $a->_so_YMBESEO_profile_updated == $b->_so_YMBESEO_profile_updated ) {
+		if ( $a->_yoast_ymbeseo_profile_updated == $b->_yoast_ymbeseo_profile_updated ) {
 			return 0;
 		}
 
-		return ( ( $a->_so_YMBESEO_profile_updated > $b->_so_YMBESEO_profile_updated ) ? 1 : -1 );
+		return ( ( $a->_yoast_ymbeseo_profile_updated > $b->_yoast_ymbeseo_profile_updated ) ? 1 : -1 );
 	}
 
 	/**
-	 * Filter users that should be excluded from the sitemap (by author metatag: YMBESEO_excludeauthorsitemap).
+	 * Filter users that should be excluded from the sitemap (by author metatag: ymbeseo_excludeauthorsitemap).
 	 *
 	 * Also filtering users that should be exclude by excluded role.
 	 *
@@ -1328,12 +1343,12 @@ class YMBESEO_Sitemaps {
 	public function user_sitemap_remove_excluded_authors( $users ) {
 
 		if ( is_array( $users ) && $users !== array() ) {
-			$options = get_option( 'YMBESEO_xml' );
+			$options = get_option( 'ymbeseo_xml' );
 
 			foreach ( $users as $user_key => $user ) {
 				$exclude_user = false;
 
-				$is_exclude_on = get_the_author_meta( 'YMBESEO_excludeauthorsitemap', $user->ID );
+				$is_exclude_on = get_the_author_meta( 'ymbeseo_excludeauthorsitemap', $user->ID );
 				if ( $is_exclude_on === 'on' ) {
 					$exclude_user = true;
 				}
@@ -1468,7 +1483,7 @@ class YMBESEO_Sitemaps {
 
 			$src   = $this->image_url( $attachment->ID );
 			$image = array(
-				'src' => apply_filters( 'YMBESEO_xml_sitemap_img_src', $src, $post ),
+				'src' => apply_filters( 'ymbeseo_xml_sitemap_img_src', $src, $post ),
 			);
 
 			$alt = get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true );
@@ -1479,7 +1494,7 @@ class YMBESEO_Sitemaps {
 
 			$image['title'] = $attachment->post_title;
 
-			$image = apply_filters( 'YMBESEO_xml_sitemap_img', $image, $post );
+			$image = apply_filters( 'ymbeseo_xml_sitemap_img', $image, $post );
 
 			$return[] = $image;
 		}
@@ -1508,15 +1523,15 @@ class YMBESEO_Sitemaps {
 		}
 
 		/**
-		 * Filter: 'YMBESEO_xml_post_type_archive_priority' - Allow changing the priority of the URL
-		 * Yoast SEO uses in the XML sitemap.
+		 * Filter: 'ymbeseo_xml_post_type_archive_priority' - Allow changing the priority of the URL
+		 * Yoast Minus Bloat Equals SEO uses in the XML sitemap.
 		 *
 		 * @api float $priority The priority for this URL, ranging from 0 to 1
 		 *
 		 * @param string $post_type The post type this archive is for.
 		 * @param object $p         The post object.
 		 */
-		$return = apply_filters( 'YMBESEO_xml_sitemap_post_priority', $return, $post->post_type, $post );
+		$return = apply_filters( 'ymbeseo_xml_sitemap_post_priority', $return, $post->post_type, $post );
 
 		return $return;
 	}

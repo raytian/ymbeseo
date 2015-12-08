@@ -6,7 +6,7 @@
 /**
  * Class YMBESEO_Import_WooThemes_SEO
  *
- * Class with functionality to import Yoast SEO settings from WooThemes SEO
+ * Class with functionality to import Yoast Minus Bloat Equals SEO settings from WooThemes SEO
  */
 class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 
@@ -20,17 +20,17 @@ class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 		$this->import_option( 'seo_woo_single_layout', 'post' );
 		$this->import_option( 'seo_woo_page_layout', 'page' );
 		$this->import_archive_option();
-		$this->import_custom_values( 'seo_woo_meta_home_desc', 'metadesc-home-wpseo' );
-		$this->import_custom_values( 'seo_woo_meta_home_key', 'metakey-home-wpseo' );
+		$this->import_custom_values( 'seo_woo_meta_home_desc', 'metadesc-home-ymbeseo' );
+		$this->import_custom_values( 'seo_woo_meta_home_key', 'metakey-home-ymbeseo' );
 		$this->import_metas();
 
-		update_option( 'YMBESEO_titles', $this->options );
+		update_option( 'ymbeseo_titles', $this->options );
 
 		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'ymbeseo' ) );
 	}
 
 	/**
-	 * Holds the WPSEO Title Options
+	 * Holds the YMBESEO Title Options
 	 *
 	 * @var array
 	 */
@@ -105,13 +105,13 @@ class YMBESEO_Import_WooThemes_SEO extends YMBESEO_Import_External {
 	private function import_home() {
 		switch ( get_option( 'seo_woo_home_layout' ) ) {
 			case 'a':
-				$this->options['title-home-wpseo'] = '%%sitename%% %%sep%% %%sitedesc%%';
+				$this->options['title-home-ymbeseo'] = '%%sitename%% %%sep%% %%sitedesc%%';
 				break;
 			case 'b':
-				$this->options['title-home-wpseo'] = '%%sitename%% ' . get_option( 'seo_woo_paged_var' ) . ' %%pagenum%%';
+				$this->options['title-home-ymbeseo'] = '%%sitename%% ' . get_option( 'seo_woo_paged_var' ) . ' %%pagenum%%';
 				break;
 			case 'c':
-				$this->options['title-home-wpseo'] = '%%sitedesc%%';
+				$this->options['title-home-ymbeseo'] = '%%sitedesc%%';
 				break;
 		}
 		$this->perhaps_delete( 'seo_woo_home_layout' );

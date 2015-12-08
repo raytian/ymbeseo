@@ -10,10 +10,10 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 	exit();
 }
 
-$options = get_option( 'wpseo' );
+$options = get_option( 'ymbeseo' );
 
-$YMBESEO_bulk_titles_table      = new YMBESEO_Bulk_Title_Editor_List_Table();
-$YMBESEO_bulk_description_table = new YMBESEO_Bulk_Description_List_Table();
+$ymbeseo_bulk_titles_table      = new YMBESEO_Bulk_Title_Editor_List_Table();
+$ymbeseo_bulk_description_table = new YMBESEO_Bulk_Description_List_Table();
 
 // If type is empty, fill it with value of first tab (title).
 $_GET['type'] = ( ! empty( $_GET['type'] ) ) ? $_GET['type'] : 'title';
@@ -24,23 +24,23 @@ if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
 }
 ?>
 <script>
-	var YMBESEO_bulk_editor_nonce = '<?php echo wp_create_nonce( 'wpseo-bulk-editor' ); ?>';
+	var ymbeseo_bulk_editor_nonce = '<?php echo wp_create_nonce( 'ymbeseo-bulk-editor' ); ?>';
 </script>
 
-<div class="wrap YMBESEO_table_page">
+<div class="wrap ymbeseo_table_page">
 
-	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
+	<h2 class="nav-tab-wrapper" id="ymbeseo-tabs">
 		<a class="nav-tab" id="title-tab" href="#top#title"><?php _e( 'Title', 'ymbeseo' ); ?></a>
 		<a class="nav-tab" id="description-tab"
 		   href="#top#description"><?php _e( 'Description', 'ymbeseo' ); ?></a>
 	</h2>
 
 	<div class="tabwrapper">
-		<div id="title" class="wpseotab">
-			<?php $YMBESEO_bulk_titles_table->show_page(); ?>
+		<div id="title" class="ymbeseotab">
+			<?php $ymbeseo_bulk_titles_table->show_page(); ?>
 		</div>
-		<div id="description" class="wpseotab">
-			<?php $YMBESEO_bulk_description_table->show_page(); ?>
+		<div id="description" class="ymbeseotab">
+			<?php $ymbeseo_bulk_description_table->show_page(); ?>
 		</div>
 
 	</div>

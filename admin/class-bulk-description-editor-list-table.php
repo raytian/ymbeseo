@@ -22,8 +22,8 @@ class YMBESEO_Bulk_Description_List_Table extends YMBESEO_Bulk_List_Table {
 	 * @var array
 	 */
 	protected $settings = array(
-		'singular' => 'YMBESEO_bulk_description',
-		'plural'   => 'YMBESEO_bulk_descriptions',
+		'singular' => 'ymbeseo_bulk_description',
+		'plural'   => 'ymbeseo_bulk_descriptions',
 		'ajax'     => true,
 	);
 
@@ -60,8 +60,8 @@ class YMBESEO_Bulk_Description_List_Table extends YMBESEO_Bulk_List_Table {
 		switch ( $column_name ) {
 			case 'col_new_yoast_seo_metadesc':
 				return sprintf(
-					'<textarea id="%1$s" name="%1$s" class="wpseo-new-metadesc" data-id="%2$s"></textarea>',
-					'wpseo-new-metadesc-' . $record->ID,
+					'<textarea id="%1$s" name="%1$s" class="ymbeseo-new-metadesc" data-id="%2$s"></textarea>',
+					'ymbeseo-new-metadesc-' . $record->ID,
 					$record->ID
 				);
 				break;

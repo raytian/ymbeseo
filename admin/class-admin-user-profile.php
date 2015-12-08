@@ -39,14 +39,14 @@ class YMBESEO_Admin_User_Profile {
 	 * @param    int $user_id of the updated user.
 	 */
 	public function process_user_option_update( $user_id ) {
-		update_user_meta( $user_id, '_so_YMBESEO_profile_updated', time() );
+		update_user_meta( $user_id, '_yoast_ymbeseo_profile_updated', time() );
 
-		check_admin_referer( 'YMBESEO_user_profile_update', 'YMBESEO_nonce' );
+		check_admin_referer( 'ymbeseo_user_profile_update', 'ymbeseo_nonce' );
 
-		update_user_meta( $user_id, 'YMBESEO_title', $this->filter_input_post( 'YMBESEO_author_title' ) );
-		update_user_meta( $user_id, 'YMBESEO_metadesc', $this->filter_input_post( 'YMBESEO_author_metadesc' ) );
-		update_user_meta( $user_id, 'YMBESEO_metakey', $this->filter_input_post( 'YMBESEO_author_metakey' ) );
-		update_user_meta( $user_id, 'YMBESEO_excludeauthorsitemap', $this->filter_input_post( 'YMBESEO_author_exclude' ) );
+		update_user_meta( $user_id, 'ymbeseo_title', $this->filter_input_post( 'ymbeseo_author_title' ) );
+		update_user_meta( $user_id, 'ymbeseo_metadesc', $this->filter_input_post( 'ymbeseo_author_metadesc' ) );
+		update_user_meta( $user_id, 'ymbeseo_metakey', $this->filter_input_post( 'ymbeseo_author_metakey' ) );
+		update_user_meta( $user_id, 'ymbeseo_excludeauthorsitemap', $this->filter_input_post( 'ymbeseo_author_exclude' ) );
 	}
 
 	/**
@@ -57,7 +57,7 @@ class YMBESEO_Admin_User_Profile {
 	public function user_profile( $user ) {
 		$options = YMBESEO_Options::get_all();
 
-		wp_nonce_field( 'YMBESEO_user_profile_update', 'YMBESEO_nonce' );
+		wp_nonce_field( 'ymbeseo_user_profile_update', 'ymbeseo_nonce' );
 
 		require_once( 'views/user-profile.php' );
 	}
