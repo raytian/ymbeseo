@@ -894,7 +894,6 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 			}
 			wp_enqueue_style( 'metabox-tabs', plugins_url( 'css/metabox-tabs' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 			wp_enqueue_style( "metabox-$color", plugins_url( 'css/metabox-' . esc_attr( $color ) . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
-			wp_enqueue_style( 'featured-image', plugins_url( 'css/featured-image' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 			wp_enqueue_style( 'jquery-qtip.js', plugins_url( 'css/jquery.qtip' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), '2.2.1' );
 
 			// Always enqueue minified as it's not our code.
@@ -904,10 +903,6 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 				'jquery',
 				'jquery-ui-core',
 			), YMBESEO_VERSION, true );
-
-			if ( post_type_supports( get_post_type(), 'thumbnail' ) ) {
-				wp_enqueue_script( 'ymbeseo-featured-image', plugins_url( 'js/ymbeseo-featured-image' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
-			}
 
 			wp_enqueue_script( 'ymbeseo-admin-media', plugins_url( 'js/ymbeseo-admin-media' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array(
 				'jquery',
