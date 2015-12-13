@@ -33,7 +33,6 @@ class YMBESEO_Admin_Init {
 		$this->pagenow = $GLOBALS['pagenow'];
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_dismissible' ) );
-		add_action( 'admin_init', array( $this, 'after_update_notice' ), 15 );
 		add_action( 'admin_init', array( $this, 'tagline_notice' ), 15 );
 		add_action( 'admin_init', array( $this, 'ga_compatibility_notice' ), 15 );
 
@@ -51,35 +50,6 @@ class YMBESEO_Admin_Init {
 		if ( version_compare( $GLOBALS['wp_version'], '4.2', '<' ) ) {
 			wp_enqueue_style( 'ymbeseo-dismissible', plugins_url( 'css/ymbeseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.css', YMBESEO_FILE ), array(), YMBESEO_VERSION );
 			wp_enqueue_script( 'ymbeseo-dismissible', plugins_url( 'js/ymbeseo-dismissible' . YMBESEO_CSSJS_SUFFIX . '.js', YMBESEO_FILE ), array( 'jquery' ), YMBESEO_VERSION, true );
-		}
-	}
-	/**
-	 * Redirect first time or just upgraded users to the about screen.
-	 */
-	public function after_update_notice() {
-		if ( current_user_can( 'manage_options' ) && ! $this->seen_about() ) {
-
-			if ( filter_input( INPUT_GET, 'intro' ) === '1' ) {
-				update_user_meta( get_current_user_id(), 'ymbeseo_seen_about_version' , YMBESEO_VERSION );
-
-				return;
-			}
-			/* translators: %1$s expands to YMBE SEO, $2%s to the version number, %3$s and %4$s to anchor tags with link to intro page  */
-			$info_message = sprintf(
-				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'ymbeseo' ),
-				'YMBE SEO',
-				YMBESEO_VERSION,
-				'<a href="' . admin_url( 'admin.php?page=ymbeseo_dashboard&intro=1' ) . '">',
-				'</a>'
-			);
-
-			$notification_options = array(
-				'type' => 'updated',
-				'id' => 'ymbeseo-dismiss-about',
-				'nonce' => wp_create_nonce( 'ymbeseo-dismiss-about' ),
-			);
-
-			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( $info_message, $notification_options ) );
 		}
 	}
 
