@@ -320,17 +320,17 @@ class YMBESEO_Admin {
 			return;
 		}
 		printf( '
-			<div id="robotsmessage" class="error">
+			<div id="robotsmessage" class="error ymbeseo-warning" style="border-left:4px solid #ffba00;">
 				<p>
-					<strong>%1$s</strong>
+					<strong>%1$s</strong><br />
 					%2$s
 					<a href="javascript:ymbeseoSetIgnore(\'blog_public_warning\',\'robotsmessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
-			__( 'Huge SEO Issue: You\'re blocking access to robots.', 'ymbeseo' ),
-			sprintf( __( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
+			__( 'Reminder: Access to robots is currently being blocked.', 'ymbeseo' ),
+			sprintf( __( 'To adjust this, please %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
 			esc_js( wp_create_nonce( 'ymbeseo-ignore' ) ),
-			__( 'I know, don\'t bug me.', 'ymbeseo' )
+			__( 'I know, thanks.', 'ymbeseo' )
 		);
 	}
 

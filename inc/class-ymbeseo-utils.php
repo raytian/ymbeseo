@@ -48,7 +48,7 @@ class YMBESEO_Utils {
 	}
 
 	/**
-	 * Check whether file editing is allowed for the .htaccess and robots.txt files
+	 * Check whether file editing is allowed for the robots.txt files
 	 *
 	 * @internal current_user_can() checks internally whether a user is on wp-ms and adjusts accordingly.
 	 *
@@ -65,7 +65,7 @@ class YMBESEO_Utils {
 
 		/**
 		 * Filter: 'ymbeseo_allow_system_file_edit' - Allow developers to change whether the editing of
-		 * .htaccess and robots.txt is allowed
+		 * robots.txt is allowed
 		 *
 		 * @api bool $allowed Whether file editing is allowed
 		 */
