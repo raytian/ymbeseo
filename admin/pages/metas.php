@@ -59,9 +59,6 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 				echo '<p><strong>', __( 'Homepage', 'ymbeseo' ), '</strong><br/>';
 				$yform->textinput( 'title-home-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template homepage-template' );
 				$yform->textarea( 'metadesc-home-ymbeseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template homepage-template' ) );
-				if ( $options['usemetakeywords'] === true ) {
-					$yform->textinput( 'metakey-home-ymbeseo', __( 'Meta keywords template', 'ymbeseo' ) );
-				}
 				echo '</p>';
 			}
 			else {
@@ -96,9 +93,6 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 
 					$yform->textinput( 'title-' . $name, __( 'Title template', 'ymbeseo' ), 'template posttype-template' );
 					$yform->textarea( 'metadesc-' . $name, __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template posttype-template' ) );
-					if ( $options['usemetakeywords'] === true ) {
-						$yform->textinput( 'metakey-' . $name, __( 'Meta keywords template', 'ymbeseo' ) );
-					}
 					$yform->checkbox( 'noindex-' . $name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
 					$yform->checkbox( 'showdate-' . $name, __( 'Show date in snippet preview?', 'ymbeseo' ), __( 'Date in Snippet Preview', 'ymbeseo' ) );
 					/* translators: %1$s expands to YMBE SEO */
@@ -133,9 +127,6 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 					echo '<strong>' . esc_html( ucfirst( $pt->labels->name ) ) . '</strong><br/>';
 					$yform->textinput( 'title-ptarchive-' . $name, __( 'Title', 'ymbeseo' ), 'template posttype-template' );
 					$yform->textarea( 'metadesc-ptarchive-' . $name, __( 'Meta description', 'ymbeseo' ), array( 'class' => 'template posttype-template' ) );
-					if ( $options['usemetakeywords'] === true ) {
-						$yform->textinput( 'metakey-ptarchive-' . $name, __( 'Meta keywords', 'ymbeseo' ) );
-					}
 					if ( $options['breadcrumbs-enable'] === true ) {
 						$yform->textinput( 'bctitle-ptarchive-' . $name, __( 'Breadcrumbs title', 'ymbeseo' ) );
 					}
@@ -157,9 +148,6 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 					echo '<strong>' . esc_html( ucfirst( $tax->labels->name ) ) . '</strong><br/>';
 					$yform->textinput( 'title-tax-' . $tax->name, __( 'Title template', 'ymbeseo' ), 'template taxonomy-template' );
 					$yform->textarea( 'metadesc-tax-' . $tax->name, __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template taxonomy-template' ) );
-					if ( $options['usemetakeywords'] === true ) {
-						$yform->textinput( 'metakey-tax-' . $tax->name, __( 'Meta keywords template', 'ymbeseo' ) );
-					}
 					$yform->checkbox( 'noindex-tax-' . $tax->name, '<code>noindex, follow</code>', __( 'Meta Robots', 'ymbeseo' ) );
 					/* translators: %1$s expands to YMBE SEO */
 					$yform->checkbox( 'hideeditbox-tax-' . $tax->name, __( 'Hide', 'ymbeseo' ), sprintf( __( '%1$s Meta Box', 'ymbeseo' ), 'YMBE SEO' ) );
@@ -176,9 +164,6 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 			echo '<h3>' . __( 'Author Archives', 'ymbeseo' ) . '</h3>';
 			$yform->textinput( 'title-author-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template author-template' );
 			$yform->textarea( 'metadesc-author-ymbeseo', __( 'Meta description template', 'ymbeseo' ), array( 'class' => 'template author-template' ) );
-			if ( $options['usemetakeywords'] === true ) {
-				$yform->textinput( 'metakey-author-ymbeseo', __( 'Meta keywords template', 'ymbeseo' ) );
-			}
 
 			echo '<h3>' . __( 'Date Archives', 'ymbeseo' ) . '</h3>';
 			$yform->textinput( 'title-archive-ymbeseo', __( 'Title template', 'ymbeseo' ), 'template date-template' );
@@ -218,14 +203,10 @@ $yform->admin_header( true, 'ymbeseo_titles' );
 			?>
 		</div>
 		<div id="other" class="ymbeseotab">
-			<strong><?php _e( 'Sitewide meta settings', 'ymbeseo' ); ?></strong><br/>
-			<br/>
+			<strong><?php _e( 'Sitewide meta settings', 'ymbeseo' ); ?></strong>
 			<?php
 			echo '<p>', __( 'If you want to prevent /page/2/ and further of any archive to show up in the search results, enable this.', 'ymbeseo' ), '</p>';
 			$yform->checkbox( 'noindex-subpages-ymbeseo', __( 'Noindex subpages of archives', 'ymbeseo' ) );
-
-			echo '<p>', __( 'I don\'t know why you\'d want to use meta keywords, but if you want to, check this box.', 'ymbeseo' ), '</p>';
-			$yform->checkbox( 'usemetakeywords', __( 'Use meta keywords tag?', 'ymbeseo' ) );
 
 			echo '<p>', __( 'Prevents search engines from using the DMOZ description for pages from this site in the search results.', 'ymbeseo' ), '</p>';
 			/* translators: %s expands to <code>noodp</code> */
