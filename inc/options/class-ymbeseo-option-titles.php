@@ -420,8 +420,8 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 
 		/*
-		Renaming these options to avoid ever overwriting these if a (bloody stupid) user /
-			   programmer would use any of the following as a custom post type or custom taxonomy:
+		Renaming these options to avoid ever overwriting these if a user / programmer
+		would use any of the following as a custom post type or custom taxonomy:
 			   'home', 'author', 'archive', 'search', '404', 'subpages'
 
 			   Similarly, renaming the tax options to avoid a custom post type and a taxonomy
