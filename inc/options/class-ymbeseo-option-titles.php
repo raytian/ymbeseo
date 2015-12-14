@@ -37,9 +37,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		'metadesc-author-ymbeseo'  => '', // Text area.
 		'metadesc-archive-ymbeseo' => '', // Text area.
 
-		'metakey-home-ymbeseo'     => '', // Text field.
-		'metakey-author-ymbeseo'   => '', // Text field.
-
 		'noindex-subpages-ymbeseo' => false,
 		'noindex-author-ymbeseo'   => false,
 		'noindex-archive-ymbeseo'  => true,
@@ -51,20 +48,17 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		 * Uses enrich_defaults to add more along the lines of:
 		 * - 'title-' . $pt->name        => ''; // Text field.
 		 * - 'metadesc-' . $pt->name      => ''; // Text field.
-		 * - 'metakey-' . $pt->name        => ''; // Text field.
 		 * - 'noindex-' . $pt->name        => false;
 		 * - 'showdate-' . $pt->name      => false;
 		 * - 'hideeditbox-' . $pt->name      => false;
 		 *
 		 * - 'title-ptarchive-' . $pt->name    => ''; // Text field.
 		 * - 'metadesc-ptarchive-' . $pt->name  => ''; // Text field.
-		 * - 'metakey-ptarchive-' . $pt->name  => ''; // Text field.
 		 * - 'bctitle-ptarchive-' . $pt->name  => ''; // Text field.
 		 * - 'noindex-ptarchive-' . $pt->name  => false;
 		 *
 		 * - 'title-tax-' . $tax->name      => '''; // Text field.
 		 * - 'metadesc-tax-' . $tax->name    => ''; // Text field.
-		 * - 'metakey-tax-' . $tax->name    => ''; // Text field.
 		 * - 'noindex-tax-' . $tax->name    => false;
 		 * - 'hideeditbox-tax-' . $tax->name  => false;
 		 */
@@ -76,7 +70,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 	protected $variable_array_key_patterns = array(
 		'title-',
 		'metadesc-',
-		'metakey-',
 		'noindex-',
 		'showdate-',
 		'hideeditbox-',
@@ -200,7 +193,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			foreach ( $post_type_names as $pt ) {
 				$this->defaults[ 'title-' . $pt ]       = '%%title%% %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-' . $pt ]    = ''; // Text area.
-				$this->defaults[ 'metakey-' . $pt ]     = ''; // Text field.
 				$this->defaults[ 'noindex-' . $pt ]     = false;
 				$this->defaults[ 'showdate-' . $pt ]    = false;
 				$this->defaults[ 'hideeditbox-' . $pt ] = false;
@@ -217,7 +209,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 				$this->defaults[ 'title-ptarchive-' . $pt->name ]    = $archive . ' %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-ptarchive-' . $pt->name ] = ''; // Text area.
-				$this->defaults[ 'metakey-ptarchive-' . $pt->name ]  = ''; // Text field.
 				$this->defaults[ 'bctitle-ptarchive-' . $pt->name ]  = ''; // Text field.
 				$this->defaults[ 'noindex-ptarchive-' . $pt->name ]  = false;
 			}
@@ -229,7 +220,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			foreach ( $taxonomy_names as $tax ) {
 				$this->defaults[ 'title-tax-' . $tax ]       = $archives . ' %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-tax-' . $tax ]    = ''; // Text area.
-				$this->defaults[ 'metakey-tax-' . $tax ]     = ''; // Text field.
 				$this->defaults[ 'hideeditbox-tax-' . $tax ] = false;
 
 				if ( $tax !== 'post_format' ) {
@@ -287,14 +277,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				case 'metadesc-':
 					/*
 					Covers:
-							 'metakey-home-ymbeseo', 'metakey-author-ymbeseo'
-							 'metakey-' . $pt->name
-							 'metakey-ptarchive-' . $pt->name
-							 'metakey-tax-' . $tax->name
-					*/
-				case 'metakey-':
-					/*
-					Covers:
 							 ''bctitle-ptarchive-' . $pt->name
 					*/
 				case 'bctitle-ptarchive-':
@@ -345,7 +327,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 				 *		'noindex-ptarchive-' . $pt->name
 				 *		'noindex-tax-' . $tax->name
 				 *		'forcerewritetitle':
-				 *		'usemetakeywords':
 				 *		'noodp':
 				 *		'noydir':
 				 *		'disable-author':
@@ -439,7 +420,7 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 
 
 		/*
-		Renaming these options to avoid ever overwritting these if a (bloody stupid) user /
+		Renaming these options to avoid ever overwriting these if a (bloody stupid) user /
 			   programmer would use any of the following as a custom post type or custom taxonomy:
 			   'home', 'author', 'archive', 'search', '404', 'subpages'
 
@@ -455,8 +436,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			'metadesc-home'    => 'metadesc-home-ymbeseo',
 			'metadesc-author'  => 'metadesc-author-ymbeseo',
 			'metadesc-archive' => 'metadesc-archive-ymbeseo',
-			'metakey-home'     => 'metakey-home-ymbeseo',
-			'metakey-author'   => 'metakey-author-ymbeseo',
 			'noindex-subpages' => 'noindex-subpages-ymbeseo',
 			'noindex-author'   => 'noindex-author-ymbeseo',
 			'noindex-archive'  => 'noindex-archive-ymbeseo',
@@ -478,7 +457,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 			$rename          = array(
 				'title-'           => 'title-tax-',
 				'metadesc-'        => 'metadesc-tax-',
-				'metakey-'         => 'metakey-tax-',
 				'noindex-'         => 'noindex-tax-',
 				'tax-hideeditbox-' => 'hideeditbox-tax-',
 
@@ -534,7 +512,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 					/* text fields */
 					case 'title-':
 					case 'metadesc-':
-					case 'metakey-':
 					case 'bctitle-ptarchive-':
 						$option_value[ $key ] = YMBESEO_Utils::sanitize_text_field( $value );
 						break;

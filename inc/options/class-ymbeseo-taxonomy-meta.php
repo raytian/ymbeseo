@@ -42,7 +42,6 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 	public static $defaults_per_term = array(
 		'ymbeseo_title'           => '',
 		'ymbeseo_desc'            => '',
-		'ymbeseo_metakey'         => '',
 		'ymbeseo_canonical'       => '',
 		'ymbeseo_bctitle'         => '',
 		'ymbeseo_noindex'         => 'default',

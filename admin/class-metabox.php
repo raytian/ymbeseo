@@ -47,10 +47,6 @@ class YMBESEO_Metabox extends YMBESEO_Meta {
 		self::$meta_fields['general']['metadesc']['description'] = sprintf( __( 'The <code>meta</code> description will be limited to %s chars%s, %s chars left.', 'ymbeseo' ), self::$meta_length, self::$meta_length_reason, '<span id="so_ymbeseo_metadesc-length"></span>' ) . ' <div id="so_ymbeseo_metadesc_notice"></div>';
 		self::$meta_fields['general']['metadesc']['help']        = sprintf( __( 'The meta description is often shown as the black text under the title in a search result. For this to work it has to contain the keyword that was searched for.<br/><br/>Read %sthis post%s for more info.', 'ymbeseo' ), '<a href="https://yoast.com/snippet-preview/#utm_source=ymbeseo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=focus-keyword">', '</a>' );
 
-		self::$meta_fields['general']['metakeywords']['title']       = __( 'Meta keywords', 'ymbeseo' );
-		self::$meta_fields['general']['metakeywords']['description'] = __( 'If you type something above it will override your %smeta keywords template%s.', 'ymbeseo' );
-
-
 		self::$meta_fields['advanced']['meta-robots-noindex']['title'] = __( 'Meta Robots Index', 'ymbeseo' );
 		if ( '0' == get_option( 'blog_public' ) ) {
 			self::$meta_fields['advanced']['meta-robots-noindex']['description'] = '<p class="error-message">' . __( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'ymbeseo' ) . '</p>';

@@ -128,13 +128,6 @@ class YMBESEO_Meta {
 				'description'   => '', // Translation added later.
 				'help'          => '', // Translation added later.
 			),
-			'metakeywords'   => array(
-				'type'          => 'text',
-				'title'         => '', // Translation added later.
-				'default_value' => '',
-				'class'         => 'metakeywords',
-				'description'   => '', // Translation added later.
-			),
 		),
 		'advanced' => array(
 			'meta-robots-noindex'  => array(
@@ -338,14 +331,6 @@ class YMBESEO_Meta {
 
 			case 'general':
 				$options = get_option( 'ymbeseo_titles' );
-				if ( $options['usemetakeywords'] === true ) {
-					/* Adjust the link in the keywords description text string based on the post type */
-					$field_defs['metakeywords']['description'] = sprintf( $field_defs['metakeywords']['description'], '<a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=ymbeseo_titles#top#post_types' ) ) . '">', '</a>' );
-				}
-				else {
-					/* Don't show the keywords field if keywords aren't enabled */
-					unset( $field_defs['metakeywords'] );
-				}
 				break;
 
 
