@@ -188,10 +188,6 @@ class YMBESEO_Taxonomy {
 		$this->form_row( 'ymbeseo_title', __( 'SEO Title', 'ymbeseo' ), esc_html__( 'The SEO title is used on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 		$this->form_row( 'ymbeseo_desc', __( 'SEO Description', 'ymbeseo' ), esc_html__( 'The SEO description is used for the meta description on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 
-		if ( $options['usemetakeywords'] === true ) {
-			$this->form_row( 'ymbeseo_metakey', __( 'Meta keywords', 'ymbeseo' ), esc_html__( 'Meta keywords used on the archive page for this term.', 'ymbeseo' ), $tax_meta );
-		}
-
 		$this->form_row( 'ymbeseo_canonical', __( 'Canonical', 'ymbeseo' ), esc_html__( 'The canonical link is shown on the archive page for this term.', 'ymbeseo' ), $tax_meta );
 
 		if ( $options['breadcrumbs-enable'] === true ) {
