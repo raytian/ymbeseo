@@ -139,11 +139,6 @@ textarea.ymbeseo_variable_warning {
 	font-weight: normal;
 }
 
-#sidebar-container {
-	width: 261px;
-	padding: 0 0 0 20px;
-}
-
 @media (max-width: 1020px) {
 	#ymbeseo_content_top {
 		margin-left: 0;
