@@ -29,19 +29,6 @@
 						          name="ymbeseo_author_metadesc"><?php echo esc_textarea( get_the_author_meta( 'ymbeseo_metadesc', $user->ID ) ); ?></textarea>
 		</td>
 	</tr>
-	<?php if ( $options['usemetakeywords'] === true ) { ?>
-		<tr>
-			<th>
-				<label
-					for="ymbeseo_author_metakey"><?php _e( 'Meta keywords to use for Author page', 'ymbeseo' ); ?></label>
-			</th>
-			<td>
-				<input class="regular-text" type="text" id="ymbeseo_author_metakey"
-				       name="ymbeseo_author_metakey"
-				       value="<?php echo esc_attr( get_the_author_meta( 'ymbeseo_metakey', $user->ID ) ); ?>"/>
-			</td>
-		</tr>
-	<?php } ?>
 	<tr>
 		<th>
 			<label

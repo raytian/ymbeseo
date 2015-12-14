@@ -45,7 +45,6 @@ class YMBESEO_Admin_User_Profile {
 
 		update_user_meta( $user_id, 'ymbeseo_title', $this->filter_input_post( 'ymbeseo_author_title' ) );
 		update_user_meta( $user_id, 'ymbeseo_metadesc', $this->filter_input_post( 'ymbeseo_author_metadesc' ) );
-		update_user_meta( $user_id, 'ymbeseo_metakey', $this->filter_input_post( 'ymbeseo_author_metakey' ) );
 		update_user_meta( $user_id, 'ymbeseo_excludeauthorsitemap', $this->filter_input_post( 'ymbeseo_author_exclude' ) );
 	}
 
