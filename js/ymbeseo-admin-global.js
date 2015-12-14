@@ -2,18 +2,6 @@
 /* jshint -W097 */
 /* jshint unused:false */
 'use strict';
-/**
- * Used to dismiss the after-update admin notice for a specific user until the next update.
- *
- * @param {string} nonce
- */
-function ymbeseoDismissAbout( nonce ) {
-	jQuery.post( ajaxurl, {
-			action: 'ymbeseo_dismiss_about',
-			_wpnonce: nonce
-		}
-	);
-}
 
 /**
  * Used to dismiss the tagline notice for a specific user.
