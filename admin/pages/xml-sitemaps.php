@@ -5,7 +5,6 @@
 
 /**
  * @todo - [JRF => whomever] check for other sitemap plugins which may conflict ?
- * @todo - [JRF => whomever] check for existance of .xls rewrite rule in .htaccess from
  * google-sitemaps-plugin/generator and remove as it will cause errors for our sitemaps
  * (or inform the user and disallow enabling of sitemaps )
  * @todo - [JRF => whomever] check if anything along these lines is already being done

@@ -29,7 +29,7 @@ if ( '' === $tool_page ) {
 	if ( YMBESEO_Utils::allow_system_file_edit() === true && ! is_multisite() ) {
 		$tools['file-editor'] = array(
 			'title' => __( 'File editor', 'ymbeseo' ),
-			'desc' => __( 'This tool allows you to quickly change important files for your SEO, like your robots.txt and, if you have one, your .htaccess file.', 'ymbeseo' ),
+			'desc' => __( 'This tool allows you to quickly change important files for your SEO, like your robots.txt.', 'ymbeseo' ),
 		);
 	}
 

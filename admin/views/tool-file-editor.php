@@ -10,7 +10,6 @@ if ( ! defined( 'YMBESEO_VERSION' ) ) {
 }
 
 $robots_file    = get_home_path() . 'robots.txt';
-$ht_access_file = get_home_path() . '.htaccess';
 
 if ( isset( $_POST['create_robots'] ) ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -42,23 +41,6 @@ if ( isset( $_POST['submitrobots'] ) ) {
 			fwrite( $f, $robotsnew );
 			fclose( $f );
 			$msg = __( 'Updated Robots.txt', 'ymbeseo' );
-		}
-	}
-}
-
-if ( isset( $_POST['submithtaccess'] ) ) {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		die( __( 'You cannot edit the .htaccess file.', 'ymbeseo' ) );
-	}
-
-	check_admin_referer( 'ymbeseo-htaccess' );
-
-	if ( file_exists( $ht_access_file ) ) {
-		$ht_access_new = stripslashes( $_POST['htaccessnew'] );
-		if ( is_writeable( $ht_access_file ) ) {
-			$f = fopen( $ht_access_file, 'w+' );
-			fwrite( $f, $ht_access_new );
-			fclose( $f );
 		}
 	}
 }
@@ -109,31 +91,4 @@ else {
 		echo '<div class="submit"><input class="button" type="submit" name="submitrobots" value="', __( 'Save changes to Robots.txt', 'ymbeseo' ), '" /></div>';
 		echo '</form>';
 	}
-}
-
-echo '<h2>', __( '.htaccess file', 'ymbeseo' ), '</h2>';
-if ( ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( $_SERVER['SERVER_SOFTWARE'], 'nginx' ) === false ) && file_exists( $ht_access_file ) ) {
-	$f = fopen( $ht_access_file, 'r' );
-
-	$contentht = '';
-	if ( filesize( $ht_access_file ) > 0 ) {
-		$contentht = fread( $f, filesize( $ht_access_file ) );
-	}
-	$contentht = esc_textarea( $contentht );
-
-	if ( ! is_writable( $ht_access_file ) ) {
-		echo '<p><em>', __( 'If your .htaccess were writable, you could edit it from here.', 'ymbeseo' ), '</em></p>';
-		echo '<textarea class="large-text code" disabled="disabled" rows="15" name="robotsnew">', $contentht, '</textarea><br/>';
-	}
-	else {
-		echo '<form action="', esc_url( $action_url ), '" method="post" id="htaccessform">';
-		wp_nonce_field( 'ymbeseo-htaccess', '_wpnonce', true, true );
-		echo '<p>', __( 'Edit the content of your .htaccess:', 'ymbeseo' ), '</p>';
-		echo '<textarea class="large-text code" rows="15" name="htaccessnew">', $contentht, '</textarea><br/>';
-		echo '<div class="submit"><input class="button" type="submit" name="submithtaccess" value="', __( 'Save changes to .htaccess', 'ymbeseo' ), '" /></div>';
-		echo '</form>';
-	}
-}
-elseif ( ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( $_SERVER['SERVER_SOFTWARE'], 'nginx' ) === false ) && ! file_exists( $ht_access_file ) ) {
-	echo '<p>', __( 'If you had a .htaccess file and it was editable, you could edit it from here.', 'ymbeseo' ), '</p>';
 }
