@@ -282,7 +282,6 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 					}
 					break;
 
-				case 'ymbeseo_metakey':
 				case 'ymbeseo_bctitle':
 					if ( isset( $meta_data[ $key ] ) ) {
 						$clean[ $key ] = YMBESEO_Utils::sanitize_text_field( stripslashes( $meta_data[ $key ] ) );
@@ -350,7 +349,6 @@ class YMBESEO_Taxonomy_Meta extends YMBESEO_Option {
 										break;
 
 									case 'canonical':
-									case 'ymbeseo_metakey':
 									case 'ymbeseo_bctitle':
 									case 'ymbeseo_title':
 									case 'ymbeseo_desc':
