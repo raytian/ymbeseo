@@ -511,20 +511,6 @@ function ymbeseo_disable_robots_meta() {
 add_action( 'admin_init', 'ymbeseo_disable_robots_meta' );
 
 /**
- * Handle deactivation & import of AIOSEO data
- *
- * @since 1.5.0
- */
-function ymbeseo_aioseo_message() {
-	// Check if aioseo is running.
-	if ( ( ! isset( $_GET['page'] ) || 'ymbeseo_import' != $_GET['page'] ) && is_plugin_active( 'all-in-one-seo-pack/all_in_one_seo_pack.php' ) ) {
-		add_action( 'admin_notices', 'ymbeseo_import_aioseo_setting_notice' );
-	}
-}
-
-add_action( 'admin_init', 'ymbeseo_aioseo_message' );
-
-/**
  * Handle deactivation AIOSEO
  *
  * @since 1.5.0
@@ -545,16 +531,6 @@ function ymbeseo_disable_aioseo() {
 }
 
 add_action( 'admin_init', 'ymbeseo_disable_aioseo' );
-
-/**
- * Throw a notice to import AIOSEO.
- *
- * @since 1.4.8
- */
-function ymbeseo_import_aioseo_setting_notice() {
-	$url = add_query_arg( array( '_wpnonce' => wp_create_nonce( 'ymbeseo-import' ) ), admin_url( 'admin.php?page=ymbeseo_tools&tool=import-export&import=1&importaioseo=1#top#import-seo' ) );
-	echo '<div class="error"><p>', sprintf( esc_html__( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s?', 'ymbeseo' ), sprintf( '<a href="%s">', esc_url( $url ) ), '</a>' ), '</p></div>';
-}
 
 /**
  * Throw a notice to inform the user AIOSEO has been deactivated

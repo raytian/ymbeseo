@@ -29,10 +29,6 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 		$replace = true;
 	}
 
-	if ( isset( $_POST['ymbeseo']['importaioseo'] ) || isset( $_GET['importaioseo'] ) ) {
-		$import = new YMBESEO_Import_AIOSEO( $replace );
-	}
-
 	if ( isset( $_POST['ymbeseo']['importheadspace'] ) ) {
 		$import = new YMBESEO_Import_External( $replace );
 		$import->import_headspace();
@@ -140,7 +136,6 @@ if ( isset( $import ) ) {
 		<?php
 		wp_nonce_field( 'ymbeseo-import', '_wpnonce', true, true );
 		$yform->checkbox( 'importheadspace', __( 'Import from HeadSpace2?', 'ymbeseo' ) );
-		$yform->checkbox( 'importaioseo', __( 'Import from All-in-One SEO?', 'ymbeseo' ) );
 		?>
 		<br/>
 		<?php
