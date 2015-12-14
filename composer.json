@@ -18,7 +18,6 @@
 	},
 	"require": {
 		"composer/installers": "~1.0",
-		"yoast/i18n-module": "^1.0",
 		"xrstf/composer-php52": "^1.0.17"
 	},
 	"minimum-stability": "dev",
