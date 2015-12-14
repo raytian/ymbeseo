@@ -199,28 +199,7 @@ class YMBESEO_Admin_Init {
 		if ( $this->on_ymbeseo_admin_page() ) {
 			// For backwards compatabilty, this still needs a global, for now...
 			$GLOBALS['ymbeseo_admin_pages'] = new YMBESEO_Admin_Pages;
-			$this->register_i18n_promo_class();
 		}
-	}
-
-	/**
-	 * Register the promotion class for our GlotPress instance
-	 *
-	 * @link https://github.com/Yoast/i18n-module
-	 */
-	private function register_i18n_promo_class() {
-		new yoast_i18n(
-			array(
-				'textdomain'     => 'ymbeseo',
-				'project_slug'   => 'ymbeseo',
-				'plugin_name'    => 'YMBE SEO',
-				'hook'           => 'ymbeseo_admin_footer',
-				'glotpress_url'  => 'https://translate.yoast.com/',
-				'glotpress_name' => 'Yoast Translate',
-				'glotpress_logo' => 'https://cdn.yoast.com/wp-content/uploads/i18n-images/Yoast_Translate.svg',
-				'register_url'   => 'https://translate.yoast.com/projects#utm_source=plugin&utm_medium=promo-box&utm_campaign=ymbeseo-i18n-promo',
-			)
-		);
 	}
 
 	/**
