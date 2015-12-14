@@ -26,7 +26,6 @@ class YMBESEO_Option_Titles extends YMBESEO_Option {
 		'separator'              => 'sc-dash',
 		'noodp'                  => false,
 		'noydir'                 => false,
-		'usemetakeywords'        => false,
 		'title-home-ymbeseo'       => '%%sitename%% %%page%% %%sep%% %%sitedesc%%', // Text field.
 		'title-author-ymbeseo'     => '', // Text field.
 		'title-archive-ymbeseo'    => '%%date%% %%page%% %%sep%% %%sitename%%', // Text field.
