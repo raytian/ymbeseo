@@ -29,10 +29,6 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 		$replace = true;
 	}
 
-	if ( isset( $_POST['ymbeseo']['importwoo'] ) ) {
-		$import = new YMBESEO_Import_WooThemes_SEO( $replace );
-	}
-
 	if ( isset( $_POST['ymbeseo']['importaioseo'] ) || isset( $_GET['importaioseo'] ) ) {
 		$import = new YMBESEO_Import_AIOSEO( $replace );
 	}
@@ -145,7 +141,6 @@ if ( isset( $import ) ) {
 		wp_nonce_field( 'ymbeseo-import', '_wpnonce', true, true );
 		$yform->checkbox( 'importheadspace', __( 'Import from HeadSpace2?', 'ymbeseo' ) );
 		$yform->checkbox( 'importaioseo', __( 'Import from All-in-One SEO?', 'ymbeseo' ) );
-		$yform->checkbox( 'importwoo', __( 'Import from WooThemes SEO framework?', 'ymbeseo' ) );
 		?>
 		<br/>
 		<?php
@@ -188,4 +183,3 @@ if ( isset( $import ) ) {
  * Allow adding a custom import tab
  */
 do_action( 'ymbeseo_import_tab_content' );
-
