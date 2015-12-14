@@ -99,9 +99,8 @@ class Yoast_Form {
 	 * Generates the footer for admin pages
 	 *
 	 * @param bool $submit       Whether or not a submit button and form end tag should be shown.
-	 * @param bool $show_sidebar Whether or not to show the banner sidebar - used by premium plugins to disable it.
 	 */
-	public function admin_footer( $submit = true, $show_sidebar = true ) {
+	public function admin_footer( $submit = true ) {
 		if ( $submit ) {
 			submit_button();
 
@@ -113,10 +112,6 @@ class Yoast_Form {
 
 		echo '
 			</div><!-- end of div ymbeseo_content_top -->';
-
-		if ( $show_sidebar ) {
-			$this->admin_sidebar();
-		}
 
 		echo '</div><!-- end of div ymbeseo_content_wrapper -->';
 
@@ -141,88 +136,6 @@ class Yoast_Form {
 
 		echo '
 			</div><!-- end of wrap -->';
-	}
-
-	/**
-	 * Generates the sidebar for admin pages.
-	 */
-	public function admin_sidebar() {
-
-		$service_banners = array(
-			array(
-				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=website-review-banner',
-				'img' => 'banner-website-review.png',
-				'alt' => 'Website Review banner',
-			),
-		);
-
-		$plugin_banners = array(
-			array(
-				'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
-				'img' => 'banner-premium-seo.png',
-				'alt' => 'Banner YMBE SEO Premium',
-			),
-		);
-
-		if ( ! class_exists( 'ymbeseo_Video_Sitemap' ) ) {
-			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=video-seo-banner',
-				'img' => 'banner-video-seo.png',
-				'alt' => 'Banner Yoast Video SEO plugin',
-			);
-		}
-
-		if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
-			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
-				'img' => 'banner-woocommerce-seo.png',
-				'alt' => 'Banner Yoast WooCommerce SEO plugin',
-			);
-		}
-
-		if ( ! defined( 'YMBESEO_LOCAL_VERSION' ) ) {
-			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=local-seo-banner',
-				'img' => 'banner-local-seo.png',
-				'alt' => 'Banner Yoast Local SEO plugin',
-			);
-		}
-
-		if ( ! class_exists( 'YMBESEO_News' ) ) {
-			$plugin_banners[] = array(
-				'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=ymbeseo-config&utm_medium=banner&utm_campaign=news-seo-banner',
-				'img' => 'banner-news-seo.png',
-				'alt' => 'Banner Yoast News SEO plugin',
-			);
-		}
-
-		shuffle( $service_banners );
-		shuffle( $plugin_banners );
-		?>
-		<div class="ymbeseo_content_cell" id="sidebar-container">
-			<div id="sidebar">
-		<?php
-
-		$service_banner = $service_banners[0];
-
-		echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . plugins_url( 'images/' . $service_banner['img'], YMBESEO_FILE ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
-
-		$i = 0;
-		foreach ( $plugin_banners as $banner ) {
-			if ( $i == 2 ) {
-				break;
-			}
-			echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" height="130" src="' . plugins_url( 'images/' . $banner['img'], YMBESEO_FILE ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
-			$i ++;
-		}
-		?>
-				<strong><?php _e( 'Remove these ads?', 'ymbeseo' ); ?></strong><br/>
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=ymbeseo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
-				 /* translators: %1$s expands to YMBE SEO Premium */
-				printf( __( 'Upgrade to %1$s &raquo;', 'ymbeseo' ), 'YMBE SEO Premium' ); ?></a><br/><br/>
-			</div>
-		</div>
-	<?php
 	}
 
 	/**
