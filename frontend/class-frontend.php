@@ -75,7 +75,6 @@ class YMBESEO_Frontend {
 		add_action( 'ymbeseo_head', array( $this, 'debug_marker' ), 2 );
 		add_action( 'ymbeseo_head', array( $this, 'robots' ), 6 );
 		add_action( 'ymbeseo_head', array( $this, 'metadesc' ), 10 );
-		add_action( 'ymbeseo_head', array( $this, 'metakeywords' ), 11 );
 		add_action( 'ymbeseo_head', array( $this, 'canonical' ), 20 );
 		add_action( 'ymbeseo_head', array( $this, 'adjacent_rel_links' ), 21 );
 		add_action( 'ymbeseo_head', array( $this, 'publisher' ), 22 );
@@ -1151,78 +1150,6 @@ class YMBESEO_Frontend {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Outputs the meta keywords element.
-	 *
-	 * @return void
-	 */
-	public function metakeywords() {
-		global $wp_query, $post;
-
-		if ( $this->options['usemetakeywords'] === false ) {
-			return;
-		}
-
-		$keywords = '';
-
-		if ( is_singular() ) {
-			$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
-			if ( $keywords === '' && ( is_object( $post ) && ( ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) ) {
-				$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
-			}
-		}
-		else {
-			if ( $this->is_home_posts_page() && $this->options['metakey-home-ymbeseo'] !== '' ) {
-				$keywords = ymbeseo_replace_vars( $this->options['metakey-home-ymbeseo'], array() );
-			}
-			elseif ( $this->is_home_static_page() ) {
-				$keywords = YMBESEO_Meta::get_value( 'metakeywords' );
-				if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ 'metakey-' . $post->post_type ] ) && $this->options[ 'metakey-' . $post->post_type ] !== '' ) ) ) {
-					$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
-				}
-			}
-			elseif ( is_category() || is_tag() || is_tax() ) {
-				$term = $wp_query->get_queried_object();
-
-				if ( is_object( $term ) ) {
-					$keywords = YMBESEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metakey' );
-					if ( ( ! is_string( $keywords ) || $keywords === '' ) && ( isset( $this->options[ 'metakey-tax-' . $term->taxonomy ] ) && $this->options[ 'metakey-tax-' . $term->taxonomy ] !== '' ) ) {
-						$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-tax-' . $term->taxonomy ], $term );
-					}
-				}
-			}
-			elseif ( is_author() ) {
-				$author_id = get_query_var( 'author' );
-				$keywords  = get_the_author_meta( 'metakey', $author_id );
-				if ( ! $keywords && $this->options['metakey-author-ymbeseo'] !== '' ) {
-					$keywords = ymbeseo_replace_vars( $this->options['metakey-author-ymbeseo'], $wp_query->get_queried_object() );
-				}
-			}
-			elseif ( is_post_type_archive() ) {
-				$post_type = get_query_var( 'post_type' );
-				if ( is_array( $post_type ) ) {
-					$post_type = reset( $post_type );
-				}
-				if ( isset( $this->options[ 'metakey-ptarchive-' . $post_type ] ) && $this->options[ 'metakey-ptarchive-' . $post_type ] !== '' ) {
-					$keywords = ymbeseo_replace_vars( $this->options[ 'metakey-ptarchive-' . $post_type ], $wp_query->get_queried_object() );
-				}
-			}
-		}
-
-		$keywords = apply_filters( 'ymbeseo_metakey', trim( $keywords ) ); // TODO Make deprecated.
-
-		/**
-		 * Filter: 'ymbeseo_metakeywords' - Allow changing the YMBE SEO meta keywords
-		 *
-		 * @api string $keywords The meta keywords to be echoed.
-		 */
-		$keywords = apply_filters( 'ymbeseo_metakeywords', trim( $keywords ) ); // More appropriately named.
-
-		if ( is_string( $keywords ) && $keywords !== '' ) {
-			echo '<meta name="keywords" content="', esc_attr( strip_tags( stripslashes( $keywords ) ) ), '"/>', "\n";
-		}
 	}
 
 	/**
